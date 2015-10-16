@@ -2,7 +2,7 @@ package kz.hts.ce.service.impl;
 
 import kz.hts.ce.entity.User;
 import kz.hts.ce.repository.UserRepository;
-import kz.hts.ce.service.UserServ;
+import kz.hts.ce.service.userService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserServ{
+public class UserServiceImpl implements userService {
 
     @Autowired
     private UserRepository userRepository;
@@ -25,8 +25,9 @@ public class UserServiceImpl implements UserServ{
         return userRepository.findAll();
     }
 
-    @Override
+    @Transactional
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+    
 }

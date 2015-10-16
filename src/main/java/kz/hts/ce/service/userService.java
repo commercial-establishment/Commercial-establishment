@@ -4,7 +4,7 @@ import kz.hts.ce.entity.User;
 
 import java.util.List;
 
-public interface UserServ {
+public interface userService {
 
     void insert(User user);
 
