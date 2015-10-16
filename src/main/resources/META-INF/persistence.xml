@@ -3,7 +3,6 @@
     <persistence-unit name="primary">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <class>kz.hts.ce.entity.User</class>
-        <class>kz.hts.ce.entity.Role</class>
         <class>kz.hts.ce.entity.BaseEntity</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
