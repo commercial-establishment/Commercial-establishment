@@ -1,7 +1,6 @@
 package kz.hts.ce.service;
 
 import kz.hts.ce.entity.User;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

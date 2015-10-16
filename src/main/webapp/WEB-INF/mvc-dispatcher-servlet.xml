@@ -14,10 +14,17 @@
    http://www.springframework.org/schema/data/jpa
    http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-    <tx:annotation-driven />
+    <tx:annotation-driven/>
 
-    <context:component-scan base-package="kz.hts.ce.service.impl" />
-    <jpa:repositories base-package="kz.hts.ce.repository" />
+    <context:component-scan base-package="kz.hts.ce.service.impl"/>
+    <context:component-scan base-package="kz.hts.ce.controller"/>
+    <jpa:repositories base-package="kz.hts.ce.repository"/>
+
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="org.postgresql.Driver"/>
@@ -28,11 +35,11 @@
 
     <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="persistenceUnitName" value="primary" />
-        <property name="dataSource" ref="dataSource" />
+        <property name="persistenceUnitName" value="primary"/>
+        <property name="dataSource" ref="dataSource"/>
     </bean>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="entityManagerFactory" />
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 </beans>
