@@ -8,6 +8,8 @@ public class User extends BaseEntity {
     private String name;
     private String surname;
     private String patronymic;
+    private String username;
+    private String email;
     private String phone;
     private int iin;
     private Role role;
