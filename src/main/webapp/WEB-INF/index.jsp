@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,16 +14,16 @@
     <title>SB Admin - Bootstrap Admin Template</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<c:url value="/static/css/bootstrap.min.css"/>" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="../static/css/sb-admin.css" rel="stylesheet">
+    <link href="<c:url value="/static/css/sb-admin.css"/>" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <link href="../static/css/plugins/morris.css" rel="stylesheet">
+    <link href="<c:url value="/static/css/plugins/morris.css"/>" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="../static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/static/font-awesome/css/font-awesome.min.css"/>" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -495,15 +496,15 @@
 <!-- /#wrapper -->
 
 <!-- jQuery -->
-<script src="../static/js/jquery.js"></script>
+<script src="<c:url value="/static/js/jquery.js"/>"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="../static/js/bootstrap.min.js"></script>
+<script src="<c:url value="/static/js/bootstrap.min.js"/>"></script>
 
 <!-- Morris Charts JavaScript -->
-<script src="../static/js/plugins/morris/raphael.min.js"></script>
-<script src="../static/js/plugins/morris/morris.min.js"></script>
-<script src="../static/js/plugins/morris/morris-data.js"></script>
+<script src="<c:url value="/static/js/plugins/morris/raphael.min.js"/>"></script>
+<script src="<c:url value="/static/js/plugins/morris/morris.min.js"/>"></script>
+<script src="<c:url value="/static/js/plugins/morris/morris-data.js"/>"></script>
 
 </body>
 

@@ -3,7 +3,7 @@ package kz.hts.ce.entity;
 import javax.persistence.Entity;
 
 @Entity
-public class Role extends BaseEntity {
+public class Product extends BaseEntity {
 
     private String name;
 

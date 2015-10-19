@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
+        return null;
     }
     
 }
