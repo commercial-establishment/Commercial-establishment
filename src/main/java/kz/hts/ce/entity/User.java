@@ -5,7 +5,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public class User extends BaseEntity {
+public abstract class User extends BaseEntity {
 
     private String name;
 
