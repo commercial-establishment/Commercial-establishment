@@ -7,7 +7,7 @@
     <display-name>Commercial Establishment Application</display-name>
 
     <welcome-file-list>
-        <welcome-file>/WEB-INF/index.html</welcome-file>
+        <welcome-file>/WEB-INF/login.jsp</welcome-file>
     </welcome-file-list>
 
     <!--<listener>-->
