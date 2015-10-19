@@ -24,6 +24,8 @@
     <!--JSP-->
     <mvc:resources mapping="/static/**" location="/static/"/>
 
+    <mvc:annotation-driven />
+
     <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="prefix" value="/WEB-INF/jsp/"/>

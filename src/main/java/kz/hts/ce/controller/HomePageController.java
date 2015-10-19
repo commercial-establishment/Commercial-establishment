@@ -1,18 +1,24 @@
 package kz.hts.ce.controller;
 
+import kz.hts.ce.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.postgresql.Driver;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @RequestMapping("/home")
 public class HomePageController {
-//
-//    @RequestMapping(method = RequestMethod.GET)
-//    public String printHello(ModelMap model) {
-//        model.addAttribute("message", "Hello Spring MVC Framework!");
-//        return "index";
-//    }
+
+    @Autowired
+    private UserService userService;
+
+
+    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    public String goToLoginPage(ModelMap model) {
+        model.addAttribute("message", "Hello Spring MVC Framework!");
+        return "login";
+    }
 }
