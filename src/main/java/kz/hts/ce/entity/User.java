@@ -1,11 +1,10 @@
 package kz.hts.ce.entity;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
-@MappedSuperclass
+@Entity
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+//@MappedSuperclass
 public abstract class User extends BaseEntity {
 
     private String name;
@@ -13,6 +12,7 @@ public abstract class User extends BaseEntity {
     private String patronymic;
     private String username;
     private String password;
+    private String email;
 
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
@@ -20,6 +20,14 @@ public abstract class User extends BaseEntity {
 
     @Column(name = "is_blocked", nullable = false)
     private boolean blocked;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getName() {
         return name;
@@ -76,4 +84,6 @@ public abstract class User extends BaseEntity {
     public void setBlocked(boolean blocked) {
         this.blocked = blocked;
     }
+
+
 }

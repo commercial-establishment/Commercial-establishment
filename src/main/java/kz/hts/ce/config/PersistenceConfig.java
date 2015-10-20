@@ -1,4 +1,4 @@
-package kz.hts.ce.spring;
+package kz.hts.ce.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -25,7 +25,7 @@ import java.util.Properties;
 @EnableTransactionManagement(proxyTargetClass = true)
 @EnableJpaRepositories("kz.hts.ce.repository")
 @ComponentScan(basePackages = { "kz.hts.ce.*" })
-public class ApplicationConfig {
+public class PersistenceConfig {
 
     @Bean(name = "dataSource")
     public DriverManagerDataSource dataSource() {

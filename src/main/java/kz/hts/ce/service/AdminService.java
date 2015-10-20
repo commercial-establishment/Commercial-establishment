@@ -1,4 +1,4 @@
-package kz.hts.ce.service.impl;
+package kz.hts.ce.service;
 
 import kz.hts.ce.entity.Admin;
 import kz.hts.ce.repository.AdminRepository;
@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AdminServiceImpl extends BaseService<Admin, AdminRepository> {
+public class AdminService extends BaseService<Admin, AdminRepository> {
 
     @Autowired
-    protected AdminServiceImpl(AdminRepository repository) {
+    protected AdminService(AdminRepository repository) {
         super(repository);
     }
 }

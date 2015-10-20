@@ -8,7 +8,6 @@ public abstract class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
-
     private long id;
 
     public long getId() {

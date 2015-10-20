@@ -1,4 +1,4 @@
-package kz.hts.ce.spring;
+package kz.hts.ce.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,7 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
-public class ApplicationContextConfig extends WebMvcConfigurerAdapter {
+public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Bean(name = "viewResolver")
     public InternalResourceViewResolver getViewResolver() {
