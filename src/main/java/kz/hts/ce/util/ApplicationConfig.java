@@ -10,6 +10,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
@@ -18,20 +19,20 @@ import javax.persistence.PersistenceContext;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan("kz.hts.ce")
-@EnableJpaRepositories(basePackages = "kz.hts.ce.repository")
-@EnableTransactionManagement
+@EnableTransactionManagement(proxyTargetClass = true)
+@EnableJpaRepositories("kz.hts.ce.repository")
+@ComponentScan(basePackages = { "kz.hts.ce" })
 public class ApplicationConfig {
-
-    @Bean
-    public UrlBasedViewResolver urlBasedViewResolver() {
-        UrlBasedViewResolver resolver = new UrlBasedViewResolver();
-        resolver.setPrefix("/WEB-INF/");
-        resolver.setSuffix(".jsp");
-        resolver.setCache(false);
-        resolver.setViewClass(JstlView.class);
-        return resolver;
-    }
+//
+//    @Bean
+//    public UrlBasedViewResolver urlBasedViewResolver() {
+//        UrlBasedViewResolver resolver = new UrlBasedViewResolver();
+//        resolver.setPrefix("/WEB-INF/");
+//        resolver.setSuffix(".jsp");
+//        resolver.setCache(false);
+//        resolver.setViewClass(JstlView.class);
+//        return resolver;
+//    }
 
     @Bean(name = "dataSource")
     public DriverManagerDataSource dataSource() {

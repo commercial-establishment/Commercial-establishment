@@ -16,6 +16,6 @@ public class HomePageController {
     @RequestMapping(value = "/home",method = RequestMethod.GET)
     public String goToLoginPage(ModelMap model) {
         model.addAttribute("message", "Hello Spring MVC Framework!");
-        return "index";
+        return "admin";
     }
 }
