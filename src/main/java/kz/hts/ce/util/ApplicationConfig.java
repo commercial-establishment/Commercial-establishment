@@ -21,7 +21,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement(proxyTargetClass = true)
 @EnableJpaRepositories("kz.hts.ce.repository")
-@ComponentScan(basePackages = { "kz.hts.ce" })
+@ComponentScan(basePackages = { "kz.hts.ce.*" })
 public class ApplicationConfig {
 //
 //    @Bean

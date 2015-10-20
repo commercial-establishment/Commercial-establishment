@@ -15,16 +15,16 @@
         <title>${title}</title>
 
         <!-- Bootstrap Core CSS -->
-        <link href="<c:url value="/static/css/bootstrap.min.css"/>" rel="stylesheet" type="text/css">
+        <link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet" type="text/css">
 
         <!-- Custom CSS -->
-        <link href="<c:url value="/static/css/sb-admin.css"/>" rel="stylesheet" type="text/css">
+        <link href="<c:url value="/resources/css/sb-admin.css"/>" rel="stylesheet" type="text/css">
 
         <!-- Morris Charts CSS -->
-        <link href="<c:url value="/static/css/plugins/morris.css"/>" rel="stylesheet" type="text/css">
+        <link href="<c:url value="/resources/css/plugins/morris.css"/>" rel="stylesheet" type="text/css">
 
         <!-- Custom Fonts -->
-        <link href="<c:url value="/static/font-awesome/css/font-awesome.min.css"/>" rel="stylesheet" type="text/css">
+        <link href="<c:url value="/resources/font-awesome/css/font-awesome.min.css"/>" rel="stylesheet" type="text/css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

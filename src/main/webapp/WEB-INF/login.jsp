@@ -14,16 +14,16 @@
   <title>SB Admin - Bootstrap Admin Template</title>
 
   <!-- Bootstrap Core CSS -->
-  <link href="<c:url value="/static/css/bootstrap.min.css"/>" rel="stylesheet" type="text/css">
+  <link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet" type="text/css">
 
   <!-- Custom CSS -->
-  <link href="<c:url value="/static/css/sb-admin.css"/>" rel="stylesheet" type="text/css">
+  <link href="<c:url value="/resources/css/sb-admin.css"/>" rel="stylesheet" type="text/css">
 
   <!-- Morris Charts CSS -->
-  <link href="<c:url value="/static/css/plugins/morris.css"/>" rel="stylesheet" type="text/css">
+  <link href="<c:url value="/resources/css/plugins/morris.css"/>" rel="stylesheet" type="text/css">
 
   <!-- Custom Fonts -->
-  <link href="<c:url value="/static/font-awesome/css/font-awesome.min.css"/>" rel="stylesheet" type="text/css">
+  <link href="<c:url value="/resources/font-awesome/css/font-awesome.min.css"/>" rel="stylesheet" type="text/css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -496,15 +496,15 @@
 <!-- /#wrapper -->
 
 <!-- jQuery -->
-<script src="<c:url value="/static/js/jquery.js"/>"></script>
+<script src="<c:url value="/resources/js/jquery.js"/>"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="<c:url value="/static/js/bootstrap.min.js"/>"></script>
+<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 
 <!-- Morris Charts JavaScript -->
-<script src="<c:url value="/static/js/plugins/morris/raphael.min.js"/>"></script>
-<script src="<c:url value="/static/js/plugins/morris/morris.min.js"/>"></script>
-<script src="<c:url value="/static/js/plugins/morris/morris-data.js"/>"></script>
+<script src="<c:url value="/resources/js/plugins/morris/raphael.min.js"/>"></script>
+<script src="<c:url value="/resources/js/plugins/morris/morris.min.js"/>"></script>
+<script src="<c:url value="/resources/js/plugins/morris/morris-data.js"/>"></script>
 
 </body>
 

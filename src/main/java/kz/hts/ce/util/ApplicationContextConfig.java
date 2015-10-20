@@ -18,14 +18,13 @@ public class ApplicationContextConfig extends WebMvcConfigurerAdapter {
     public InternalResourceViewResolver getViewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/WEB-INF/");
-        viewResolver.setSuffix(".jsp");
-        viewResolver.setCache(false);
         viewResolver.setViewClass(JstlView.class);
+        viewResolver.setSuffix(".jsp");
         return viewResolver;
     }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("/static/");
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
 }
