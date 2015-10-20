@@ -1,6 +1,6 @@
 package kz.hts.ce.controller;
 
-import kz.hts.ce.service.UserService;
+import kz.hts.ce.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomePageController {
 
     @Autowired
-    private UserService userService;
+    private AdminService adminService;
 
     @RequestMapping(value = "/home",method = RequestMethod.GET)
     public String goToLoginPage(ModelMap model) {
