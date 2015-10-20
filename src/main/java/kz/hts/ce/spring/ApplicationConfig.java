@@ -1,4 +1,4 @@
-package kz.hts.ce.util;
+package kz.hts.ce.spring;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,12 +10,15 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
+import java.util.Locale;
 import java.util.Properties;
 
 @Configuration
@@ -23,16 +26,6 @@ import java.util.Properties;
 @EnableJpaRepositories("kz.hts.ce.repository")
 @ComponentScan(basePackages = { "kz.hts.ce.*" })
 public class ApplicationConfig {
-//
-//    @Bean
-//    public UrlBasedViewResolver urlBasedViewResolver() {
-//        UrlBasedViewResolver resolver = new UrlBasedViewResolver();
-//        resolver.setPrefix("/WEB-INF/");
-//        resolver.setSuffix(".jsp");
-//        resolver.setCache(false);
-//        resolver.setViewClass(JstlView.class);
-//        return resolver;
-//    }
 
     @Bean(name = "dataSource")
     public DriverManagerDataSource dataSource() {
