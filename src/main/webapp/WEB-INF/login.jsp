@@ -168,18 +168,23 @@
                                 <b><fmt:message key="sign.in"/></b></h3>
                         </div>
                         <div class="panel-body">
-                            <form role="form" action="<c:url value='/login/form'/>" method="post" class="form-signin">
+                            <c:url var="loginUrl" value="/login/form" />
+                            <form action="${loginUrl}" method="post" class="form-signin">
                                 <div class="jumbotron" style="background-color: white">
                                     <div class="form-group">
                                         <label for="username">Username</label>
                                         <input id="username" name="username" type="text" class="form-control">
                                     </div>
+
                                     <div class="form-group">
                                         <label for="password">Password (<a href="<c:url value="/recovery"/>">forgot
                                             password</a>)</label>
                                         <input id="password" name="password" type="password" class="form-control">
                                     </div>
-                                    <input class="hidden" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+                                    <input class="hidden" type="hidden" name="${_csrf.parameterName}"
+                                           value="${_csrf.token}"/>
+
                                     <p align="right">
                                         <button class="btn btn-primary btn-lg"><fmt:message key="sign.in"/></button>
                                     </p>

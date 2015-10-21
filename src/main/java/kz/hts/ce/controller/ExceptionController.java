@@ -5,11 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-//@RequestMapping("/admin")
-public class AdminController {
+public class ExceptionController {
 
-    @RequestMapping(value = "/admin",method = RequestMethod.GET)
-    public String loginPage() {
-        return "admin";
+    @RequestMapping(value = "/403", method = RequestMethod.GET)
+    public String accessDeniedPage() {
+        return "403";
     }
 }

@@ -1,5 +1,8 @@
 package kz.hts.ce.security;
 
+import kz.hts.ce.config.CustomSuccessHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -29,9 +32,16 @@ import static kz.hts.ce.util.SpringUtils.getCurrentlyAuthenticatedUser;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
+    @Autowired
+    private CustomSuccessHandler successHandler;
+
+    @Autowired
+    @Qualifier("authenticationService")
+    UserDetailsService userDetailsService;
+
+    @Autowired
+    public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService);
     }
 
     @Override
@@ -48,64 +58,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/login", "/login/form").anonymous()
                 .antMatchers("/admin", "/admin/**").hasRole("ADMIN")
-
-//                .antMatchers("/login","/login/form**","/logout").permitAll()
-//                .antMatchers("/admin", "/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/login/form")
-                .loginProcessingUrl("/login")
-                .successHandler(new SavedRequestAwareAuthenticationSuccessHandler() {
-                    @Override
-                    protected String determineTargetUrl(HttpServletRequest request, HttpServletResponse response) {
-                        String targetUrl = super.determineTargetUrl(request, response);
-                        boolean role_admin = getCurrentlyAuthenticatedUser().getAuthorities()
-                                .contains(new SimpleGrantedAuthority("ROLE_ADMIN"));
-                        if (targetUrl.equals("/") && role_admin) {
-                            targetUrl = "/admin/form";
-                        }
-                        return targetUrl;
-                    }
-                })
-                .failureUrl("/login/form?error")
+                .formLogin().loginPage("/login/form").successHandler(successHandler)
+                .usernameParameter("username").passwordParameter("password")
+                .failureUrl("/login/form?error=1")
                 .and()
-                .exceptionHandling()
-                .accessDeniedPage("/WEB-INF/403.jsp");
-
-        http.csrf().requireCsrfProtectionMatcher(new RequestMatcher() {
-            private Pattern allowedMethods = Pattern.compile("^(GET|HEAD|TRACE|OPTIONS)$");
-            private RegexRequestMatcher apiMatcher = new RegexRequestMatcher(".*\\.rest", null);
-
-            @Override
-            public boolean matches(HttpServletRequest request) {
-                // No CSRF due to allowedMethod
-                if (allowedMethods.matcher(request.getMethod()).matches())
-                    return false;
-
-                // No CSRF due to api call
-                if (apiMatcher.matches(request))
-                    return false;
-
-                // CSRF for everything else that is not an API call or an allowedMethod
-                return true;
-            }
-        });    }
-
-    /*TODO ?????*/
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return new AuthenticationService();
+                .exceptionHandling().accessDeniedPage("/403");
     }
 }

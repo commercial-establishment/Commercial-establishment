@@ -15,7 +15,7 @@ import javax.persistence.EntityManagerFactory;
 @Configuration
 @EnableTransactionManagement(proxyTargetClass = true)
 @EnableJpaRepositories("kz.hts.ce.repository")
-@ComponentScan(basePackages = { "kz.hts.ce.*" })
+@ComponentScan("kz.hts.ce")
 public class PersistenceConfig {
 
     @Bean(name = "dataSource")
