@@ -36,7 +36,7 @@
                                     </span>
 
                                 <div class="media-body">
-                                    <h5 class="media-heading"><strong>John Smith</strong>
+                                    <h5 class="media-heading"><strong>${name} ${patronymic}</strong>
                                     </h5>
 
                                     <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
@@ -54,7 +54,7 @@
                                     </span>
 
                                 <div class="media-body">
-                                    <h5 class="media-heading"><strong>John Smith</strong>
+                                    <h5 class="media-heading"><strong>${name} ${patronymic}</strong>
                                     </h5>
 
                                     <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
@@ -72,7 +72,7 @@
                                     </span>
 
                                 <div class="media-body">
-                                    <h5 class="media-heading"><strong>John Smith</strong>
+                                    <h5 class="media-heading"><strong>${name} ${patronymic}</strong>
                                     </h5>
 
                                     <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
@@ -116,7 +116,7 @@
                 </ul>
             </li>
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> ${name} ${patronymic} <b
                         class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>

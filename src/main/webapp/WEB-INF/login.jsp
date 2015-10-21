@@ -147,14 +147,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        Dashboard
-                        <small>Statistics Overview</small>
+                        Please log in
                     </h1>
-                    <ol class="breadcrumb">
-                        <li class="active">
-                            <i class="fa fa-dashboard"></i> Dashboard
-                        </li>
-                    </ol>
                 </div>
             </div>
             <!-- /.row -->
@@ -177,16 +171,16 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="password">Password (<a href="<c:url value="/recovery"/>">forgot
-                                            password</a>)</label>
+                                        <label for="password">Password <a href="<c:url value="/recovery"/>">(forgot
+                                            password)</a></label>
                                         <input id="password" name="password" type="password" class="form-control">
                                     </div>
 
                                     <input class="hidden" type="hidden" name="${_csrf.parameterName}"
                                            value="${_csrf.token}"/>
 
-                                    <p align="right">
-                                        <button class="btn btn-primary btn-lg"><fmt:message key="sign.in"/></button>
+                                    <p>
+                                        <button class="btn btn-default btn-lg"><fmt:message key="sign.in"/></button>
                                     </p>
                                 </div>
                             </form>

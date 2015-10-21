@@ -39,10 +39,4 @@ public class LoginController {
 //        return "password-recovery";
 //    }
 //
-    @RequestMapping(value = "/form",method = RequestMethod.POST)
-    public String login(@ModelAttribute("username") String username, @ModelAttribute("password") String password) {
-        Admin user = adminService.findByUsername(username);
-        System.out.println(user);
-        return "admin";
-    }
 }

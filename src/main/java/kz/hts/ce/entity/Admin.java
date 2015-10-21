@@ -8,7 +8,11 @@ import javax.persistence.ManyToOne;
 public class Admin extends BaseEntity {
 
     private String username;
+    private String email;
     private String password;
+    private String name;
+    private String surname;
+    private String patronymic;
 
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
@@ -16,6 +20,18 @@ public class Admin extends BaseEntity {
 
     public String getUsername() {
         return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -26,8 +42,28 @@ public class Admin extends BaseEntity {
         this.password = password;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getPatronymic() {
+        return patronymic;
+    }
+
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
     }
 
     public Role getRole() {

@@ -18,4 +18,8 @@ public class AdminService extends BaseService<Admin, AdminRepository> {
     public Admin findByUsername(String username) {
         return repository.findByUsername(username);
     }
+
+    public void updatePasswordById(String password, long id) {
+        repository.updatePasswordById(password, id);
+    }
 }
