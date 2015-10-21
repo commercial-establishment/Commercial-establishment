@@ -56,13 +56,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/login", "/login/form").anonymous()
+                .antMatchers("/login/form").anonymous()
                 .antMatchers("/admin", "/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login/form").successHandler(successHandler)
-                .usernameParameter("username").passwordParameter("password")
-                .failureUrl("/login/form?error=1")
+                .usernameParameter("username")
+                .passwordParameter("password")
+//                .and().logout().logoutSuccessUrl("/login?logout")
+                .failureUrl("/login?error")
                 .and()
                 .exceptionHandling().accessDeniedPage("/403");
     }

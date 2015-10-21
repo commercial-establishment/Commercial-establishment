@@ -129,8 +129,4 @@
         </dependency>
 
     </dependencies>
-
-    <build>
-        <finalName>establishment</finalName>
-    </build>
 </project>

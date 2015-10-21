@@ -45,7 +45,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         }
 
         if (isAdmin(roles)) {
-            url = "/admin/form";
+            url = "/admin";
         }
         else {
             url = "/403";
@@ -63,7 +63,9 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
     }
 
     private boolean isAdmin(List<String> roles) {
-        if (roles.contains("ADMIN")) return true;
+        if (roles.contains("ROLE_ADMIN")) return true;
         return false;
     }
+
+
 }
