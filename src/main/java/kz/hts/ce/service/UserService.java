@@ -16,4 +16,10 @@ public class UserService extends BaseService<User, UserRepository> {
     public User findByUsername(String username) {
         return repository.findByUsername(username);
     }
+
+    public User login(String username, String password){
+        User user = findByUsername(username);
+
+        return null;
+    }
 }

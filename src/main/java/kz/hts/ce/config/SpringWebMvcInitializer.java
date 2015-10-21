@@ -13,18 +13,23 @@ import javax.servlet.ServletRegistration.Dynamic;
 
 public class SpringWebMvcInitializer implements WebApplicationInitializer {
 
+    private static final String DISPATCHER_SERVLET_NAME = "dispatcher";
+    public static final String SPRING_SECURITY_FILTER = "springSecurityFilterChain";
+
     public void onStartup(ServletContext servletContext) throws ServletException {
         AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
-        ctx.register(WebConfig.class);
+        ctx.register(WebMvcConfig.class);
         ctx.register(PersistenceConfig.class);
         servletContext.addListener(new ContextLoaderListener(ctx));
+
         ctx.setServletContext(servletContext);
-        Dynamic dynamic = servletContext.addServlet("dispatcher", new DispatcherServlet(ctx));
-        dynamic.addMapping("/");
-        dynamic.setLoadOnStartup(1);
+
+        Dynamic servlet = servletContext.addServlet(DISPATCHER_SERVLET_NAME, new DispatcherServlet(ctx));
+        servlet.addMapping("/");
+        servlet.setLoadOnStartup(1);
 
         FilterRegistration.Dynamic springSecurityFilterChain =
-                servletContext.addFilter("springSecurityFilterChain", DelegatingFilterProxy.class);
+                servletContext.addFilter(SPRING_SECURITY_FILTER, DelegatingFilterProxy.class);
         springSecurityFilterChain.addMappingForUrlPatterns(null, false, "/*");
     }
 }

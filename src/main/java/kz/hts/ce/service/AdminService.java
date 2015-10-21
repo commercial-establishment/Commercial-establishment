@@ -1,6 +1,7 @@
 package kz.hts.ce.service;
 
 import kz.hts.ce.entity.Admin;
+import kz.hts.ce.entity.User;
 import kz.hts.ce.repository.AdminRepository;
 import kz.hts.ce.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,5 +13,9 @@ public class AdminService extends BaseService<Admin, AdminRepository> {
     @Autowired
     protected AdminService(AdminRepository repository) {
         super(repository);
+    }
+
+    public Admin findByUsername(String username) {
+        return repository.findByUsername(username);
     }
 }

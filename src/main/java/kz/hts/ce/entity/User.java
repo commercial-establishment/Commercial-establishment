@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 //@MappedSuperclass
-public abstract class User extends BaseEntity {
+public class User extends BaseEntity {
 
     private String name;
     private String surname;

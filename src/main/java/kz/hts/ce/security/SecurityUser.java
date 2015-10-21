@@ -1,5 +1,6 @@
 package kz.hts.ce.security;
 
+import kz.hts.ce.entity.Admin;
 import kz.hts.ce.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,16 +10,14 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SecurityUser extends User implements UserDetails {
+public class SecurityUser extends Admin implements UserDetails {
 
     public SecurityUser(User user) {
         if(user != null) {
             this.setId(user.getId());
             this.setUsername(user.getUsername());
-            this.setEmail(user.getEmail());
             this.setPassword(user.getPassword());
             this.setRole(user.getRole());
-            /*TODO*/
         }
     }
 
