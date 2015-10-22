@@ -44,7 +44,7 @@ public class TransitionPageController {
     @RequestMapping("/admins/{id}/edit")
     public String editAdminPage(@PathVariable long id) {
         adminService.reestablishById(id);
-        return "redirect:";
+        return "edit-admin";
     }
 
     @RequestMapping(value = "/admins",method = RequestMethod.GET)
