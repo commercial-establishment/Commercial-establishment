@@ -35,10 +35,19 @@ public class TransitionPageController {
 
     @RequestMapping(value = "/admins",method = RequestMethod.GET)
     public String adminsPage(Model model) {
-        String username = getPrincipal();
         List<Admin> admins = adminService.findByRoleName(ADMIN);
         model.addAttribute("admins", admins);
         return "admins";
+    }
+
+    @RequestMapping(value = "/providers",method = RequestMethod.GET)
+    public String providersPage(Model model) {
+        return "providers";
+    }
+
+    @RequestMapping(value = "/shops",method = RequestMethod.GET)
+    public String shopsPage(Model model) {
+        return "shops";
     }
 
     @RequestMapping(value = "/recovery", method = RequestMethod.GET)

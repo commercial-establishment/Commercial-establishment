@@ -148,13 +148,13 @@
                         <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Главная</a>
                     </li>
                     <li>
-                        <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
+                        <a href="<c:url value="/providers"/>"><i class="fa fa-fw fa-table"></i> Поставщики</a>
                     </li>
                     <li>
-                        <a href="/admins"><i class="fa fa-fw fa-table"></i>Администраторы</a>
+                        <a href="<c:url value="/admins"/>"><i class="fa fa-fw fa-table"></i>Администраторы</a>
                     </li>
                     <li>
-                        <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
+                        <a href="<c:url value="/shops"/>"><i class="fa fa-fw fa-table"></i> Магазины</a>
                     </li>
                     <li>
                         <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>

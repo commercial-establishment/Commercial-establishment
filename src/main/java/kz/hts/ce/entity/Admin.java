@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.time.LocalDateTime;
 
 @Entity
 public class Admin extends BaseEntity {
@@ -17,10 +18,11 @@ public class Admin extends BaseEntity {
 
     /*TODO nullable = false*/
     @Column(name = "start_work_date", nullable = true)
-    private String startWorkDate;
+    private LocalDateTime startWorkDate;
 
+    /*TODO nullable = false*/
     @Column(name = "end_work_date", nullable = true)
-    private String endWorkDate;
+    private LocalDateTime endWorkDate;
 
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
@@ -77,19 +79,19 @@ public class Admin extends BaseEntity {
         this.patronymic = patronymic;
     }
 
-    public String getStartWorkDate() {
+    public LocalDateTime getStartWorkDate() {
         return startWorkDate;
     }
 
-    public void setStartWorkDate(String startWorkDate) {
+    public void setStartWorkDate(LocalDateTime startWorkDate) {
         this.startWorkDate = startWorkDate;
     }
 
-    public String getEndWorkDate() {
+    public LocalDateTime getEndWorkDate() {
         return endWorkDate;
     }
 
-    public void setEndWorkDate(String endWorkDate) {
+    public void setEndWorkDate(LocalDateTime endWorkDate) {
         this.endWorkDate = endWorkDate;
     }
 
