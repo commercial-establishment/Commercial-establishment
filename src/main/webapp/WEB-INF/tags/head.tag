@@ -4,6 +4,7 @@
 <fmt:setLocale value="${locale}"/>
 <fmt:bundle basename="i18n.messages">
     <%@ attribute name="title" %>
+
     <head>
 
         <meta charset="utf-8">
@@ -12,7 +13,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>${title}</title>
+        <title><fmt:message key="${title}"/></title>
 
         <!-- Bootstrap Core CSS -->
         <link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet" type="text/css">

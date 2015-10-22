@@ -28,10 +28,4 @@ public class AuthenticationService implements UserDetailsService {
         GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + userEntity.getRole().getName());
         return new User(userEntity.getUsername(), userEntity.getPassword(), Arrays.asList(authority));
     }
-
-//    private List<GrantedAuthority> getGrantedAuthorities(Admin admin) {
-//        List<GrantedAuthority> authorities = new ArrayList<>();
-//        authorities.add(new SimpleGrantedAuthority("ROLE_" + admin.getRole().getName()));
-//        return authorities;
-//    }
 }

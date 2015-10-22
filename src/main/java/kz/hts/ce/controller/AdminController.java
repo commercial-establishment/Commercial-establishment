@@ -18,9 +18,9 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    @RequestMapping(value = "/admin",method = RequestMethod.GET)
+    @RequestMapping(value = {"/","/admin"}, method = RequestMethod.GET)
     public String adminPage(Model model) {
-        String username = getPrincipal();
+            String username = getPrincipal();
         Admin admin = adminService.findByUsername(username);
         model.addAttribute("name", admin.getName());
         model.addAttribute("patronymic", admin.getPatronymic());
