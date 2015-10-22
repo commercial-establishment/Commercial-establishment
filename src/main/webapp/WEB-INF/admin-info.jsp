@@ -11,18 +11,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Bootstrap Admin Template</title>
+    <title>Информация об администраторе</title>
 
-    <!-- Bootstrap Core CSS -->
     <link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet">
-
-    <!-- Custom CSS -->
     <link href="<c:url value="/resources/css/sb-admin.css"/>" rel="stylesheet">
-
-    <!-- Custom Fonts -->
     <link href="<c:url value="/resources/font-awesome/css/font-awesome.min.css"/>" rel="stylesheet" type="text/css">
-
-    <%--<link href="<c:url value="/resources/css/style.css"/>" rel="stylesheet" type="text/css">--%>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -37,9 +30,7 @@
 
 <div id="wrapper">
 
-    <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -49,7 +40,6 @@
             </button>
             <a class="navbar-brand" href="index.html">SB Admin</a>
         </div>
-        <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b
@@ -162,20 +152,19 @@
                 </ul>
             </li>
         </ul>
-        <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <li>
-                    <a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-dashboard"></i> Главная</a>
-                </li>
-                <li>
-                    <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
-                </li>
                 <li class="active">
-                    <a href="<c:url value="/admins"/>"><i class="fa fa-fw fa-table"></i> Администраторы</a>
+                    <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Главная</a>
                 </li>
                 <li>
-                    <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
+                    <a href="<c:url value="/providers"/>"><i class="fa fa-fw fa-table"></i> Поставщики</a>
+                </li>
+                <li>
+                    <a href="<c:url value="/admins"/>"><i class="fa fa-fw fa-table"></i>Администраторы</a>
+                </li>
+                <li>
+                    <a href="<c:url value="/shops"/>"><i class="fa fa-fw fa-table"></i> Магазины</a>
                 </li>
                 <li>
                     <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
@@ -200,19 +189,16 @@
                 </li>
             </ul>
         </div>
-        <!-- /.navbar-collapse -->
     </nav>
 
     <div id="page-wrapper">
 
         <div class="container-fluid">
 
-            <!-- Page Heading -->
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        Blank Page
-                        <small>Subheading</small>
+                        Информация об администраторе
                     </h1>
                     <ol class="breadcrumb">
                         <li>
@@ -228,35 +214,65 @@
                 </div>
             </div>
             <div class="col-lg-12">
-                <h2>Bordered with Striped Rows</h2>
-
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover table-striped">
-                        <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Username</th>
-                            <th>Name</th>
-                            <th>Patronymic</th>
-                            <th>Surname</th>
-                            <th>Start work date</th>
-                            <th>End work date</th>
-                            <th>Blocked</th>
-                        </tr>
-                        </thead>
+                    <table class="table table-hover">
                         <tbody>
-                        <c:forEach items="${admins}" var="admin">
-                            <tr onclick="document.location = '/admins/' + ${admin.id};">
-                                <td>${admin.id}</td>
-                                <td> ${admin.username}</td>
-                                <td>${admin.name}</td>
-                                <td>${admin.patronymic}</td>
-                                <td>${admin.surname}</td>
-                                <td>${admin.startWorkDate}</td>
-                                <td>${admin.endWorkDate}</td>
-                                <td>${admin.blocked}</td>
-                            </tr>
-                        </c:forEach>
+                        <tr>
+                            <td><b>Имя пользователя:</b></td>
+                            <td>${admin.username}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Имя:</b></td>
+                            <td>${admin.name}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Отчество:</b></td>
+                            <td>${admin.patronymic}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Фамилия:</b></td>
+                            <td>${admin.surname}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Email:</b></td>
+                            <td>${admin.email}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Номер телефона:</b></td>
+                            <td>${admin.phone}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Пол:</b></td>
+                            <td>${admin.gender.name}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Дата начала работы:</b></td>
+                            <td>${admin.startWorkDate}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Дата окончания работы:</b></td>
+                            <td>${admin.endWorkDate}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Роль:</b></td>
+                            <td>${admin.role.name}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Заблокирован:</b></td>
+                            <td>${admin.blocked}</td>
+                        </tr>
+                        <tr>
+                            <td><a href="<c:url value="/admins/${id}/edit"/>" class="btn btn-lg btn-default">Редактировать</a></td>
+
+                            <c:choose>
+                                <c:when test="${admin.blocked == false}">
+                                    <td><a href="<c:url value="/admins/${id}/lock"/>" class="btn btn-lg btn-danger">Заблокировать</a></td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td><a href="<c:url value="/admins/${id}/reestablish"/>" class="btn btn-lg btn-danger">Восстановить</a></td>
+                                </c:otherwise>
+                            </c:choose>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -265,13 +281,8 @@
     </div>
 </div>
 
-<!-- jQuery -->
 <script src="<c:url value="/resources/js/jquery.js"/>"></script>
-
-<!-- Bootstrap Core JavaScript -->
 <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
-
-<%--<script src="<c:url value="/resources/js/custom-script.js"/>"></script>--%>
 
 </body>
 

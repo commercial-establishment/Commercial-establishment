@@ -1,9 +1,7 @@
 package kz.hts.ce.service;
 
 import kz.hts.ce.entity.Admin;
-import kz.hts.ce.entity.User;
 import kz.hts.ce.repository.AdminRepository;
-import kz.hts.ce.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,5 +25,13 @@ public class AdminService extends BaseService<Admin, AdminRepository> {
 
     public List<Admin> findByRoleName(String roleName){
         return repository.findByRole_Name(roleName);
+    }
+
+    public void lockById(long id){
+        repository.lockById(id);
+    }
+
+    public void reestablishById(long id){
+        repository.reestablishById(id);
     }
 }

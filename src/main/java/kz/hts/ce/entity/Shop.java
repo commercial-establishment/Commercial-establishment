@@ -6,7 +6,11 @@ import java.util.List;
 @Entity
 public class Shop extends BaseEntity {
 
-    private String name;
+    private String username;
+    private String password;
+
+    @Column(name = "full_name")
+    private String fullName;
 
     @ManyToOne
     @JoinColumn(name = "type_id", nullable = false)
@@ -16,15 +20,34 @@ public class Shop extends BaseEntity {
     @JoinColumn(name = "warehouse_id", nullable = false)
     private Warehouse warehouse;
 
+    @Column(name = "is_blocked", nullable = false)
+    private boolean blocked;
+
     @ManyToMany(mappedBy="shops")
     private List<Provider> providers;
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public Type getType() {
@@ -41,6 +64,14 @@ public class Shop extends BaseEntity {
 
     public void setWarehouse(Warehouse warehouse) {
         this.warehouse = warehouse;
+    }
+
+    public boolean isBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
     }
 
     public List<Provider> getProviders() {

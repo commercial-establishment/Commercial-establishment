@@ -1,5 +1,6 @@
 package kz.hts.ce.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,6 +15,9 @@ public class Warehouse extends BaseEntity {
 
     private int arrival;
     private int residue;
+
+    /*TODO nullable = false*/
+    @Column(name = "import_date", nullable = true)
     private LocalDateTime importDate;
 
     public Product getProduct() {

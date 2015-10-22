@@ -13,7 +13,7 @@ public class Model extends BaseEntity {
     private String name;
 
     @OneToOne
-    @JoinColumn(name = "image_id", nullable = false)
+    @JoinColumn(name = "image_id", nullable = true)
     private Image image;
 
     @ManyToMany(mappedBy="models")

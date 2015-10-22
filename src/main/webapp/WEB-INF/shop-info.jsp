@@ -211,19 +211,25 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        Список администраторов
+                        Blank Page
+                        <small>Subheading</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li>
                             <i class="fa fa-dashboard"></i> <a href="<c:url value="/admin"/>">Главная</a>
                         </li>
+                        <li>
+                            <i class="fa fa-table"></i> <a href="<c:url value="/admins"/>">Список магазинов</a>
+                        </li>
                         <li class="active">
-                            <i class="fa fa-table"></i> Список администраторов
+                            <i class="fa fa-desktop"></i> Информация о магазине
                         </li>
                     </ol>
                 </div>
             </div>
             <div class="col-lg-12">
+                <h2>Bordered with Striped Rows</h2>
+
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
@@ -233,8 +239,8 @@
                             <th>Name</th>
                             <th>Patronymic</th>
                             <th>Surname</th>
-                            <%--<th>Start work date</th>--%>
-                            <%--<th>End work date</th>--%>
+                            <th>Start work date</th>
+                            <th>End work date</th>
                             <th>Blocked</th>
                         </tr>
                         </thead>
@@ -246,8 +252,8 @@
                                 <td>${admin.name}</td>
                                 <td>${admin.patronymic}</td>
                                 <td>${admin.surname}</td>
-                                <%--<td>${admin.startWorkDate}</td>--%>
-                                <%--<td>${admin.endWorkDate}</td>--%>
+                                <td>${admin.startWorkDate}</td>
+                                <td>${admin.endWorkDate}</td>
                                 <td>${admin.blocked}</td>
                             </tr>
                         </c:forEach>

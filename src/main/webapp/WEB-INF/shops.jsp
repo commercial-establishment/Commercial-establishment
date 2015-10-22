@@ -219,7 +219,7 @@
                             <i class="fa fa-dashboard"></i> <a href="<c:url value="/admin"/>">Главная</a>
                         </li>
                         <li class="active">
-                            <i class="fa fa-table"></i> Список администраторов
+                            <i class="fa fa-table"></i> Список магазинов
                         </li>
                     </ol>
                 </div>
@@ -233,25 +233,19 @@
                         <tr>
                             <th>Id</th>
                             <th>Username</th>
-                            <th>Name</th>
-                            <th>Patronymic</th>
-                            <th>Surname</th>
-                            <%--<th>Start work date</th>--%>
-                            <%--<th>End work date</th>--%>
+                            <th>Full name</th>
+                            <th>Type</th>
                             <th>Blocked</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${admins}" var="admin">
-                            <tr onclick="document.location = '/admins/' + ${admin.id};">
-                                <td>${admin.id}</td>
-                                <td> ${admin.username}</td>
-                                <td>${admin.name}</td>
-                                <td>${admin.patronymic}</td>
-                                <td>${admin.surname}</td>
-                                <%--<td>${admin.startWorkDate}</td>--%>
-                                <%--<td>${admin.endWorkDate}</td>--%>
-                                <td>${admin.blocked}</td>
+                        <c:forEach items="${shops}" var="shop">
+                            <tr onclick="document.location = '/shops/' + ${shop.id};">
+                                <td>${shop.id}</td>
+                                <td>${shop.username}</td>
+                                <td>${shop.fullName}</td>
+                                <td>${shop.type.name}</td>
+                                <td>${shop.blocked}</td>
                             </tr>
                         </c:forEach>
                         </tbody>
