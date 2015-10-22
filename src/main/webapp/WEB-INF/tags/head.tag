@@ -13,7 +13,8 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title><fmt:message key="${title}"/></title>
+        <%--<title><fmt:message key="${title}"/></title>--%>
+        <title>${title}</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet" type="text/css">

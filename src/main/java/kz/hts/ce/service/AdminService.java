@@ -7,6 +7,8 @@ import kz.hts.ce.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AdminService extends BaseService<Admin, AdminRepository> {
 
@@ -21,5 +23,9 @@ public class AdminService extends BaseService<Admin, AdminRepository> {
 
     public void updatePasswordById(String password, long id) {
         repository.updatePasswordById(password, id);
+    }
+
+    public List<Admin> findByRoleName(String roleName){
+        return repository.findByRole_Name(roleName);
     }
 }

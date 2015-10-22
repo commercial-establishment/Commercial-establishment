@@ -1,5 +1,6 @@
 package kz.hts.ce.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,9 +15,19 @@ public class Admin extends BaseEntity {
     private String surname;
     private String patronymic;
 
+    /*TODO nullable = false*/
+    @Column(name = "start_work_date", nullable = true)
+    private String startWorkDate;
+
+    @Column(name = "end_work_date", nullable = true)
+    private String endWorkDate;
+
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
+
+    @Column(name = "is_blocked", nullable = false)
+    private boolean blocked;
 
     public String getUsername() {
         return username;
@@ -66,11 +77,35 @@ public class Admin extends BaseEntity {
         this.patronymic = patronymic;
     }
 
+    public String getStartWorkDate() {
+        return startWorkDate;
+    }
+
+    public void setStartWorkDate(String startWorkDate) {
+        this.startWorkDate = startWorkDate;
+    }
+
+    public String getEndWorkDate() {
+        return endWorkDate;
+    }
+
+    public void setEndWorkDate(String endWorkDate) {
+        this.endWorkDate = endWorkDate;
+    }
+
     public Role getRole() {
         return role;
     }
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public boolean isBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
     }
 }

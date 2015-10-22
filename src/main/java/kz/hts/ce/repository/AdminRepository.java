@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface AdminRepository extends JpaRepository<Admin, Long> {
 
@@ -15,4 +17,6 @@ public interface AdminRepository extends JpaRepository<Admin, Long> {
     @Modifying
     @Query("UPDATE User u set u.password = ?1 where u.id = ?2")
     void updatePasswordById(String password, long id);
+
+    List<Admin> findByRole_Name(String roleName);
 }

@@ -8,11 +8,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
+
 import static kz.hts.ce.util.SpringUtils.getPrincipal;
 
 @Controller
 public class TransitionPageController {
 
+    public static final String ADMIN = "ADMIN";
     @Autowired
     private AdminService adminService;
 
@@ -31,7 +34,10 @@ public class TransitionPageController {
     }
 
     @RequestMapping(value = "/admins",method = RequestMethod.GET)
-    public String adminsPage() {
+    public String adminsPage(Model model) {
+        String username = getPrincipal();
+        List<Admin> admins = adminService.findByRoleName(ADMIN);
+        model.addAttribute("admins", admins);
         return "admins";
     }
 

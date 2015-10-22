@@ -164,6 +164,11 @@
                         <div class="panel-body">
                             <c:url var="loginUrl" value="/login/form" />
                             <form action="${loginUrl}" method="post" class="form-signin">
+                                <c:if test="${param.error != null}">
+                                    <div class="alert alert-danger">
+                                        <p>Неверное имя пользователя или пароль</p>
+                                    </div>
+                                </c:if>
                                 <div class="jumbotron" style="background-color: white">
                                     <div class="form-group">
                                         <label for="username">Username</label>
