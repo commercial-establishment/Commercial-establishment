@@ -2,3 +2,8 @@
     width: 700px; /* Ширина элемента в пикселах */
     margin: auto; /* Выравниваем по центру */
 }
+
+tr.hover {
+    cursor: pointer;
+    /* whatever other hover styles you want */
+}

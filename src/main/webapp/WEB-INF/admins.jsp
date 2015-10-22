@@ -22,6 +22,8 @@
     <!-- Custom Fonts -->
     <link href="<c:url value="/resources/font-awesome/css/font-awesome.min.css"/>" rel="stylesheet" type="text/css">
 
+    <%--<link href="<c:url value="/resources/css/style.css"/>" rel="stylesheet" type="text/css">--%>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -196,9 +198,6 @@
                 <li>
                     <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
                 </li>
-                <li>
-                    <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
-                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -217,7 +216,7 @@
                     </h1>
                     <ol class="breadcrumb">
                         <li>
-                            <i class="fa fa-dashboard"></i>  <a href="<c:url value="/admin"/>">Главная</a>
+                            <i class="fa fa-dashboard"></i> <a href="<c:url value="/admin"/>">Главная</a>
                         </li>
                         <li class="active">
                             <i class="fa fa-table"></i> Список администраторов
@@ -244,9 +243,9 @@
                         </thead>
                         <tbody>
                         <c:forEach items="${admins}" var="admin">
-                            <tr>
+                            <tr onclick="document.location = '/admins/' + ${admin.id};">
                                 <td>${admin.id}</td>
-                                <td>${admin.username}</td>
+                                <td> ${admin.username}</td>
                                 <td>${admin.name}</td>
                                 <td>${admin.patronymic}</td>
                                 <td>${admin.surname}</td>
@@ -268,6 +267,8 @@
 
 <!-- Bootstrap Core JavaScript -->
 <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
+
+<%--<script src="<c:url value="/resources/js/custom-script.js"/>"></script>--%>
 
 </body>
 
