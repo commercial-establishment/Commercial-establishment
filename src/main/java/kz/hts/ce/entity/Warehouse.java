@@ -1,38 +1,50 @@
 package kz.hts.ce.entity;
 
+import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.time.LocalDateTime;
 
+@Entity
 public class Warehouse extends BaseEntity {
 
     @ManyToOne
-    @JoinColumn(name = "model_id")
-    private Model model;
+    @JoinColumn(name = "produt_id")
+    private Product product;
 
-    private int totalQuantity;
-    private int quantity;
+    private int arrival;
+    private int residue;
+    private LocalDateTime importDate;
 
-    public Model getModel() {
-        return model;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setModel(Model model) {
-        this.model = model;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public int getTotalQuantity() {
-        return totalQuantity;
+    public int getArrival() {
+        return arrival;
     }
 
-    public void setTotalQuantity(int totalQuantity) {
-        this.totalQuantity = totalQuantity;
+    public void setArrival(int arrival) {
+        this.arrival = arrival;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getResidue() {
+        return residue;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setResidue(int residue) {
+        this.residue = residue;
+    }
+
+    public LocalDateTime getImportDate() {
+        return importDate;
+    }
+
+    public void setImportDate(LocalDateTime importDate) {
+        this.importDate = importDate;
     }
 }

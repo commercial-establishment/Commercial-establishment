@@ -5,7 +5,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Employee extends User {
+public class Employee extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "shop_id", nullable = false)

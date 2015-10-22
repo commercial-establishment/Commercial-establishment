@@ -15,6 +15,11 @@ public class Admin extends BaseEntity {
     private String name;
     private String surname;
     private String patronymic;
+    private String phone;
+
+    @ManyToOne
+    @JoinColumn(name = "gender_id", nullable = false)
+    private Gender gender;
 
     /*TODO nullable = false*/
     @Column(name = "start_work_date", nullable = true)
@@ -109,5 +114,21 @@ public class Admin extends BaseEntity {
 
     public void setBlocked(boolean blocked) {
         this.blocked = blocked;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 }
