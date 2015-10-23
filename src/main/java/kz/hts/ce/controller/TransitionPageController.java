@@ -1,7 +1,9 @@
 package kz.hts.ce.controller;
 
 import kz.hts.ce.entity.Admin;
+import kz.hts.ce.entity.Gender;
 import kz.hts.ce.entity.Shop;
+import kz.hts.ce.repository.GenderRepository;
 import kz.hts.ce.service.AdminService;
 import kz.hts.ce.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +21,13 @@ import static kz.hts.ce.util.SpringUtils.getPrincipal;
 public class TransitionPageController {
 
     public static final String ADMIN = "ADMIN";
+
     @Autowired
     private AdminService adminService;
     @Autowired
     private ShopService shopService;
+    @Autowired
+    private GenderRepository genderRepository;
 
     /*ADMIN*/
     @RequestMapping("/admins/{id}")
@@ -42,9 +47,13 @@ public class TransitionPageController {
     }
 
     @RequestMapping("/admins/{id}/edit")
-    public String editAdminPage(@PathVariable long id) {
-        adminService.reestablishById(id);
-        return "edit-admin";
+    public String editAdminPage(Model model, @PathVariable long id) {
+        Admin admin = adminService.findById(id);
+        List<Gender> genders = genderRepository.findAll();
+
+        model.addAttribute("genders", genders);
+        model.addAttribute("admin", admin);
+        return "admin-edit";
     }
 
     @RequestMapping(value = "/admins",method = RequestMethod.GET)
