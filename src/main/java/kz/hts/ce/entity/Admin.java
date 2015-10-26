@@ -1,10 +1,9 @@
 package kz.hts.ce.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import java.time.LocalDateTime;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Admin extends BaseEntity {
@@ -21,13 +20,13 @@ public class Admin extends BaseEntity {
     @JoinColumn(name = "gender_id", nullable = false)
     private Gender gender;
 
-    /*TODO nullable = false*/
-    @Column(name = "start_work_date", nullable = true)
-    private LocalDateTime startWorkDate;
+    @Column(name = "start_work_date", nullable = false)
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private Date startWorkDate;
 
-    /*TODO nullable = false*/
     @Column(name = "end_work_date", nullable = true)
-    private LocalDateTime endWorkDate;
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private Date endWorkDate;
 
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
@@ -100,19 +99,19 @@ public class Admin extends BaseEntity {
         this.gender = gender;
     }
 
-    public LocalDateTime getStartWorkDate() {
+    public Date getStartWorkDate() {
         return startWorkDate;
     }
 
-    public void setStartWorkDate(LocalDateTime startWorkDate) {
+    public void setStartWorkDate(Date startWorkDate) {
         this.startWorkDate = startWorkDate;
     }
 
-    public LocalDateTime getEndWorkDate() {
+    public Date getEndWorkDate() {
         return endWorkDate;
     }
 
-    public void setEndWorkDate(LocalDateTime endWorkDate) {
+    public void setEndWorkDate(Date endWorkDate) {
         this.endWorkDate = endWorkDate;
     }
 

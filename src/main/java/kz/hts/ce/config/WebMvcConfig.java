@@ -1,7 +1,6 @@
 package kz.hts.ce.config;
 
 import kz.hts.ce.util.converters.StringToGender;
-import kz.hts.ce.util.converters.StringToRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -22,12 +21,9 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
     @Autowired
     private StringToGender stringToGenderConverter;
-    @Autowired
-    private StringToRole stringToRoleConverter;
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        registry.addConverter(stringToRoleConverter);
         registry.addConverter(stringToGenderConverter);
     }
 

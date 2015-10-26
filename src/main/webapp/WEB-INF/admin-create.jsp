@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Информация об администраторе</title>
+    <title>Редактирование данных об администраторе</title>
 
     <link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/sb-admin.css"/>" rel="stylesheet">
@@ -23,6 +25,7 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link href="<c:url value="/resources/css/datepicker.css"/>" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -154,13 +157,13 @@
         </ul>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <li>
+                <li class="active">
                     <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Главная</a>
                 </li>
                 <li>
                     <a href="<c:url value="/providers"/>"><i class="fa fa-fw fa-table"></i> Поставщики</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="<c:url value="/admins"/>"><i class="fa fa-fw fa-table"></i>Администраторы</a>
                 </li>
                 <li>
@@ -198,7 +201,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        Информация об администраторе
+                        Редактирование данных об администраторе
                     </h1>
                     <ol class="breadcrumb">
                         <li>
@@ -208,73 +211,88 @@
                             <i class="fa fa-table"></i> <a href="<c:url value="/admins"/>">Список администраторов</a>
                         </li>
                         <li class="active">
-                            <i class="fa fa-desktop"></i> Информация об администраторе
+                            <i class="fa fa-desktop"></i> <a href="<c:url value="/admins/${admin.id}"/>">Информация об
+                            администраторе</a>
+                        </li>
+                        <li class="active">
+                            <i class="fa fa-edit"></i> Редантирование данных
                         </li>
                     </ol>
                 </div>
             </div>
             <div class="col-lg-12">
                 <div class="table-responsive">
-                    <table class="table table-hover">
-                        <tbody>
-                        <tr>
-                            <td><b>Имя пользователя:</b></td>
-                            <td>${admin.username}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Имя:</b></td>
-                            <td>${admin.name}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Отчество:</b></td>
-                            <td>${admin.patronymic}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Фамилия:</b></td>
-                            <td>${admin.surname}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Email:</b></td>
-                            <td>${admin.email}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Номер телефона:</b></td>
-                            <td>${admin.phone}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Пол:</b></td>
-                            <td>${admin.gender.name}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Дата начала работы:</b></td>
-                            <td>${admin.startWorkDate}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Дата окончания работы:</b></td>
-                            <td>${admin.endWorkDate}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Роль:</b></td>
-                            <td><b>${admin.role.name}</b></td>
-                        </tr>
-                        <tr>
-                            <td><b>Заблокирован:</b></td>
-                            <td>${admin.blocked}</td>
-                        </tr>
-                        <tr>
-                            <td><a href="<c:url value="/admins/${id}/edit"/>" class="btn btn-lg btn-default">Редактировать</a></td>
-
-                            <c:choose>
-                                <c:when test="${admin.blocked == false}">
-                                    <td><a href="<c:url value="/admins/${id}/lock"/>" class="btn btn-lg btn-danger">Заблокировать</a></td>
-                                </c:when>
-                                <c:otherwise>
-                                    <td><a href="<c:url value="/admins/${id}/reestablish"/>" class="btn btn-lg btn-success">Восстановить</a></td>
-                                </c:otherwise>
-                            </c:choose>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <form:form method="post" action="/admins/create-save" modelAttribute="admin">
+                        <table class="table table-hover">
+                            <tbody>
+                            <tr>
+                                <td><form:label path="username">Имя пользователя:</form:label></td>
+                                <td><form:input cssClass="form-control" path="username"/></td>
+                                <td>Имя пользователя должно состоять из ...</td>
+                            </tr>
+                            <tr>
+                                <td><form:label path="password">Пароль:</form:label></td>
+                                <td><form:input cssClass="form-control" path="password"/></td>
+                                <td>Имя пользователя должно состоять из ...</td>
+                            </tr>
+                            <tr>
+                                <td><form:label path="name">Имя:</form:label></td>
+                                <td><form:input cssClass="form-control" path="name"/></td>
+                                <td>Имя пользователя должно состоять из ...</td>
+                            </tr>
+                            <tr>
+                                <td><form:label path="patronymic">Отчество:</form:label></td>
+                                <td><form:input cssClass="form-control" path="patronymic"/></td>
+                                <td>Имя пользователя должно состоять из ...</td>
+                            </tr>
+                            <tr>
+                                <td><form:label path="surname">Фамилия:</form:label></td>
+                                <td><form:input cssClass="form-control" path="surname"/></td>
+                                <td>Имя пользователя должно состоять из ...</td>
+                            </tr>
+                            <tr>
+                                <td><form:label path="email">Email:</form:label></td>
+                                <td><form:input type="email" cssClass="form-control" path="email"/></td>
+                                <td>Имя пользователя должно состоять из ...</td>
+                            </tr>
+                            <tr>
+                                <td><form:label path="phone">Номер телефона:</form:label></td>
+                                <td><form:input cssClass="form-control" path="phone"/></td>
+                                <td>Имя пользователя должно состоять из ...</td>
+                            </tr>
+                            <tr>
+                                <td><form:label path="gender">Пол:</form:label></td>
+                                <td>
+                                    <select name="gender" id="gender" class="form-control">
+                                        <c:forEach items="${genders}" var="gender">
+                                            <option> ${gender.name}</option>
+                                        </c:forEach>
+                                    </select>
+                                </td>
+                                <td>Имя пользователя должно состоять из ...</td>
+                            </tr>
+                            <tr>
+                                <td><form:label path="role">Роль:</form:label></td>
+                                <td><form:label path="role">ADMIN</form:label></td>
+                                <td>Имя пользователя должно состоять из ...</td>
+                            </tr>
+                            <tr>
+                                <td><form:label path="blocked">Заблокирован:</form:label></td>
+                                <td>${admin.blocked}</td>
+                                <form:hidden path="blocked"/>
+                                <td>Имя пользователя должно состоять из ...</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <form:button type="submit" class="btn btn-lg btn-success">Сохранить</form:button>
+                                </td>
+                                <td/>
+                                <td><a href="<c:url value="/admins/${id}"/>" class="btn btn-lg btn-danger">Отмена</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form:form>
                 </div>
             </div>
         </div>
@@ -283,7 +301,7 @@
 
 <script src="<c:url value="/resources/js/jquery.js"/>"></script>
 <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
-
+<script src="<c:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
 </body>
 
 </html>

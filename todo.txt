@@ -4,3 +4,4 @@
 4) username or password isn't correct - login
 5) Encrypt password
 6) Role == null in edit-admin
+7) .and().rememberMe();

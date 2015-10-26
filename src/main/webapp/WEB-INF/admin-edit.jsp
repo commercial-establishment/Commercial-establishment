@@ -272,18 +272,15 @@
                                 <td><form:label path="startWorkDate">Дата начала работы:</form:label></td>
                                 <%--${admin.startWorkDate}--%>
                                <td>
-                                   <input  type="text" class="form-control customDatepicker">
+                                   <form:input path="startWorkDate" cssClass="form-control customDatepicker"/>
                                </td>
-
-                                    <%--TODO--%>
                                 <td>Имя пользователя должно состоять из ...</td>
                             </tr>
                             <tr>
                                 <td><form:label path="endWorkDate">Дата окончания работы:</form:label></td>
                                 <td>
-                                    <input  type="text" class="form-control customDatepicker">
+                                    <form:input path="endWorkDate" cssClass="form-control customDatepicker"/>
                                 </td>
-                                    <%--TODO--%>
                                 <td>Имя пользователя должно состоять из ...</td>
                             </tr>
                             <tr>

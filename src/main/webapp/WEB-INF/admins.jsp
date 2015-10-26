@@ -225,6 +225,11 @@
             </div>
             <div class="col-lg-12">
                 <div class="table-responsive">
+                    <div>
+                        <a href="<c:url value="/admins/create"/>" class="btn btn-lg btn-default">Добавить
+                            администратора</a>
+                        <br/> <br/>
+                    </div>
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
                         <tr>
@@ -233,8 +238,6 @@
                             <th>Name</th>
                             <th>Patronymic</th>
                             <th>Surname</th>
-                            <%--<th>Start work date</th>--%>
-                            <%--<th>End work date</th>--%>
                             <th>Blocked</th>
                         </tr>
                         </thead>
@@ -242,12 +245,10 @@
                         <c:forEach items="${admins}" var="admin">
                             <tr onclick="document.location = '/admins/' + ${admin.id};">
                                 <td>${admin.id}</td>
-                                <td> ${admin.username}</td>
+                                <td>${admin.username}</td>
                                 <td>${admin.name}</td>
                                 <td>${admin.patronymic}</td>
                                 <td>${admin.surname}</td>
-                                <%--<td>${admin.startWorkDate}</td>--%>
-                                <%--<td>${admin.endWorkDate}</td>--%>
                                 <td>${admin.blocked}</td>
                             </tr>
                         </c:forEach>

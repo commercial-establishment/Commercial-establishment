@@ -1397,7 +1397,7 @@
 $(document).ready(function () {
 
     $('.customDatepicker').datepicker({
-        format: "dd/mm/yyyy"
+        format: "dd-mm-yyyy"
     });
 
 });

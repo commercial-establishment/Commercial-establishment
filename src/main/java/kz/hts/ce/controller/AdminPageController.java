@@ -57,6 +57,17 @@ public class AdminPageController {
         return "admin-edit";
     }
 
+
+    @RequestMapping("/admins/create")
+    public String edit(Model model) {
+        Admin admin = new Admin();
+        List<Gender> genders = genderService.findAll();
+
+        model.addAttribute("genders", genders);
+        model.addAttribute("admin", admin);
+        return "admin-create";
+    }
+
     @RequestMapping(value = "/admins",method = RequestMethod.GET)
     public String adminsPage(Model model) {
         List<Admin> admins = adminService.findByRoleName(ADMIN);
