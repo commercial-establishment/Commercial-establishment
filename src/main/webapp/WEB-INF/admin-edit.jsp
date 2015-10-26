@@ -25,6 +25,7 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link href="<c:url value="/resources/css/datepicker.css"/>" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -269,13 +270,19 @@
                             </tr>
                             <tr>
                                 <td><form:label path="startWorkDate">Дата начала работы:</form:label></td>
-                                <td>${admin.startWorkDate}</td>
+                                <%--${admin.startWorkDate}--%>
+                               <td>
+                                   <input  type="text" class="form-control customDatepicker">
+                               </td>
+
                                     <%--TODO--%>
                                 <td>Имя пользователя должно состоять из ...</td>
                             </tr>
                             <tr>
                                 <td><form:label path="endWorkDate">Дата окончания работы:</form:label></td>
-                                <td>${admin.endWorkDate}</td>
+                                <td>
+                                    <input  type="text" class="form-control customDatepicker">
+                                </td>
                                     <%--TODO--%>
                                 <td>Имя пользователя должно состоять из ...</td>
                             </tr>
@@ -300,7 +307,6 @@
                             </tr>
                             </tbody>
                         </table>
-                        <%--</form>--%>
                     </form:form>
                 </div>
             </div>
@@ -310,7 +316,7 @@
 
 <script src="<c:url value="/resources/js/jquery.js"/>"></script>
 <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
-
+<script src="<c:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
 </body>
 
 </html>

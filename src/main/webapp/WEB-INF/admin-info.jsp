@@ -154,13 +154,13 @@
         </ul>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <li class="active">
+                <li>
                     <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Главная</a>
                 </li>
                 <li>
                     <a href="<c:url value="/providers"/>"><i class="fa fa-fw fa-table"></i> Поставщики</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="<c:url value="/admins"/>"><i class="fa fa-fw fa-table"></i>Администраторы</a>
                 </li>
                 <li>
