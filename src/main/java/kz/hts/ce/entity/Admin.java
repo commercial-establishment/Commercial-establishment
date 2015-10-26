@@ -84,6 +84,22 @@ public class Admin extends BaseEntity {
         this.patronymic = patronymic;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
     public LocalDateTime getStartWorkDate() {
         return startWorkDate;
     }
@@ -116,19 +132,21 @@ public class Admin extends BaseEntity {
         this.blocked = blocked;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public Gender getGender() {
-        return gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
+    @Override
+    public String toString() {
+        return "Admin{" +
+                "username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                ", phone='" + phone + '\'' +
+                ", gender=" + gender +
+                ", startWorkDate=" + startWorkDate +
+                ", endWorkDate=" + endWorkDate +
+                ", role=" + role +
+                ", blocked=" + blocked +
+                '}';
     }
 }

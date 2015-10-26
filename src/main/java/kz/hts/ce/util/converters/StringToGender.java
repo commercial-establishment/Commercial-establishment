@@ -1,21 +1,18 @@
-package kz.hts.ce.util;
+package kz.hts.ce.util.converters;
 
 import kz.hts.ce.entity.Gender;
 import kz.hts.ce.service.GenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
-//@TypeConverter
+@Component
 public final class StringToGender implements Converter<String, Gender> {
 
-//    @Autowired
-//    private GenderService genderService;
+    @Autowired
+    private GenderService genderService;
 
     public Gender convert(String source) {
-//        Gender gender = genderService.findByName(source);
-        Gender gender = new Gender();
-        gender.setName(source);
-        gender.setId(1);
-        return gender;
+        return genderService.findByName(source);
     }
 }

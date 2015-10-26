@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="f" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -221,86 +221,87 @@
             </div>
             <div class="col-lg-12">
                 <div class="table-responsive">
-                    <f:form method="post" action="/admins/${id}/edit-save" modelAttribute="admin">
-                    <%--<form action="<c:url value="/admins/{id}/edit-save"/>" method="POST">--%>
+                    <form:form method="post" action="/admins/${id}/edit-save" modelAttribute="admin">
                         <table class="table table-hover">
                             <tbody>
                             <tr>
-                                <td><b>Имя пользователя:</b></td>
-                                <td><input class="form-control" value="${admin.username}"></td>
-
-                                <%--<td>--%>
-                                    <%--<f:input cssClass="form-control" path="username">${admin.username}</f:input>--%>
-                                <%--</td>--%>
+                                <td><form:label path="username">Имя пользователя:</form:label></td>
+                                <td><form:input cssClass="form-control" path="username"/></td>
+                                <form:hidden path="password"/>
                                 <td>Имя пользователя должно состоять из ...</td>
                             </tr>
                             <tr>
-                                <td><b>Имя:</b></td>
-                                <td><input class="form-control" value="${admin.name}"></td>
+                                <td><form:label path="name">Имя:</form:label></td>
+                                <td><form:input cssClass="form-control" path="name"/></td>
                                 <td>Имя пользователя должно состоять из ...</td>
                             </tr>
                             <tr>
-                                <td><b>Отчество:</b></td>
-                                <td><input class="form-control" value="${admin.patronymic}"></td>
+                                <td><form:label path="patronymic">Отчество:</form:label></td>
+                                <td><form:input cssClass="form-control" path="patronymic"/></td>
                                 <td>Имя пользователя должно состоять из ...</td>
                             </tr>
                             <tr>
-                                <td><b>Фамилия:</b></td>
-                                <td><input class="form-control" value="${admin.surname}"></td>
+                                <td><form:label path="surname">Фамилия:</form:label></td>
+                                <td><form:input cssClass="form-control" path="surname"/></td>
                                 <td>Имя пользователя должно состоять из ...</td>
                             </tr>
                             <tr>
-                                <td><b>Email:</b></td>
-                                <td><input class="form-control" value="${admin.email}"></td>
+                                <td><form:label path="email">Email:</form:label></td>
+                                <td><form:input type="email" cssClass="form-control" path="email"/></td>
                                 <td>Имя пользователя должно состоять из ...</td>
                             </tr>
                             <tr>
-                                <td><b>Номер телефона:</b></td>
-                                <td><input class="form-control" value="${admin.phone}"></td>
+                                <td><form:label path="phone">Номер телефона:</form:label></td>
+                                <td><form:input cssClass="form-control" path="phone"/></td>
                                 <td>Имя пользователя должно состоять из ...</td>
                             </tr>
                             <tr>
-                                <td><b>Пол:</b></td>
+                                <td><form:label path="gender">Пол:</form:label></td>
                                 <td>
                                     <select name="gender" id="gender" class="form-control">
                                         <c:forEach items="${genders}" var="gender">
-                                        <option <c:if test="${admin.gender.name == gender.name}">selected</c:if>>
-                                                ${gender.name}</option>
+                                            <option <c:if test="${admin.gender.name == gender.name}">selected</c:if>>
+                                                    ${gender.name}</option>
                                         </c:forEach>
+                                    </select>
                                 </td>
                                 <td>Имя пользователя должно состоять из ...</td>
                             </tr>
                             <tr>
-                                <td><b>Дата начала работы:</b></td>
+                                <td><form:label path="startWorkDate">Дата начала работы:</form:label></td>
                                 <td>${admin.startWorkDate}</td>
+                                    <%--TODO--%>
                                 <td>Имя пользователя должно состоять из ...</td>
                             </tr>
                             <tr>
-                                <td><b>Дата окончания работы:</b></td>
+                                <td><form:label path="endWorkDate">Дата окончания работы:</form:label></td>
                                 <td>${admin.endWorkDate}</td>
+                                    <%--TODO--%>
                                 <td>Имя пользователя должно состоять из ...</td>
                             </tr>
                             <tr>
-                                <td><b>Роль:</b></td>
-                                <td>${admin.role.name}</td>
+                                <td><form:label path="role">Роль:</form:label></td>
+                                <td><form:label path="role">${admin.role.name}</form:label></td>
                                 <td>Имя пользователя должно состоять из ...</td>
                             </tr>
                             <tr>
-                                <td><b>Заблокирован:</b></td>
+                                <td><form:label path="blocked">Заблокирован:</form:label></td>
                                 <td>${admin.blocked}</td>
+                                <form:hidden path="blocked"/>
                                 <td>Имя пользователя должно состоять из ...</td>
                             </tr>
                             <tr>
-                                <%--<td><a class="btn btn-lg btn-success">Сохранить</a></td>--%>
-                                <td><input type="submit" class="btn btn-lg btn-success" value="Сохранить"></td>
+                                <td>
+                                    <form:button type="submit" class="btn btn-lg btn-success">Сохранить</form:button>
+                                        <%--<input type="submit" class="btn btn-lg btn-success" value="Сохранить">--%>
+                                </td>
                                 <td/>
-                                <td/>
+                                <td><a href="<c:url value="/admins/${id}"/>" class="btn btn-lg btn-danger">Отмена</a></td>
                             </tr>
                             </tbody>
                         </table>
-                    <%--</form>--%>
-                    </f:form>
-                    <td><a href="<c:url value="/admins/${id}"/>" class="btn btn-lg btn-danger">Отмена</a></td>
+                        <%--</form>--%>
+                    </form:form>
                 </div>
             </div>
         </div>

@@ -269,7 +269,7 @@
                                     <td><a href="<c:url value="/admins/${id}/lock"/>" class="btn btn-lg btn-danger">Заблокировать</a></td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td><a href="<c:url value="/admins/${id}/reestablish"/>" class="btn btn-lg btn-danger">Восстановить</a></td>
+                                    <td><a href="<c:url value="/admins/${id}/reestablish"/>" class="btn btn-lg btn-success">Восстановить</a></td>
                                 </c:otherwise>
                             </c:choose>
                         </tr>

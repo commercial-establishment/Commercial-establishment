@@ -1,12 +1,12 @@
 package kz.hts.ce.config;
 
-import kz.hts.ce.util.StringToGender;
+import kz.hts.ce.util.converters.StringToGender;
+import kz.hts.ce.util.converters.StringToRole;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.ConversionServiceFactoryBean;
-import org.springframework.core.convert.ConversionService;
-import org.springframework.core.convert.converter.Converter;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -14,14 +14,22 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
 @ComponentScan(basePackages = "kz.hts.ce")
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
+
+    @Autowired
+    private StringToGender stringToGenderConverter;
+    @Autowired
+    private StringToRole stringToRoleConverter;
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(stringToRoleConverter);
+        registry.addConverter(stringToGenderConverter);
+    }
 
     @Bean(name = "viewResolver")
     public InternalResourceViewResolver getViewResolver() {
@@ -35,21 +43,5 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-    }
-
-    @Bean
-    public ConversionService getConversionService() {
-        ConversionServiceFactoryBean bean = new ConversionServiceFactoryBean();
-        bean.setConverters(getConverters());
-        bean.afterPropertiesSet();
-        return bean.getObject();
-    }
-
-    private Set<Converter> getConverters() {
-        Set<Converter> converters = new HashSet<>();
-
-        converters.add(new StringToGender());
-
-        return converters;
     }
 }
