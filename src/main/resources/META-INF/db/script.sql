@@ -12,7 +12,7 @@ INSERT INTO type (id, name) VALUES (1, 'A');
 INSERT INTO type (id, name) VALUES (2, 'B');
 
 INSERT INTO admin (id, is_blocked, email, end_work_date, name, password, patronymic, start_work_date, surname, username, role_id, gender_id)
-VALUES (1, FALSE, 'yakovshmidt93@gmail.com', NULL, 'Yakov', 'yakov', 'Vladimirovich', NULL, 'Shmidt', 'yakov', 1, 1);
+VALUES (1, FALSE, 'yakovshmidt93@gmail.com', NULL, 'Yakov', '$2a$10$5/0IiLwNrICc3Dmq/7AWKO08qK13AKH2tWIytGe9a2.WZHIj2WwPa', 'Vladimirovich', '11-11-2011', 'Shmidt', 'yakov11', 1, 1);
 
 INSERT INTO model (id, name, image_id) VALUES (1, 'MODEL OF PRODUCT', NULL);
 
