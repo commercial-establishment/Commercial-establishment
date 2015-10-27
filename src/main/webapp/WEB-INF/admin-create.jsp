@@ -211,11 +211,7 @@
                             <i class="fa fa-table"></i> <a href="<c:url value="/admins"/>">Список администраторов</a>
                         </li>
                         <li class="active">
-                            <i class="fa fa-desktop"></i> <a href="<c:url value="/admins/${admin.id}"/>">Информация об
-                            администраторе</a>
-                        </li>
-                        <li class="active">
-                            <i class="fa fa-edit"></i> Редантирование данных
+                            <i class="fa fa-edit"></i> Добавление администратора
                         </li>
                     </ol>
                 </div>

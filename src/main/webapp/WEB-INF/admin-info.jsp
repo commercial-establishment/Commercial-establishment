@@ -249,10 +249,12 @@
                             <td><b>Дата начала работы:</b></td>
                             <td>${admin.startWorkDate}</td>
                         </tr>
-                        <tr>
-                            <td><b>Дата окончания работы:</b></td>
-                            <td>${admin.endWorkDate}</td>
-                        </tr>
+                        <c:if test="${admin.endWorkDate != null}">
+                            <tr>
+                                <td><b>Дата окончания работы:</b></td>
+                                <td>${admin.endWorkDate}</td>
+                            </tr>
+                        </c:if>
                         <tr>
                             <td><b>Роль:</b></td>
                             <td><b>${admin.role.name}</b></td>
@@ -262,14 +264,17 @@
                             <td>${admin.blocked}</td>
                         </tr>
                         <tr>
-                            <td><a href="<c:url value="/admins/${id}/edit"/>" class="btn btn-lg btn-default">Редактировать</a></td>
+                            <td><a href="<c:url value="/admins/${id}/edit"/>" class="btn btn-lg btn-default">Редактировать</a>
+                            </td>
 
                             <c:choose>
                                 <c:when test="${admin.blocked == false}">
-                                    <td><a href="<c:url value="/admins/${id}/lock"/>" class="btn btn-lg btn-danger">Заблокировать</a></td>
+                                    <td><a href="<c:url value="/admins/${id}/lock"/>" class="btn btn-lg btn-danger">Заблокировать</a>
+                                    </td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td><a href="<c:url value="/admins/${id}/reestablish"/>" class="btn btn-lg btn-success">Восстановить</a></td>
+                                    <td><a href="<c:url value="/admins/${id}/reestablish"/>"
+                                           class="btn btn-lg btn-success">Восстановить</a></td>
                                 </c:otherwise>
                             </c:choose>
                         </tr>

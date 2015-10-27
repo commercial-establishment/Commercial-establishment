@@ -25,9 +25,7 @@ public class AuthenticationService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Admin admin = adminService.findByUsername(username);
-        if (admin == null) {
-            return null;
-        }
+        if (admin == null) return null;
         GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + admin.getRole().getName());
         return new User(admin.getUsername(), admin.getPassword(), Arrays.asList(authority));
     }

@@ -222,7 +222,7 @@
             </div>
             <div class="col-lg-12">
                 <div class="table-responsive">
-                    <form:form method="post" action="/admins/${id}/edit-save" modelAttribute="admin">
+                    <form:form method="post" action="/admins/${id}/edit-save" modelAttribute="admin" commandName="admin">
                         <table class="table table-hover">
                             <tbody>
                             <tr>
@@ -230,6 +230,9 @@
                                 <td><form:input cssClass="form-control" path="username"/></td>
                                 <form:hidden path="password"/>
                                 <td>Имя пользователя должно состоять из ...</td>
+                            </tr>
+                            <tr>
+                                <form:errors path="username"/>
                             </tr>
                             <tr>
                                 <td><form:label path="name">Имя:</form:label></td>

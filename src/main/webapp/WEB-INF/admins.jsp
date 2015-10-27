@@ -233,12 +233,12 @@
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
                         <tr>
-                            <th>Id</th>
-                            <th>Username</th>
-                            <th>Name</th>
-                            <th>Patronymic</th>
-                            <th>Surname</th>
-                            <th>Blocked</th>
+                            <th>ID</th>
+                            <th>Имя пользователя</th>
+                            <th>Имя</th>
+                            <th>Отчество</th>
+                            <th>Фамилия</th>
+                            <th>Заблокирован</th>
                         </tr>
                         </thead>
                         <tbody>

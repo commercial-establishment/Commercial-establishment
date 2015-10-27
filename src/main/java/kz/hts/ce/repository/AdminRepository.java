@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -31,4 +32,13 @@ public interface AdminRepository extends JpaRepository<Admin, Long> {
     @Query("UPDATE Admin a set a.blocked = FALSE where a.id = ?1")
     void reestablishById(long id);
 
+    @Transactional
+    @Modifying
+    @Query("UPDATE Admin a set a.startWorkDate = ?1, a.endWorkDate = ?2 where a.id = ?3")
+    void updateStartAndEndWorkDate(Date startWorkDate, Date endWorkDate, long id);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE Admin a set a.endWorkDate = ?1 where a.id = ?2")
+    void updateEndWorkDate(Date endWorkDate, long id);
 }

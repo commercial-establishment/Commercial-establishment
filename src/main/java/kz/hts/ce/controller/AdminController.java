@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.validation.Valid;
 import java.util.Date;
 
 @Controller
@@ -25,30 +27,35 @@ public class AdminController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private AdminPageController adminPageController;
-
     @RequestMapping(value = "/admins/{id}/lock")
     public String lock(@PathVariable long id) {
+        Admin admin = adminService.findById(id);
+        admin.setEndWorkDate(new Date());
+        admin.setBlocked(true);
+        adminService.save(admin);
+        adminService.updateEndWorkDate(new Date(), id);
         adminService.lockById(id);
         return "redirect:";
     }
 
     @RequestMapping("/admins/{id}/reestablish")
     public String reestablish(@PathVariable long id) {
+        adminService.updateStartAndEndWorkDate(new Date(), null, id);
         adminService.reestablishById(id);
         return "redirect:";
     }
 
     @RequestMapping(value = "/admins/{id}/edit-save", method = RequestMethod.POST)
-    public String edit(Model model, @PathVariable long id, @ModelAttribute("admin") Admin admin) {
+    public String edit(@PathVariable long id, @Valid @ModelAttribute("admin") Admin admin, BindingResult result) {
         Role role = roleService.findByName("ADMIN");
-
         admin.setId(id);
         admin.setRole(role);
-
-        adminService.save(admin);/*TODO replace save on merge*/
-        return "redirect:";
+        adminService.save(admin);
+        if (result.hasErrors()) {
+            return "asas";/*TODO*/
+        } else {
+            return "redirect:";
+        }
     }
 
     @RequestMapping(value = "/admins/create-save", method = RequestMethod.POST)
