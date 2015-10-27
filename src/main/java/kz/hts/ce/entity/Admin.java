@@ -7,14 +7,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
 public class Admin extends BaseEntity {
 
     @NotEmpty(message = "Please enter your username.")
-    @Size(min = 3, max = 15, message = "Your username must between 3 and 15 characters")
+//    @Size(min = 3, max = 15, message = "Your username must between 3 and 15 characters")
     private String username;
 
     private String email;
