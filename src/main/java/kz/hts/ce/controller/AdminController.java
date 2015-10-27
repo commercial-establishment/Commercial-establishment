@@ -47,15 +47,14 @@ public class AdminController {
 
     @RequestMapping(value = "/admins/{id}/edit-save", method = RequestMethod.POST)
     public String edit(@PathVariable long id, @Valid @ModelAttribute("admin") Admin admin, BindingResult result) {
+        if (result.hasErrors()) {
+            return "admin-edit";
+        }
         Role role = roleService.findByName("ADMIN");
         admin.setId(id);
         admin.setRole(role);
         adminService.save(admin);
-        if (result.hasErrors()) {
-            return "asas";/*TODO*/
-        } else {
-            return "redirect:";
-        }
+        return "redirect:";
     }
 
     @RequestMapping(value = "/admins/create-save", method = RequestMethod.POST)

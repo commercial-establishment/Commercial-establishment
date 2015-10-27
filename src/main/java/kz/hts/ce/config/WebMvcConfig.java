@@ -23,8 +23,6 @@ import org.springframework.web.servlet.view.JstlView;
 @ComponentScan(basePackages = "kz.hts.ce")
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
-    private static final String MESSAGE_SOURCE = "/WEB-INF/i18n/messages";
-
     @Autowired
     private StringToGender stringToGenderConverter;
 
@@ -46,19 +44,24 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
-//
-//    @Bean(name = "messageSource")
-//    public MessageSource messageSource() {
-//        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-//        messageSource.setBasename(MESSAGE_SOURCE);
-//        messageSource.setCacheSeconds(5);
-//        return messageSource;
-//    }
-//
-//    @Override
-//    public Validator getValidator() {
-//        LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
-//        validator.setValidationMessageSource(messageSource());
-//        return validator;
-//    }
+
+    @Bean(name = "messageSource")
+    public MessageSource messageSource() {
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasename("classpath:messages");
+        messageSource.setDefaultEncoding("UTF-8");
+        return messageSource;
+    }
+
+    @Bean
+    public LocalValidatorFactoryBean validator() {
+        LocalValidatorFactoryBean validatorFactoryBean = new LocalValidatorFactoryBean();
+        validatorFactoryBean.setValidationMessageSource(messageSource());
+        return validatorFactoryBean;
+    }
+
+    @Override
+    public Validator getValidator() {
+        return validator();
+    }
 }

@@ -12,8 +12,7 @@ import java.util.Date;
 @Entity
 public class Admin extends BaseEntity {
 
-    @NotEmpty(message = "Please enter your username.")
-//    @Size(min = 3, max = 15, message = "Your username must between 3 and 15 characters")
+    @NotEmpty
     private String username;
 
     private String email;
