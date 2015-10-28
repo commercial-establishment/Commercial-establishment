@@ -26,6 +26,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <link href="<c:url value="/resources/css/datepicker.css"/>" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/resources/css/style.css"/>" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -222,17 +223,22 @@
             </div>
             <div class="col-lg-12">
                 <div class="table-responsive">
-                    <form:form method="post" action="/admins/${id}/edit-save" modelAttribute="admin" commandName="admin">
+                    <form:form method="post" action="/admins/${id}/edit" modelAttribute="admin" commandName="admin">
                         <table class="table table-hover">
                             <tbody>
                             <tr>
                                 <td><form:label path="username">Имя пользователя:</form:label></td>
                                 <td><form:input cssClass="form-control" path="username"/></td>
                                 <form:hidden path="password"/>
-                                <td>Имя пользователя должно состоять из ...</td>
-                            </tr>
-                            <tr>
-                                <form:errors path="username"/>
+                                <c:set var="usernameErrors"><form:errors path="username" cssClass="error"/> </c:set>
+                                <c:choose>
+                                    <c:when test="${not empty usernameErrors}">
+                                        <td> ${usernameErrors} </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>Имя пользователя должно состоять из ...</td>
+                                    </c:otherwise>
+                                </c:choose>
                             </tr>
                             <tr>
                                 <td><form:label path="name">Имя:</form:label></td>
@@ -252,7 +258,15 @@
                             <tr>
                                 <td><form:label path="email">Email:</form:label></td>
                                 <td><form:input type="email" cssClass="form-control" path="email"/></td>
-                                <td>Имя пользователя должно состоять из ...</td>
+                                <c:set var="emailErrors"><form:errors path="email" cssClass="error"/> </c:set>
+                                <c:choose>
+                                    <c:when test="${not empty emailErrors}">
+                                        <td> ${emailErrors} </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>Имя пользователя должно состоять из ...</td>
+                                    </c:otherwise>
+                                </c:choose>
                             </tr>
                             <tr>
                                 <td><form:label path="phone">Номер телефона:</form:label></td>
@@ -273,10 +287,10 @@
                             </tr>
                             <tr>
                                 <td><form:label path="startWorkDate">Дата начала работы:</form:label></td>
-                                <%--${admin.startWorkDate}--%>
-                               <td>
-                                   <form:input path="startWorkDate" cssClass="form-control customDatepicker"/>
-                               </td>
+                                    <%--${admin.startWorkDate}--%>
+                                <td>
+                                    <form:input path="startWorkDate" cssClass="form-control customDatepicker"/>
+                                </td>
                                 <td>Имя пользователя должно состоять из ...</td>
                             </tr>
                             <tr>
@@ -303,7 +317,8 @@
                                         <%--<input type="submit" class="btn btn-lg btn-success" value="Сохранить">--%>
                                 </td>
                                 <td/>
-                                <td><a href="<c:url value="/admins/${id}"/>" class="btn btn-lg btn-danger">Отмена</a></td>
+                                <td><a href="<c:url value="/admins/${id}"/>" class="btn btn-lg btn-danger">Отмена</a>
+                                </td>
                             </tr>
                             </tbody>
                         </table>

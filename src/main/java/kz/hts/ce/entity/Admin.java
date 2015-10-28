@@ -1,5 +1,6 @@
 package kz.hts.ce.entity;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -7,18 +8,32 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
 public class Admin extends BaseEntity {
 
     @NotEmpty
+    @Size(min = 2, max = 14)
+    @Pattern(regexp = "^[a-z0-9_-]{2,14}$")
     private String username;
 
+    @NotEmpty
+    @Email
+    @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
     private String email;
+
+    @NotEmpty
     private String password;
+
+    @NotEmpty
     private String name;
+
+    @NotEmpty
     private String surname;
+
     private String patronymic;
     private String phone;
 

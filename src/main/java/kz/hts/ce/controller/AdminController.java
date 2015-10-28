@@ -20,6 +20,8 @@ import java.util.Date;
 @Controller
 public class AdminController {
 
+    public static final String ADMIN = "ADMIN";
+
     @Autowired
     private AdminService adminService;
     @Autowired
@@ -45,12 +47,12 @@ public class AdminController {
         return "redirect:";
     }
 
-    @RequestMapping(value = "/admins/{id}/edit-save", method = RequestMethod.POST)
+    @RequestMapping(value = "/admins/{id}/edit", method = RequestMethod.POST)
     public String edit(@PathVariable long id, @Valid @ModelAttribute("admin") Admin admin, BindingResult result) {
         if (result.hasErrors()) {
             return "admin-edit";
         }
-        Role role = roleService.findByName("ADMIN");
+        Role role = roleService.findByName(ADMIN);
         admin.setId(id);
         admin.setRole(role);
         adminService.save(admin);
