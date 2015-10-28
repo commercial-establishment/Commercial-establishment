@@ -23,12 +23,6 @@ public class TransitionPageController {
         return "login";
     }
 
-    /*PROVIDER*/
-    @RequestMapping(value = "/providers",method = RequestMethod.GET)
-    public String providersPage(Model model) {
-        return "providers";
-    }
-
     /*SHOP*/
     @RequestMapping(value = "/shops",method = RequestMethod.GET)
     public String shopsPage(Model model) {
