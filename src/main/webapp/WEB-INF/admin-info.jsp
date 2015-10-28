@@ -239,7 +239,7 @@
                         </tr>
                         <tr>
                             <td><b>Номер телефона:</b></td>
-                            <td>${admin.phone}</td>
+                            <td><b>+7</b>${admin.phone}</td>
                         </tr>
                         <tr>
                             <td><b>Пол:</b></td>

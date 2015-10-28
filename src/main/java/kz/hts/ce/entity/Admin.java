@@ -29,7 +29,7 @@ public class Admin extends BaseEntity {
     private String email;
 
     @NotEmpty
-    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-zA-Z0-9])(?!.*\\s).{8,16}$")/*TODO messages*/
+    @Size(min = 8, max = 16)
     private String password;
 
     @NotEmpty
@@ -46,7 +46,8 @@ public class Admin extends BaseEntity {
     @Pattern(regexp = NAME_REGEX)
     private String patronymic;
 
-    @Pattern(regexp = "\\(?([0-9]{3})\\)?([ .-]?)([0-9]{3})\\2([0-9]{4})")
+    @Pattern(regexp = "\\(?([0-9]{3})\\)?([ .-]?)([0-9]{3})\\2([0-9]{4})|")
+    @Column(nullable = true)
     private String phone;
 
     @ManyToOne

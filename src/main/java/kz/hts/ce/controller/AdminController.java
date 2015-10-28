@@ -1,8 +1,10 @@
 package kz.hts.ce.controller;
 
 import kz.hts.ce.entity.Admin;
+import kz.hts.ce.entity.Gender;
 import kz.hts.ce.entity.Role;
 import kz.hts.ce.service.AdminService;
+import kz.hts.ce.service.GenderService;
 import kz.hts.ce.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class AdminController {
@@ -26,6 +29,8 @@ public class AdminController {
     private AdminService adminService;
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private GenderService genderService;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -48,19 +53,29 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/admins/{id}/edit", method = RequestMethod.POST)
-    public String edit(@PathVariable long id, @Valid @ModelAttribute("admin") Admin admin, BindingResult result) {
+    public String edit(Model model, @PathVariable long id, @Valid @ModelAttribute("admin") Admin admin, BindingResult result) {
+        Role role = roleService.findByName(ADMIN);
+        admin.setRole(role);
+
         if (result.hasErrors()) {
+            List<Gender> genders = genderService.findAll();
+            List<Role> roles = roleService.findAll();
+
+            model.addAttribute("genders", genders);
+            model.addAttribute("roles", roles);
             return "admin-edit";
         }
-        Role role = roleService.findByName(ADMIN);
+
         admin.setId(id);
-        admin.setRole(role);
         adminService.save(admin);
         return "redirect:";
     }
 
     @RequestMapping(value = "/admins/create-save", method = RequestMethod.POST)
-    public String create(Model model, @ModelAttribute("admin") Admin admin) {
+    public String create(Model model, @Valid @ModelAttribute("admin") Admin admin, BindingResult result) {
+        if (result.hasErrors()) {
+            return "admin-edit";
+        }
         Role role = roleService.findByName("ADMIN");
 
         admin.setRole(role);

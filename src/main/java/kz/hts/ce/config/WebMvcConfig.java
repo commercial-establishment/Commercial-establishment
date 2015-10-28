@@ -11,11 +11,17 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+
+import java.util.Locale;
 
 @Configuration
 @EnableWebMvc
@@ -63,5 +69,21 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public Validator getValidator() {
         return validator();
+    }
+
+    @Bean
+    public LocaleResolver localeResolver(){
+        CookieLocaleResolver resolver = new CookieLocaleResolver();
+        resolver.setDefaultLocale(new Locale("ru_RU"));
+        resolver.setCookieName("establishmentLocaleCookie");
+        resolver.setCookieMaxAge(4800);
+        return resolver;
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
+        interceptor.setParamName("establishmentLocale");
+        registry.addInterceptor(interceptor);
     }
 }

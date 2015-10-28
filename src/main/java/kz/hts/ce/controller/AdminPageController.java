@@ -30,14 +30,14 @@ public class AdminPageController {
     private RoleService roleService;
 
     @RequestMapping("/admins/{id}")
-    public String adminInformationPage(Model model, @PathVariable long id) {
+    public String information(Model model, @PathVariable long id) {
         Admin admin = adminService.findById(id);
         model.addAttribute("admin", admin);
         return "/admin-info";
     }
 
     @RequestMapping(value = {"/","/admin"}, method = RequestMethod.GET)
-    public String adminPage(Model model) {
+    public String admin(Model model) {
         String username = getPrincipal();
         Admin admin = adminService.findByUsername(username);
         model.addAttribute("name", admin.getName());
@@ -46,7 +46,7 @@ public class AdminPageController {
     }
 
     @RequestMapping("/admins/{id}/edit")
-    public String editAdminPage(Model model, @PathVariable long id) {
+    public String edit(Model model, @PathVariable long id) {
         Admin admin = adminService.findById(id);
         List<Gender> genders = genderService.findAll();
         List<Role> roles = roleService.findAll();
@@ -59,7 +59,7 @@ public class AdminPageController {
 
 
     @RequestMapping("/admins/create")
-    public String edit(Model model) {
+    public String create(Model model) {
         Admin admin = new Admin();
         List<Gender> genders = genderService.findAll();
 
@@ -69,14 +69,14 @@ public class AdminPageController {
     }
 
     @RequestMapping(value = "/admins",method = RequestMethod.GET)
-    public String adminsPage(Model model) {
+    public String admins(Model model) {
         List<Admin> admins = adminService.findByRoleName(ADMIN);
         model.addAttribute("admins", admins);
         return "admins";
     }
 
     @RequestMapping(value = "/recovery", method = RequestMethod.GET)
-    public String passwordRecoveryPage() {
+    public String passwordRecovery() {
         return "password-recovery";
     }
 }
