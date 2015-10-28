@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -15,6 +16,8 @@ import java.util.Date;
 @Entity
 public class Admin extends BaseEntity {
 
+    public static final String NAME_REGEX = "^[a-zA-Z\u0430-\u044f\u0410-\u042f\u0451\u0401]" +
+            "[a-zA-Z-\u0430-\u044f\u0410-\u042f\u0451\u0401]+[a-zA-Z\u0430-\u044f\u0410-\u042f\u0451\u0401]?$";
     @NotEmpty
     @Size(min = 3, max = 14)
     @Pattern(regexp = "^[a-z0-9_-]+[a-z0-9_-]$")
@@ -30,14 +33,19 @@ public class Admin extends BaseEntity {
 
     @NotEmpty
     @Size(min = 1, max = 15)
-    @Pattern(regexp = "^[a-zA-Z\u0430-\u044f\u0410-\u042f\u0451\u0401][a-zA-Z-\u0430-\u044f\u0410-\u042f\u0451\u0401]" +
-            "+[a-zA-Z\u0430-\u044f\u0410-\u042f\u0451\u0401]?$")
+    @Pattern(regexp = NAME_REGEX)
     private String name;
 
     @NotEmpty
+    @Size(min = 1, max = 15)
+    @Pattern(regexp = NAME_REGEX)
     private String surname;
 
+    @Size(min = 1, max = 15)
+    @Pattern(regexp = NAME_REGEX)
     private String patronymic;
+
+    @Pattern(regexp = "\\(?([0-9]{3})\\)?([ .-]?)([0-9]{3})\\2([0-9]{4})")
     private String phone;
 
     @ManyToOne
@@ -56,7 +64,8 @@ public class Admin extends BaseEntity {
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
-    @Column(name = "is_blocked", nullable = false)
+    @NotNull
+    @Column(name = "is_blocked")
     private boolean blocked;
 
     public String getUsername() {

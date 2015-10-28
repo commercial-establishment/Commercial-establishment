@@ -252,7 +252,7 @@
                                 <td>Имя пользователя должно состоять из ...</td>
                             </tr>
                             <tr>
-                                <td><form:label path="phone">Номер телефона:</form:label></td>
+                                <td><form:label path="phone">Номер телефона (без +7):</form:label></td>
                                 <td><form:input cssClass="form-control" path="phone"/></td>
                                 <td>Имя пользователя должно состоять из ...</td>
                             </tr>

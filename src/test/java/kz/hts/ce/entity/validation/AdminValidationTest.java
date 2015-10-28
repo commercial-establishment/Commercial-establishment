@@ -14,6 +14,10 @@ import static org.junit.Assert.assertEquals;
 
 public class AdminValidationTest {
 
+    public static final String ADMIN_CORRECT_NAME = "John";
+    public static final String ADMIN_CORRECT_SURNAME = "Doe";
+    public static final String ADMIN_CORRECT_EMAIL = "JohnDoe@gmail.com";
+    public static final String ADMIN_CORRECT_PASSWORD = "JohnDoe11";
     private static Validator validator;
 
     @BeforeClass
@@ -89,5 +93,22 @@ public class AdminValidationTest {
 
         assertEquals(1, constraintViolations.size());
         assertEquals("size must be between 3 and 14", constraintViolations.iterator().next().getMessage());
+    }
+
+    @Test
+    public void emailRegexpDoesNotSuit() {
+        Admin admin = new Admin();
+        admin.setEmail("JohnDoe@JohnDoe");
+
+        admin.setUsername("john");
+        admin.setName("John");
+        admin.setSurname("Doe");
+        admin.setPassword("JohnDoe11");
+
+        Set<ConstraintViolation<Admin>> constraintViolations = validator.validate(admin);
+
+        assertEquals(1, constraintViolations.size());
+        assertEquals("must match \"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]" +
+                "+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$\"", constraintViolations.iterator().next().getMessage());
     }
 }
