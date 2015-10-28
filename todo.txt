@@ -5,3 +5,4 @@
 5) Encrypt password
 6) Role == null in edit-admin
 7) .and().rememberMe();
+8) Error on login page
