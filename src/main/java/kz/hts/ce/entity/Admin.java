@@ -28,20 +28,21 @@ public class Admin extends BaseEntity {
     @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
     private String email;
 
-    @NotEmpty/*TODO regexp*/
+    @NotEmpty
+    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-zA-Z0-9])(?!.*\\s).{8,16}$")/*TODO messages*/
     private String password;
 
     @NotEmpty
-    @Size(min = 1, max = 15)
+    @Size(min = 2, max = 15)
     @Pattern(regexp = NAME_REGEX)
     private String name;
 
     @NotEmpty
-    @Size(min = 1, max = 15)
+    @Size(min = 2, max = 15)
     @Pattern(regexp = NAME_REGEX)
     private String surname;
 
-    @Size(min = 1, max = 15)
+    @Size(min = 2, max = 15)
     @Pattern(regexp = NAME_REGEX)
     private String patronymic;
 
@@ -64,7 +65,6 @@ public class Admin extends BaseEntity {
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
-    @NotNull
     @Column(name = "is_blocked")
     private boolean blocked;
 

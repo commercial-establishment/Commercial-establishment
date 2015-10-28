@@ -14,10 +14,6 @@ import static org.junit.Assert.assertEquals;
 
 public class AdminValidationTest {
 
-    public static final String ADMIN_CORRECT_NAME = "John";
-    public static final String ADMIN_CORRECT_SURNAME = "Doe";
-    public static final String ADMIN_CORRECT_EMAIL = "JohnDoe@gmail.com";
-    public static final String ADMIN_CORRECT_PASSWORD = "JohnDoe11";
     private static Validator validator;
 
     @BeforeClass
@@ -52,7 +48,7 @@ public class AdminValidationTest {
     }
 
     @Test
-    public void usernameRegexpIsCorrect() {
+    public void regexpsIsCorrect() {
         Admin admin = new Admin();
         admin.setUsername("john");
         admin.setName("John");
@@ -110,5 +106,22 @@ public class AdminValidationTest {
         assertEquals(1, constraintViolations.size());
         assertEquals("must match \"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]" +
                 "+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$\"", constraintViolations.iterator().next().getMessage());
+    }
+
+    @Test
+    public void passwordRegexpDoesNotSuit() {
+        Admin admin = new Admin();
+        admin.setPassword("JohnDoe1111-JohnDoe1111");
+
+        admin.setUsername("john");
+        admin.setName("John");
+        admin.setSurname("Doe");
+        admin.setEmail("JohnDoe@gmail.com");
+
+        Set<ConstraintViolation<Admin>> constraintViolations = validator.validate(admin);
+
+        assertEquals(1, constraintViolations.size());
+        assertEquals("must match \"^(?=.*\\d)(?=.*[a-zA-Z0-9])(?!.*\\s).{8,16}$\"",
+                constraintViolations.iterator().next().getMessage());
     }
 }
