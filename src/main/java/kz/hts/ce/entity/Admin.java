@@ -16,8 +16,8 @@ import java.util.Date;
 public class Admin extends BaseEntity {
 
     @NotEmpty
-    @Size(min = 2, max = 14)
-    @Pattern(regexp = "^[a-z0-9_-]{2,14}$")
+    @Size(min = 3, max = 14)
+    @Pattern(regexp = "^[a-z0-9_-]+[a-z0-9_-]$")
     private String username;
 
     @NotEmpty
@@ -25,10 +25,13 @@ public class Admin extends BaseEntity {
     @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
     private String email;
 
-    @NotEmpty
+    @NotEmpty/*TODO regexp*/
     private String password;
 
     @NotEmpty
+    @Size(min = 1, max = 15)
+    @Pattern(regexp = "^[a-zA-Z\u0430-\u044f\u0410-\u042f\u0451\u0401][a-zA-Z-\u0430-\u044f\u0410-\u042f\u0451\u0401]" +
+            "+[a-zA-Z\u0430-\u044f\u0410-\u042f\u0451\u0401]?$")
     private String name;
 
     @NotEmpty
