@@ -29,7 +29,7 @@ public class Admin extends BaseEntity {
     private String email;
 
     @NotEmpty
-    @Size(min = 8, max = 16)
+//    @Size(min = 8, max = 16)
     private String password;
 
     @NotEmpty

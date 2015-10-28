@@ -264,7 +264,11 @@
                             <td>${admin.blocked}</td>
                         </tr>
                         <tr>
-                            <td><a href="<c:url value="/admins/${id}/edit"/>" class="btn btn-lg btn-default">Редактировать</a>
+                            <td>
+                                <form method="GET" action="<c:url value="/admins/${id}/edit"/>">
+                                    <input type="submit" class="btn btn-lg btn-default" value="Редактировать">
+                                </form>
+                                <%--<a href="<c:url value="/admins/${id}/edit"/>" class="btn btn-lg btn-default">Редактировать</a>--%>
                             </td>
 
                             <c:choose>

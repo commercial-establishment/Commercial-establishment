@@ -43,4 +43,8 @@ public class AdminService extends BaseService<Admin, AdminRepository> {
     public void updateEndWorkDate(Date endWorkDate, long id) {
         repository.updateEndWorkDate(endWorkDate, id);
     }
+
+    public Admin findByUsernameAndBlocked(String username, boolean blocked) {
+        return repository.findByUsernameAndBlocked(username, blocked);
+    }
 }

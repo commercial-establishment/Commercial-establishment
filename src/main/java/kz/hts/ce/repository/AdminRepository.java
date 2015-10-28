@@ -15,6 +15,8 @@ public interface AdminRepository extends JpaRepository<Admin, Long> {
 
     Admin findByUsername(String username);
 
+    Admin findByUsernameAndBlocked(String username, boolean blocked);
+
     List<Admin> findByRole_Name(String roleName);
 
     @Transactional
