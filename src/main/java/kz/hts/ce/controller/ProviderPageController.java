@@ -1,9 +1,11 @@
 package kz.hts.ce.controller;
 
 import kz.hts.ce.entity.City;
+import kz.hts.ce.entity.ProductProvider;
 import kz.hts.ce.entity.Provider;
 import kz.hts.ce.entity.Role;
 import kz.hts.ce.service.CityService;
+import kz.hts.ce.service.ProductProviderService;
 import kz.hts.ce.service.ProviderService;
 import kz.hts.ce.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,8 @@ public class ProviderPageController {
     private RoleService roleService;
     @Autowired
     private CityService cityService;
+    @Autowired
+    private ProductProviderService productProviderService;
 
     @RequestMapping("/providers/{id}")
     public String providerInformation(Model model, @PathVariable long id){
@@ -54,6 +58,15 @@ public class ProviderPageController {
 
     @RequestMapping(value = "/providers", method = RequestMethod.GET)
     public String providers(Model model){
+        List<Provider> providers = providerService.findByRoleName(PROVIDER);
+        model.addAttribute("providers", providers);
+        return "providers";
+    }
+
+    @RequestMapping(value = "/providers/{id}/products", method = RequestMethod.GET)
+    public String providers(Model model, @PathVariable long id){
+        List<ProductProvider> providerProducts = productProviderService.findByProviderId(id);
+        System.out.println(providerProducts);
         List<Provider> providers = providerService.findByRoleName(PROVIDER);
         model.addAttribute("providers", providers);
         return "providers";
