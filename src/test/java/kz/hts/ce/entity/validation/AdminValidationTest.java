@@ -107,21 +107,4 @@ public class AdminValidationTest {
         assertEquals("must match \"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]" +
                 "+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$\"", constraintViolations.iterator().next().getMessage());
     }
-
-    @Test
-    public void passwordRegexpDoesNotSuit() {
-        Admin admin = new Admin();
-        admin.setPassword("JohnDoe1111-JohnDoe1111");
-
-        admin.setUsername("john");
-        admin.setName("John");
-        admin.setSurname("Doe");
-        admin.setEmail("JohnDoe@gmail.com");
-
-        Set<ConstraintViolation<Admin>> constraintViolations = validator.validate(admin);
-
-        assertEquals(1, constraintViolations.size());
-        assertEquals("must match \"^(?=.*\\d)(?=.*[a-zA-Z0-9])(?!.*\\s).{8,16}$\"",
-                constraintViolations.iterator().next().getMessage());
-    }
 }
