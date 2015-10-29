@@ -1,5 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -166,13 +166,13 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li>
-                    <a href="<c:url value="/admin"/>"><i class="fa fa-fw fa-dashboard"></i> Главная</a>
+                    <a href="<c:url value="/provider"/>"><i class="fa fa-fw fa-dashboard"></i> Главная</a>
                 </li>
                 <li>
                     <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
                 </li>
                 <li class="active">
-                    <a href="<c:url value="/admins"/>"><i class="fa fa-fw fa-table"></i> Администраторы</a>
+                    <a href="<c:url value="/providers"/>"><i class="fa fa-fw fa-table"></i> Поставщики</a>
                 </li>
                 <li>
                     <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
@@ -211,47 +211,45 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        Blank Page
-                        <small>Subheading</small>
+                        Список поставщиков
                     </h1>
                     <ol class="breadcrumb">
                         <li>
                             <i class="fa fa-dashboard"></i> <a href="<c:url value="/admin"/>">Главная</a>
                         </li>
                         <li class="active">
-                            <i class="fa fa-table"></i> Список администраторов
+                            <i class="fa fa-table"></i> Список поставщиков
                         </li>
                     </ol>
                 </div>
             </div>
             <div class="col-lg-12">
-                <h2>Bordered with Striped Rows</h2>
-
                 <div class="table-responsive">
+                    <div>
+                        <a href="<c:url value="/providers/create"/>" class="btn btn-lg btn-default">Добавить
+                            поставщика</a>
+                        <br/> <br/>
+                    </div>
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
                         <tr>
-                            <th>Id</th>
-                            <th>Username</th>
-                            <th>Name</th>
-                            <th>Patronymic</th>
-                            <th>Surname</th>
-                            <%--<th>Start work date</th>--%>
-                            <%--<th>End work date</th>--%>
-                            <th>Blocked</th>
+                            <th>ID</th>
+                            <th>Имя пользователя</th>
+                            <th>Имя</th>
+                            <th>Отчество</th>
+                            <th>Фамилия</th>
+                            <th>Заблокирован</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${admins}" var="admin">
-                            <tr onclick="document.location = '/admins/' + ${admin.id};">
-                                <td>${admin.id}</td>
-                                <td> ${admin.username}</td>
-                                <td>${admin.name}</td>
-                                <td>${admin.patronymic}</td>
-                                <td>${admin.surname}</td>
-                                <%--<td>${admin.startWorkDate}</td>--%>
-                                <%--<td>${admin.endWorkDate}</td>--%>
-                                <td>${admin.blocked}</td>
+                        <c:forEach items="${providers}" var="provider">
+                            <tr onclick="document.location = '/providers/' + ${provider.id};">
+                                <td>${provider.id}</td>
+                                <td>${provider.username}</td>
+                                <td>${provider.name}</td>
+                                <td>${provider.patronymic}</td>
+                                <td>${provider.surname}</td>
+                                <td>${provider.blocked}</td>
                             </tr>
                         </c:forEach>
                         </tbody>

@@ -22,3 +22,8 @@ INSERT INTO product (id, model_id) VALUES (1, 1);
 INSERT INTO warehouse (id, arrival, import_date, residue, produt_id) VALUES (1, 100, null, 50, 1);
 
 INSERT INTO shop (id, is_blocked, full_name, password, username, type_id, warehouse_id) VALUES (1, FALSE, 'Super Магаз', 'super', 'super', 1, 1);
+
+
+INSERT INTO provider (id, is_blocked, email, end_work_date, name, password, patronymic, phone, start_work_date,
+                      surname, username, role_id) VALUES (2, FALSE, 'yakov@gmail.com', null, 'yakov22',
+                                                          '$2a$10$5/0IiLwNrICc3Dmq/7AWKO08qK13AKH2tWIytGe9a2.WZHIj2WwPa', 'adasd', null, '11-11-2011', 'asdasd', 'asdasdas', 2);
