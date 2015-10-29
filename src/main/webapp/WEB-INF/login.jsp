@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<t:head title="Торговое предприятие"/>
+<t:head title="Авторизация пользователя"/>
 
 <body>
 

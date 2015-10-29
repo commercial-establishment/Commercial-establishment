@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ExceptionController {
 
     @RequestMapping(value = "/403", method = RequestMethod.GET)
-    public String accessDeniedPage(ModelMap model, @ModelAttribute("username") String username) {
+    public String accessDeniedPage() {
         return "403";
     }
 }
