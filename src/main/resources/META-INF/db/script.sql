@@ -21,8 +21,6 @@ INSERT INTO product (id, model_id) VALUES (1, 1);
 /*TODO product's history*/
 INSERT INTO warehouse (id, arrival, import_date, residue, produt_id) VALUES (1, 100, null, 50, 1);
 
-INSERT INTO shop (id, is_blocked, full_name, password, username, type_id, warehouse_id) VALUES (1, FALSE, 'Super Магаз', 'super', 'super', 1, 1);
-
 
 INSERT INTO provider (id, is_blocked, email, end_work_date, name, password, patronymic, phone, start_work_date,
                       surname, username, role_id) VALUES (2, FALSE, 'yakov@gmail.com', null, 'yakov22',

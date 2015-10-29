@@ -8,9 +8,12 @@ public class Shop extends BaseEntity {
 
     private String username;
     private String password;
+    private String name;
+    private String address;
+    private String city;
 
-    @Column(name = "full_name")
-    private String fullName;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "shop")
+    private List<Employee> employees;
 
     @ManyToOne
     @JoinColumn(name = "type_id", nullable = false)
@@ -22,9 +25,6 @@ public class Shop extends BaseEntity {
 
     @Column(name = "is_blocked", nullable = false)
     private boolean blocked;
-
-    @ManyToMany(mappedBy="shops")
-    private List<Provider> providers;
 
     public String getUsername() {
         return username;
@@ -42,12 +42,36 @@ public class Shop extends BaseEntity {
         this.password = password;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getName() {
+        return name;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public Type getType() {
@@ -72,13 +96,5 @@ public class Shop extends BaseEntity {
 
     public void setBlocked(boolean blocked) {
         this.blocked = blocked;
-    }
-
-    public List<Provider> getProviders() {
-        return providers;
-    }
-
-    public void setProviders(List<Provider> providers) {
-        this.providers = providers;
     }
 }

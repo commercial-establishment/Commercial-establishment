@@ -40,13 +40,6 @@ public class Provider extends BaseEntity {
             inverseJoinColumns={@JoinColumn(name="MODEL_ID", referencedColumnName="ID")})
     private List<Model> models;
 
-    @ManyToMany
-    @JoinTable(
-            name="SHOP_PROVIDER",
-            joinColumns={@JoinColumn(name="PROVIDER_ID", referencedColumnName="ID")},
-            inverseJoinColumns={@JoinColumn(name="SHOP_ID", referencedColumnName="ID")})
-    private List<Shop> shops;
-
     public String getUsername() {
         return username;
     }
@@ -141,13 +134,5 @@ public class Provider extends BaseEntity {
 
     public void setModels(List<Model> models) {
         this.models = models;
-    }
-
-    public List<Shop> getShops() {
-        return shops;
-    }
-
-    public void setShops(List<Shop> shops) {
-        this.shops = shops;
     }
 }
