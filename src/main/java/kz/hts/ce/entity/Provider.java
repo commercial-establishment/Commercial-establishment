@@ -3,7 +3,6 @@ package kz.hts.ce.entity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -11,12 +10,23 @@ import java.util.List;
 public class Provider extends BaseEntity {
 
     private String username;
-    private String email;
     private String password;
-    private String name;
-    private String surname;
-    private String patronymic;
-    private String phone;
+    private String address;
+    private String email;
+
+    @Column(name = "contact_person")
+    private String contactPerson;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
+    private Role role;
+
+    @Column(name = "company_name")
+    private String companyName;
+
+    @ManyToOne
+    @JoinColumn(name = "city_id", nullable = false)
+    private City city;
 
     @Column(name = "start_work_date", nullable = false)
     @DateTimeFormat(pattern = "dd-MM-yyyy")
@@ -26,19 +36,15 @@ public class Provider extends BaseEntity {
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date endWorkDate;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false)
-    private Role role;
-
     @Column(name = "is_blocked", nullable = false)
     private boolean blocked;
 
     @ManyToMany
     @JoinTable(
-            name="PROVIDER_MODEL",
+            name="PROVIDER_PRODUCT",
             joinColumns={@JoinColumn(name="PROVIDER_ID", referencedColumnName="ID")},
-            inverseJoinColumns={@JoinColumn(name="MODEL_ID", referencedColumnName="ID")})
-    private List<Model> models;
+            inverseJoinColumns={@JoinColumn(name="PRODUCT_ID", referencedColumnName="ID")})
+    private List<Product> products;
 
     @ManyToMany
     @JoinTable(
@@ -55,14 +61,6 @@ public class Provider extends BaseEntity {
         this.username = username;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -71,36 +69,52 @@ public class Provider extends BaseEntity {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public Role getRole() {
+        return role;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
-    public String getPatronymic() {
-        return patronymic;
+    public City getCity() {
+        return city;
     }
 
-    public void setPatronymic(String patronymic) {
-        this.patronymic = patronymic;
+    public void setCity(City city) {
+        this.city = city;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getAddress() {
+        return address;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getContactPerson() {
+        return contactPerson;
+    }
+
+    public void setContactPerson(String contactPerson) {
+        this.contactPerson = contactPerson;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Date getStartWorkDate() {
@@ -119,14 +133,6 @@ public class Provider extends BaseEntity {
         this.endWorkDate = endWorkDate;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
     public boolean isBlocked() {
         return blocked;
     }
@@ -135,12 +141,12 @@ public class Provider extends BaseEntity {
         this.blocked = blocked;
     }
 
-    public List<Model> getModels() {
-        return models;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setModels(List<Model> models) {
-        this.models = models;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     public List<Shop> getShops() {

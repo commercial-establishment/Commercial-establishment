@@ -6,7 +6,6 @@
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <!--<property name="hibernate.show_sql" value="true"/>-->
-            <!--<property name="hibernate.cache.provider_class" value="org.hibernate.cache.HashtableCacheProvider"/>-->
         </properties>
     </persistence-unit>
 </persistence>

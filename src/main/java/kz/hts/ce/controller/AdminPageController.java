@@ -36,14 +36,7 @@ public class AdminPageController {
         return "/admin-info";
     }
 
-    @RequestMapping(value = {"/","/admin"}, method = RequestMethod.GET)
-    public String admin(Model model) {
-        String username = getPrincipal();
-        Admin admin = adminService.findByUsername(username);
-        model.addAttribute("name", admin.getName());
-        model.addAttribute("patronymic", admin.getPatronymic());
-        return "admin";
-    }
+
 
     @RequestMapping("/admins/{id}/edit")
     public String edit(Model model, @PathVariable long id) {
@@ -75,8 +68,4 @@ public class AdminPageController {
         return "admins";
     }
 
-    @RequestMapping(value = "/recovery", method = RequestMethod.GET)
-    public String passwordRecovery() {
-        return "password-recovery";
-    }
 }

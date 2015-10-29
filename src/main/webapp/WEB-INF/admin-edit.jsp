@@ -158,38 +158,23 @@
         </ul>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <li class="active">
-                    <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Главная</a>
+                <li>
+                    <a href="<c:url value="/home"/>"><i class="fa fa-fw fa-dashboard"></i> Главная</a>
                 </li>
                 <li>
                     <a href="<c:url value="/providers"/>"><i class="fa fa-fw fa-table"></i> Поставщики</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="<c:url value="/admins"/>"><i class="fa fa-fw fa-table"></i>Администраторы</a>
                 </li>
                 <li>
                     <a href="<c:url value="/shops"/>"><i class="fa fa-fw fa-table"></i> Магазины</a>
                 </li>
                 <li>
-                    <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
+                    <a href="<c:url value="/products"/>"><i class="fa fa-fw fa-table"></i>Товары</a>
                 </li>
                 <li>
-                    <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
-                </li>
-                <li>
-                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i
-                            class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
-                    <ul id="demo" class="collapse">
-                        <li>
-                            <a href="#">Dropdown Item</a>
-                        </li>
-                        <li>
-                            <a href="#">Dropdown Item</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
+                    <a href="<c:url value="/categories"/>"><i class="fa fa-fw fa-wrench"></i>Категории товаров</a>
                 </li>
             </ul>
         </div>
@@ -325,13 +310,13 @@
                                 </td>
                                 <td>Имя пользователя должно состоять из ...</td>
                             </tr>
-                            <tr>
-                                <td><form:label path="endWorkDate">Дата окончания работы:</form:label></td>
-                                <td>
-                                    <form:input path="endWorkDate" cssClass="form-control customDatepicker"/>
-                                </td>
-                                <td>Имя пользователя должно состоять из ...</td>
-                            </tr>
+                            <%--<tr>--%>
+                                <%--<td><form:label path="endWorkDate">Дата окончания работы:</form:label></td>--%>
+                                <%--<td>--%>
+                                    <%--<form:input path="endWorkDate" cssClass="form-control customDatepicker"/>--%>
+                                <%--</td>--%>
+                                <%--<td>Имя пользователя должно состоять из ...</td>--%>
+                            <%--</tr>--%>
                             <tr>
                                 <td><form:label path="role">Роль:</form:label></td>
                                 <td><form:label path="role">${admin.role.name}</form:label></td>
