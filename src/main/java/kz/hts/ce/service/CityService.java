@@ -18,4 +18,8 @@ public class CityService extends BaseService<City, CityRepository> {
     public List<City> findAll() {
         return repository.findAll();
     }
+
+    public City findByName(String cityName) {
+        return repository.findByName(cityName);
+    }
 }

@@ -89,7 +89,12 @@
                             <tr>
                                 <td><form:label path="city">Город:</form:label></td>
                                 <td>
-                                    <select name="cities" id="cities" class="form-control">
+                                        <%--<form:select id="cities" path="city" cssClass="form-control">--%>
+                                        <%--<c:forEach items="${cities}" var="city">--%>
+                                        <%--<form:option value="${city.id}" label="${city.name}"/>--%>
+                                        <%--</c:forEach>--%>
+                                        <%--</form:select>--%>
+                                    <select name="city" id="city" class="form-control">
                                         <c:forEach items="${cities}" var="city">
                                             <option <c:if test="${provider.city.name == city.name}">selected</c:if>>
                                                     ${city.name}</option>

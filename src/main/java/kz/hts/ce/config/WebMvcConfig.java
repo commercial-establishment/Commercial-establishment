@@ -1,5 +1,6 @@
 package kz.hts.ce.config;
 
+import kz.hts.ce.util.converters.StringToCity;
 import kz.hts.ce.util.converters.StringToGender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -31,10 +32,13 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
     @Autowired
     private StringToGender stringToGenderConverter;
+    @Autowired
+    private StringToCity stringToCityConverter;
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(stringToGenderConverter);
+        registry.addConverter(stringToCityConverter);
     }
 
     @Bean(name = "viewResolver")

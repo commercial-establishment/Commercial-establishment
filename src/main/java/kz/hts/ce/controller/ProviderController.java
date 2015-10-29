@@ -45,7 +45,7 @@ public class ProviderController {
     }
 
     @RequestMapping("/providers/{id}/reestablish")
-    public String reestablish(@PathVariable long id){
+    public String reestablish(@PathVariable long id) {
         providerService.updateStartAndEndWorkDate(new Date(), null, id);
         providerService.reestablishById(id);
         return "redirect:";
@@ -62,7 +62,7 @@ public class ProviderController {
 
             model.addAttribute("cities", cities);
             model.addAttribute("roles", roles);
-            return "admin-edit";
+            return "provider-edit";
         }
 
         provider.setId(id);
@@ -71,7 +71,7 @@ public class ProviderController {
     }
 
     @RequestMapping(value = "/providers/create", method = RequestMethod.POST)
-    public String create(Model model, @ModelAttribute("provider") Provider provider){
+    public String create(@ModelAttribute("provider") Provider provider) {
         Role role = roleService.findByName("PROVIDER");
         provider.setRole(role);
         provider.setPassword(passwordEncoder.encode(provider.getPassword()));
