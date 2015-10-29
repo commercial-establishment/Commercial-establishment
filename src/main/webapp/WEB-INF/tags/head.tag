@@ -2,16 +2,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@ attribute name="title" %>
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <%@ attribute name="title" %>
     <%--<title><fmt:message key="${title}"/></title>--%>
     <title>${title}</title>
 
@@ -27,6 +25,5 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <link href="<c:url value="/resources/css/datepicker.css"/>" rel="stylesheet" type="text/css">
-    <link href="<c:url value="/resources/css/style.css"/>" rel="stylesheet" type="text/css">
+    <jsp:doBody/>
 </head>

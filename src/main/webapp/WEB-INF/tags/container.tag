@@ -83,6 +83,4 @@
   <jsp:doBody/>
 
 </div>
-
-<t:script/>
 </body>

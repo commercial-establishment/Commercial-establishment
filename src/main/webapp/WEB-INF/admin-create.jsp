@@ -108,5 +108,6 @@
             </div>
         </div>
     </div>
+    <t:script/>
 </t:container>
 </html>

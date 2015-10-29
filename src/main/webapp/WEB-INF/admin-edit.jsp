@@ -5,7 +5,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<t:head title="Редактирование администратора"/>
+<t:head title="Редактирование администратора">
+    <link href="<c:url value="/resources/css/datepicker.css"/>" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/resources/css/style.css"/>" rel="stylesheet" type="text/css">
+</t:head>
 
 <t:container admins="active">
 
@@ -181,5 +184,8 @@
         </div>
     </div>
 
+    <script src="<c:url value="/resources/js/jquery.js"/>"></script>
+    <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
+    <script src="<c:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
 </t:container>
 </html>
