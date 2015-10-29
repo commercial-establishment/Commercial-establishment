@@ -23,9 +23,6 @@ public class Shop extends BaseEntity {
     @Column(name = "is_blocked", nullable = false)
     private boolean blocked;
 
-    @ManyToMany(mappedBy="shops")
-    private List<Provider> providers;
-
     public String getUsername() {
         return username;
     }
@@ -72,13 +69,5 @@ public class Shop extends BaseEntity {
 
     public void setBlocked(boolean blocked) {
         this.blocked = blocked;
-    }
-
-    public List<Provider> getProviders() {
-        return providers;
-    }
-
-    public void setProviders(List<Provider> providers) {
-        this.providers = providers;
     }
 }

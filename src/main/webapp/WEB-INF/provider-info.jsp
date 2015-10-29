@@ -32,35 +32,13 @@
             </div>
             <div class="col-lg-12">
                 <div class="table-responsive">
-                    <table>
+
+                    <table class="table table-hover">
                         <tbody>
                         <tr>
-                            <td>
-                                <div>
-                                    <ul class="nav navbar-nav">
-                                        <li>
-                                            <a class="btn btn-lg btn-default" href="javascript:;" data-toggle="collapse" data-target="#demo"><i
-                                                    class="fa fa-fw fa-arrows-v"></i> Список товаров поставщика <i
-                                                    class="fa fa-fw fa-caret-down"></i></a>
-                                            <ul id="demo" class="collapse">
-                                                <li>
-                                                    <a href="#">Dropdown Item</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Dropdown Item</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                            </td>
+                            <td><a href="<c:url value="/providers/${id}/products"/>" class="btn btn-lg btn-default">Товары</a></td>
+                            <td><a href="<c:url value="/providers/${id}/shops"/>" class="btn btn-lg btn-default">Магазины</a></td>
                         </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-hover">
-
-                        <tbody>
                         <tr>
                             <td><b>Имя пользователя:</b></td>
                             <td>${provider.username}</td>

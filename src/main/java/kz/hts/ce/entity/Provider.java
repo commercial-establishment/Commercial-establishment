@@ -4,11 +4,13 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 public class Provider extends BaseEntity {
@@ -55,20 +57,6 @@ public class Provider extends BaseEntity {
 
     @Column(name = "is_blocked", nullable = false)
     private boolean blocked;
-
-    @ManyToMany
-    @JoinTable(
-            name="PROVIDER_PRODUCT",
-            joinColumns={@JoinColumn(name="PROVIDER_ID", referencedColumnName="ID")},
-            inverseJoinColumns={@JoinColumn(name="PRODUCT_ID", referencedColumnName="ID")})
-    private List<Product> products;
-
-    @ManyToMany
-    @JoinTable(
-            name="SHOP_PROVIDER",
-            joinColumns={@JoinColumn(name="PROVIDER_ID", referencedColumnName="ID")},
-            inverseJoinColumns={@JoinColumn(name="SHOP_ID", referencedColumnName="ID")})
-    private List<Shop> shops;
 
     public String getUsername() {
         return username;
@@ -156,21 +144,5 @@ public class Provider extends BaseEntity {
 
     public void setBlocked(boolean blocked) {
         this.blocked = blocked;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
-    public List<Shop> getShops() {
-        return shops;
-    }
-
-    public void setShops(List<Shop> shops) {
-        this.shops = shops;
     }
 }

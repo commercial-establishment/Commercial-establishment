@@ -28,14 +28,14 @@ public class ProviderPageController {
     private CityService cityService;
 
     @RequestMapping("/providers/{id}")
-    public String providerInformationPage(Model model, @PathVariable long id){
+    public String providerInformation(Model model, @PathVariable long id){
         Provider provider = providerService.findById(id);
         model.addAttribute("provider", provider);
         return "/provider-info";
     }
 
     @RequestMapping("/providers/{id}/edit")
-    public String editProviderPage(Model model, @PathVariable long id){
+    public String edit(Model model, @PathVariable long id){
         List<City> cities = cityService.findAll();
         Provider provider = providerService.findById(id);
         List<Role> roles = roleService.findAll();
@@ -46,19 +46,16 @@ public class ProviderPageController {
     }
 
     @RequestMapping("/providers/create")
-    public String edit(Model model){
+    public String create(Model model){
         Provider provider = new Provider();
         model.addAttribute("provider", provider);
         return "provider-create";
     }
 
     @RequestMapping(value = "/providers", method = RequestMethod.GET)
-    public String providersPage(Model model){
+    public String providers(Model model){
         List<Provider> providers = providerService.findByRoleName(PROVIDER);
         model.addAttribute("providers", providers);
         return "providers";
     }
-
-    @RequestMapping(value = "?recovery", method = RequestMethod.GET)
-    public String passwordRecoveryPage(){ return "password-recovery"; }
 }
