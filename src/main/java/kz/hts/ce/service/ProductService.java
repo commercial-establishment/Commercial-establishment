@@ -15,8 +15,7 @@ public class ProductService extends BaseService<Product, ProductRepository>{
         super(repository);
     }
 
-    public List<Product> findByProducts(String product) {
-
-        return repository.findByProducts(product);
-    }
+//    public List<Product> findByProducts(String product) {
+//        return repository.findByProducts(product);
+//    }
 }
