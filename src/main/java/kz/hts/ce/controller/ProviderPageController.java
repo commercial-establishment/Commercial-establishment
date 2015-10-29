@@ -66,7 +66,6 @@ public class ProviderPageController {
     @RequestMapping(value = "/providers/{id}/products", method = RequestMethod.GET)
     public String providers(Model model, @PathVariable long id){
         List<ProductProvider> providerProducts = productProviderService.findByProviderId(id);
-        System.out.println(providerProducts);
         List<Provider> providers = providerService.findByRoleName(PROVIDER);
         model.addAttribute("providers", providers);
         return "providers";
