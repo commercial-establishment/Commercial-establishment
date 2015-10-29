@@ -22,6 +22,7 @@ INSERT INTO warehouse (id, arrival, import_date, residue, produt_id) VALUES (1, 
 INSERT INTO shop (id, is_blocked, full_name, password, username, type_id, warehouse_id) VALUES (1, FALSE, 'Super Магаз', 'super', 'super', 1, 1);
 
 INSERT INTO city (id, name) VALUES (1, 'АСТАНА');
+INSERT INTO city (id, name) VALUES (2, 'КАРАГАНДА');
 
 INSERT INTO provider (id, address, is_blocked, company_name, contact_person, email, end_work_date, password, start_work_date, username, city_id, role_id)
     VALUES (1, 'ул. Ташенова 5/2', false, 'COMPANY NAME','PERSON NAME', 'yakov@gmail.com', null, '$2a$10$5/0IiLwNrICc3Dmq/7AWKO08qK13AKH2tWIytGe9a2.WZHIj2WwPa', '11-11-20110',

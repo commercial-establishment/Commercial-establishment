@@ -1,8 +1,8 @@
 package kz.hts.ce.controller;
 
 
-import kz.hts.ce.entity.Provider;
-import kz.hts.ce.entity.Role;
+import kz.hts.ce.entity.*;
+import kz.hts.ce.service.CityService;
 import kz.hts.ce.service.ProviderService;
 import kz.hts.ce.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class ProviderController {
@@ -29,14 +30,16 @@ public class ProviderController {
     private RoleService roleService;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private CityService cityService;
 
     @RequestMapping(value = "/providers/{id}/lock")
-    public String lock(@PathVariable long id){
+    public String lock(@PathVariable long id) {
         Provider provider = providerService.findById(id);
         provider.setEndWorkDate(new Date());
         provider.setBlocked(true);
         providerService.save(provider);
-        providerService.updateStartAndEndWorkDate(new Date(), null, id);
+        providerService.updateEndWorkDate(new Date(), id);
         providerService.lockById(id);
         return "redirect:";
     }
@@ -49,18 +52,25 @@ public class ProviderController {
     }
 
     @RequestMapping(value = "/providers/{id}/edit", method = RequestMethod.POST)
-    public String edit(@PathVariable long id, @Valid @ModelAttribute("provider") Provider provider, BindingResult result){
-        if(result.hasErrors()){
-            return "provider-edit";
-        }
+    public String edit(Model model, @PathVariable long id, @Valid @ModelAttribute("provider") Provider provider, BindingResult result) {
         Role role = roleService.findByName(PROVIDER);
-        provider.setId(id);
         provider.setRole(role);
+
+        if (result.hasErrors()) {
+            List<City> cities = cityService.findAll();
+            List<Role> roles = roleService.findAll();
+
+            model.addAttribute("cities", cities);
+            model.addAttribute("roles", roles);
+            return "admin-edit";
+        }
+
+        provider.setId(id);
         providerService.save(provider);
         return "redirect:";
     }
 
-    @RequestMapping(value = "/providers/create-save", method = RequestMethod.POST)
+    @RequestMapping(value = "/providers/create", method = RequestMethod.POST)
     public String create(Model model, @ModelAttribute("provider") Provider provider){
         Role role = roleService.findByName("PROVIDER");
         provider.setRole(role);

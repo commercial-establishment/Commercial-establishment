@@ -1,7 +1,9 @@
 package kz.hts.ce.controller;
 
+import kz.hts.ce.entity.City;
 import kz.hts.ce.entity.Provider;
 import kz.hts.ce.entity.Role;
+import kz.hts.ce.service.CityService;
 import kz.hts.ce.service.ProviderService;
 import kz.hts.ce.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
-import static kz.hts.ce.util.SpringUtils.getPrincipal;
-
 @Controller
 public class ProviderPageController {
 
@@ -24,6 +24,8 @@ public class ProviderPageController {
     private ProviderService providerService;
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private CityService cityService;
 
     @RequestMapping("/providers/{id}")
     public String providerInformationPage(Model model, @PathVariable long id){
@@ -32,21 +34,14 @@ public class ProviderPageController {
         return "/provider-info";
     }
 
-//    @RequestMapping(value = {"/","/provider"}, method = RequestMethod.GET)
-//    public String providerPage(Model model) {
-//        String username = getPrincipal();
-//        Provider provider = providerService.findByUsername(username);
-////        model.addAttribute("name", provider.getName());
-////        model.addAttribute("patronymic", provider.getPatronymic());
-//        return "admin";
-//    }
-
     @RequestMapping("/providers/{id}/edit")
     public String editProviderPage(Model model, @PathVariable long id){
+        List<City> cities = cityService.findAll();
         Provider provider = providerService.findById(id);
         List<Role> roles = roleService.findAll();
         model.addAttribute("roles", roles);
         model.addAttribute("provider", provider);
+        model.addAttribute("cities", cities);
         return "provider-edit";
     }
 

@@ -33,7 +33,7 @@
                             администраторе</a>
                         </li>
                         <li class="active">
-                            <i class="fa fa-edit"></i> Редантирование данных
+                            <i class="fa fa-edit"></i> Редактирование данных
                         </li>
                     </ol>
                 </div>
@@ -136,19 +136,11 @@
                             </tr>
                             <tr>
                                 <td><form:label path="startWorkDate">Дата начала работы:</form:label></td>
-                                    <%--${admin.startWorkDate}--%>
                                 <td>
                                     <form:input path="startWorkDate" cssClass="form-control customDatepicker"/>
                                 </td>
                                 <td>Имя пользователя должно состоять из ...</td>
                             </tr>
-                            <%--<tr>--%>
-                                <%--<td><form:label path="endWorkDate">Дата окончания работы:</form:label></td>--%>
-                                <%--<td>--%>
-                                    <%--<form:input path="endWorkDate" cssClass="form-control customDatepicker"/>--%>
-                                <%--</td>--%>
-                                <%--<td>Имя пользователя должно состоять из ...</td>--%>
-                            <%--</tr>--%>
                             <tr>
                                 <td><form:label path="role">Роль:</form:label></td>
                                 <td><form:label path="role">${admin.role.name}</form:label></td>

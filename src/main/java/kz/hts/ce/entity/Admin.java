@@ -8,7 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -18,6 +17,7 @@ public class Admin extends BaseEntity {
 
     public static final String NAME_REGEX = "^[a-zA-Z\u0430-\u044f\u0410-\u042f\u0451\u0401]" +
             "[a-zA-Z-\u0430-\u044f\u0410-\u042f\u0451\u0401]+[a-zA-Z\u0430-\u044f\u0410-\u042f\u0451\u0401]?$";
+
     @NotEmpty
     @Size(min = 3, max = 14)
     @Pattern(regexp = "^[a-z0-9_-]+[a-z0-9_-]$")
@@ -29,7 +29,6 @@ public class Admin extends BaseEntity {
     private String email;
 
     @NotEmpty
-//    @Size(min = 8, max = 16)
     private String password;
 
     @NotEmpty

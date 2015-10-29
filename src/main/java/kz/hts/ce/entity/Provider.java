@@ -1,19 +1,35 @@
 package kz.hts.ce.entity;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 public class Provider extends BaseEntity {
 
+    @NotEmpty
+    @Size(min = 3, max = 14)
+    @Pattern(regexp = "^[a-z0-9_-]+[a-z0-9_-]$")
     private String username;
+
+    @NotEmpty
     private String password;
+
+    @Size(max = 100)
     private String address;
+
+    @NotEmpty
+    @Email
+    @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
     private String email;
 
+    @Size(max = 100)
     @Column(name = "contact_person")
     private String contactPerson;
 
@@ -21,6 +37,7 @@ public class Provider extends BaseEntity {
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
+    @Size(max = 30)
     @Column(name = "company_name")
     private String companyName;
 
