@@ -1,19 +1,19 @@
 package kz.hts.ce.controller.provider;
 
 import kz.hts.ce.entity.*;
-import kz.hts.ce.service.CityService;
-import kz.hts.ce.service.ProductProviderService;
-import kz.hts.ce.service.ProviderService;
-import kz.hts.ce.service.RoleService;
+import kz.hts.ce.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static kz.hts.ce.util.CalculateHelper.calculateCost;
 
 @Controller
 public class ProviderPageController {
@@ -28,6 +28,8 @@ public class ProviderPageController {
     private CityService cityService;
     @Autowired
     private ProductProviderService productProviderService;
+    @Autowired
+    private ProductService productService;
 
     @RequestMapping("/providers/{id}")
     public String providerInformation(Model model, @PathVariable long id) {
@@ -64,19 +66,20 @@ public class ProviderPageController {
     @RequestMapping(value = "/providers/{id}/products", method = RequestMethod.GET)
     public String providers(Model model, @PathVariable long id) {
         List<ProductProvider> providerProducts = productProviderService.findByProviderId(id);
-
-        List<Product> products = new ArrayList<>();
-        for (ProductProvider providerProduct : providerProducts) {
-            Product product = providerProduct.getProduct();
-            products.add(product);
-        }
-
-        model.addAttribute("products", products);
+        model.addAttribute("providerProducts", providerProducts);
         return "products";
     }
 
-    @RequestMapping(value = "/providers/{id}/products/{providerId}", method = RequestMethod.GET)
-    public String providerProducts(Model model, @PathVariable("id") long id, @PathVariable("providerId") long providerId) {
+    @RequestMapping(value = "/providers/{providerId}/products/{productId}", method = RequestMethod.GET)
+    public String providerProducts(Model model, @PathVariable("providerId") long id, @PathVariable("productId") long productId) {
+        ProductProvider productProvider = productProviderService.findByProviderIdAndProductId(id, productId);
+
+        long amount = productProvider.getAmount();
+        BigDecimal price = productProvider.getPrice();
+        BigDecimal sumPrice = calculateCost(amount, price);
+
+        model.addAttribute("productProvider", productProvider);
+        model.addAttribute("sumPrice", sumPrice);
         return "product-info";
     }
 }

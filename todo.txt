@@ -4,3 +4,4 @@
 4) username or password isn't correct - login
 5) .and().rememberMe();
 6) В admin-create.jsp добавить валидацию
+7) для ВСЕХ проверить текст валидации в messages.properties

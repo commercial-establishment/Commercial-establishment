@@ -15,21 +15,21 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        Информация об администраторе
+                        Информация о товаре
                     </h1>
                     <ol class="breadcrumb">
                         <li>
-                            <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>">Главная</a>
+                            <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>"> Главная</a>
                         </li>
                         <li>
-                            <i class="fa fa-table"></i> <a href="<c:url value="/providers"/>">Список поставщиков</a>
+                            <i class="fa fa-table"></i> <a href="<c:url value="/providers"/>"> Список поставщиков</a>
                         </li>
                         <li>
-                            <i class="fa fa-desktop"></i> <a href="<c:url value="/providers/${id}"/>">Информация о
+                            <i class="fa fa-desktop"></i> <a href="<c:url value="/providers/${id}"/>"> Информация о
                             поставщике</a>
                         </li>
                         <li>
-                            <i class="fa fa-table"></i><a href="<c:url value="/providers/${id}/products"/>">Список
+                            <i class="fa fa-table"></i><a href="<c:url value="/providers/${id}/products"/>"> Список
                             товаров</a>
                         </li>
                         <li class="active">
@@ -44,30 +44,23 @@
                         <tbody>
                         <tr>
                             <td><b>Название:</b></td>
-                            <td>${admin.name}</td>
+                            <td>${productProvider.product.name}</td>
                         </tr>
                         <tr>
-                            <td><b>Заблокирован:</b></td>
-                            <td>${admin.blocked}</td>
+                            <td><b>Категория:</b></td>
+                            <td>${productProvider.product.category.name}</td>
                         </tr>
                         <tr>
-                            <td>
-                                <form method="GET" action="<c:url value="/admins/${id}/edit"/>">
-                                    <input type="submit" class="btn btn-lg btn-default" value="Редактировать">
-                                </form>
-                                    <%--<a href="<c:url value="/admins/${id}/edit"/>" class="btn btn-lg btn-default">Редактировать</a>--%>
-                            </td>
-
-                            <c:choose>
-                                <c:when test="${admin.blocked == false}">
-                                    <td><a href="<c:url value="/admins/${id}/lock"/>" class="btn btn-lg btn-danger">Заблокировать</a>
-                                    </td>
-                                </c:when>
-                                <c:otherwise>
-                                    <td><a href="<c:url value="/admins/${id}/reestablish"/>"
-                                           class="btn btn-lg btn-success">Восстановить</a></td>
-                                </c:otherwise>
-                            </c:choose>
+                            <td><b>Цена(в тенге):</b></td>
+                            <td>${productProvider.price}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Количество:</b></td>
+                            <td>${productProvider.amount}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Общая цена:</b></td>
+                            <td><b>${sumPrice}</b></td>
                         </tr>
                         </tbody>
                     </table>
