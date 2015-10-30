@@ -5,15 +5,16 @@ import kz.hts.ce.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import static kz.hts.ce.util.CalculateHelper.calculateCost;
+import static kz.hts.ce.util.Helper.calculateCost;
+import static kz.hts.ce.util.Helper.convertStringToBigDecimal;
 
 @Controller
 public class ProviderPageController {
@@ -67,12 +68,12 @@ public class ProviderPageController {
     public String providers(Model model, @PathVariable long id) {
         List<ProductProvider> providerProducts = productProviderService.findByProviderId(id);
         model.addAttribute("providerProducts", providerProducts);
-        return "products";
+        return "provider-products";
     }
 
-    @RequestMapping(value = "/providers/{providerId}/products/{productId}", method = RequestMethod.GET)
-    public String providerProducts(Model model, @PathVariable("providerId") long id, @PathVariable("productId") long productId) {
-        ProductProvider productProvider = productProviderService.findByProviderIdAndProductId(id, productId);
+    @RequestMapping(value = "/providers/{providerId}/products/{productProviderId}", method = RequestMethod.GET)
+    public String providerProducts(Model model, @PathVariable("productProviderId") long productProviderId) {
+        ProductProvider productProvider = productProviderService.findById(productProviderId);
 
         long amount = productProvider.getAmount();
         BigDecimal price = productProvider.getPrice();
@@ -81,5 +82,29 @@ public class ProviderPageController {
         model.addAttribute("productProvider", productProvider);
         model.addAttribute("sumPrice", sumPrice);
         return "product-info";
+    }
+
+    @RequestMapping(value = "/providers/{providerId}/products/all", method = RequestMethod.GET)
+    public String admins(Model model, @PathVariable("providerId") long providerId) {
+        List<Product> products = productService.findAll();
+        model.addAttribute("products", products);
+        return "provider-product-add";
+    }
+
+    @RequestMapping(value = "/providers/{providerId}/products", method = RequestMethod.POST)
+    public String providerProductsPost(Model model, @PathVariable("providerId") long providerId,
+                                       @RequestParam("productId") String productId,
+                                       @RequestParam("amount") long amount, @RequestParam("price") BigDecimal price) {
+        Product product = productService.findById(Long.valueOf(productId));
+        Provider provider = providerService.findById(providerId);
+
+        ProductProvider productProvider = new ProductProvider();
+        productProvider.setProvider(provider);
+        productProvider.setProduct(product);
+        productProvider.setPrice(price);
+        productProvider.setAmount(amount);
+        productProvider.setBlocked(false);
+        productProviderService.save(productProvider);
+        return providers(model, providerId);
     }
 }

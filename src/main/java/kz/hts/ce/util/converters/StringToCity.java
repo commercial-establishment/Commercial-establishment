@@ -7,7 +7,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class StringToCity implements Converter<String, City> {
+public final class StringToCity implements Converter<String, City> {
 
     @Autowired
     private CityService cityService;

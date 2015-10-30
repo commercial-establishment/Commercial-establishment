@@ -1,5 +1,7 @@
 package kz.hts.ce.entity;
 
+import com.sun.istack.internal.Nullable;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -7,7 +9,10 @@ import java.math.BigDecimal;
 @Table(name = "product_provider")
 public class ProductProvider extends BaseEntity {
 
+    @Nullable
     private long amount;
+
+    @Nullable
     private BigDecimal price;
 
     @ManyToOne

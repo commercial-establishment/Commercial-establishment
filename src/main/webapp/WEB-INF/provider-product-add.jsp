@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        Список товаров
+                        Добавление товара
                     </h1>
                     <ol class="breadcrumb">
                         <li>
@@ -28,53 +28,43 @@
                             <i class="fa fa-desktop"></i> <a href="<c:url value="/providers/${id}"/>">Информация о
                             поставщике</a>
                         </li>
+                        <li>
+                            <i class="fa fa-table"></i> <a href="<c:url value="/providers/${id}/products"/>">Список
+                            товаров</a>
+                        </li>
                         <li class="active">
-                            <i class="fa fa-table"></i> Список товаров
+                            <i class="fa fa-table"></i> Добавление товара
                         </li>
                     </ol>
                 </div>
             </div>
             <div class="col-lg-12">
                 <div class="table-responsive">
-                    <div>
-                        <ul class="nav navbar-nav">
-                            <li>
-                                <a href="javascript:;" data-toggle="collapse" data-target="#demo" class="btn btn-lg btn-default"><i
-                                        class="fa fa-fw fa-arrows-v"></i> Dropdown <i
-                                        class="fa fa-fw fa-caret-down"></i></a>
-                                <ul id="demo" class="collapse">
-                                    <li>
-                                        <a href="#">Dropdown Item</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Dropdown Item</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <%--<a href="<c:url value="#"/>" class="btn btn-lg btn-default">Добавить товар</a>--%>
-                        <br/> <br/>
-                    </div>
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
                         <tr>
                             <th>ID</th>
                             <th>Название</th>
                             <th>Категория</th>
-                            <th>Цена(в тенге)</th>
                             <th>Количество</th>
+                            <th>Цена</th>
+                            <th>Добавить</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${providerProducts}" var="providerProduct">
-                            <tr onclick="document.location = '/providers/' + ${providerProduct.provider.id}
-                                    + '/products/' + ${providerProduct.product.id};">
-                                <td>${providerProduct.product.id}</td>
-                                <td>${providerProduct.product.name}</td>
-                                <td>${providerProduct.product.category.name}</td>
-                                <td>${providerProduct.price}</td>
-                                <td>${providerProduct.amount}</td>
-                            </tr>
+                        <c:forEach items="${products}" var="product">
+                            <form method="post" action="/providers/${providerId}/products">
+                                <tr>
+                                    <td>${product.id}</td>
+                                    <td>${product.name}</td>
+                                    <td>${product.category.name}</td>
+                                    <td><input type="number" name="amount" id="amount" class="form-control" size="5"
+                                               min="1" max="9999"></td>
+                                    <td><input type="number" name="price" id="price" class="form-control" size="5" min="1"
+                                               max="9999"></td>
+                                    <td><input type="submit" value="Добавить" class="btn btn-lg btn-default"></td>
+                                </tr>
+                            </form>
                         </c:forEach>
                         </tbody>
                     </table>
