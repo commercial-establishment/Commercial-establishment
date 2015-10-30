@@ -1,4 +1,4 @@
-package kz.hts.ce.controller;
+package kz.hts.ce.controller.provider;
 
 
 import kz.hts.ce.entity.*;

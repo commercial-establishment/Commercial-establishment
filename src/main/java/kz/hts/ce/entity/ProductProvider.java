@@ -14,6 +14,8 @@ public class ProductProvider extends BaseEntity {
     @PrimaryKeyJoinColumn(name = "provider_id", referencedColumnName = "id")
     private Provider provider;
 
+    private long amount;
+
     @Column(name = "is_blocked")
     private boolean blocked;
 
@@ -31,6 +33,14 @@ public class ProductProvider extends BaseEntity {
 
     public void setProvider(Provider provider) {
         this.provider = provider;
+    }
+
+    public long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(long amount) {
+        this.amount = amount;
     }
 
     public boolean isBlocked() {

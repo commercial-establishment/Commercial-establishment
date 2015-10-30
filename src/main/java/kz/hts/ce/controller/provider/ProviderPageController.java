@@ -1,4 +1,4 @@
-package kz.hts.ce.controller;
+package kz.hts.ce.controller.provider;
 
 import kz.hts.ce.entity.*;
 import kz.hts.ce.service.CityService;
