@@ -4,25 +4,30 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<t:head title="Администраторы"/>
+<t:head title="Товары"/>
 
-<t:container admins="active">
+<t:container providers="active">
     <div id="page-wrapper">
 
         <div class="container-fluid">
 
-            <!-- Page Heading -->
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        Список администраторов
+                        Список товаров
                     </h1>
                     <ol class="breadcrumb">
                         <li>
                             <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>">Главная</a>
                         </li>
+                        <li>
+                            <i class="fa fa-table"></i> <a href="<c:url value="/providers"/>">Список поставщиков</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-desktop"></i> <a href="<c:url value="/providers/${id}"/>">Информация о поставщике</a>
+                        </li>
                         <li class="active">
-                            <i class="fa fa-table"></i> Список администраторов
+                            <i class="fa fa-table"></i> Список товаров
                         </li>
                     </ol>
                 </div>
@@ -30,30 +35,23 @@
             <div class="col-lg-12">
                 <div class="table-responsive">
                     <div>
-                        <a href="<c:url value="/admins/create"/>" class="btn btn-lg btn-default">Добавить
-                            администратора</a>
+                        <a href="<c:url value="#"/>" class="btn btn-lg btn-default">Добавить товар</a>
                         <br/> <br/>
                     </div>
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Имя пользователя</th>
-                            <th>Имя</th>
-                            <th>Отчество</th>
-                            <th>Фамилия</th>
+                            <th>Название</th>
                             <th>Заблокирован</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${admins}" var="admin">
-                            <tr onclick="document.location = '/admins/' + ${admin.id};">
-                                <td>${admin.id}</td>
-                                <td>${admin.username}</td>
-                                <td>${admin.name}</td>
-                                <td>${admin.patronymic}</td>
-                                <td>${admin.surname}</td>
-                                <td>${admin.blocked}</td>
+                        <c:forEach items="${products}" var="product">
+                            <tr onclick="document.location = '/providers/' + ${id} + '/products/' + ${product.id};">
+                                <td>${product.id}</td>
+                                <td>${product.name}</td>
+                                <td>${product.blocked}</td>
                             </tr>
                         </c:forEach>
                         </tbody>

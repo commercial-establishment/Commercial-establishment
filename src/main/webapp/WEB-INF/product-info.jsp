@@ -6,7 +6,7 @@
 
 <t:head title="Информация об администраторе"/>
 
-<t:container admins="active">
+<t:container providers="active">
 
     <div id="page-wrapper">
 
@@ -22,10 +22,18 @@
                             <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>">Главная</a>
                         </li>
                         <li>
-                            <i class="fa fa-table"></i> <a href="<c:url value="/admins"/>">Список администраторов</a>
+                            <i class="fa fa-table"></i> <a href="<c:url value="/providers"/>">Список поставщиков</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-desktop"></i> <a href="<c:url value="/providers/${id}"/>">Информация о
+                            поставщике</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-table"></i><a href="<c:url value="/providers/${id}/products"/>">Список
+                            товаров</a>
                         </li>
                         <li class="active">
-                            <i class="fa fa-desktop"></i> Информация об администраторе
+                            <i class="fa fa-table"></i> Информация о товаре
                         </li>
                     </ol>
                 </div>
@@ -35,48 +43,8 @@
                     <table class="table table-hover">
                         <tbody>
                         <tr>
-                            <td><b>Имя пользователя:</b></td>
-                            <td>${admin.username}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Имя:</b></td>
+                            <td><b>Название:</b></td>
                             <td>${admin.name}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Отчество:</b></td>
-                            <td>${admin.patronymic}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Фамилия:</b></td>
-                            <td>${admin.surname}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Email:</b></td>
-                            <td>${admin.email}</td>
-                        </tr>
-                        <c:if test="${not empty admin.phone}">
-                        <tr>
-                            <td><b>Номер телефона:</b></td>
-                            <td>+7${admin.phone}</td>
-                        </tr>
-                        </c:if>
-                        <tr>
-                            <td><b>Пол:</b></td>
-                            <td>${admin.gender.name}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Дата начала работы:</b></td>
-                            <td>${admin.startWorkDate}</td>
-                        </tr>
-                        <c:if test="${admin.endWorkDate != null}">
-                            <tr>
-                                <td><b>Дата окончания работы:</b></td>
-                                <td>${admin.endWorkDate}</td>
-                            </tr>
-                        </c:if>
-                        <tr>
-                            <td><b>Роль:</b></td>
-                            <td><b>${admin.role.name}</b></td>
                         </tr>
                         <tr>
                             <td><b>Заблокирован:</b></td>
