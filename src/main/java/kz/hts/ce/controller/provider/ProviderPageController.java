@@ -54,7 +54,10 @@ public class ProviderPageController {
     @RequestMapping("/providers/create")
     public String create(Model model) {
         Provider provider = new Provider();
+        List<City> cities = cityService.findAll();
+
         model.addAttribute("provider", provider);
+        model.addAttribute("cities", cities);
         return "provider-create";
     }
 

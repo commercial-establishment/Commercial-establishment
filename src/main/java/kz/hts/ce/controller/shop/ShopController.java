@@ -61,6 +61,7 @@ public class ShopController {
 
     @RequestMapping(value = "/shops/create-save", method = RequestMethod.POST)
     public String create(Model model, @Valid @ModelAttribute("shop") Shop shop, BindingResult result) {
+        /*TODO join warehouse*/
         if (result.hasErrors()) {
             return "shop-create";
         }

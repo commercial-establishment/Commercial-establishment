@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        Список товаров
+                        Список магазинов
                     </h1>
                     <ol class="breadcrumb">
                         <li>
@@ -37,28 +37,30 @@
             <div class="col-lg-12">
                 <div class="table-responsive">
                     <div>
-                        <a href="<c:url value="/providers/${providerId}/products/all"/>" class="btn btn-lg btn-default">Добавить товар</a>
+                        <a href="<c:url value="/providers/${providerId}/shops/all"/>" class="btn btn-lg btn-default">Добавить магазин</a>
                         <br/> <br/>
                     </div>
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Название</th>
-                            <th>Категория</th>
-                            <th>Цена(в тенге)</th>
-                            <th>Количество</th>
+                            <th>Название магазина</th>
+                            <th>Адрес</th>
+                            <th>Город</th>
+                            <th>Тип</th>
+                            <th>Заблокирован</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${providerProducts}" var="providerProduct">
-                            <tr onclick="document.location = '/providers/' + ${providerProduct.provider.id}
-                                    + '/products/' + ${providerProduct.id};">
-                                <td>${providerProduct.id}</td>
-                                <td>${providerProduct.product.name}</td>
-                                <td>${providerProduct.product.category.name}</td>
-                                <td>${providerProduct.price}</td>
-                                <td>${providerProduct.amount}</td>
+                            <%--@elvariable id="shop" type="kz.hts.ce.entity.Shop"--%>
+                        <c:forEach items="${providerShops}" var="providerShop">
+                            <tr onclick="document.location = '/providers/' + ${providerShop.provider.id} + '/shops/' + ${providerShop.shop.id};">
+                                <td>${providerShop.id}</td>
+                                <td>${providerShop.shop.name}</td>
+                                <td>${providerShop.shop.address}</td>
+                                <td>${providerShop.shop.city.name}</td>
+                                <td>${providerShop.shop.type.name}</td>
+                                <td>${providerShop.blocked}</td>
                             </tr>
                         </c:forEach>
                         </tbody>

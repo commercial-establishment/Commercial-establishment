@@ -23,6 +23,10 @@ public class Provider extends BaseEntity {
     @NotEmpty
     private String password;
 
+    @ManyToOne
+    @JoinColumn(name = "city_id", nullable = false)
+    private City city;
+
     @Size(max = 100)
     private String address;
 
@@ -42,10 +46,6 @@ public class Provider extends BaseEntity {
     @Size(max = 30)
     @Column(name = "company_name")
     private String companyName;
-
-    @ManyToOne
-    @JoinColumn(name = "city_id", nullable = false)
-    private City city;
 
     @Column(name = "start_work_date", nullable = false)
     @DateTimeFormat(pattern = "dd-MM-yyyy")
