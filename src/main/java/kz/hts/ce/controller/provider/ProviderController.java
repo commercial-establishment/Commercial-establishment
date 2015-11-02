@@ -82,10 +82,11 @@ public class ProviderController {
         return "redirect:";
     }
 
-    @RequestMapping(value = "/providers/{providerId}/products", method = RequestMethod.POST)
-    public String providerProductsPost(Model model, @PathVariable("providerId") String providerId,
-                                       @RequestParam("productId") String productId,
-                                       @RequestParam("amount") long amount, @RequestParam("price") BigDecimal price) {
+    @RequestMapping(value = "/providers/{providerId}/products/add", method = RequestMethod.POST)
+    public String addProduct(Model model, @PathVariable("providerId") String providerId,
+                             @RequestParam("productId") String productId,
+                             @RequestParam("amount") long amount,
+                             @RequestParam("price") BigDecimal price) {
         Product product = productService.findById(Long.valueOf(productId));
         Provider provider = providerService.findById(Long.valueOf(providerId));
 
@@ -96,6 +97,6 @@ public class ProviderController {
         productProvider.setAmount(amount);
         productProvider.setBlocked(false);
         productProviderService.save(productProvider);
-        return providerPageController.products(model, Long.parseLong(providerId));
+        return "redirect:";
     }
 }

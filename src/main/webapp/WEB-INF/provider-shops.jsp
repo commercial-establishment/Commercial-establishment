@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<t:head title="Товары"/>
+<t:head title="Магазины"/>
 
 <t:container providers="active">
     <div id="page-wrapper">
@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        Добавление товара
+                        Список товаров
                     </h1>
                     <ol class="breadcrumb">
                         <li>
@@ -28,43 +28,38 @@
                             <i class="fa fa-desktop"></i> <a href="<c:url value="/providers/${id}"/>">Информация о
                             поставщике</a>
                         </li>
-                        <li>
-                            <i class="fa fa-table"></i> <a href="<c:url value="/providers/${id}/products"/>">Список
-                            товаров</a>
-                        </li>
                         <li class="active">
-                            <i class="fa fa-table"></i> Добавление товара
+                            <i class="fa fa-table"></i> Список магазинов
                         </li>
                     </ol>
                 </div>
             </div>
             <div class="col-lg-12">
                 <div class="table-responsive">
+                    <div>
+                        <a href="<c:url value="/providers/${providerId}/products/all"/>" class="btn btn-lg btn-default">Добавить товар</a>
+                        <br/> <br/>
+                    </div>
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
                         <tr>
                             <th>ID</th>
                             <th>Название</th>
                             <th>Категория</th>
+                            <th>Цена(в тенге)</th>
                             <th>Количество</th>
-                            <th>Цена</th>
-                            <th>Добавить</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${products}" var="product">
-                            <form method="post" action="/providers/${providerId}/products/add">
-                                <tr>
-                                    <td>${product.id}</td>
-                                    <td>${product.name}</td>
-                                    <td>${product.category.name}</td>
-                                    <td><input type="number" name="amount" id="amount" class="form-control" size="5"
-                                               min="1" max="9999"></td>
-                                    <td><input type="number" name="price" id="price" class="form-control" size="5" min="1"
-                                               max="9999"></td>
-                                    <td><button type="submit" name="productId" value="${product.id}" class="btn btn-lg btn-default">Добавить</button></td>
-                                </tr>
-                            </form>
+                        <c:forEach items="${providerProducts}" var="providerProduct">
+                            <tr onclick="document.location = '/providers/' + ${providerProduct.provider.id}
+                                    + '/products/' + ${providerProduct.id};">
+                                <td>${providerProduct.id}</td>
+                                <td>${providerProduct.product.name}</td>
+                                <td>${providerProduct.product.category.name}</td>
+                                <td>${providerProduct.price}</td>
+                                <td>${providerProduct.amount}</td>
+                            </tr>
                         </c:forEach>
                         </tbody>
                     </table>

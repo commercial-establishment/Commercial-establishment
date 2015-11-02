@@ -29,6 +29,8 @@ public class ProviderPageController {
     @Autowired
     private ProductProviderService productProviderService;
     @Autowired
+    private ShopProviderService shopProviderService;
+    @Autowired
     private ProductService productService;
 
     @RequestMapping("/providers/{id}")
@@ -69,6 +71,14 @@ public class ProviderPageController {
         model.addAttribute("providerProducts", providerProducts);
         model.addAttribute("providerId", id);
         return "provider-products";
+    }
+
+    @RequestMapping(value = "/providers/{id}/shops", method = RequestMethod.GET)
+    public String shops(Model model, @PathVariable long id) {
+        List<ShopProvider> providerShops = shopProviderService.findByProviderId(id);
+        model.addAttribute("providerShops", providerShops);
+        model.addAttribute("providerId", id);
+        return "provider-shops";
     }
 
     @RequestMapping(value = "/providers/{providerId}/products/{productProviderId}", method = RequestMethod.GET)
