@@ -1,4 +1,4 @@
-package kz.hts.ce.controller;
+package kz.hts.ce.controller.admin;
 
 import kz.hts.ce.entity.Admin;
 import kz.hts.ce.entity.Gender;
@@ -50,7 +50,6 @@ public class AdminPageController {
         return "admin-edit";
     }
 
-
     @RequestMapping("/admins/create")
     public String create(Model model) {
         Admin admin = new Admin();
@@ -67,5 +66,4 @@ public class AdminPageController {
         model.addAttribute("admins", admins);
         return "admins";
     }
-
 }

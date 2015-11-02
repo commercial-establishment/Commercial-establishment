@@ -1,10 +1,19 @@
 package kz.hts.ce.entity;
 
+import com.sun.istack.internal.Nullable;
+
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "product_provider")
 public class ProductProvider extends BaseEntity {
+
+    @Nullable
+    private long amount;
+
+    @Nullable
+    private BigDecimal price;
 
     @ManyToOne
     @PrimaryKeyJoinColumn(name = "product_id", referencedColumnName = "id")
@@ -19,6 +28,22 @@ public class ProductProvider extends BaseEntity {
 
     public Product getProduct() {
         return product;
+    }
+
+    public long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(long amount) {
+        this.amount = amount;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public void setProduct(Product product) {

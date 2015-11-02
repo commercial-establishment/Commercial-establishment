@@ -1,4 +1,4 @@
-package kz.hts.ce.controller;
+package kz.hts.ce.controller.admin;
 
 import kz.hts.ce.entity.Admin;
 import kz.hts.ce.entity.Gender;

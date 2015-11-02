@@ -23,7 +23,7 @@
                     </h1>
                     <ol class="breadcrumb">
                         <li>
-                            <i class="fa fa-dashboard"></i> <a href="<c:url value="/admin"/>">Главная</a>
+                            <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>">Главная</a>
                         </li>
                         <li class="active">
                             <i class="fa fa-table"></i> Список поставщиков

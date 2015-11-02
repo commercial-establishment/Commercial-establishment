@@ -18,4 +18,8 @@ public class ProductProviderService extends BaseService<ProductProvider, Product
     public List<ProductProvider> findByProviderId(long providerId) {
         return repository.findByProvider_Id(providerId);
     }
+
+    public ProductProvider findByProviderIdAndProductId(long providerId, long productId) {
+        return repository.findByProvider_IdAndProduct_Id(providerId, productId);
+    }
 }

@@ -23,7 +23,7 @@
                     </h1>
                     <ol class="breadcrumb">
                         <li>
-                            <i class="fa fa-dashboard"></i> <a href="<c:url value="/admin"/>">Главная</a>
+                            <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>">Главная</a>
                         </li>
                         <li>
                             <i class="fa fa-table"></i> <a href="<c:url value="/admins"/>">Список администраторов</a>
@@ -45,7 +45,7 @@
                             <tbody>
                             <tr>
                                 <td><form:label path="username">Имя пользователя:</form:label></td>
-                                <td><form:input cssClass="form-control" path="username"/></td>
+                                <td><form:input cssClass="" path="username"/></td>
                                 <form:hidden path="password"/>
                                 <c:set var="usernameErrors"><form:errors path="username" cssClass="error"/> </c:set>
                                 <c:choose>
