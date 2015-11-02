@@ -24,6 +24,7 @@ VALUES
 INSERT INTO product (id, is_blocked, name, category_id) VALUES (1, FALSE, 'Coca-Cola', 1);
 INSERT INTO product (id, is_blocked, name, category_id) VALUES (2, FALSE, 'NeCoca-Cola', 1);
 
+INSERT INTO shop (id, address, is_blocked, name, city_id, type_id, warehouse_id) VALUES (1, 'Туркистан 8/2', false, 'Gal Mart', 1, 1, 1);
 /*TODO product's history*/
 INSERT INTO warehouse (id, arrival, import_date, residue, produt_id) VALUES (1, 100, NULL, 50, 1);
 INSERT INTO warehouse (id, arrival, import_date, residue, produt_id) VALUES (2, 100, NULL, 50, 2);

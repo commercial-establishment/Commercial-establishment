@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1">
-    <persistence-unit name="primary">
-        <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <properties>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
-            <!--<property name="hibernate.show_sql" value="true"/>-->
-        </properties>
-    </persistence-unit>
+<persistence-unit name="primary">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <properties>
+        <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+        <property name="hibernate.hbm2ddl.auto" value="update"/>
+        <!--<property name="hibernate.show_sql" value="true"/>-->
+    </properties>
+</persistence-unit>
 </persistence>

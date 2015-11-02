@@ -33,19 +33,14 @@ public class TransitionPageController {
     }
 
     /*SHOP*/
-    @RequestMapping(value = "/shops",method = RequestMethod.GET)
-    public String shopsPage(Model model) {
-        List<Shop> shops = shopService.findAll();
-        model.addAttribute("shops", shops);
-        return "shops";
-    }
 
-    @RequestMapping("/shops/{id}")
-    public String shopInformationPage(Model model, @PathVariable String id){
-        Shop shop = shopService.findById(Long.valueOf(id));
-        model.addAttribute("shop", shop);
-        return "/shop-info";
-    }
+//
+//    @RequestMapping("/shops/{id}")
+//    public String shopInformationPage(Model model, @PathVariable String id){
+//        Shop shop = shopService.findById(Long.valueOf(id));
+//        model.addAttribute("shop", shop);
+//        return "/shop-info";
+//    }
 
     @RequestMapping(value = "/recovery", method = RequestMethod.GET)
     public String passwordRecovery() {

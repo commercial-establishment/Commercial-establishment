@@ -6,11 +6,8 @@ import java.util.List;
 @Entity
 public class Shop extends BaseEntity {
 
-    private String username;
-    private String password;
     private String name;
     private String address;
-    private String city;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "shop")
     private List<Employee> employees;
@@ -23,24 +20,12 @@ public class Shop extends BaseEntity {
     @JoinColumn(name = "warehouse_id", nullable = false)
     private Warehouse warehouse;
 
+    @OneToOne
+    @JoinColumn(name = "city_id", nullable = false)
+    private City city;
+
     @Column(name = "is_blocked", nullable = false)
     private boolean blocked;
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getName() {
         return name;
@@ -66,14 +51,6 @@ public class Shop extends BaseEntity {
         this.address = address;
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     public Type getType() {
         return type;
     }
@@ -96,5 +73,13 @@ public class Shop extends BaseEntity {
 
     public void setBlocked(boolean blocked) {
         this.blocked = blocked;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 }
