@@ -16,10 +16,9 @@ VALUES (1, FALSE, 'yakovshmidt93@gmail.com', NULL, 'Yakov', '$2a$10$5/0IiLwNrICc
 
 INSERT INTO product (id, name) VALUES (1, 'Coca Cola');
 
+INSERT INTO shop (id, address, is_blocked, name, city_id, type_id, warehouse_id) VALUES (1, 'Туркистан 8/2', false, 'Gal Mart', 1, 1, 1);
 /*TODO product's history*/
 INSERT INTO warehouse (id, arrival, import_date, residue, produt_id) VALUES (1, 100, null, 50, 1);
-
-INSERT INTO shop (id, is_blocked, full_name, password, username, type_id, warehouse_id) VALUES (1, FALSE, 'Super Магаз', 'super', 'super', 1, 1);
 
 INSERT INTO city (id, name) VALUES (1, 'АСТАНА');
 INSERT INTO city (id, name) VALUES (2, 'КАРАГАНДА');

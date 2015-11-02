@@ -16,6 +16,13 @@ public class Employee extends BaseEntity {
     @JoinColumn(name = "shop_id", nullable = false)
     private Shop shop;
 
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
+    private Role role;
+
+    @Column(name = "is_blocked")
+    private boolean blocked;
+
     public String getFirstName() {
         return firstName;
     }
@@ -54,5 +61,21 @@ public class Employee extends BaseEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public boolean isBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
     }
 }
