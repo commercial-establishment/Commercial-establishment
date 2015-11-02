@@ -81,25 +81,11 @@
                                 <td>
                                     <select name="type" id="type" class="form-control">
                                         <c:forEach items="${types}" var="type">
-                                            <option> ${type.name}</option>
+                                            <option>${type.name}</option>
                                         </c:forEach>
                                     </select>
                                 </td>
                                 <td>Имя пользователя должно состоять из ...</td>
-                            </tr>
-                            <tr>
-                                <td><form:label path="blocked">Заблокирован:</form:label></td>
-                                <td>${provider.blocked}</td>
-                                <form:hidden path="blocked"/>
-                                <c:set var="blockedErrors"><form:errors path="blocked" cssClass="error"/> </c:set>
-                                <c:choose>
-                                    <c:when test="${not empty blockedErrors}">
-                                        <td> ${blockedErrors} </td>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <td>Имя пользователя должно состоять из ...</td>
-                                    </c:otherwise>
-                                </c:choose>
                             </tr>
                             <tr>
                                 <td>

@@ -15,4 +15,8 @@ public interface ShopRepository extends JpaRepository<Shop, Long> {
     @Query("UPDATE Shop s set s.blocked = TRUE where s.id = ?1")
     void lockById(long id);
 
+    @Transactional
+    @Modifying
+    @Query("UPDATE Shop s set s.blocked = FALSE where s.id = ?1")
+    void reestablishById(long id);
 }

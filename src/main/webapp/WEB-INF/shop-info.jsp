@@ -51,10 +51,6 @@
                             <td>${shop.type.name}</td>
                         </tr>
                         <tr>
-                            <td><b>Склад:</b></td>
-                            <td>${shop.warehouse.id}</td>
-                        </tr>
-                        <tr>
                             <td><b>Заблокирован:</b></td>
                             <td>${shop.blocked}</td>
                         </tr>
@@ -67,7 +63,7 @@
                             </td>
 
                             <c:choose>
-                                <c:when test="${admin.blocked == false}">
+                                <c:when test="${shop.blocked == false}">
                                     <td><a href="<c:url value="/shops/${id}/lock"/>" class="btn btn-lg btn-danger">Заблокировать</a>
                                     </td>
                                 </c:when>

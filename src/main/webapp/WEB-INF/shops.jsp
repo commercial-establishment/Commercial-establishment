@@ -45,7 +45,6 @@
                             <th>Адрес</th>
                             <th>Город</th>
                             <th>Тип</th>
-                            <th>Склад</th>
                             <th>Заблокирован</th>
                         </tr>
                         </thead>
@@ -58,7 +57,6 @@
                                 <td>${shop.address}</td>
                                 <td>${shop.city.name}</td>
                                 <td>${shop.type.name}</td>
-                                <td>${shop.warehouse.id}</td>
                                 <td>${shop.blocked}</td>
                             </tr>
                         </c:forEach>
