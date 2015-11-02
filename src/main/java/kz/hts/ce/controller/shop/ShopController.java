@@ -31,7 +31,6 @@ public class ShopController {
     @Autowired
     private TypeService typeService;
 
-
     @RequestMapping(value = "/shops/{id}/lock")
     public String lock(@PathVariable long id) {
         Shop shop = shopService.findById(id);
