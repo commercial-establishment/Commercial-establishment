@@ -14,7 +14,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import static kz.hts.ce.util.Helper.calculateCost;
-import static kz.hts.ce.util.Helper.convertStringToBigDecimal;
 
 @Controller
 public class ProviderPageController {
@@ -65,9 +64,10 @@ public class ProviderPageController {
     }
 
     @RequestMapping(value = "/providers/{id}/products", method = RequestMethod.GET)
-    public String providers(Model model, @PathVariable long id) {
+    public String products(Model model, @PathVariable long id) {
         List<ProductProvider> providerProducts = productProviderService.findByProviderId(id);
         model.addAttribute("providerProducts", providerProducts);
+        model.addAttribute("providerId", id);
         return "provider-products";
     }
 
@@ -85,26 +85,10 @@ public class ProviderPageController {
     }
 
     @RequestMapping(value = "/providers/{providerId}/products/all", method = RequestMethod.GET)
-    public String admins(Model model, @PathVariable("providerId") long providerId) {
+    public String providerProductAdd(Model model, @PathVariable("providerId") String providerId) {
         List<Product> products = productService.findAll();
         model.addAttribute("products", products);
+        model.addAttribute("providerId", providerId);
         return "provider-product-add";
-    }
-
-    @RequestMapping(value = "/providers/{providerId}/products", method = RequestMethod.POST)
-    public String providerProductsPost(Model model, @PathVariable("providerId") long providerId,
-                                       @RequestParam("productId") String productId,
-                                       @RequestParam("amount") long amount, @RequestParam("price") BigDecimal price) {
-        Product product = productService.findById(Long.valueOf(productId));
-        Provider provider = providerService.findById(providerId);
-
-        ProductProvider productProvider = new ProductProvider();
-        productProvider.setProvider(provider);
-        productProvider.setProduct(product);
-        productProvider.setPrice(price);
-        productProvider.setAmount(amount);
-        productProvider.setBlocked(false);
-        productProviderService.save(productProvider);
-        return providers(model, providerId);
     }
 }

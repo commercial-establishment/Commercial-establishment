@@ -62,7 +62,8 @@
                                                min="1" max="9999"></td>
                                     <td><input type="number" name="price" id="price" class="form-control" size="5" min="1"
                                                max="9999"></td>
-                                    <td><input type="submit" value="Добавить" class="btn btn-lg btn-default"></td>
+                                    <td><button type="submit" name="productId" value="${product.id}" class="btn btn-lg btn-default">Добавить</button></td>
+
                                 </tr>
                             </form>
                         </c:forEach>
