@@ -10,7 +10,7 @@
     <link href="<c:url value="/resources/css/style.css"/>" rel="stylesheet" type="text/css">
 </t:head>
 
-<t:container providers="active">
+<t:container admins="active">
 
     <div id="page-wrapper">
 
@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        Редактирование данных магазина
+                        Редактирование данных о магазине
                     </h1>
                     <ol class="breadcrumb">
                         <li>
@@ -29,9 +29,8 @@
                             <i class="fa fa-table"></i> <a href="<c:url value="/shops"/>">Список магазинов</a>
                         </li>
                         <li class="active">
-                            <i class="fa fa-desktop"></i> <a href="<c:url value="/shops/${shop.id}"/>">Информация
-                            о
-                            магазине</a>
+                            <i class="fa fa-desktop"></i> <a href="<c:url value="/shops/${shop.id}"/>">Информация о магазинах
+                            </a>
                         </li>
                         <li class="active">
                             <i class="fa fa-edit"></i> Редактирование данных
@@ -41,37 +40,18 @@
             </div>
             <div class="col-lg-12">
                 <div class="table-responsive">
-                    <form:form method="post" action="/shop/${id}/edit" modelAttribute="shop"
-                               commandName="shop">
+                    <form:form method="post" action="/shops/${id}/edit" modelAttribute="shop" commandName="shop">
                         <table class="table table-hover">
                             <tbody>
                             <tr>
                                 <td><form:label path="name">Наименование магазина:</form:label></td>
                                 <td><form:input cssClass="form-control" path="name"/></td>
-                                <%--<form:hidden path="password"/>--%>
-                                <%--<c:set var="usernameErrors"><form:errors path="username" cssClass="error"/> </c:set>--%>
-                                <%--<c:choose>--%>
-                                    <%--<c:when test="${not empty usernameErrors}">--%>
-                                        <%--<td> ${usernameErrors} </td>--%>
-                                    <%--</c:when>--%>
-                                    <%--<c:otherwise>--%>
-                                        <%--<td>Имя пользователя должно состоять из ...</td>--%>
-                                    <%--</c:otherwise>--%>
-                                <%--</c:choose>--%>
+
                             </tr>
                             <tr>
-                                <td><form:label path="address">Адрес магазина:</form:label></td>
+                                <td><form:label path="address">Адрес:</form:label></td>
                                 <td><form:input cssClass="form-control" path="address"/></td>
-                                <%--<c:set var="companyNameErrors"><form:errors path="address" cssClass="error"/>--%>
-                                <%--</c:set>--%>
-                                <%--<c:choose>--%>
-                                    <%--<c:when test="${not empty companyNameErrors}">--%>
-                                        <%--<td> ${companyNameErrors} </td>--%>
-                                    <%--</c:when>--%>
-                                    <%--<c:otherwise>--%>
-                                        <%--<td>Имя пользователя должно состоять из ...</td>--%>
-                                    <%--</c:otherwise>--%>
-                                <%--</c:choose>--%>
+
                             </tr>
                             <tr>
                                 <td><form:label path="city">Город:</form:label></td>
@@ -99,7 +79,7 @@
                             </tr>
                             <tr>
                                 <td><form:label path="blocked">Заблокирован:</form:label></td>
-                                <td>${provider.blocked}</td>
+                                <td>${shop.blocked}</td>
                                 <form:hidden path="blocked"/>
                                 <c:set var="blockedErrors"><form:errors path="blocked" cssClass="error"/> </c:set>
                                 <c:choose>

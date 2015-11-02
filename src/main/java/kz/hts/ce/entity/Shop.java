@@ -17,10 +17,6 @@ public class Shop extends BaseEntity {
     private Type type;
 
     @OneToOne
-    @JoinColumn(name = "warehouse_id", nullable = false)
-    private Warehouse warehouse;
-
-    @OneToOne
     @JoinColumn(name = "city_id", nullable = false)
     private City city;
 
@@ -57,14 +53,6 @@ public class Shop extends BaseEntity {
 
     public void setType(Type type) {
         this.type = type;
-    }
-
-    public Warehouse getWarehouse() {
-        return warehouse;
-    }
-
-    public void setWarehouse(Warehouse warehouse) {
-        this.warehouse = warehouse;
     }
 
     public boolean isBlocked() {

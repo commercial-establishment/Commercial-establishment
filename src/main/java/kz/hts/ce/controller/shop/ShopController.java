@@ -25,8 +25,6 @@ public class ShopController {
     @Autowired
     private ShopService shopService;
     @Autowired
-    private RoleService roleService;
-    @Autowired
     private CityService cityService;
     @Autowired
     private TypeService typeService;
@@ -41,16 +39,14 @@ public class ShopController {
         return "redirect:";
     }
 
-//    @RequestMapping("/shops/{id}/reestablish")
-//    public String reestablish(@PathVariable long id) {
-//        adminService.updateStartAndEndWorkDate(new Date(), null, id);
-//        adminService.reestablishById(id);
-//        return "redirect:";
-//    }
+    @RequestMapping("/shops/{id}/reestablish")
+    public String reestablish(@PathVariable long id) {
+        shopService.reestablishById(id);
+        return "redirect:";
+    }
 
     @RequestMapping(value = "/shops/{id}/edit", method = RequestMethod.POST)
     public String edit(Model model, @PathVariable long id, @Valid @ModelAttribute("shop") Shop shop, BindingResult result) {
-
         if (result.hasErrors()) {
             List<City> cities = cityService.findAll();
             List<Type> types = typeService.findAll();
@@ -65,9 +61,9 @@ public class ShopController {
     }
 
     @RequestMapping(value = "/shops/create-save", method = RequestMethod.POST)
-    public String create(Model model, @Valid @ModelAttribute("admin") Shop shop, BindingResult result) {
+    public String create(Model model, @Valid @ModelAttribute("shop") Shop shop, BindingResult result) {
         if (result.hasErrors()) {
-            return "shop-edit";
+            return "shop-create";
         }
         shopService.save(shop);
         return "redirect:";

@@ -76,7 +76,7 @@
                                 <td>
                                     <select name="gender" id="gender" class="form-control">
                                         <c:forEach items="${genders}" var="gender">
-                                            <option> ${gender.name}</option>
+                                            <option>${gender.name}</option>
                                         </c:forEach>
                                     </select>
                                 </td>

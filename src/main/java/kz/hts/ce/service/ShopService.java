@@ -22,4 +22,8 @@ public class ShopService extends BaseService<Shop, ShopRepository> {
     public void lockById(long id) {
         repository.lockById(id);
     }
+
+    public void reestablishById(long id) {
+        repository.reestablishById(id);
+    }
 }
