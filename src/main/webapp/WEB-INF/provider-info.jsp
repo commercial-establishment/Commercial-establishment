@@ -36,7 +36,12 @@
                     <table class="table table-hover">
                         <tbody>
                         <tr>
-                            <td><a href="<c:url value="/providers/${id}/products"/>" class="btn btn-lg btn-default">Товары</a></td>
+                            <td>
+                                <form method="GET" action="/providers/${id}/products">
+                                    <input type="submit" class="btn btn-lg btn-default" value="Товары">
+                                </form>
+                                <%--<a href="<c:url value="/providers/${id}/products"/>" class="btn btn-lg btn-default">Товары</a>--%>
+                            </td>
                             <td><a href="<c:url value="/providers/${id}/shops"/>" class="btn btn-lg btn-default">Магазины</a></td>
                         </tr>
                         <tr>

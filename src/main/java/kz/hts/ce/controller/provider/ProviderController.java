@@ -2,20 +2,16 @@ package kz.hts.ce.controller.provider;
 
 
 import kz.hts.ce.entity.*;
-import kz.hts.ce.service.CityService;
-import kz.hts.ce.service.ProviderService;
-import kz.hts.ce.service.RoleService;
+import kz.hts.ce.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -32,6 +28,12 @@ public class ProviderController {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private CityService cityService;
+    @Autowired
+    private ProductService productService;
+    @Autowired
+    private ProductProviderService productProviderService;
+    @Autowired
+    private ProviderPageController providerPageController;
 
     @RequestMapping(value = "/providers/{id}/lock")
     public String lock(@PathVariable long id) {
@@ -80,4 +82,20 @@ public class ProviderController {
         return "redirect:";
     }
 
+    @RequestMapping(value = "/providers/{providerId}/products", method = RequestMethod.POST)
+    public String providerProductsPost(Model model, @PathVariable("providerId") String providerId,
+                                       @RequestParam("productId") String productId,
+                                       @RequestParam("amount") long amount, @RequestParam("price") BigDecimal price) {
+        Product product = productService.findById(Long.valueOf(productId));
+        Provider provider = providerService.findById(Long.valueOf(providerId));
+
+        ProductProvider productProvider = new ProductProvider();
+        productProvider.setProvider(provider);
+        productProvider.setProduct(product);
+        productProvider.setPrice(price);
+        productProvider.setAmount(amount);
+        productProvider.setBlocked(false);
+        productProviderService.save(productProvider);
+        return providerPageController.products(model, Long.parseLong(providerId));
+    }
 }

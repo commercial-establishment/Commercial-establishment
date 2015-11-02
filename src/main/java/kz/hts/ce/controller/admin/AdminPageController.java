@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
-import static kz.hts.ce.util.SpringUtils.getPrincipal;
-
 @Controller
 public class AdminPageController {
 

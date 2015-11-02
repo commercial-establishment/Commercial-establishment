@@ -50,7 +50,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <%--@elvariable id="shop" type="kz.hts.ce.entity.Shop"--%>
+                            <%--@elvariable id="shop" type="kz.hts.ce.entity.Shop"--%>
                         <c:forEach items="${shops}" var="shop">
                             <tr onclick="document.location = '/shops/' + ${shop.id};">
                                 <td>${shop.id}</td>
