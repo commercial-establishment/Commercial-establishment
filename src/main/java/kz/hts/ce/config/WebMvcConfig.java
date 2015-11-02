@@ -1,5 +1,6 @@
 package kz.hts.ce.config;
 
+import kz.hts.ce.util.converters.StringToCategory;
 import kz.hts.ce.util.converters.StringToCity;
 import kz.hts.ce.util.converters.StringToGender;
 import kz.hts.ce.util.converters.StringToType;
@@ -39,12 +40,16 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     private StringToCity stringToCityConverter;
     @Autowired
     private StringToType stringToTypeConverter;
+    @Autowired
+    private StringToCategory stringToCategoryConverter;
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(stringToGenderConverter);
         registry.addConverter(stringToCityConverter);
         registry.addConverter(stringToTypeConverter);
+        registry.addConverter(stringToCategoryConverter);
+
     }
 
     @Bean(name = "viewResolver")
