@@ -22,4 +22,12 @@ public class ShopProviderService extends BaseService<ShopProvider, ShopProviderR
     public ShopProvider findByProviderIdAndShopId(long providerId, long shopId) {
        return repository.findByProvider_IdAndShop_Id(providerId, shopId);
     }
+
+    public void lockById(long id) {
+        repository.lockById(id);
+    }
+
+    public void reestablishById(long id) {
+        repository.reestablishById(id);
+    }
 }

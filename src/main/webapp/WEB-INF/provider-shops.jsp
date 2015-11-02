@@ -37,7 +37,8 @@
             <div class="col-lg-12">
                 <div class="table-responsive">
                     <div>
-                        <a href="<c:url value="/providers/${providerId}/shops/all"/>" class="btn btn-lg btn-default">Добавить магазин</a>
+                        <a href="<c:url value="/providers/${providerId}/shops/all"/>" class="btn btn-lg btn-default">Добавить
+                            магазин</a>
                         <br/> <br/>
                     </div>
                     <table class="table table-bordered table-hover table-striped">
@@ -48,7 +49,7 @@
                             <th>Адрес</th>
                             <th>Город</th>
                             <th>Тип</th>
-                            <th>Заблокирован</th>
+                            <th>Удалить/Восстановить</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -60,7 +61,26 @@
                                 <td>${providerShop.shop.address}</td>
                                 <td>${providerShop.shop.city.name}</td>
                                 <td>${providerShop.shop.type.name}</td>
-                                <td>${providerShop.blocked}</td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${providerShop.blocked == false}">
+                                            <form method="post"
+                                                  action="<c:url value="/providers/${providerShop.provider.id}/shops/${providerShop.shop.id}/lock"/>">
+                                                <button type="submit" name="shopId" value="${providerShop.shop.id}"
+                                                        class="btn btn-lg btn-danger">Удалить
+                                                </button>
+                                            </form>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <form method="post"
+                                                  action="<c:url value="/providers/${providerShop.provider.id}/shops/${providerShop.shop.id}/reestablish"/>">
+                                                <button type="submit" name="shopId" value="${providerShop.shop.id}"
+                                                        class="btn btn-lg btn-success">Восстановить
+                                                </button>
+                                            </form>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>

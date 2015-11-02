@@ -37,6 +37,8 @@ public class ProviderController {
     private ShopService shopService;
     @Autowired
     private ShopProviderService shopProviderService;
+    @Autowired
+    private ProviderPageController providerPageController;
 
     @RequestMapping(value = "/providers/{id}/lock")
     public String lock(@PathVariable long id) {
@@ -47,6 +49,20 @@ public class ProviderController {
         providerService.updateEndWorkDate(new Date(), id);
         providerService.lockById(id);
         return "redirect:";
+    }
+
+    @RequestMapping(value = "providers/{providerId}/shops/{shopId}/lock", method = RequestMethod.POST)
+    public String lockShop(@PathVariable("providerId") long providerId, @PathVariable("shopId") long shopId) {
+        ShopProvider shopProvider = shopProviderService.findByProviderIdAndShopId(providerId, shopId);
+        shopProviderService.lockById(shopProvider.getId());
+        return "redirect:/providers/" + providerId + "/shops";
+    }
+
+    @RequestMapping(value = "providers/{providerId}/shops/{shopId}/reestablish", method = RequestMethod.POST)
+    public String reestablishShop(@PathVariable("providerId") long providerId, @PathVariable("shopId") long shopId) {
+        ShopProvider shopProvider = shopProviderService.findByProviderIdAndShopId(providerId, shopId);
+        shopProviderService.reestablishById(shopProvider.getId());
+        return "redirect:/providers/" + providerId + "/shops";
     }
 
     @RequestMapping("/providers/{id}/reestablish")
