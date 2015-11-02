@@ -10,4 +10,6 @@ import java.util.List;
 public interface ShopProviderRepository extends JpaRepository<ShopProvider, Long> {
 
     List<ShopProvider> findByProvider_Id(long id);
+
+    ShopProvider findByProvider_IdAndShop_Id(long providerId, long shopId);
 }

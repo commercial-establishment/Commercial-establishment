@@ -32,6 +32,8 @@ public class ProviderPageController {
     private ShopProviderService shopProviderService;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private ShopService shopService;
 
     @RequestMapping("/providers/{id}")
     public String providerInformation(Model model, @PathVariable long id) {
@@ -103,5 +105,13 @@ public class ProviderPageController {
         model.addAttribute("products", products);
         model.addAttribute("providerId", providerId);
         return "provider-product-add";
+    }
+
+    @RequestMapping(value = "/providers/{providerId}/shops/all", method = RequestMethod.GET)
+    public String providerShopAdd(Model model, @PathVariable("providerId") String providerId) {
+        List<Shop> shops = shopService.findAll();
+        model.addAttribute("shops", shops);
+        model.addAttribute("providerId", providerId);
+        return "provider-shop-add";
     }
 }

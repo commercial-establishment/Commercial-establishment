@@ -6,6 +6,7 @@ import kz.hts.ce.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +34,9 @@ public class ProviderController {
     @Autowired
     private ProductProviderService productProviderService;
     @Autowired
-    private ProviderPageController providerPageController;
+    private ShopService shopService;
+    @Autowired
+    private ShopProviderService shopProviderService;
 
     @RequestMapping(value = "/providers/{id}/lock")
     public String lock(@PathVariable long id) {
@@ -83,7 +86,7 @@ public class ProviderController {
     }
 
     @RequestMapping(value = "/providers/{providerId}/products/add", method = RequestMethod.POST)
-    public String addProduct(Model model, @PathVariable("providerId") String providerId,
+    public String addProduct(@PathVariable("providerId") String providerId,
                              @RequestParam("productId") String productId,
                              @RequestParam("amount") long amount,
                              @RequestParam("price") BigDecimal price) {
@@ -97,6 +100,23 @@ public class ProviderController {
         productProvider.setAmount(amount);
         productProvider.setBlocked(false);
         productProviderService.save(productProvider);
+        return "redirect:";
+    }
+
+    @Transactional
+    @RequestMapping(value = "/providers/{providerId}/shops/add", method = RequestMethod.POST)
+    public String addShop(@PathVariable("providerId") long providerId,
+                          @RequestParam("shopId") long shopId) {
+        ShopProvider shopProviderFromDB = shopProviderService.findByProviderIdAndShopId(providerId, shopId);
+        if (shopProviderFromDB == null) {
+            Shop shop = shopService.findById(shopId);
+            Provider provider = providerService.findById(providerId);
+            ShopProvider shopProvider = new ShopProvider();
+            shopProvider.setProvider(provider);
+            shopProvider.setShop(shop);
+            shopProvider.setBlocked(false);
+            shopProviderService.save(shopProvider);
+        }
         return "redirect:";
     }
 }

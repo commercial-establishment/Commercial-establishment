@@ -3,3 +3,4 @@
 4) username or password isn't correct - login
 5) .and().rememberMe();
 7) для ВСЕХ проверить текст валидации в messages.properties
+1) Если магазин или товар уже добавлен у поставщика - заменить.
