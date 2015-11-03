@@ -38,13 +38,5 @@ public class CategoryController {
         categoryService.save(category);
         return "redirect:";
     }
-
-    @RequestMapping(value = "/categories/{id}/delete")
-    public String delete(@PathVariable long id) {
-        Category category = categoryService.findById(id);
-        categoryService.save(category);
-        categoryService.delete(id);
-        return "redirect:";
-    }
 }
 
