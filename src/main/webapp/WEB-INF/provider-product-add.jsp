@@ -53,7 +53,7 @@
                         </thead>
                         <tbody>
                         <c:forEach items="${products}" var="product">
-                            <form method="post" action="/admin/providers/${providerId}/products">
+                            <form method="post" action="/admin/providers/${providerId}/products/add">
                                 <tr>
                                     <td>${product.id}</td>
                                     <td>${product.name}</td>

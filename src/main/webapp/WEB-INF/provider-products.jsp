@@ -56,8 +56,7 @@
                         </thead>
                         <tbody>
                         <c:forEach items="${providerProducts}" var="providerProduct">
-                            <tr onclick="document.location = '/admin/providers/' + ${providerProduct.provider.id}
-                                    + '/products/' + ${providerProduct.id};">
+                            <tr>
                                 <td>${providerProduct.id}</td>
                                 <td>${providerProduct.product.name}</td>
                                 <td>${providerProduct.product.category.name}</td>
@@ -66,17 +65,13 @@
                                 <td>
                                     <form method="GET"
                                           action="<c:url value="/admin/providers/${providerProduct.provider.id}/products/${providerProduct.product.id}/edit"/>">
-                                        <button type="submit" name="shopId" value="${providerProduct.product.id}"
-                                                class="btn btn-lg btn-default">Редактировать
-                                        </button>
+                                        <button type="submit" class="btn btn-lg btn-default">Редактировать</button>
                                     </form>
                                 </td>
                                 <td>
                                     <form method="POST"
                                           action="<c:url value="/admin/providers/${providerProduct.provider.id}/products/${providerProduct.product.id}/delete"/>">
-                                        <button type="submit" name="shopId" value="${providerProduct.product.id}"
-                                                class="btn btn-lg btn-danger">Удалить
-                                        </button>
+                                        <button type="submit" class="btn btn-lg btn-danger">Удалить</button>
                                     </form>
                                 </td>
                             </tr>

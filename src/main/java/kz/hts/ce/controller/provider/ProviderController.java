@@ -16,6 +16,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import static kz.hts.ce.util.Helper.calculateCost;
+
 @Controller
 public class ProviderController {
 
@@ -132,5 +134,15 @@ public class ProviderController {
             shopProviderService.save(shopProvider);
         }
         return "redirect:";
+    }
+
+    @RequestMapping(value = "/admin/providers/{providerId}/products/{productId}/delete",
+            method = RequestMethod.POST)
+    public String deleteProduct(Model model,
+                                @PathVariable("productId") long productId,
+                                @PathVariable("providerId") long providerId) {
+        ProductProvider productProvider = productProviderService.findByProviderIdAndProductId(providerId, productId);
+        productProviderService.delete(productProvider.getId());
+        return "redirect:/admin/providers/" + providerId + "/products";
     }
 }
