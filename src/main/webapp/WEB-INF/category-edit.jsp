@@ -29,9 +29,9 @@
                             <i class="fa fa-table"></i> <a href="<c:url value="/categories"/>">Категории</a>
                         </li>
                         <li class="active">
-                            <i class="fa fa-desktop"></i> <a href="<c:url value="/categories/${provider.id}"/>">Информация
+                            <i class="fa fa-desktop"></i> <a href="<c:url value="/categories/${category.id}"/>">Информация
                             о
-                            категории</a>
+                            категориях</a>
                         </li>
                         <li class="active">
                             <i class="fa fa-edit"></i> Редактирование данных
