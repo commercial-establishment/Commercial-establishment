@@ -29,7 +29,7 @@ public class ShopController {
     @Autowired
     private TypeService typeService;
 
-    @RequestMapping(value = "/shops/{id}/lock")
+    @RequestMapping(value = "/admin/shops/{id}/lock")
     public String lock(@PathVariable long id) {
         Shop shop = shopService.findById(id);
         shop.setBlocked(true);
@@ -38,13 +38,13 @@ public class ShopController {
         return "redirect:";
     }
 
-    @RequestMapping("/shops/{id}/reestablish")
+    @RequestMapping("/admin/shops/{id}/reestablish")
     public String reestablish(@PathVariable long id) {
         shopService.reestablishById(id);
         return "redirect:";
     }
 
-    @RequestMapping(value = "/shops/{id}/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/shops/{id}/edit", method = RequestMethod.POST)
     public String edit(Model model, @PathVariable long id, @Valid @ModelAttribute("shop") Shop shop, BindingResult result) {
         if (result.hasErrors()) {
             List<City> cities = cityService.findAll();
@@ -59,7 +59,7 @@ public class ShopController {
         return "redirect:";
     }
 
-    @RequestMapping(value = "/shops/create-save", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/shops/create-save", method = RequestMethod.POST)
     public String create(Model model, @Valid @ModelAttribute("shop") Shop shop, BindingResult result) {
         /*TODO join warehouse*/
         if (result.hasErrors()) {

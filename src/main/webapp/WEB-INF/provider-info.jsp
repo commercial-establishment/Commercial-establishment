@@ -22,7 +22,7 @@
                             <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>">Главная</a>
                         </li>
                         <li>
-                            <i class="fa fa-table"></i> <a href="<c:url value="/providers"/>">Список поставщиков</a>
+                            <i class="fa fa-table"></i> <a href="<c:url value="/admin/providers"/>">Список поставщиков</a>
                         </li>
                         <li class="active">
                             <i class="fa fa-desktop"></i> Информация о поставщике
@@ -37,12 +37,12 @@
                         <tbody>
                         <tr>
                             <td>
-                                <form method="GET" action="/providers/${id}/products">
+                                <form method="GET" action="/admin/providers/${id}/products">
                                     <input type="submit" class="btn btn-lg btn-default" value="Товары">
                                 </form>
                                 <%--<a href="<c:url value="/providers/${id}/products"/>" class="btn btn-lg btn-default">Товары</a>--%>
                             </td>
-                            <td><a href="<c:url value="/providers/${id}/shops"/>" class="btn btn-lg btn-default">Магазины</a></td>
+                            <td><a href="<c:url value="/admin/providers/${id}/shops"/>" class="btn btn-lg btn-default">Магазины</a></td>
                         </tr>
                         <tr>
                             <td><b>Имя пользователя:</b></td>
@@ -88,17 +88,17 @@
                         </tr>
                         <tr>
                             <td>
-                                <form method="GET" action="<c:url value="/providers/${id}/edit"/>">
+                                <form method="GET" action="<c:url value="/admin/providers/${id}/edit"/>">
                                     <input type="submit" class="btn btn-lg btn-default" value="Редактировать">
                                 </form>
                             </td>
                             <c:choose>
                                 <c:when test="${provider.blocked == false}">
-                                    <td><a href="<c:url value="/providers/${id}/lock"/>" class="btn btn-lg btn-danger">Заблокировать</a>
+                                    <td><a href="<c:url value="/admin/providers/${id}/lock"/>" class="btn btn-lg btn-danger">Заблокировать</a>
                                     </td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td><a href="<c:url value="/providers/${id}/reestablish"/>"
+                                    <td><a href="<c:url value="/admin/providers/${id}/reestablish"/>"
                                            class="btn btn-lg btn-success">Восстановить</a></td>
                                 </c:otherwise>
                             </c:choose>

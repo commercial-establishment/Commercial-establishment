@@ -23,7 +23,7 @@
                             <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>">Главная</a>
                         </li>
                         <li>
-                            <i class="fa fa-table"></i> <a href="<c:url value="/shops"/>">Список магазинов</a>
+                            <i class="fa fa-table"></i> <a href="<c:url value="/admin/shops"/>">Список магазинов</a>
                         </li>
                         <li class="active">
                             <i class="fa fa-edit"></i> Добавление магазина
@@ -33,7 +33,7 @@
             </div>
             <div class="col-lg-12">
                 <div class="table-responsive">
-                    <form:form method="post" action="/shops/create-save" modelAttribute="shop">
+                    <form:form method="post" action="/admin/shops/create-save" modelAttribute="shop">
                         <table class="table table-hover">
                             <tbody>
                             <tr>
@@ -92,7 +92,7 @@
                                     <form:button type="submit" class="btn btn-lg btn-success">Сохранить</form:button>
                                 </td>
                                 <td/>
-                                <td><a href="<c:url value="/shops/${id}"/>" class="btn btn-lg btn-danger">Отмена</a>
+                                <td><a href="<c:url value="/admin/shops/${id}"/>" class="btn btn-lg btn-danger">Отмена</a>
                                 </td>
                             </tr>
                             </tbody>

@@ -23,7 +23,7 @@
                             <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>">Главная</a>
                         </li>
                         <li>
-                            <i class="fa fa-table"></i> <a href="<c:url value="/admins"/>">Список администраторов</a>
+                            <i class="fa fa-table"></i> <a href="<c:url value="/admin/admins"/>">Список администраторов</a>
                         </li>
                         <li class="active">
                             <i class="fa fa-edit"></i> Добавление администратора
@@ -33,7 +33,7 @@
             </div>
             <div class="col-lg-12">
                 <div class="table-responsive">
-                    <form:form method="post" action="/admins/create-save" modelAttribute="admin">
+                    <form:form method="post" action="/admin/admins/create-save" modelAttribute="admin">
                         <table class="table table-hover">
                             <tbody>
                             <tr>
@@ -98,7 +98,7 @@
                                     <form:button type="submit" class="btn btn-lg btn-success">Сохранить</form:button>
                                 </td>
                                 <td/>
-                                <td><a href="<c:url value="/admins/${id}"/>" class="btn btn-lg btn-danger">Отмена</a>
+                                <td><a href="<c:url value="/admin/admins/${id}"/>" class="btn btn-lg btn-danger">Отмена</a>
                                 </td>
                             </tr>
                             </tbody>

@@ -52,19 +52,19 @@
                             <a href="<c:url value="/home"/>"><i class="fa fa-fw fa-dashboard"></i> Главная</a>
                         </li>
                         <li class="${providers}">
-                            <a href="<c:url value="/providers"/>"><i class="fa fa-fw fa-table"></i> Поставщики</a>
+                            <a href="<c:url value="/admin/providers"/>"><i class="fa fa-fw fa-table"></i> Поставщики</a>
                         </li>
                         <li class="${admins}">
-                            <a href="<c:url value="/admins"/>"><i class="fa fa-fw fa-table"></i>Администраторы</a>
+                            <a href="<c:url value="/admin/admins"/>"><i class="fa fa-fw fa-table"></i>Администраторы</a>
                         </li>
                         <li class="${shops}">
-                            <a href="<c:url value="/shops"/>"><i class="fa fa-fw fa-table"></i> Магазины</a>
+                            <a href="<c:url value="/admin/shops"/>"><i class="fa fa-fw fa-table"></i> Магазины</a>
                         </li>
                         <li class="${products}">
-                            <a href="<c:url value="/products"/>"><i class="fa fa-fw fa-table"></i>Товары</a>
+                            <a href="<c:url value="/admin/products"/>"><i class="fa fa-fw fa-table"></i>Товары</a>
                         </li>
                         <li class="${categories}">
-                            <a href="<c:url value="/categories"/>"><i class="fa fa-fw fa-wrench"></i>Категории
+                            <a href="<c:url value="/admin/categories"/>"><i class="fa fa-fw fa-wrench"></i>Категории
                                 товаров</a>
                         </li>
                     </c:when>
@@ -73,10 +73,10 @@
                             <a href="<c:url value="/home"/>"><i class="fa fa-fw fa-dashboard"></i> Главная</a>
                         </li>
                         <li class="${shops}">
-                            <a href="<c:url value="/shops"/>"><i class="fa fa-fw fa-table"></i> Магазины</a>
+                            <a href="<c:url value="/provider/shops"/>"><i class="fa fa-fw fa-table"></i> Магазины</a>
                         </li>
                         <li class="${products}">
-                            <a href="<c:url value="/products"/>"><i class="fa fa-fw fa-table"></i>Товары</a>
+                            <a href="<c:url value="/provider/products"/>"><i class="fa fa-fw fa-table"></i>Товары</a>
                         </li>
                     </c:otherwise>
                 </c:choose>

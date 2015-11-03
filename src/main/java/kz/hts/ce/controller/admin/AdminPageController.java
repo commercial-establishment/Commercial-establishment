@@ -27,7 +27,7 @@ public class AdminPageController {
     @Autowired
     private RoleService roleService;
 
-    @RequestMapping("/admins/{id}")
+    @RequestMapping("/admin/admins/{id}")
     public String information(Model model, @PathVariable long id) {
         Admin admin = adminService.findById(id);
         model.addAttribute("admin", admin);
@@ -36,7 +36,7 @@ public class AdminPageController {
 
 
 
-    @RequestMapping("/admins/{id}/edit")
+    @RequestMapping("/admin/admins/{id}/edit")
     public String edit(Model model, @PathVariable long id) {
         Admin admin = adminService.findById(id);
         List<Gender> genders = genderService.findAll();
@@ -48,7 +48,7 @@ public class AdminPageController {
         return "admin-edit";
     }
 
-    @RequestMapping("/admins/create")
+    @RequestMapping("/admin/admins/create")
     public String create(Model model) {
         Admin admin = new Admin();
         List<Gender> genders = genderService.findAll();
@@ -58,7 +58,7 @@ public class AdminPageController {
         return "admin-create";
     }
 
-    @RequestMapping(value = "/admins",method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/admins",method = RequestMethod.GET)
     public String admins(Model model) {
         List<Admin> admins = adminService.findByRoleName(ADMIN);
         model.addAttribute("admins", admins);

@@ -26,10 +26,10 @@
                             <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>">Главная</a>
                         </li>
                         <li>
-                            <i class="fa fa-table"></i> <a href="<c:url value="/products"/>">Список товаров</a>
+                            <i class="fa fa-table"></i> <a href="<c:url value="/admin/products"/>">Список товаров</a>
                         </li>
                         <li class="active">
-                            <i class="fa fa-desktop"></i> <a href="<c:url value="/products/${product.id}"/>">Информация о товарах
+                            <i class="fa fa-desktop"></i> <a href="<c:url value="/admin/products/${product.id}"/>">Информация о товарах
                             </a>
                         </li>
                         <li class="active">
@@ -40,7 +40,7 @@
             </div>
             <div class="col-lg-12">
                 <div class="table-responsive">
-                    <form:form method="post" action="/products/${id}/edit" modelAttribute="product" commandName="product">
+                    <form:form method="post" action="/admin/products/${id}/edit" modelAttribute="product" commandName="product">
                         <table class="table table-hover">
                             <tbody>
                             <tr>
@@ -79,7 +79,7 @@
                                     <form:button type="submit" class="btn btn-lg btn-success">Сохранить</form:button>
                                 </td>
                                 <td></td>
-                                <td><a href="<c:url value="/products/${id}"/>" class="btn btn-lg btn-danger">Отмена</a>
+                                <td><a href="<c:url value="/admin/products/${id}"/>" class="btn btn-lg btn-danger">Отмена</a>
                                 </td>
                             </tr>
                             </tbody>

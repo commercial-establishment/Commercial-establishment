@@ -23,7 +23,7 @@ public class ProductController {
     @Autowired
     private CategoryService categoryService;
 
-    @RequestMapping(value = "/products/{id}/lock")
+    @RequestMapping(value = "/admin/products/{id}/lock")
     public String lock(@PathVariable long id) {
         Product product = productService.findById(id);
         product.setBlocked(true);
@@ -32,13 +32,13 @@ public class ProductController {
         return "redirect:";
     }
 
-    @RequestMapping("/products/{id}/reestablish")
+    @RequestMapping("/admin/products/{id}/reestablish")
     public String reestablish(@PathVariable long id) {
         productService.reestablishById(id);
         return "redirect:";
     }
 
-    @RequestMapping(value = "/products/{id}/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/products/{id}/edit", method = RequestMethod.POST)
     public String edit(Model model, @PathVariable long id, @Valid @ModelAttribute("product") Product product, BindingResult result) {
         if (result.hasErrors()) {
             List<Category> categories = categoryService.findAll();
@@ -51,7 +51,7 @@ public class ProductController {
         return "redirect:";
     }
 
-    @RequestMapping(value = "/products/create-save", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/products/create-save", method = RequestMethod.POST)
     public String create(Model model, @Valid @ModelAttribute("product") Product product, BindingResult result) {
         if (result.hasErrors()) {
             return "product-create";

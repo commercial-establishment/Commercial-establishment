@@ -26,10 +26,10 @@
                             <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>">Главная</a>
                         </li>
                         <li>
-                            <i class="fa fa-table"></i> <a href="<c:url value="/providers"/>">Список поставщиков</a>
+                            <i class="fa fa-table"></i> <a href="<c:url value="/admin/providers"/>">Список поставщиков</a>
                         </li>
                         <li class="active">
-                            <i class="fa fa-desktop"></i> <a href="<c:url value="/providers/${provider.id}"/>">Информация
+                            <i class="fa fa-desktop"></i> <a href="<c:url value="/admin/providers/${provider.id}"/>">Информация
                             о
                             поставщике</a>
                         </li>
@@ -41,7 +41,7 @@
             </div>
             <div class="col-lg-12">
                 <div class="table-responsive">
-                    <form:form method="post" action="/providers/${id}/edit" modelAttribute="provider"
+                    <form:form method="post" action="/admin/providers/${id}/edit" modelAttribute="provider"
                                commandName="provider">
                         <table class="table table-hover">
                             <tbody>
@@ -157,7 +157,7 @@
                                         <%--<input type="submit" class="btn btn-lg btn-success" value="Сохранить">--%>
                                 </td>
                                 <td/>
-                                <td><a href="<c:url value="/providers/${id}"/>" class="btn btn-lg btn-danger">Отмена</a>
+                                <td><a href="<c:url value="/admin/providers/${id}"/>" class="btn btn-lg btn-danger">Отмена</a>
                                 </td>
                             </tr>
                             </tbody>

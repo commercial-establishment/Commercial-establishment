@@ -34,7 +34,7 @@
             <div class="col-lg-12">
                 <div class="table-responsive">
                     <div>
-                        <a href="<c:url value="/products/create"/>" class="btn btn-lg btn-default">Добавить</a>
+                        <a href="<c:url value="/admin/products/create"/>" class="btn btn-lg btn-default">Добавить</a>
                         <br/> <br/>
                     </div>
                     <table class="table table-bordered table-hover table-striped">
@@ -49,7 +49,7 @@
                         <tbody>
                             <%--@elvariable id="shop" type="kz.hts.ce.entity.Product"--%>
                         <c:forEach items="${products}" var="product">
-                            <tr onclick="document.location = '/products/' + ${product.id};">
+                            <tr onclick="document.location = '/admin/products/' + ${product.id};">
                                 <td>${product.id}</td>
                                 <td>${product.name}</td>
                                 <td>${product.category.name}</td>

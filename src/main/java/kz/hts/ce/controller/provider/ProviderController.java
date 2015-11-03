@@ -38,7 +38,7 @@ public class ProviderController {
     @Autowired
     private ShopProviderService shopProviderService;
 
-    @RequestMapping(value = "/providers/{id}/lock")
+    @RequestMapping(value = "/admin/providers/{id}/lock")
     public String lock(@PathVariable long id) {
         Provider provider = providerService.findById(id);
         provider.setEndWorkDate(new Date());
@@ -49,28 +49,28 @@ public class ProviderController {
         return "redirect:";
     }
 
-    @RequestMapping(value = "providers/{providerId}/shops/{shopId}/lock", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/providers/{providerId}/shops/{shopId}/lock", method = RequestMethod.POST)
     public String lockShop(@PathVariable("providerId") long providerId, @PathVariable("shopId") long shopId) {
         ShopProvider shopProvider = shopProviderService.findByProviderIdAndShopId(providerId, shopId);
         shopProviderService.lockById(shopProvider.getId());
         return "redirect:/providers/" + providerId + "/shops";
     }
 
-    @RequestMapping(value = "providers/{providerId}/shops/{shopId}/reestablish", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/providers/{providerId}/shops/{shopId}/reestablish", method = RequestMethod.POST)
     public String reestablishShop(@PathVariable("providerId") long providerId, @PathVariable("shopId") long shopId) {
         ShopProvider shopProvider = shopProviderService.findByProviderIdAndShopId(providerId, shopId);
         shopProviderService.reestablishById(shopProvider.getId());
         return "redirect:/providers/" + providerId + "/shops";
     }
 
-    @RequestMapping("/providers/{id}/reestablish")
+    @RequestMapping("/admin/providers/{id}/reestablish")
     public String reestablish(@PathVariable long id) {
         providerService.updateStartAndEndWorkDate(new Date(), null, id);
         providerService.reestablishById(id);
         return "redirect:";
     }
 
-    @RequestMapping(value = "/providers/{id}/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/providers/{id}/edit", method = RequestMethod.POST)
     public String edit(Model model, @PathVariable long id, @Valid @ModelAttribute("provider") Provider provider, BindingResult result) {
         Role role = roleService.findByName(PROVIDER);
         provider.setRole(role);
@@ -89,7 +89,7 @@ public class ProviderController {
         return "redirect:";
     }
 
-    @RequestMapping(value = "/providers/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/providers/create", method = RequestMethod.POST)
     public String create(@ModelAttribute("provider") Provider provider) {
         Role role = roleService.findByName("PROVIDER");
         provider.setRole(role);
@@ -99,7 +99,7 @@ public class ProviderController {
         return "redirect:";
     }
 
-    @RequestMapping(value = "/providers/{providerId}/products/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/providers/{providerId}/products/add", method = RequestMethod.POST)
     public String addProduct(@PathVariable("providerId") String providerId,
                              @RequestParam("productId") String productId,
                              @RequestParam("amount") long amount,
@@ -118,7 +118,7 @@ public class ProviderController {
     }
 
     @Transactional
-    @RequestMapping(value = "/providers/{providerId}/shops/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/providers/{providerId}/shops/add", method = RequestMethod.POST)
     public String addShop(@PathVariable("providerId") long providerId,
                           @RequestParam("shopId") long shopId) {
         ShopProvider shopProviderFromDB = shopProviderService.findByProviderIdAndShopId(providerId, shopId);

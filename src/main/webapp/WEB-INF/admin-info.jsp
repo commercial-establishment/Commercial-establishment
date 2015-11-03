@@ -22,7 +22,7 @@
                             <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>">Главная</a>
                         </li>
                         <li>
-                            <i class="fa fa-table"></i> <a href="<c:url value="/admins"/>">Список администраторов</a>
+                            <i class="fa fa-table"></i> <a href="<c:url value="/admin/admins"/>">Список администраторов</a>
                         </li>
                         <li class="active">
                             <i class="fa fa-desktop"></i> Информация об администраторе
@@ -84,7 +84,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <form method="GET" action="<c:url value="/admins/${id}/edit"/>">
+                                <form method="GET" action="<c:url value="/admin/admins/${id}/edit"/>">
                                     <input type="submit" class="btn btn-lg btn-default" value="Редактировать">
                                 </form>
                                     <%--<a href="<c:url value="/admins/${id}/edit"/>" class="btn btn-lg btn-default">Редактировать</a>--%>
@@ -92,11 +92,11 @@
 
                             <c:choose>
                                 <c:when test="${admin.blocked == false}">
-                                    <td><a href="<c:url value="/admins/${id}/lock"/>" class="btn btn-lg btn-danger">Заблокировать</a>
+                                    <td><a href="<c:url value="/admin/admins/${id}/lock"/>" class="btn btn-lg btn-danger">Заблокировать</a>
                                     </td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td><a href="<c:url value="/admins/${id}/reestablish"/>"
+                                    <td><a href="<c:url value="/admin/admins/${id}/reestablish"/>"
                                            class="btn btn-lg btn-success">Восстановить</a></td>
                                 </c:otherwise>
                             </c:choose>

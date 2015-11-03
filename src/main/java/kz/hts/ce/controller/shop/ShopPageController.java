@@ -26,14 +26,14 @@ public class ShopPageController {
     private TypeService typeService;
 
 
-    @RequestMapping("/shops/{id}")
+    @RequestMapping("/admin/shops/{id}")
     public String providerInformation(Model model, @PathVariable long id){
         Shop shop = shopService.findById(id);
         model.addAttribute("shop", shop);
         return "/shop-info";
     }
 
-    @RequestMapping("/shops/{id}/edit")
+    @RequestMapping("/admin/shops/{id}/edit")
     public String edit(Model model, @PathVariable long id){
         List<City> cities = cityService.findAll();
         List<Type> types = typeService.findAll();
@@ -45,7 +45,7 @@ public class ShopPageController {
         return "shop-edit";
     }
 
-    @RequestMapping("/shops/create")
+    @RequestMapping("/admin/shops/create")
     public String create(Model model){
         Shop shop = new Shop();
         List<City> cities = cityService.findAll();
@@ -57,7 +57,7 @@ public class ShopPageController {
         return "shop-create";
     }
 
-    @RequestMapping(value = "/shops",method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/shops",method = RequestMethod.GET)
     public String shopsPage(Model model) {
         List<Shop> shops = shopService.findAll();
         model.addAttribute("shops", shops);

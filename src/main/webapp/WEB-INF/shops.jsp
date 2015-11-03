@@ -23,7 +23,7 @@
                     </h1>
                     <ol class="breadcrumb">
                         <li>
-                            <i class="fa fa-dashboard"></i> <a href="<c:url value="/shop"/>">Главная</a>
+                            <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>">Главная</a>
                         </li>
                         <li class="active">
                             <i class="fa fa-table"></i> Список магазинов
@@ -34,7 +34,7 @@
             <div class="col-lg-12">
                 <div class="table-responsive">
                     <div>
-                        <a href="<c:url value="/shops/create"/>" class="btn btn-lg btn-default">Добавить</a>
+                        <a href="<c:url value="/admin/shops/create"/>" class="btn btn-lg btn-default">Добавить</a>
                         <br/> <br/>
                     </div>
                     <table class="table table-bordered table-hover table-striped">
@@ -51,7 +51,7 @@
                         <tbody>
                             <%--@elvariable id="shop" type="kz.hts.ce.entity.Shop"--%>
                         <c:forEach items="${shops}" var="shop">
-                            <tr onclick="document.location = '/shops/' + ${shop.id};">
+                            <tr onclick="document.location = '/admin/shops/' + ${shop.id};">
                                 <td>${shop.id}</td>
                                 <td>${shop.name}</td>
                                 <td>${shop.address}</td>

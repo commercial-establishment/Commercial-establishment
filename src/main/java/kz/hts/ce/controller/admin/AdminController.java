@@ -34,7 +34,7 @@ public class AdminController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @RequestMapping(value = "/admins/{id}/lock")
+    @RequestMapping(value = "/admin/admins/{id}/lock")
     public String lock(@PathVariable long id) {
         Admin admin = adminService.findById(id);
         admin.setEndWorkDate(new Date());
@@ -45,14 +45,14 @@ public class AdminController {
         return "redirect:";
     }
 
-    @RequestMapping("/admins/{id}/reestablish")
+    @RequestMapping("/admin/admins/{id}/reestablish")
     public String reestablish(@PathVariable long id) {
         adminService.updateStartAndEndWorkDate(new Date(), null, id);
         adminService.reestablishById(id);
         return "redirect:";
     }
 
-    @RequestMapping(value = "/admins/{id}/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/admins/{id}/edit", method = RequestMethod.POST)
     public String edit(Model model, @PathVariable long id, @Valid @ModelAttribute("admin") Admin admin, BindingResult result) {
         Role role = roleService.findByName(ADMIN);
         admin.setRole(role);
@@ -71,7 +71,7 @@ public class AdminController {
         return "redirect:";
     }
 
-    @RequestMapping(value = "/admins/create-save", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/admins/create-save", method = RequestMethod.POST)
     public String create(Model model, @Valid @ModelAttribute("admin") Admin admin, BindingResult result) {
         if (result.hasErrors()) {
             return "admin-edit";

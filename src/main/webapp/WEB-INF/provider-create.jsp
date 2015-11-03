@@ -23,7 +23,7 @@
               <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>">Главная</a>
             </li>
             <li>
-              <i class="fa fa-table"></i> <a href="<c:url value="/providers"/>">Список поставщиков</a>
+              <i class="fa fa-table"></i> <a href="<c:url value="/admin/providers"/>">Список поставщиков</a>
             </li>
             <li class="active">
               <i class="fa fa-edit"></i> Добавление поставщика
@@ -33,7 +33,7 @@
       </div>
       <div class="col-lg-12">
         <div class="table-responsive">
-          <form:form method="post" action="/providers/create" modelAttribute="provider">
+          <form:form method="post" action="/admin/providers/create" modelAttribute="provider">
             <table class="table table-hover">
               <tbody>
               <tr>
@@ -93,7 +93,7 @@
                   <form:button type="submit" class="btn btn-lg btn-success">Сохранить</form:button>
                 </td>
                 <td/>
-                <td><a href="<c:url value="/providers/${id}"/>" class="btn btn-lg btn-danger">Отмена</a>
+                <td><a href="<c:url value="/admin/providers/${id}"/>" class="btn btn-lg btn-danger">Отмена</a>
                 </td>
               </tr>
               </tbody>

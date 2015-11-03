@@ -23,14 +23,14 @@ public class ProductPageController {
 
 
 
-    @RequestMapping("/products/{id}")
+    @RequestMapping("/admin/products/{id}")
     public String information(Model model, @PathVariable long id){
         Product product = productService.findById(id);
         model.addAttribute("product", product);
         return "/product-info(2)";
     }
 
-    @RequestMapping("/products/{id}/edit")
+    @RequestMapping("/admin/products/{id}/edit")
     public String edit(Model model, @PathVariable long id){
         List<Category> categories = categoryService.findAll();
         Product product = productService.findById(id);
@@ -39,7 +39,7 @@ public class ProductPageController {
         return "product-edit";
     }
 
-    @RequestMapping("/products/create")
+    @RequestMapping("/admin/products/create")
     public String create(Model model){
         Product product = new Product();
         List<Category> categories = categoryService.findAll();
@@ -48,7 +48,7 @@ public class ProductPageController {
         return "product-create";
     }
 
-    @RequestMapping(value = "/products",method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/products",method = RequestMethod.GET)
     public String shopsPage(Model model) {
         List<Product> products = productService.findAll();
         model.addAttribute("products", products);

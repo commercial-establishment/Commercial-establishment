@@ -30,7 +30,7 @@
             <div class="col-lg-12">
                 <div class="table-responsive">
                     <div>
-                        <a href="<c:url value="/admins/create"/>" class="btn btn-lg btn-default">Добавить
+                        <a href="<c:url value="/admin/admins/create"/>" class="btn btn-lg btn-default">Добавить
                             администратора</a>
                         <br/> <br/>
                     </div>
@@ -47,7 +47,7 @@
                         </thead>
                         <tbody>
                         <c:forEach items="${admins}" var="admin">
-                            <tr onclick="document.location = '/admins/' + ${admin.id};">
+                            <tr onclick="document.location = '/admin/admins/' + ${admin.id};">
                                 <td>${admin.id}</td>
                                 <td>${admin.username}</td>
                                 <td>${admin.name}</td>

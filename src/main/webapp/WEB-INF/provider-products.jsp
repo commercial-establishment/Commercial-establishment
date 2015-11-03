@@ -22,10 +22,11 @@
                             <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>">Главная</a>
                         </li>
                         <li>
-                            <i class="fa fa-table"></i> <a href="<c:url value="/providers"/>">Список поставщиков</a>
+                            <i class="fa fa-table"></i> <a href="<c:url value="/admin/providers"/>">Список
+                            поставщиков</a>
                         </li>
                         <li>
-                            <i class="fa fa-desktop"></i> <a href="<c:url value="/providers/${id}"/>">Информация о
+                            <i class="fa fa-desktop"></i> <a href="<c:url value="/admin/providers/${id}"/>">Информация о
                             поставщике</a>
                         </li>
                         <li class="active">
@@ -37,7 +38,8 @@
             <div class="col-lg-12">
                 <div class="table-responsive">
                     <div>
-                        <a href="<c:url value="/providers/${providerId}/products/all"/>" class="btn btn-lg btn-default">Добавить товар</a>
+                        <a href="<c:url value="/admin/providers/${providerId}/products/all"/>"
+                           class="btn btn-lg btn-default">Добавить товар</a>
                         <br/> <br/>
                     </div>
                     <table class="table table-bordered table-hover table-striped">
@@ -48,17 +50,35 @@
                             <th>Категория</th>
                             <th>Цена(в тенге)</th>
                             <th>Количество</th>
+                            <th>Редактировать</th>
+                            <th>Удалить</th>
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach items="${providerProducts}" var="providerProduct">
-                            <tr onclick="document.location = '/providers/' + ${providerProduct.provider.id}
+                            <tr onclick="document.location = '/admin/providers/' + ${providerProduct.provider.id}
                                     + '/products/' + ${providerProduct.id};">
                                 <td>${providerProduct.id}</td>
                                 <td>${providerProduct.product.name}</td>
                                 <td>${providerProduct.product.category.name}</td>
                                 <td>${providerProduct.price}</td>
                                 <td>${providerProduct.amount}</td>
+                                <td>
+                                    <form method="GET"
+                                          action="<c:url value="/admin/providers/${providerProduct.provider.id}/products/${providerProduct.product.id}/edit"/>">
+                                        <button type="submit" name="shopId" value="${providerProduct.product.id}"
+                                                class="btn btn-lg btn-default">Редактировать
+                                        </button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form method="POST"
+                                          action="<c:url value="/admin/providers/${providerProduct.provider.id}/products/${providerProduct.product.id}/delete"/>">
+                                        <button type="submit" name="shopId" value="${providerProduct.product.id}"
+                                                class="btn btn-lg btn-danger">Удалить
+                                        </button>
+                                    </form>
+                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>

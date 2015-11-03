@@ -22,14 +22,14 @@
                             <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>">Главная</a>
                         </li>
                         <li>
-                            <i class="fa fa-table"></i> <a href="<c:url value="/providers"/>">Список поставщиков</a>
+                            <i class="fa fa-table"></i> <a href="<c:url value="/admin/providers"/>">Список поставщиков</a>
                         </li>
                         <li>
-                            <i class="fa fa-desktop"></i> <a href="<c:url value="/providers/${id}"/>">Информация о
+                            <i class="fa fa-desktop"></i> <a href="<c:url value="/admin/providers/${id}"/>">Информация о
                             поставщике</a>
                         </li>
                         <li>
-                            <i class="fa fa-table"></i> <a href="<c:url value="/providers/${id}/shops"/>">Список
+                            <i class="fa fa-table"></i> <a href="<c:url value="/admin/providers/${id}/shops"/>">Список
                             магазинов</a>
                         </li>
                         <li class="active">
@@ -53,7 +53,7 @@
                         </thead>
                         <tbody>
                         <c:forEach items="${shops}" var="shop">
-                            <form method="post" action="/providers/${providerId}/shops/add">
+                            <form method="post" action="/admin/providers/${providerId}/shops/add">
                                 <tr>
                                     <td>${shop.id}</td>
                                     <td>${shop.name}</td>

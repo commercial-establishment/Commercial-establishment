@@ -22,7 +22,7 @@
                             <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>">Главная</a>
                         </li>
                         <li>
-                            <i class="fa fa-table"></i> <a href="<c:url value="/shops"/>">Список магазинов</a>
+                            <i class="fa fa-table"></i> <a href="<c:url value="/admin/shops"/>">Список магазинов</a>
                         </li>
                         <li class="active">
                             <i class="fa fa-desktop"></i> Информация о магазине
@@ -56,7 +56,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <form method="GET" action="<c:url value="/shops/${id}/edit"/>">
+                                <form method="GET" action="<c:url value="/admin/shops/${id}/edit"/>">
                                     <input type="submit" class="btn btn-lg btn-default" value="Редактировать">
                                 </form>
                                     <%--<a href="<c:url value="/admins/${id}/edit"/>" class="btn btn-lg btn-default">Редактировать</a>--%>
@@ -64,11 +64,11 @@
 
                             <c:choose>
                                 <c:when test="${shop.blocked == false}">
-                                    <td><a href="<c:url value="/shops/${id}/lock"/>" class="btn btn-lg btn-danger">Заблокировать</a>
+                                    <td><a href="<c:url value="/admin/shops/${id}/lock"/>" class="btn btn-lg btn-danger">Заблокировать</a>
                                     </td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td><a href="<c:url value="/shops/${id}/reestablish"/>"
+                                    <td><a href="<c:url value="/admin/shops/${id}/reestablish"/>"
                                            class="btn btn-lg btn-success">Восстановить</a></td>
                                 </c:otherwise>
                             </c:choose>
