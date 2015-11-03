@@ -35,6 +35,13 @@ public class ProviderPageController {
     @Autowired
     private ShopService shopService;
 
+    @RequestMapping(value = "/admin/providers", method = RequestMethod.GET)
+    public String providers(Model model) {
+        List<Provider> providers = providerService.findByRoleName(PROVIDER);
+        model.addAttribute("providers", providers);
+        return "providers";
+    }
+
     @RequestMapping("/admin/providers/{id}")
     public String providerInformation(Model model, @PathVariable long id) {
         Provider provider = providerService.findById(id);
@@ -63,13 +70,6 @@ public class ProviderPageController {
         return "provider-create";
     }
 
-    @RequestMapping(value = "/admin/providers", method = RequestMethod.GET)
-    public String providers(Model model) {
-        List<Provider> providers = providerService.findByRoleName(PROVIDER);
-        model.addAttribute("providers", providers);
-        return "providers";
-    }
-
     @RequestMapping(value = "/admin/providers/{id}/products", method = RequestMethod.GET)
     public String products(Model model, @PathVariable long id) {
         List<ProductProvider> providerProducts = productProviderService.findByProviderId(id);
@@ -84,6 +84,22 @@ public class ProviderPageController {
         model.addAttribute("providerShops", providerShops);
         model.addAttribute("providerId", id);
         return "provider-shops";
+    }
+
+    @RequestMapping(value = "/admin/providers/{providerId}/products/all", method = RequestMethod.GET)
+    public String providerProductAdd(Model model, @PathVariable("providerId") String providerId) {
+        List<Product> products = productService.findAll();
+        model.addAttribute("products", products);
+        model.addAttribute("providerId", providerId);
+        return "provider-product-add";
+    }
+
+    @RequestMapping(value = "/admin/providers/{providerId}/shops/all", method = RequestMethod.GET)
+    public String providerShopAdd(Model model, @PathVariable("providerId") String providerId) {
+        List<Shop> shops = shopService.findAll();
+        model.addAttribute("shops", shops);
+        model.addAttribute("providerId", providerId);
+        return "provider-shop-add";
     }
 
     @RequestMapping(value = "/admin/providers/{providerId}/products/{productProviderId}", method = RequestMethod.GET)
@@ -101,22 +117,9 @@ public class ProviderPageController {
 
     @RequestMapping(value = "/admin/providers/{providerId}/products/{productProviderId}/edit", method = RequestMethod.GET)
     public String providerProductEdit(Model model, @PathVariable("productProviderId") long productProviderId) {
-        return "provider-product-info";
-    }
+        ProductProvider productProvider = productProviderService.findById(productProviderId);
 
-    @RequestMapping(value = "/admin/providers/{providerId}/products/all", method = RequestMethod.GET)
-    public String providerProductAdd(Model model, @PathVariable("providerId") String providerId) {
-        List<Product> products = productService.findAll();
-        model.addAttribute("products", products);
-        model.addAttribute("providerId", providerId);
-        return "provider-product-add";
-    }
-
-    @RequestMapping(value = "/admin/providers/{providerId}/shops/all", method = RequestMethod.GET)
-    public String providerShopAdd(Model model, @PathVariable("providerId") String providerId) {
-        List<Shop> shops = shopService.findAll();
-        model.addAttribute("shops", shops);
-        model.addAttribute("providerId", providerId);
-        return "provider-shop-add";
+        model.addAttribute("productProvider", productProvider);
+        return "provider-product-edit";
     }
 }

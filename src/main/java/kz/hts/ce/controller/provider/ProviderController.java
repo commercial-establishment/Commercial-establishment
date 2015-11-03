@@ -16,8 +16,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import static kz.hts.ce.util.Helper.calculateCost;
-
 @Controller
 public class ProviderController {
 
@@ -51,43 +49,10 @@ public class ProviderController {
         return "redirect:";
     }
 
-    @RequestMapping(value = "/admin/providers/{providerId}/shops/{shopId}/lock", method = RequestMethod.POST)
-    public String lockShop(@PathVariable("providerId") long providerId, @PathVariable("shopId") long shopId) {
-        ShopProvider shopProvider = shopProviderService.findByProviderIdAndShopId(providerId, shopId);
-        shopProviderService.lockById(shopProvider.getId());
-        return "redirect:/providers/" + providerId + "/shops";
-    }
-
-    @RequestMapping(value = "/admin/providers/{providerId}/shops/{shopId}/reestablish", method = RequestMethod.POST)
-    public String reestablishShop(@PathVariable("providerId") long providerId, @PathVariable("shopId") long shopId) {
-        ShopProvider shopProvider = shopProviderService.findByProviderIdAndShopId(providerId, shopId);
-        shopProviderService.reestablishById(shopProvider.getId());
-        return "redirect:/providers/" + providerId + "/shops";
-    }
-
     @RequestMapping("/admin/providers/{id}/reestablish")
     public String reestablish(@PathVariable long id) {
         providerService.updateStartAndEndWorkDate(new Date(), null, id);
         providerService.reestablishById(id);
-        return "redirect:";
-    }
-
-    @RequestMapping(value = "/admin/providers/{id}/edit", method = RequestMethod.POST)
-    public String edit(Model model, @PathVariable long id, @Valid @ModelAttribute("provider") Provider provider, BindingResult result) {
-        Role role = roleService.findByName(PROVIDER);
-        provider.setRole(role);
-
-        if (result.hasErrors()) {
-            List<City> cities = cityService.findAll();
-            List<Role> roles = roleService.findAll();
-
-            model.addAttribute("cities", cities);
-            model.addAttribute("roles", roles);
-            return "provider-edit";
-        }
-
-        provider.setId(id);
-        providerService.save(provider);
         return "redirect:";
     }
 
@@ -101,21 +66,47 @@ public class ProviderController {
         return "redirect:";
     }
 
+    @RequestMapping(value = "/admin/providers/{id}/edit", method = RequestMethod.POST)
+    public String edit(Model model, @PathVariable long id, @Valid @ModelAttribute("provider") Provider provider, BindingResult result) {
+        Role role = roleService.findByName(PROVIDER);
+        provider.setRole(role);
+        if (result.hasErrors()) {
+            List<City> cities = cityService.findAll();
+            List<Role> roles = roleService.findAll();
+
+            model.addAttribute("cities", cities);
+            model.addAttribute("roles", roles);
+            return "provider-edit";
+        }
+        provider.setId(id);
+        providerService.save(provider);
+        return "redirect:";
+    }
+
     @RequestMapping(value = "/admin/providers/{providerId}/products/add", method = RequestMethod.POST)
-    public String addProduct(@PathVariable("providerId") String providerId,
-                             @RequestParam("productId") String productId,
+    public String addProduct(@PathVariable("providerId") long providerId,
+                             @RequestParam("productId") long productId,
                              @RequestParam("amount") long amount,
                              @RequestParam("price") BigDecimal price) {
-        Product product = productService.findById(Long.valueOf(productId));
-        Provider provider = providerService.findById(Long.valueOf(providerId));
+        Product product = productService.findById(productId);
+        Provider provider = providerService.findById(providerId);
 
-        ProductProvider productProvider = new ProductProvider();
-        productProvider.setProvider(provider);
-        productProvider.setProduct(product);
-        productProvider.setPrice(price);
-        productProvider.setAmount(amount);
-        productProvider.setBlocked(false);
-        productProviderService.save(productProvider);
+        ProductProvider productProviderFromDB = productProviderService.
+                findByProviderIdAndProductId(providerId, productId);
+
+        if (productProviderFromDB == null) {
+            ProductProvider productProvider = new ProductProvider();
+            productProvider.setProvider(provider);
+            productProvider.setProduct(product);
+            productProvider.setPrice(price);
+            productProvider.setAmount(amount);
+            productProvider.setBlocked(false);
+            productProviderService.save(productProvider);
+        } else {
+            productProviderFromDB.setPrice(price);
+            productProviderFromDB.setAmount(amount);
+            productProviderService.save(productProviderFromDB);
+        }
         return "redirect:";
     }
 
@@ -138,11 +129,24 @@ public class ProviderController {
 
     @RequestMapping(value = "/admin/providers/{providerId}/products/{productId}/delete",
             method = RequestMethod.POST)
-    public String deleteProduct(Model model,
-                                @PathVariable("productId") long productId,
+    public String deleteProduct(@PathVariable("productId") long productId,
                                 @PathVariable("providerId") long providerId) {
         ProductProvider productProvider = productProviderService.findByProviderIdAndProductId(providerId, productId);
         productProviderService.delete(productProvider.getId());
         return "redirect:/admin/providers/" + providerId + "/products";
+    }
+
+    @RequestMapping(value = "/admin/providers/{providerId}/shops/{shopId}/lock", method = RequestMethod.POST)
+    public String lockShop(@PathVariable("providerId") long providerId, @PathVariable("shopId") long shopId) {
+        ShopProvider shopProvider = shopProviderService.findByProviderIdAndShopId(providerId, shopId);
+        shopProviderService.lockById(shopProvider.getId());
+        return "redirect:/admin/providers/" + providerId + "/shops";
+    }
+
+    @RequestMapping(value = "/admin/providers/{providerId}/shops/{shopId}/reestablish", method = RequestMethod.POST)
+    public String reestablishShop(@PathVariable("providerId") long providerId, @PathVariable("shopId") long shopId) {
+        ShopProvider shopProvider = shopProviderService.findByProviderIdAndShopId(providerId, shopId);
+        shopProviderService.reestablishById(shopProvider.getId());
+        return "redirect:/admin/providers/" + providerId + "/shops";
     }
 }

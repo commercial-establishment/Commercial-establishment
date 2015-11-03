@@ -42,42 +42,50 @@
                            class="btn btn-lg btn-default">Добавить товар</a>
                         <br/> <br/>
                     </div>
-                    <table class="table table-bordered table-hover table-striped">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Название</th>
-                            <th>Категория</th>
-                            <th>Цена(в тенге)</th>
-                            <th>Количество</th>
-                            <th>Редактировать</th>
-                            <th>Удалить</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach items="${providerProducts}" var="providerProduct">
-                            <tr>
-                                <td>${providerProduct.id}</td>
-                                <td>${providerProduct.product.name}</td>
-                                <td>${providerProduct.product.category.name}</td>
-                                <td>${providerProduct.price}</td>
-                                <td>${providerProduct.amount}</td>
-                                <td>
-                                    <form method="GET"
-                                          action="<c:url value="/admin/providers/${providerProduct.provider.id}/products/${providerProduct.product.id}/edit"/>">
-                                        <button type="submit" class="btn btn-lg btn-default">Редактировать</button>
-                                    </form>
-                                </td>
-                                <td>
-                                    <form method="POST"
-                                          action="<c:url value="/admin/providers/${providerProduct.provider.id}/products/${providerProduct.product.id}/delete"/>">
-                                        <button type="submit" class="btn btn-lg btn-danger">Удалить</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
+                    <c:choose>
+                        <c:when test="${providerProducts.size() == 0}">
+                            <h1 align="center">Список товаров пуст!</h1>
+                        </c:when>
+                        <c:otherwise>
+                            <table class="table table-bordered table-hover table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Название</th>
+                                    <th>Категория</th>
+                                    <th>Цена(в тенге)</th>
+                                    <th>Количество</th>
+                                    <th>Редактировать</th>
+                                    <th>Удалить</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${providerProducts}" var="providerProduct">
+                                    <tr>
+                                        <td>${providerProduct.id}</td>
+                                        <td>${providerProduct.product.name}</td>
+                                        <td>${providerProduct.product.category.name}</td>
+                                        <td>${providerProduct.price}</td>
+                                        <td>${providerProduct.amount}</td>
+                                        <td>
+                                            <form method="GET"
+                                                  action="<c:url value="/admin/providers/${providerProduct.provider.id}/products/${providerProduct.id}/edit"/>">
+                                                <button type="submit" class="btn btn-lg btn-default">Редактировать
+                                                </button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form method="POST"
+                                                  action="<c:url value="/admin/providers/${providerProduct.provider.id}/products/${providerProduct.product.id}/delete"/>">
+                                                <button type="submit" class="btn btn-lg btn-danger">Удалить</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </div>
