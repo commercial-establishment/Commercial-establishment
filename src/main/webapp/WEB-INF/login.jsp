@@ -1,9 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <t:head title="Авторизация пользователя"/>
 
@@ -150,22 +151,20 @@
                 </h1>
             </div>
         </div>
-        <!-- /.row -->
 
         <div class="center">
             <div class="col-lg-10">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">
-                            <%--<i class="fa fa-money fa-fw"></i> --%>
                             <b>Войти</b></h3>
                     </div>
                     <div class="panel-body">
                         <c:url var="loginUrl" value="/login/form"/>
                         <form action="${loginUrl}" method="post" class="form-signin">
                             <c:if test="${error != null}">
-                                <div class="alert alert-danger">
-                                    <p>${error}</p>
+                                <div align="center" class="alert alert-danger">
+                                    <p><spring:message code="${error}"/></p>
                                 </div>
                             </c:if>
                             <div class="jumbotron" style="background-color: white">
