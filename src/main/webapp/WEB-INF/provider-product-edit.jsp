@@ -43,7 +43,8 @@
             </div>
             <div class="col-lg-12">
                 <div class="table-responsive">
-                    <form:form method="post" action="/admin/providers/${productProvider.provider.id}/products/add"
+                    <form:form method="post"
+                               action="/admin/providers/${productProvider.provider.id}/products/${productProvider.id}/edit"
                                modelAttribute="productProvider" commandName="productProvider">
                         <table class="table table-bordered table-hover table-striped">
                             <thead>

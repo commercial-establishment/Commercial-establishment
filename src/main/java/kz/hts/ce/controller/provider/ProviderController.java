@@ -149,4 +149,17 @@ public class ProviderController {
         shopProviderService.reestablishById(shopProvider.getId());
         return "redirect:/admin/providers/" + providerId + "/shops";
     }
+
+
+    @RequestMapping(value = "/admin/providers/{providerId}/products/{productProviderId}/edit", method = RequestMethod.POST)
+    public String providerProductEdit(@PathVariable("productProviderId") long productProviderId,
+                                      @PathVariable("providerId") long providerId,
+                                      @RequestParam("amount") int amount,
+                                      @RequestParam("price") BigDecimal price) {
+        ProductProvider productProvider = productProviderService.findById(productProviderId);
+        productProvider.setAmount(amount);
+        productProvider.setPrice(price);
+        productProviderService.save(productProvider);
+        return "redirect:/admin/providers/" + providerId + "/products";
+    }
 }
