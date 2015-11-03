@@ -5,6 +5,8 @@ import kz.hts.ce.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductService extends BaseService<Product, ProductRepository>{
 
@@ -13,4 +15,15 @@ public class ProductService extends BaseService<Product, ProductRepository>{
         super(repository);
     }
 
+    public List<Product> findAll() {
+        return repository.findAll();
+    }
+
+    public void lockById(long id) {
+        repository.lockById(id);
+    }
+
+    public void reestablishById(long id) {
+        repository.reestablishById(id);
+    }
 }

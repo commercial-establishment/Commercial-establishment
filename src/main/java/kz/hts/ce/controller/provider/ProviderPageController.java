@@ -29,11 +29,7 @@ public class ProviderPageController {
     @Autowired
     private ProductProviderService productProviderService;
     @Autowired
-    private ShopProviderService shopProviderService;
-    @Autowired
     private ProductService productService;
-    @Autowired
-    private ShopService shopService;
 
     @RequestMapping("/providers/{id}")
     public String providerInformation(Model model, @PathVariable long id) {
@@ -56,10 +52,7 @@ public class ProviderPageController {
     @RequestMapping("/providers/create")
     public String create(Model model) {
         Provider provider = new Provider();
-        List<City> cities = cityService.findAll();
-
         model.addAttribute("provider", provider);
-        model.addAttribute("cities", cities);
         return "provider-create";
     }
 
@@ -76,14 +69,6 @@ public class ProviderPageController {
         model.addAttribute("providerProducts", providerProducts);
         model.addAttribute("providerId", id);
         return "provider-products";
-    }
-
-    @RequestMapping(value = "/providers/{id}/shops", method = RequestMethod.GET)
-    public String shops(Model model, @PathVariable long id) {
-        List<ShopProvider> providerShops = shopProviderService.findByProviderId(id);
-        model.addAttribute("providerShops", providerShops);
-        model.addAttribute("providerId", id);
-        return "provider-shops";
     }
 
     @RequestMapping(value = "/providers/{providerId}/products/{productProviderId}", method = RequestMethod.GET)
@@ -105,13 +90,5 @@ public class ProviderPageController {
         model.addAttribute("products", products);
         model.addAttribute("providerId", providerId);
         return "provider-product-add";
-    }
-
-    @RequestMapping(value = "/providers/{providerId}/shops/all", method = RequestMethod.GET)
-    public String providerShopAdd(Model model, @PathVariable("providerId") String providerId) {
-        List<Shop> shops = shopService.findAll();
-        model.addAttribute("shops", shops);
-        model.addAttribute("providerId", providerId);
-        return "provider-shop-add";
     }
 }
