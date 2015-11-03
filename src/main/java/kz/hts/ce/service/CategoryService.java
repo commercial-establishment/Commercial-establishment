@@ -22,4 +22,6 @@ public class CategoryService extends BaseService<Category, CategoryRepository>{
     public Category findByName(String categoryName) {
         return repository.findByName(categoryName);
     }
+
+    public void delete(long id){ repository.delete(id); }
 }

@@ -11,3 +11,7 @@ tr.hover {
 .error {
     color: red; font-weight: bold;
 }
+table {
+    table-layout: fixed;
+    word-wrap: break-word;
+}

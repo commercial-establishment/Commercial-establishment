@@ -24,7 +24,7 @@ public class ProductController {
     private CategoryService categoryService;
 
     @RequestMapping(value = "/products/{id}/lock")
-    public String lock(@PathVariable long id) {
+         public String lock(@PathVariable long id) {
         Product product = productService.findById(id);
         product.setBlocked(true);
         productService.save(product);
