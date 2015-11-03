@@ -49,8 +49,6 @@
                                 </form>
                                     <%--<a href="<c:url value="/admins/${id}/edit"/>" class="btn btn-lg btn-default">Редактировать</a>--%>
                             </td>
-                            <td><a href="<c:url value="/categories/${id}/delete"/>" class="btn btn-lg btn-danger">Удалить</a>
-                            </td>
                         </tr>
                         </tbody>
                     </table>
