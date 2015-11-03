@@ -37,8 +37,6 @@ public class ProviderController {
     private ShopService shopService;
     @Autowired
     private ShopProviderService shopProviderService;
-    @Autowired
-    private ProviderPageController providerPageController;
 
     @RequestMapping(value = "/providers/{id}/lock")
     public String lock(@PathVariable long id) {

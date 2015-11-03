@@ -6,7 +6,7 @@
 
 <t:head title="Информация о магазине"/>
 
-<t:container admins="active">
+<t:container shops="active">
 
     <div id="page-wrapper">
 

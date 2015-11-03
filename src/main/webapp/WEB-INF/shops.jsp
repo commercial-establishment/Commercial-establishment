@@ -9,7 +9,7 @@
     <link href="<c:url value="/resources/css/style.css"/>" rel="stylesheet" type="text/css">
 </t:head>
 
-<t:container providers="active">
+<t:container shops="active">
 
     <div id="page-wrapper">
 
