@@ -46,6 +46,9 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         if (isAdmin(roles)) {
             url = "/home";
         }
+        else if (isProvider(roles)) {
+            url = "/home";
+        }
         else {
             url = "/403";
         }
@@ -66,5 +69,8 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         return false;
     }
 
-
+    private boolean isProvider(List<String> roles) {
+        if (roles.contains("ROLE_PROVIDER")) return true;
+        return false;
+    }
 }

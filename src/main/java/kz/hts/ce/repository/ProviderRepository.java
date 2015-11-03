@@ -41,4 +41,6 @@ public interface ProviderRepository extends JpaRepository<Provider, Long> {
     @Modifying
     @Query("UPDATE Provider a set a.endWorkDate = ?1 where a.id = ?2")
     void updateEndWorkDate(Date endWorkDate, long id);
+
+    Provider findByUsernameAndBlocked(String username, boolean blocked);
 }

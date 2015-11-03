@@ -20,6 +20,10 @@ public class ProviderService extends BaseService<Provider, ProviderRepository> {
         return repository.findByUsername(username);
     }
 
+    public Provider findByUsernameAndBlocked(String username, boolean blocked) {
+        return repository.findByUsernameAndBlocked(username, blocked);
+    }
+
     public void updatePasswordById(String password, long id) {
         repository.updatePasswordById(password, id);
     }
