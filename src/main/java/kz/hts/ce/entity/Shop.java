@@ -20,10 +20,6 @@ public class Shop extends BaseEntity {
     @JoinColumn(name = "city_id", nullable = false)
     private City city;
 
-    @OneToOne
-    @JoinColumn(name = "warehouse_id", nullable = false)
-    private Warehouse warehouse;
-
     @Column(name = "is_blocked", nullable = false)
     private boolean blocked;
 
@@ -75,11 +71,4 @@ public class Shop extends BaseEntity {
         this.city = city;
     }
 
-    public Warehouse getWarehouse() {
-        return warehouse;
-    }
-
-    public void setWarehouse(Warehouse warehouse) {
-        this.warehouse = warehouse;
-    }
 }
