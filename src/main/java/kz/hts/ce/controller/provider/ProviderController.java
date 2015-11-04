@@ -162,4 +162,6 @@ public class ProviderController {
         productProviderService.save(productProvider);
         return "redirect:/admin/providers/" + providerId + "/products";
     }
+
+    /*For provider*/
 }

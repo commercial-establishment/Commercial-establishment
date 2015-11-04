@@ -72,16 +72,13 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/admin/admins/create-save", method = RequestMethod.POST)
-    public String create(Model model, @Valid @ModelAttribute("admin") Admin admin, BindingResult result) {
+    public String create(@Valid @ModelAttribute("admin") Admin admin, BindingResult result) {
         if (result.hasErrors()) {
-            return "admin-edit";
+            return "admin-edit";/*TODO*/
         }
         Role role = roleService.findByName("ADMIN");
-
         admin.setRole(role);
-
         admin.setPassword(passwordEncoder.encode(admin.getPassword()));
-
         admin.setStartWorkDate(new Date());
         adminService.save(admin);
         return "redirect:";

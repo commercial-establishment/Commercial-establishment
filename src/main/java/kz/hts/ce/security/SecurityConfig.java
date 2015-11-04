@@ -71,6 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login/form", "/recovery").anonymous()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/", "/home", "/home/**").hasAnyRole("ADMIN", "PROVIDER")
+                .antMatchers("/provider/**").hasRole("PROVIDER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login/form").successHandler(successHandler)
