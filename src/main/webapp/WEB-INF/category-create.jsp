@@ -23,7 +23,7 @@
                             <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>">Главная</a>
                         </li>
                         <li>
-                            <i class="fa fa-table"></i> <a href="<c:url value="/categories"/>">Категории</a>
+                            <i class="fa fa-table"></i> <a href="<c:url value="/admin/categories"/>">Категории</a>
                         </li>
                         <li class="active">
                             <i class="fa fa-edit"></i> Добавление категории
@@ -33,19 +33,18 @@
             </div>
             <div class="col-lg-12">
                 <div class="table-responsive">
-                    <form:form method="post" action="/categories/create-save" modelAttribute="category">
-                        <table class="table table-hover">
+                    <form:form method="post" action="/admin/categories/create-save" modelAttribute="category">
+                        <table class="table table-hover fixed-table">
                             <tbody>
                             <tr>
-                                <td class = "td_category"><form:label path="name">Название категории:</form:label></td>
-                                <td class = "td_category"><form:input cssClass="form-control" path="name"/></td>
+                                <td style="width: 250px;"><form:label path="name">Название категории:</form:label></td>
+                                <td style="width: 250px;"><form:input cssClass="form-control" path="name"/></td>
                             </tr>
                             <tr>
-                                <td>
+                                <td style="width: 250px;">
                                     <form:button type="submit" class="btn btn-lg btn-success">Сохранить</form:button>
                                 </td>
-                                <td/>
-                                <td><a href="<c:url value="/categories/${id}"/>" class="btn btn-lg btn-danger">Отмена</a>
+                                <td style="width: 250px;"><a href="<c:url value="/admin/categories/${id}"/>" class="btn btn-lg btn-danger">Отмена</a>
                                 </td>
                             </tr>
                             </tbody>

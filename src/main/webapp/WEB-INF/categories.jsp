@@ -19,14 +19,14 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        Список товаров
+                        Список категории
                     </h1>
                     <ol class="breadcrumb">
                         <li>
                             <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>">Главная</a>
                         </li>
                         <li class="active">
-                            <i class="fa fa-table"></i> <a href="<c:url value="/categories"/>">Категории</a>
+                            <i class="fa fa-table"></i> <a href="<c:url value="/admin/categories"/>">Категории</a>
                         </li>
                     </ol>
                 </div>
@@ -34,22 +34,22 @@
             <div class="col-lg-12">
                 <div class="table-responsive">
                     <div>
-                        <a href="<c:url value="/categories/create"/>" class="btn btn-lg btn-default">Добавить</a>
+                        <a href="<c:url value="/admin/categories/create"/>" class="btn btn-lg btn-default">Добавить</a>
                         <br/> <br/>
                     </div>
-                    <table class="table table-bordered table-hover table-striped">
+                    <table class="table table-bordered table-hover table-striped fixed-table">
                         <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Категория</th>
+                            <th class ="td_id">ID</th>
+                            <th class ="td_category" style="text-align: center;">Категория</th>
                         </tr>
                         </thead>
                         <tbody>
                             <%--@elvariable id="shop" type="kz.hts.ce.entity.Category"--%>
                         <c:forEach items="${categories}" var="category">
-                            <tr onclick="document.location = '/categories/' + ${category.id};">
-                                <td class = "td_id">${category.id}</td>
-                                <td class = "td_category">${category.name}</td>
+                            <tr onclick="document.location = '/admin/categories/' + ${category.id};">
+                                <td class ="td_id">${category.id}</td>
+                                <td class ="td_category">${category.name}</td>
                             </tr>
                         </c:forEach>
                         </tbody>

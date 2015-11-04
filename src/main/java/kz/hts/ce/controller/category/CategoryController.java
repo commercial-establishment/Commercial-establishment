@@ -19,18 +19,17 @@ public class CategoryController {
     private CategoryService categoryService;
 
 
-    @RequestMapping(value = "/categories/{id}/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/categories/{id}/edit", method = RequestMethod.POST)
     public String edit(Model model, @PathVariable long id, @Valid @ModelAttribute("category") Category category, BindingResult result) {
         if (result.hasErrors()) {
             return "category-edit";
         }
-
         category.setId(id);
         categoryService.save(category);
         return "redirect:";
     }
 
-    @RequestMapping(value = "/categories/create-save", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/categories/create-save", method = RequestMethod.POST)
     public String create(Model model, @Valid @ModelAttribute("product") Category category, BindingResult result) {
         if (result.hasErrors()) {
             return "category-create";
