@@ -45,6 +45,7 @@ public class Provider extends BaseEntity {
     private Role role;
 
     @Size(max = 30)
+    @NotEmpty
     @Column(name = "company_name", nullable = false)
     private String companyName;
 
@@ -61,9 +62,11 @@ public class Provider extends BaseEntity {
 
     @Size(max = 20)
     @Column(nullable = true)
+    @Pattern(regexp = "^[\\d]{0,20}$")
     private String iin;
 
     @Size(max = 20)
+    @Pattern(regexp = "^[\\d]{0,20}$")
     @Column(nullable = true)
     private String bin;
 

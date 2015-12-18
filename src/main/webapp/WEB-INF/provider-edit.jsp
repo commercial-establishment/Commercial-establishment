@@ -51,6 +51,9 @@
                                 <form:hidden path="password"/>
                                 <c:set var="usernameErrors"><form:errors path="username" cssClass="error"/> </c:set>
                                 <c:choose>
+                                    <c:when test="${not empty loginIsOccupied}">
+                                        <td class="error"> ${loginIsOccupied} </td>
+                                    </c:when>
                                     <c:when test="${not empty usernameErrors}">
                                         <td> ${usernameErrors} </td>
                                     </c:when>
@@ -122,6 +125,34 @@
                                     </c:when>
                                     <c:otherwise>
                                         <td>Имя пользователя должно состоять из ...</td>
+                                    </c:otherwise>
+                                </c:choose>
+                            </tr>
+                            <tr>
+                                <td><form:label path="iin">ИИН:</form:label></td>
+                                <td><form:input cssClass="form-control" path="iin"/></td>
+                                <c:set var="iinErrors"><form:errors path="iin" cssClass="error"/>
+                                </c:set>
+                                <c:choose>
+                                    <c:when test="${not empty iinErrors}">
+                                        <td> ${iinErrors} </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>- Только цифры. Максимальное количество - 20.</td>
+                                    </c:otherwise>
+                                </c:choose>
+                            </tr>
+                            <tr>
+                                <td><form:label path="bin">БИН:</form:label></td>
+                                <td><form:input cssClass="form-control" path="bin"/></td>
+                                <c:set var="binErrors"><form:errors path="bin" cssClass="error"/>
+                                </c:set>
+                                <c:choose>
+                                    <c:when test="${not empty binErrors}">
+                                        <td> ${binErrors} </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>- Только цифры. Максимальное количество - 20.</td>
                                     </c:otherwise>
                                 </c:choose>
                             </tr>

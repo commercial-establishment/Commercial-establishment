@@ -25,7 +25,6 @@ public class CategoryController {
         if (result.hasErrors()) {
             return "category-edit";
         }
-
         category.setId(id);
         categoryService.save(category);
         return "redirect:";

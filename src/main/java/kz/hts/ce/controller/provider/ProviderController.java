@@ -1,6 +1,5 @@
 package kz.hts.ce.controller.provider;
 
-
 import kz.hts.ce.entity.*;
 import kz.hts.ce.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +36,8 @@ public class ProviderController {
     private ShopService shopService;
     @Autowired
     private ShopProviderService shopProviderService;
+    @Autowired
+    private AdminService adminService;
 
     @RequestMapping(value = "/admin/providers/{id}/lock")
     public String lock(@PathVariable long id) {
@@ -57,30 +58,56 @@ public class ProviderController {
     }
 
     @RequestMapping(value = "/admin/providers/create", method = RequestMethod.POST)
-    public String create(@ModelAttribute("provider") Provider provider) {
-        Role role = roleService.findByName("PROVIDER");
-        provider.setRole(role);
-        provider.setPassword(passwordEncoder.encode(provider.getPassword()));
-        provider.setStartWorkDate(new Date());
-        providerService.save(provider);
-        return "redirect:";
+    public String create(Model model, @Valid @ModelAttribute("provider") Provider provider, BindingResult result) {
+        Admin adminFromDB = adminService.findByUsernameAndBlocked(provider.getUsername(), false);
+        Provider providerFromDB = providerService.findByUsernameAndBlocked(provider.getUsername(), false);
+        List<City> cities = cityService.findAll();
+        if (adminFromDB == null && providerFromDB == null) {
+            Role role = roleService.findByName(PROVIDER);
+            provider.setBlocked(false);
+            provider.setRole(role);
+            provider.setPassword(passwordEncoder.encode(provider.getPassword()));
+            provider.setStartWorkDate(new Date());
+            providerService.save(provider);
+            return "redirect:";
+        } else {
+            model.addAttribute("loginIsOccupied", "Указанный логин уже занят");
+            model.addAttribute("cities", cities);
+        }
+        if (result.hasErrors()) {
+            model.addAttribute("cities", cities);
+        }
+        return "provider-create";
     }
 
     @RequestMapping(value = "/admin/providers/{id}/edit", method = RequestMethod.POST)
-    public String edit(Model model, @PathVariable long id, @Valid @ModelAttribute("provider") Provider provider, BindingResult result) {
-        Role role = roleService.findByName(PROVIDER);
-        provider.setRole(role);
-        if (result.hasErrors()) {
-            List<City> cities = cityService.findAll();
-            List<Role> roles = roleService.findAll();
-
+    public String edit(Model model, @PathVariable long id, @Valid @ModelAttribute("provider") Provider provider,
+                       BindingResult result) {
+        Admin adminFromDB = adminService.findByUsernameAndBlocked(provider.getUsername(), false);
+        Provider providerFromDB = providerService.findByUsernameAndBlocked(provider.getUsername(), false);
+        List<City> cities = cityService.findAll();
+        List<Role> roles = roleService.findAll();
+        if (adminFromDB == null && providerFromDB == null) {
+            Role role = null;
+            for (Role roleFromDB : roles) {
+                if (roleFromDB.getName().equals(PROVIDER)) {
+                    role = roleFromDB;
+                }
+            }
+            provider.setRole(role);
+            provider.setId(id);
+            providerService.save(provider);
+            return "redirect:";
+        } else {
+            model.addAttribute("loginIsOccupied", "Указанный логин уже занят");
             model.addAttribute("cities", cities);
             model.addAttribute("roles", roles);
-            return "provider-edit";
         }
-        provider.setId(id);
-        providerService.save(provider);
-        return "redirect:";
+        if (result.hasErrors()) {
+            model.addAttribute("cities", cities);
+            model.addAttribute("roles", roles);
+        }
+        return "provider-edit";
     }
 
     @RequestMapping(value = "/admin/providers/{providerId}/products/add", method = RequestMethod.POST)
@@ -144,7 +171,8 @@ public class ProviderController {
     }
 
     @RequestMapping(value = "/admin/providers/{providerId}/shops/{shopId}/reestablish", method = RequestMethod.POST)
-    public String reestablishShop(@PathVariable("providerId") long providerId, @PathVariable("shopId") long shopId) {
+    public String reestablishShop(@PathVariable("providerId") long providerId,
+                                  @PathVariable("shopId") long shopId) {
         ShopProvider shopProvider = shopProviderService.findByProviderIdAndShopId(providerId, shopId);
         shopProviderService.reestablishById(shopProvider.getId());
         return "redirect:/admin/providers/" + providerId + "/shops";
