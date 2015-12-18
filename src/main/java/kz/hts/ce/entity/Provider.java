@@ -12,15 +12,16 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
+
 @Entity
 public class Provider extends BaseEntity {
 
-    @NotEmpty
     @Size(min = 3, max = 14)
     @Pattern(regexp = "^[a-z0-9_-]+[a-z0-9_-]$")
+    @Column(nullable = true)
     private String username;
 
-    @NotEmpty
+    @Column(nullable = true)
     private String password;
 
     @ManyToOne
@@ -36,7 +37,7 @@ public class Provider extends BaseEntity {
     private String email;
 
     @Size(max = 100)
-    @Column(name = "contact_person")
+    @Column(name = "contact_person", nullable = false)
     private String contactPerson;
 
     @ManyToOne
@@ -44,7 +45,7 @@ public class Provider extends BaseEntity {
     private Role role;
 
     @Size(max = 30)
-    @Column(name = "company_name")
+    @Column(name = "company_name", nullable = false)
     private String companyName;
 
     @Column(name = "start_work_date", nullable = false)
@@ -57,6 +58,14 @@ public class Provider extends BaseEntity {
 
     @Column(name = "is_blocked", nullable = false)
     private boolean blocked;
+
+    @Size(max = 20)
+    @Column(nullable = true)
+    private String iin;
+
+    @Size(max = 20)
+    @Column(nullable = true)
+    private String bin;
 
     public String getUsername() {
         return username;
@@ -145,4 +154,21 @@ public class Provider extends BaseEntity {
     public void setBlocked(boolean blocked) {
         this.blocked = blocked;
     }
+
+    public String getIin() {
+        return iin;
+    }
+
+    public void setIin(String iin) {
+        this.iin = iin;
+    }
+
+    public String getBin() {
+        return bin;
+    }
+
+    public void setBin(String bin) {
+        this.bin = bin;
+    }
 }
+

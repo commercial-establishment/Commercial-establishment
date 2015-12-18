@@ -13,32 +13,32 @@ import java.util.List;
 
 @Controller
 public class CategoryPageController {
+
     @Autowired
     private CategoryService categoryService;
 
-
-    @RequestMapping("/categories/{id}")
+    @RequestMapping("/admin/categories/{id}")
     public String information(Model model, @PathVariable long id){
         Category category = categoryService.findById(id);
         model.addAttribute("category", category);
         return "/category-info";
     }
 
-    @RequestMapping("/categories/{id}/edit")
+    @RequestMapping("/admin/categories/{id}/edit")
     public String edit(Model model, @PathVariable long id){
         Category category = categoryService.findById(id);
         model.addAttribute("category", category);
         return "category-edit";
     }
 
-    @RequestMapping("/categories/create")
+    @RequestMapping("/admin/categories/create")
     public String create(Model model){
         Category category = new Category();
         model.addAttribute("category", category);
         return "category-create";
     }
 
-    @RequestMapping(value = "/categories",method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/categories",method = RequestMethod.GET)
     public String categoriesPage(Model model) {
         List<Category> categories = categoryService.findAll();
         model.addAttribute("categories", categories);

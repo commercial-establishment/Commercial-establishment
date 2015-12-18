@@ -11,19 +11,20 @@
 <t:container home="active">
     <div id="page-wrapper">
 
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">
-                    Главная страница
-                </h1>
-                <ol class="breadcrumb">
-                    <li class="active">
-                        <i class="fa fa-desktop"></i> Главная страница
-                    </li>
-                </ol>
-            </div>
-        </div>
         <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        Главная страница
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li class="active">
+                            <i class="fa fa-dashboard"></i> Главная
+                        </li>
+                    </ol>
+                </div>
+            </div>
 
             <div class="jumbotron">
                 <h1>Привет, ${pageContext.request.userPrincipal.name}!</h1>
