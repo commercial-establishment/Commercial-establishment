@@ -42,14 +42,17 @@
                         <tr>
                             <th>ID</th>
                             <th>Категория</th>
+                            <th>Редактирование</th>
                         </tr>
                         </thead>
                         <tbody>
                             <%--@elvariable id="shop" type="kz.hts.ce.entity.Category"--%>
                         <c:forEach items="${categories}" var="category">
-                            <tr onclick="document.location = '/admin/categories/' + ${category.id};">
-                                <td class="td_id">${category.id}</td>
-                                <td class="td_category">${category.name}</td>
+                            <tr>
+                                <td>${category.id}</td>
+                                <td>${category.name}</td>
+                                <td><a href="/admin/categories/${category.id}/edit" class="btn btn-lg btn-default">Редактировать</a>
+                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>

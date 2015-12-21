@@ -17,8 +17,8 @@ public class Shop extends BaseEntity {
     private Type type;
 
     @OneToOne
-    @JoinColumn(name = "city_id", nullable = false)
-    private City city;
+    @JoinColumn(name = "area_id", nullable = false)
+    private Area area;
 
     @Column(name = "is_blocked", nullable = false)
     private boolean blocked;
@@ -63,12 +63,11 @@ public class Shop extends BaseEntity {
         this.blocked = blocked;
     }
 
-    public City getCity() {
-        return city;
+    public Area getArea() {
+        return area;
     }
 
-    public void setCity(City city) {
-        this.city = city;
+    public void setArea(Area area) {
+        this.area = area;
     }
-
 }

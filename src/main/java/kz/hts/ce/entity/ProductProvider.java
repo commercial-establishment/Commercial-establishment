@@ -1,6 +1,6 @@
 package kz.hts.ce.entity;
 
-import com.sun.istack.internal.Nullable;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -9,10 +9,10 @@ import java.math.BigDecimal;
 @Table(name = "product_provider")
 public class ProductProvider extends BaseEntity {
 
-    @Nullable
+    @NotEmpty
     private long amount;
 
-    @Nullable
+    @NotEmpty
     private BigDecimal price;
 
     @ManyToOne

@@ -1,22 +1,22 @@
 package kz.hts.ce.controller.shop;
 
+import kz.hts.ce.entity.Area;
 import kz.hts.ce.entity.City;
 import kz.hts.ce.entity.Shop;
 import kz.hts.ce.entity.Type;
+import kz.hts.ce.service.AreaService;
 import kz.hts.ce.service.CityService;
-import kz.hts.ce.service.RoleService;
 import kz.hts.ce.service.ShopService;
 import kz.hts.ce.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -28,6 +28,8 @@ public class ShopController {
     private CityService cityService;
     @Autowired
     private TypeService typeService;
+    @Autowired
+    private AreaService areaService;
 
     @RequestMapping(value = "/admin/shops/{id}/lock")
     public String lock(@PathVariable long id) {
@@ -67,5 +69,14 @@ public class ShopController {
         }
         shopService.save(shop);
         return "redirect:";
+    }
+
+    @RequestMapping(value = "/admin/shops/areas", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List<String> getAreasByCity(@RequestParam String city) {
+        long cityId = cityService.findByName(city).getId();
+        List<Area> areas = areaService.findByCityId(cityId);
+        List<String> areaNames = new ArrayList<>();
+        for (Area area : areas) areaNames.add(area.getName());
+        return areaNames;
     }
 }

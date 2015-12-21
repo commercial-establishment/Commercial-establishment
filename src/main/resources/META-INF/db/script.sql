@@ -10,6 +10,12 @@ INSERT INTO gender (id, name) VALUES (2, 'FEMALE');
 INSERT INTO city (id, name) VALUES (1, 'АСТАНА');
 INSERT INTO city (id, name) VALUES (2, 'КАРАГАНДА');
 
+INSERT INTO area (id, name, city_id) VALUES (1, 'Есильский', 1);
+INSERT INTO area (id, name, city_id) VALUES (2, 'Алматинский', 1);
+INSERT INTO area (id, name, city_id) VALUES (3, 'Сарыаркинский', 1);
+
+INSERT INTO area (id, name, city_id) VALUES (4, 'Офигенный', 2);
+
 INSERT INTO category (id, name) VALUES (1, 'Напитки');
 
 /*TODO change types*/
@@ -27,7 +33,7 @@ INSERT INTO product (id, is_blocked, name, category_id) VALUES (2, FALSE, 'NeCoc
 INSERT INTO warehouse (id, arrival, import_date, residue, produt_id) VALUES (1, 100, NULL, 50, 1);
 INSERT INTO warehouse (id, arrival, import_date, residue, produt_id) VALUES (2, 100, NULL, 50, 2);
 
-INSERT INTO shop (id, address, is_blocked, name, city_id, type_id) VALUES (1, 'Туркистан 8/2', false, 'Gal Mart', 1, 1);
+INSERT INTO shop (id, address, is_blocked, name, area_id, type_id) VALUES (1, 'Туркистан 8/2', FALSE, 'Gal Mart', 1, 1);
 /*TODO product's history*/
 
 INSERT INTO provider (id, address, is_blocked, company_name, contact_person, email, end_work_date, password, start_work_date, username, city_id, role_id)

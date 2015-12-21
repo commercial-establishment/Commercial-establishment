@@ -37,13 +37,24 @@
                         <table class="table table-hover">
                             <tbody>
                             <tr>
-                                <td class="td_category"><form:label path="name">Название категории:</form:label></td>
-                                <td class="td_category"><form:input cssClass="form-control" path="name"/></td>
+                                <td><form:label path="name">Название категории:</form:label></td>
+                                <td><form:input cssClass="form-control" path="name"/></td>
+                                <c:set var="nameErrors"><form:errors path="name" cssClass="error"/>
+                                </c:set>
+                                <c:choose>
+                                    <c:when test="${not empty nameErrors}">
+                                        <td> ${nameErrors} </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>- Введите актуальное название категории</td>
+                                    </c:otherwise>
+                                </c:choose>
                             </tr>
                             <tr>
                                 <td>
                                     <form:button type="submit" class="btn btn-lg btn-success">Сохранить</form:button>
                                 </td>
+                                <td/>
                                 <td><a href="<c:url value="/admin/categories/${id}"/>"
                                        class="btn btn-lg btn-danger">Отмена</a>
                                 </td>
