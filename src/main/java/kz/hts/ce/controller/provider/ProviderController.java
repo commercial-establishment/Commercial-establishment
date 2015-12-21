@@ -2,6 +2,7 @@ package kz.hts.ce.controller.provider;
 
 import kz.hts.ce.entity.*;
 import kz.hts.ce.service.*;
+import kz.hts.ce.util.SpringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -19,13 +20,12 @@ import java.util.List;
 public class ProviderController {
 
     public static final String PROVIDER = "PROVIDER";
+    public static final String REDIRECT = "redirect:";
+    public static final String ROLES = "roles";
+    public static final String CITIES = "cities";
 
     @Autowired
     private ProviderService providerService;
-    @Autowired
-    private RoleService roleService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
     @Autowired
     private CityService cityService;
     @Autowired
@@ -39,6 +39,11 @@ public class ProviderController {
     @Autowired
     private AdminService adminService;
 
+    @Autowired
+    private SpringUtil springUtil;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @RequestMapping(value = "/admin/providers/{id}/lock")
     public String lock(@PathVariable long id) {
         Provider provider = providerService.findById(id);
@@ -47,35 +52,36 @@ public class ProviderController {
         providerService.save(provider);
         providerService.updateEndWorkDate(new Date(), id);
         providerService.lockById(id);
-        return "redirect:";
+        return REDIRECT;
     }
 
     @RequestMapping("/admin/providers/{id}/reestablish")
     public String reestablish(@PathVariable long id) {
         providerService.updateStartAndEndWorkDate(new Date(), null, id);
         providerService.reestablishById(id);
-        return "redirect:";
+        return REDIRECT;
     }
 
     @RequestMapping(value = "/admin/providers/create", method = RequestMethod.POST)
     public String create(Model model, @Valid @ModelAttribute("provider") Provider provider, BindingResult result) {
+        List<City> cities = cityService.findAll();
+        if (result.hasErrors()) {
+            model.addAttribute(CITIES, cities);
+        }
+
         Admin adminFromDB = adminService.findByUsernameAndBlocked(provider.getUsername(), false);
         Provider providerFromDB = providerService.findByUsernameAndBlocked(provider.getUsername(), false);
-        List<City> cities = cityService.findAll();
         if (adminFromDB == null && providerFromDB == null) {
-            Role role = roleService.findByName(PROVIDER);
+            Role role = springUtil.getRoleMap().get(PROVIDER);
             provider.setBlocked(false);
             provider.setRole(role);
             provider.setPassword(passwordEncoder.encode(provider.getPassword()));
             provider.setStartWorkDate(new Date());
             providerService.save(provider);
-            return "redirect:";
+            return REDIRECT;
         } else {
             model.addAttribute("loginIsOccupied", "Указанный логин уже занят");
-            model.addAttribute("cities", cities);
-        }
-        if (result.hasErrors()) {
-            model.addAttribute("cities", cities);
+            model.addAttribute(CITIES, cities);
         }
         return "provider-create";
     }
@@ -83,10 +89,15 @@ public class ProviderController {
     @RequestMapping(value = "/admin/providers/{id}/edit", method = RequestMethod.POST)
     public String edit(Model model, @PathVariable long id, @Valid @ModelAttribute("provider") Provider provider,
                        BindingResult result) {
+        List<City> cities = cityService.findAll();
+        List<Role> roles = springUtil.getRoles();
+        if (result.hasErrors()) {
+            model.addAttribute(CITIES, cities);
+            model.addAttribute(ROLES, roles);
+        }
+
         Admin adminFromDB = adminService.findByUsernameAndBlocked(provider.getUsername(), false);
         Provider providerFromDB = providerService.findByUsernameAndBlocked(provider.getUsername(), false);
-        List<City> cities = cityService.findAll();
-        List<Role> roles = roleService.findAll();
         if (adminFromDB == null && providerFromDB == null) {
             Role role = null;
             for (Role roleFromDB : roles) {
@@ -97,15 +108,11 @@ public class ProviderController {
             provider.setRole(role);
             provider.setId(id);
             providerService.save(provider);
-            return "redirect:";
+            return REDIRECT;
         } else {
             model.addAttribute("loginIsOccupied", "Указанный логин уже занят");
-            model.addAttribute("cities", cities);
-            model.addAttribute("roles", roles);
-        }
-        if (result.hasErrors()) {
-            model.addAttribute("cities", cities);
-            model.addAttribute("roles", roles);
+            model.addAttribute(CITIES, cities);
+            model.addAttribute(ROLES, roles);
         }
         return "provider-edit";
     }
@@ -134,7 +141,7 @@ public class ProviderController {
             productProviderFromDB.setAmount(amount);
             productProviderService.save(productProviderFromDB);
         }
-        return "redirect:";
+        return REDIRECT;
     }
 
     @Transactional
@@ -151,7 +158,7 @@ public class ProviderController {
             shopProvider.setBlocked(false);
             shopProviderService.save(shopProvider);
         }
-        return "redirect:";
+        return REDIRECT;
     }
 
     @RequestMapping(value = "/admin/providers/{providerId}/products/{productId}/delete",

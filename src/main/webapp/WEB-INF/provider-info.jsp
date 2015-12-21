@@ -73,6 +73,9 @@
                         <tr>
                             <td><b>ИИН:</b></td>
                             <c:choose>
+                                <c:when test="${provider.iin == ''}">
+                                    <td>ИИН не заполнен</td>
+                                </c:when>
                                 <c:when test="${provider.iin != null}">
                                     <td>${provider.iin}</td>
                                 </c:when>
@@ -84,6 +87,9 @@
                         <tr>
                             <td><b>БИН:</b></td>
                             <c:choose>
+                                <c:when test="${provider.bin == ''}">
+                                    <td>БИН не заполнен</td>
+                                </c:when>
                                 <c:when test="${provider.bin != null}">
                                     <td>${provider.bin}</td>
                                 </c:when>

@@ -2,6 +2,7 @@ package kz.hts.ce.controller.provider;
 
 import kz.hts.ce.entity.*;
 import kz.hts.ce.service.*;
+import kz.hts.ce.util.SpringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,8 +23,6 @@ public class ProviderPageController {
     @Autowired
     private ProviderService providerService;
     @Autowired
-    private RoleService roleService;
-    @Autowired
     private CityService cityService;
     @Autowired
     private ProductProviderService productProviderService;
@@ -33,6 +32,9 @@ public class ProviderPageController {
     private ProductService productService;
     @Autowired
     private ShopService shopService;
+
+    @Autowired
+    private SpringUtil springUtil;
 
     @RequestMapping(value = "/admin/providers", method = RequestMethod.GET)
     public String providers(Model model) {
@@ -52,7 +54,7 @@ public class ProviderPageController {
     public String edit(Model model, @PathVariable long id) {
         List<City> cities = cityService.findAll();
         Provider provider = providerService.findById(id);
-        List<Role> roles = roleService.findAll();
+        List<Role> roles = springUtil.getRoles();
         model.addAttribute("roles", roles);
         model.addAttribute("provider", provider);
         model.addAttribute("cities", cities);
