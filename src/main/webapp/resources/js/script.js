@@ -9,13 +9,12 @@ function selectCity() {
         function (data) {
             var $selectArea = $('select#area');
             $selectArea.empty();
-            $.each(data, function( key, value ) {
+            $selectArea.prop('disabled', false);
+            $.each(data, function (key, value) {
                 $selectArea.append($("<option>")
-                        .val("value")
+                        .val(value)
                         .html(value)
                 );
-                //alert( key + ": " + value );
             });
-
         });
 }

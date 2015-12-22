@@ -1,12 +1,22 @@
 package kz.hts.ce.entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
 public class Shop extends BaseEntity {
 
+    @NotEmpty
+    @Column(nullable = false)
+    @Size(min = 2, max = 30)
     private String name;
+
+    @NotEmpty
+    @Column(nullable = false)
+    @Size(min = 2, max = 30)
     private String address;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "shop")

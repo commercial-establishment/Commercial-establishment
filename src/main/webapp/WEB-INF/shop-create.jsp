@@ -39,7 +39,15 @@
                             <tr>
                                 <td><form:label path="name">Наименование магазина:</form:label></td>
                                 <td><form:input cssClass="form-control" path="name"/></td>
-                                <td>Имя пользователя должно состоять из ...</td>
+                                <c:set var="nameErrors"><form:errors path="name" cssClass="error"/> </c:set>
+                                <c:choose>
+                                    <c:when test="${not empty nameErrors}">
+                                        <td> ${nameErrors} </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>- Введите корректное название магазина</td>
+                                    </c:otherwise>
+                                </c:choose>
                             </tr>
                             <tr>
                                 <td><label>Город:</label></td>
@@ -51,23 +59,28 @@
                                         </c:forEach>
                                     </select>
                                 </td>
-                                <td>Имя пользователя должно состоять из ...</td>
+                                <td>- Выберите город</td>
                             </tr>
                             <tr>
                                 <td><label>Район:</label></td>
                                 <td>
-                                    <select name="area" id="area" class="form-control">
-                                        <c:forEach items="${areas}" var="area">
-                                            <option> ${area.name}</option>
-                                        </c:forEach>
+                                    <select disabled="disabled" name="area" id="area" class="form-control">
                                     </select>
                                 </td>
-                                <td>Имя пользователя должно состоять из ...</td>
+                                <td>- Выберите район</td>
                             </tr>
                             <tr>
                                 <td><form:label path="address">Адрес магазина:</form:label></td>
                                 <td><form:input cssClass="form-control" path="address"/></td>
-                                <td>Имя пользователя должно состоять из ...</td>
+                                <c:set var="addressErrors"><form:errors path="address" cssClass="error"/> </c:set>
+                                <c:choose>
+                                    <c:when test="${not empty addressErrors}">
+                                        <td> ${addressErrors} </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>- Введите действующий адрес магазина</td>
+                                    </c:otherwise>
+                                </c:choose>
                             </tr>
                             <tr>
                                 <td><form:label path="type">Тип:</form:label></td>
@@ -78,7 +91,7 @@
                                         </c:forEach>
                                     </select>
                                 </td>
-                                <td>Имя пользователя должно состоять из ...</td>
+                                <td>- Выберите тип магазина</td>
                             </tr>
                             <tr>
                                 <td>

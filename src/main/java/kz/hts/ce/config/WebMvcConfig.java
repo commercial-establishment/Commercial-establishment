@@ -2,10 +2,7 @@ package kz.hts.ce.config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kz.hts.ce.util.converters.StringToCategory;
-import kz.hts.ce.util.converters.StringToCity;
-import kz.hts.ce.util.converters.StringToGender;
-import kz.hts.ce.util.converters.StringToType;
+import kz.hts.ce.util.converters.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -47,6 +44,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     private StringToType stringToTypeConverter;
     @Autowired
     private StringToCategory stringToCategoryConverter;
+    @Autowired
+    private StringToArea stringToAreaConverter;
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
@@ -54,6 +53,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         registry.addConverter(stringToCityConverter);
         registry.addConverter(stringToTypeConverter);
         registry.addConverter(stringToCategoryConverter);
+        registry.addConverter(stringToAreaConverter);
 
     }
 
@@ -92,7 +92,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public LocaleResolver localeResolver(){
+    public LocaleResolver localeResolver() {
         CookieLocaleResolver resolver = new CookieLocaleResolver();
         resolver.setDefaultLocale(new Locale("ru_RU"));
         resolver.setCookieName("establishmentLocaleCookie");
@@ -108,7 +108,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     }
 
     @Override
-    public void configureMessageConverters( List<HttpMessageConverter<?>> converters ) {
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.add(jsonConverter());
     }
 

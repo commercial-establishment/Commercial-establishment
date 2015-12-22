@@ -18,4 +18,8 @@ public class AreaService extends BaseService<Area, AreaRepository> {
     public List<Area> findByCityId(long id) {
         return repository.findByCity_Id(id);
     }
+
+    public Area findByName(String name) {
+        return repository.findByName(name);
+    }
 }

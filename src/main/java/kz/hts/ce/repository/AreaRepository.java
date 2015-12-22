@@ -10,6 +10,8 @@ import java.util.List;
 public interface AreaRepository extends JpaRepository<Area, Long> {
 
     List<Area> findByCity_Id(long id);
+
+    Area findByName(String name);
 }
 
 
