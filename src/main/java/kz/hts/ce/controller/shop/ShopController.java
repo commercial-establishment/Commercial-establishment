@@ -50,7 +50,10 @@ public class ShopController {
             model.addAttribute("cities", cities);
             return "shop-edit";
         }
-
+        if (shop.getArea() == null) {
+            Shop shopFromDB = shopService.findById(id);
+            shop.setArea(shopFromDB.getArea());
+        }
         shop.setId(id);
         shopService.save(shop);
         return REDIRECT;

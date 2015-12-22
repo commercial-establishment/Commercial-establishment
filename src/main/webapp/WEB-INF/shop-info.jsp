@@ -1,10 +1,13 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 
-<t:head title="Информация о магазине"/>
+<t:head title="Информация о магазине">
+    <link href="<c:url value="/resources/css/datepicker.css"/>" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/resources/css/style.css"/>" rel="stylesheet" type="text/css">
+</t:head>
 
 <t:container shops="active">
 
@@ -39,12 +42,16 @@
                             <td>${shop.name}</td>
                         </tr>
                         <tr>
-                            <td><b>Адрес:</b></td>
-                            <td>${shop.address}</td>
+                            <td><b>Город:</b></td>
+                            <td>${shop.area.city.name}</td>
                         </tr>
                         <tr>
-                            <td><b>Город:</b></td>
-                            <td>${shop.city.name}</td>
+                            <td><b>Район:</b></td>
+                            <td>${shop.area.name}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Адрес:</b></td>
+                            <td>${shop.address}</td>
                         </tr>
                         <tr>
                             <td><b>Тип:</b></td>
