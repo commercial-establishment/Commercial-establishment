@@ -47,12 +47,28 @@
                             <tr>
                                 <td><form:label path="name">Наименование магазина:</form:label></td>
                                 <td><form:input cssClass="form-control" path="name"/></td>
-
+                                <c:set var="nameErrors"><form:errors path="name" cssClass="error"/> </c:set>
+                                <c:choose>
+                                    <c:when test="${not empty nameErrors}">
+                                        <td> ${nameErrors} </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>- Введите корректное название магазина</td>
+                                    </c:otherwise>
+                                </c:choose>
                             </tr>
                             <tr>
                                 <td><form:label path="address">Адрес:</form:label></td>
                                 <td><form:input cssClass="form-control" path="address"/></td>
-
+                                <c:set var="addressErrors"><form:errors path="address" cssClass="error"/> </c:set>
+                                <c:choose>
+                                    <c:when test="${not empty addressErrors}">
+                                        <td> ${addressErrors} </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>- Введите корректный адрес</td>
+                                    </c:otherwise>
+                                </c:choose>
                             </tr>
                             <tr>
                                 <td><label>Город:</label></td>

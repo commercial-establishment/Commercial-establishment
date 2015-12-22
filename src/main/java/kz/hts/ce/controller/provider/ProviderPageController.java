@@ -107,12 +107,12 @@ public class ProviderPageController {
     public String providerProducts(Model model, @PathVariable("productProviderId") long productProviderId) {
         ProductProvider productProvider = productProviderService.findById(productProviderId);
 
-        long amount = productProvider.getAmount();
-        BigDecimal price = productProvider.getPrice();
-        BigDecimal sumPrice = calculateCost(amount, price);
+//        long amount = productProvider.getAmount();
+//        BigDecimal price = productProvider.getPrice();
+//        BigDecimal sumPrice = calculateCost(amount, price);
 
         model.addAttribute("productProvider", productProvider);
-        model.addAttribute("sumPrice", sumPrice);
+//        model.addAttribute("sumPrice", sumPrice);
         return "provider-product-info";
     }
 

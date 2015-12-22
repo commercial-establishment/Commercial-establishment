@@ -67,6 +67,7 @@ public class ProviderController {
         List<City> cities = cityService.findAll();
         if (result.hasErrors()) {
             model.addAttribute(CITIES, cities);
+            return "provider-create";
         }
 
         Admin adminFromDB = adminService.findByUsernameAndBlocked(provider.getUsername(), false);
@@ -82,8 +83,8 @@ public class ProviderController {
         } else {
             model.addAttribute("loginIsOccupied", "Указанный логин уже занят");
             model.addAttribute(CITIES, cities);
+            return "provider-create";
         }
-        return "provider-create";
     }
 
     @RequestMapping(value = "/admin/providers/{id}/edit", method = RequestMethod.POST)
@@ -132,13 +133,9 @@ public class ProviderController {
             ProductProvider productProvider = new ProductProvider();
             productProvider.setProvider(provider);
             productProvider.setProduct(product);
-            productProvider.setPrice(price);
-            productProvider.setAmount(amount);
             productProvider.setBlocked(false);
             productProviderService.save(productProvider);
         } else {
-            productProviderFromDB.setPrice(price);
-            productProviderFromDB.setAmount(amount);
             productProviderService.save(productProviderFromDB);
         }
         return REDIRECT;
@@ -192,8 +189,6 @@ public class ProviderController {
                                       @RequestParam("amount") int amount,
                                       @RequestParam("price") BigDecimal price) {
         ProductProvider productProvider = productProviderService.findById(productProviderId);
-        productProvider.setAmount(amount);
-        productProvider.setPrice(price);
         productProviderService.save(productProvider);
         return "redirect:/admin/providers/" + providerId + "/products";
     }

@@ -2,8 +2,10 @@ package kz.hts.ce.controller.product;
 
 import kz.hts.ce.entity.Category;
 import kz.hts.ce.entity.Product;
+import kz.hts.ce.entity.Unit;
 import kz.hts.ce.service.CategoryService;
 import kz.hts.ce.service.ProductService;
+import kz.hts.ce.service.UnitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +20,15 @@ import java.util.List;
 
 @Controller
 public class ProductController {
+
+    public static final String REDIRECT = "redirect:";
+
     @Autowired
     private ProductService productService;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private UnitService unitService;
 
     @RequestMapping(value = "/admin/products/{id}/lock")
     public String lock(@PathVariable long id) {
@@ -29,35 +36,41 @@ public class ProductController {
         product.setBlocked(true);
         productService.save(product);
         productService.lockById(id);
-        return "redirect:";
+        return REDIRECT;
     }
 
     @RequestMapping("/admin/products/{id}/reestablish")
     public String reestablish(@PathVariable long id) {
         productService.reestablishById(id);
-        return "redirect:";
+        return REDIRECT;
     }
 
     @RequestMapping(value = "/admin/products/{id}/edit", method = RequestMethod.POST)
     public String edit(Model model, @PathVariable long id, @Valid @ModelAttribute("product") Product product, BindingResult result) {
         if (result.hasErrors()) {
             List<Category> categories = categoryService.findAll();
+            List<Unit> units = unitService.findAll();
             model.addAttribute("categories", categories);
+            model.addAttribute("units", units);
             return "product-edit";
         }
 
         product.setId(id);
         productService.save(product);
-        return "redirect:";
+        return REDIRECT;
     }
 
     @RequestMapping(value = "/admin/products/create-save", method = RequestMethod.POST)
     public String create(Model model, @Valid @ModelAttribute("product") Product product, BindingResult result) {
         if (result.hasErrors()) {
+            List<Category> categories = categoryService.findAll();
+            List<Unit> units = unitService.findAll();
+            model.addAttribute("categories", categories);
+            model.addAttribute("units", units);
             return "product-create";
         }
         productService.save(product);
-        return "redirect:";
+        return REDIRECT;
     }
 
 }
