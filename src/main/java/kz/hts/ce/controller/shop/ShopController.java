@@ -1,7 +1,13 @@
 package kz.hts.ce.controller.shop;
 
-import kz.hts.ce.entity.*;
-import kz.hts.ce.service.*;
+import kz.hts.ce.entity.Area;
+import kz.hts.ce.entity.City;
+import kz.hts.ce.entity.Shop;
+import kz.hts.ce.entity.Type;
+import kz.hts.ce.service.AreaService;
+import kz.hts.ce.service.CityService;
+import kz.hts.ce.service.ShopService;
+import kz.hts.ce.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -16,7 +22,8 @@ import java.util.List;
 @Controller
 public class ShopController {
 
-    public static final String REDIRECT = "redirect:";
+    private static final String REDIRECT = "redirect:";
+
     @Autowired
     private ShopService shopService;
     @Autowired
@@ -73,13 +80,27 @@ public class ShopController {
     }
 
     @RequestMapping(value = "/admin/shops/areas", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public
     @ResponseBody
-    List<String> getAreasByCity(@RequestParam String city) {
+    public List<String> getAreasByCity(@RequestParam String city) {
         long cityId = cityService.findByName(city).getId();
         List<Area> areas = areaService.findByCityId(cityId);
         List<String> areaNames = new ArrayList<>();
         for (Area area : areas) areaNames.add(area.getName());
         return areaNames;
+    }
+
+    @RequestMapping(value = "/employees11", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    @ResponseBody
+    public String getForClient(Model model) {
+        List<City> cities = cityService.findAll();
+        model.addAttribute("cities", cities);
+        return cities.get(0).getName();
+    }
+
+    @RequestMapping(value = "/employees11", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    @ResponseBody
+    public City postFromClient(@RequestBody City city) {
+        cityService.save(city);
+        return city;
     }
 }
