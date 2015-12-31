@@ -70,14 +70,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/login/form", "/recovery").anonymous()
                 .antMatchers("/", "/home", "/home/**").hasAnyRole("ADMIN", "PROVIDER")
-                .anyRequest().authenticated()
-                .and()
-                .formLogin().loginPage("/login/form").successHandler(successHandler)
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .failureUrl("/login?error")
-                .and().logout().logoutSuccessUrl("/login?logout")
+                .anyRequest().authenticated();
+        http
+                .formLogin()
+                .loginPage("/login/form")
+                .loginProcessingUrl("/j_spring_security_check")
+                .successHandler(successHandler)
+                .usernameParameter("j_username")
+                .passwordParameter("j_password")
+                .failureUrl("/login?error").and()
+                .httpBasic();
+        http
+                .logout().logoutSuccessUrl("/login?logout")
                 .and()
                 .exceptionHandling().accessDeniedPage("/403");
     }
+
+//    @Bean
+//    public RememberMeServices rememberMeServices() {
+//        TokenBasedRememberMeServices rememberMeServices = new TokenBasedRememberMeServices("password", userService);
+//        rememberMeServices.setCookieName("cookieName");
+//        rememberMeServices.setParameter("rememberMe");
+//        return rememberMeServices;
+//    }
 }
