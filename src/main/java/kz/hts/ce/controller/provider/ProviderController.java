@@ -4,6 +4,7 @@ import kz.hts.ce.entity.*;
 import kz.hts.ce.service.*;
 import kz.hts.ce.util.SpringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,10 +20,10 @@ import java.util.List;
 @Controller
 public class ProviderController {
 
-    public static final String PROVIDER = "PROVIDER";
-    public static final String REDIRECT = "redirect:";
-    public static final String ROLES = "roles";
-    public static final String CITIES = "cities";
+    private static final String PROVIDER = "PROVIDER";
+    private static final String REDIRECT = "redirect:";
+    private static final String ROLES = "roles";
+    private static final String CITIES = "cities";
 
     @Autowired
     private ProviderService providerService;
@@ -191,5 +192,12 @@ public class ProviderController {
         ProductProvider productProvider = productProviderService.findById(productProviderId);
         productProviderService.save(productProvider);
         return "redirect:/admin/providers/" + providerId + "/products";
+    }
+
+    @RequestMapping(value = "/json/providers/add", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    @ResponseBody
+    public List<Provider> getProvidersFromClient(@RequestBody List<Provider> providers) {
+        for (Provider provider : providers) providerService.save(provider);
+        return providers;
     }
 }
