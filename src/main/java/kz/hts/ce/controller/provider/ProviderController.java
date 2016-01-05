@@ -200,4 +200,10 @@ public class ProviderController {
         for (Provider provider : providers) providerService.save(provider);
         return providers;
     }
+
+    @RequestMapping(value = "/json/providers", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    @ResponseBody
+    public List<Provider> sendAllProvidersToClient() {
+        return providerService.findAll();
+    }
 }
