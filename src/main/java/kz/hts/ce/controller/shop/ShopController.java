@@ -1,13 +1,7 @@
 package kz.hts.ce.controller.shop;
 
-import kz.hts.ce.entity.Area;
-import kz.hts.ce.entity.City;
-import kz.hts.ce.entity.Shop;
-import kz.hts.ce.entity.Type;
-import kz.hts.ce.service.AreaService;
-import kz.hts.ce.service.CityService;
-import kz.hts.ce.service.ShopService;
-import kz.hts.ce.service.TypeService;
+import kz.hts.ce.entity.*;
+import kz.hts.ce.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -32,6 +26,8 @@ public class ShopController {
     private TypeService typeService;
     @Autowired
     private AreaService areaService;
+    @Autowired
+    private ShopProviderService shopProviderService;
 
     @RequestMapping(value = "/admin/shops/{id}/lock")
     public String lock(@PathVariable long id) {
@@ -97,10 +93,10 @@ public class ShopController {
         return cities.get(0).getName();
     }
 
-    @RequestMapping(value = "/employees11", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    @RequestMapping(value = "/json/shop-providers/add", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     @ResponseBody
-    public City postFromClient(@RequestBody City city) {
-        cityService.save(city);
-        return city;
+    public List<ShopProvider> getShopProvidersFromClient(@RequestBody List<ShopProvider> shopProviders) {
+        for (ShopProvider shopProvider : shopProviders) shopProviderService.save(shopProvider);
+        return shopProviders;
     }
 }
