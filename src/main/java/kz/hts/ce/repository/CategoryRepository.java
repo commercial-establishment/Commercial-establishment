@@ -7,14 +7,17 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
+
 @Repository
-public interface CategoryRepository extends JpaRepository<Category, Long> {
+public interface CategoryRepository extends JpaRepository<Category, UUID> {
+
     Category findByName(String categoryName);
 
     @Transactional
     @Modifying
     @Query("DELETE FROM Category c WHERE c.id = ?1")
-    void delete(long id);
+    void delete(UUID id);
 }
 
 

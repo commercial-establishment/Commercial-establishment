@@ -17,11 +17,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class ProductController {
 
-    public static final String REDIRECT = "redirect:";
+    private static final String REDIRECT = "redirect:";
 
     @Autowired
     private ProductService productService;
@@ -31,7 +32,7 @@ public class ProductController {
     private UnitService unitService;
 
     @RequestMapping(value = "/admin/products/{id}/lock")
-    public String lock(@PathVariable long id) {
+    public String lock(@PathVariable UUID id) {
         Product product = productService.findById(id);
         product.setBlocked(true);
         productService.save(product);
@@ -40,13 +41,13 @@ public class ProductController {
     }
 
     @RequestMapping("/admin/products/{id}/reestablish")
-    public String reestablish(@PathVariable long id) {
+    public String reestablish(@PathVariable UUID id) {
         productService.reestablishById(id);
         return REDIRECT;
     }
 
     @RequestMapping(value = "/admin/products/{id}/edit", method = RequestMethod.POST)
-    public String edit(Model model, @PathVariable long id, @Valid @ModelAttribute("product") Product product, BindingResult result) {
+    public String edit(Model model, @PathVariable UUID id, @Valid @ModelAttribute("product") Product product, BindingResult result) {
         if (result.hasErrors()) {
             List<Category> categories = categoryService.findAll();
             List<Unit> units = unitService.findAll();

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class AreaService extends BaseService<Area, AreaRepository> {
@@ -15,7 +16,7 @@ public class AreaService extends BaseService<Area, AreaRepository> {
         super(repository);
     }
 
-    public List<Area> findByCityId(long id) {
+    public List<Area> findByCityId(UUID id) {
         return repository.findByCity_Id(id);
     }
 

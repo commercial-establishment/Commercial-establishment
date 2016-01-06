@@ -22,14 +22,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class AdminController {
 
-    public static final String ADMIN = "ADMIN";
-    public static final String REDIRECT = "redirect:";
-    public static final String GENDERS = "genders";
-    public static final String ROLES = "roles";
+    private static final String ADMIN = "ADMIN";
+    private static final String REDIRECT = "redirect:";
+    private static final String GENDERS = "genders";
+    private static final String ROLES = "roles";
 
     @Autowired
     private AdminService adminService;
@@ -42,7 +43,7 @@ public class AdminController {
     private PasswordEncoder passwordEncoder;
 
     @RequestMapping(value = "/admin/admins/{id}/lock")
-    public String lock(@PathVariable long id) {
+    public String lock(@PathVariable UUID id) {
         Admin admin = adminService.findById(id);
         admin.setEndWorkDate(new Date());
         admin.setBlocked(true);
@@ -53,14 +54,14 @@ public class AdminController {
     }
 
     @RequestMapping("/admin/admins/{id}/reestablish")
-    public String reestablish(@PathVariable long id) {
+    public String reestablish(@PathVariable UUID id) {
         adminService.updateStartAndEndWorkDate(new Date(), null, id);
         adminService.reestablishById(id);
         return REDIRECT;
     }
 
     @RequestMapping(value = "/admin/admins/{id}/edit", method = RequestMethod.POST)
-    public String edit(Model model, @PathVariable long id, @Valid @ModelAttribute("admin") Admin admin, BindingResult result) {
+    public String edit(Model model, @PathVariable UUID id, @Valid @ModelAttribute("admin") Admin admin, BindingResult result) {
         Role role = springUtil.getRoleMap().get(ADMIN);
         admin.setRole(role);
 

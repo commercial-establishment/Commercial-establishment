@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class WarehouseService extends BaseService<Warehouse, WarehouseRepository>{
+public class WarehouseService extends BaseService<Warehouse, WarehouseRepository> {
 
     @Autowired
     protected WarehouseService(WarehouseRepository repository) {

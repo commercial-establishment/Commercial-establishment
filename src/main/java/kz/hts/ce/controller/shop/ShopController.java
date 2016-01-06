@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class ShopController {
@@ -30,7 +31,7 @@ public class ShopController {
     private ShopProviderService shopProviderService;
 
     @RequestMapping(value = "/admin/shops/{id}/lock")
-    public String lock(@PathVariable long id) {
+    public String lock(@PathVariable UUID id) {
         Shop shop = shopService.findById(id);
         shop.setBlocked(true);
         shopService.save(shop);
@@ -39,13 +40,13 @@ public class ShopController {
     }
 
     @RequestMapping("/admin/shops/{id}/reestablish")
-    public String reestablish(@PathVariable long id) {
+    public String reestablish(@PathVariable UUID id) {
         shopService.reestablishById(id);
         return REDIRECT;
     }
 
     @RequestMapping(value = "/admin/shops/{id}/edit", method = RequestMethod.POST)
-    public String edit(Model model, @PathVariable long id, @Valid @ModelAttribute("shop") Shop shop, BindingResult result) {
+    public String edit(Model model, @PathVariable UUID id, @Valid @ModelAttribute("shop") Shop shop, BindingResult result) {
         if (result.hasErrors()) {
             List<City> cities = cityService.findAll();
             List<Type> types = typeService.findAll();
@@ -78,7 +79,7 @@ public class ShopController {
     @RequestMapping(value = "/admin/shops/areas", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<String> getAreasByCity(@RequestParam String city) {
-        long cityId = cityService.findByName(city).getId();
+        UUID cityId = cityService.findByName(city).getId();
         List<Area> areas = areaService.findByCityId(cityId);
         List<String> areaNames = new ArrayList<>();
         for (Area area : areas) areaNames.add(area.getName());

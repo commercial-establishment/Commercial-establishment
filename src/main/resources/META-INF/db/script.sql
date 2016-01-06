@@ -1,32 +1,32 @@
-INSERT INTO role (id, name) VALUES (1, 'ADMIN');
-INSERT INTO role (id, name) VALUES (2, 'PROVIDER');
-INSERT INTO role (id, name) VALUES (3, 'OWNER');
-INSERT INTO role (id, name) VALUES (4, 'ACCOUNTANT');
-INSERT INTO role (id, name) VALUES (5, 'SELLER');
+INSERT INTO role (id, name) VALUES ('00000000-0000-0001-0000-000000000000', 'ADMIN');
+INSERT INTO role (id, name) VALUES ('00000000-0000-0002-0000-000000000000', 'PROVIDER');
+INSERT INTO role (id, name) VALUES ('00000000-0000-0003-0000-000000000000', 'OWNER');
+INSERT INTO role (id, name) VALUES ('00000000-0000-0004-0000-000000000000', 'ACCOUNTANT');
+INSERT INTO role (id, name) VALUES ('00000000-0000-0005-0000-000000000000', 'SELLER');
 
-INSERT INTO gender (id, name) VALUES (1, 'MALE');
-INSERT INTO gender (id, name) VALUES (2, 'FEMALE');
+INSERT INTO gender (id, name) VALUES ('00000000-0000-0001-0000-000000000000', 'MALE');
+INSERT INTO gender (id, name) VALUES ('00000000-0000-0002-0000-000000000000', 'FEMALE');
 
-INSERT INTO city (id, name) VALUES (1, 'АСТАНА');
-INSERT INTO city (id, name) VALUES (2, 'КАРАГАНДА');
+INSERT INTO city (id, name) VALUES ('00000000-0000-0001-0000-000000000000', 'АСТАНА');
+INSERT INTO city (id, name) VALUES ('00000000-0000-0002-0000-000000000000', 'КАРАГАНДА');
 
-INSERT INTO area (id, name, city_id) VALUES (1, 'Есильский', 1);
-INSERT INTO area (id, name, city_id) VALUES (2, 'Алматинский', 1);
-INSERT INTO area (id, name, city_id) VALUES (3, 'Сарыаркинский', 1);
+INSERT INTO area (id, name, city_id) VALUES ('00000000-0000-0001-0000-000000000000', 'Есильский', '00000000-0000-0001-0000-000000000000');
+INSERT INTO area (id, name, city_id) VALUES ('00000000-0000-0002-0000-000000000000', 'Алматинский', '00000000-0000-0001-0000-000000000000');
+INSERT INTO area (id, name, city_id) VALUES ('00000000-0000-0003-0000-000000000000', 'Сарыаркинский', '00000000-0000-0001-0000-000000000000');
 
-INSERT INTO area (id, name, city_id) VALUES (4, 'Офигенный', 2);
+INSERT INTO area (id, name, city_id) VALUES ('00000000-0000-0004-0000-000000000000', 'Офигенный', '00000000-0000-0002-0000-000000000000');
 
-INSERT INTO category (id, name) VALUES (1, 'Напитки');
-INSERT INTO category (id, name) VALUES (2, 'НеНапитки');
+INSERT INTO category (id, name) VALUES ('00000000-0000-0001-0000-000000000000', 'Напитки');
+INSERT INTO category (id, name) VALUES ('00000000-0000-0002-0000-000000000000', 'НеНапитки');
 
 /*TODO change types*/
-INSERT INTO type (id, name) VALUES (1, 'A');
-INSERT INTO type (id, name) VALUES (2, 'B');
+INSERT INTO type (id, name) VALUES ('00000000-0000-0001-0000-000000000000', 'A');
+INSERT INTO type (id, name) VALUES ('00000000-0000-0002-0000-000000000000', 'B');
 
 INSERT INTO admin (id, is_blocked, email, end_work_date, name, password, patronymic, start_work_date, surname, username, role_id, gender_id)
 VALUES
-  (1, FALSE, 'yakovshmidt93@gmail.com', NULL, 'Yakov', '$2a$10$5/0IiLwNrICc3Dmq/7AWKO08qK13AKH2tWIytGe9a2.WZHIj2WwPa',
-   'Vladimirovich', '11-11-2011', 'Shmidt', 'yakov11', 1, 1);
+  ('00000000-0000-0001-0000-000000000000', FALSE, 'yakovshmidt93@gmail.com', NULL, 'Yakov', '$2a$10$5/0IiLwNrICc3Dmq/7AWKO08qK13AKH2tWIytGe9a2.WZHIj2WwPa',
+   'Vladimirovich', '11-11-2011', 'Shmidt', 'yakov11', '00000000-0000-0001-0000-000000000000', '00000000-0000-0001-0000-000000000000');
 
 INSERT INTO unit (id, name, symbol) VALUES (1, 'Килограмм', 'кг');
 INSERT INTO unit (id, name, symbol) VALUES (2, 'Литр', 'л');

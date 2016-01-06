@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class ProductPageController {
@@ -26,14 +27,14 @@ public class ProductPageController {
     private UnitService unitService;
 
     @RequestMapping("/admin/products/{id}")
-    public String information(Model model, @PathVariable long id) {
+    public String information(Model model, @PathVariable UUID id) {
         Product product = productService.findById(id);
         model.addAttribute("product", product);
         return "/product-info";
     }
 
     @RequestMapping("/admin/products/{id}/edit")
-    public String edit(Model model, @PathVariable long id) {
+    public String edit(Model model, @PathVariable UUID id) {
         List<Category> categories = categoryService.findAll();
         List<Unit> units = unitService.findAll();
         Product product = productService.findById(id);

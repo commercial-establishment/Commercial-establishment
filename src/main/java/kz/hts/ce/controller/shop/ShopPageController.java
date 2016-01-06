@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class ShopPageController {
@@ -27,14 +28,14 @@ public class ShopPageController {
 
 
     @RequestMapping("/admin/shops/{id}")
-    public String providerInformation(Model model, @PathVariable long id){
+    public String providerInformation(Model model, @PathVariable UUID id){
         Shop shop = shopService.findById(id);
         model.addAttribute("shop", shop);
         return "/shop-info";
     }
 
     @RequestMapping("/admin/shops/{id}/edit")
-    public String edit(Model model, @PathVariable long id){
+    public String edit(Model model, @PathVariable UUID id){
         List<City> cities = cityService.findAll();
         List<Type> types = typeService.findAll();
         Shop shop = shopService.findById(id);

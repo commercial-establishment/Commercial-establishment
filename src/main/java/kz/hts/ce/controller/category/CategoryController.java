@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class CategoryController {
@@ -19,7 +20,7 @@ public class CategoryController {
 
 
     @RequestMapping(value = "/admin/categories/{id}/edit", method = RequestMethod.POST)
-    public String edit(@PathVariable long id, @Valid @ModelAttribute("category") Category category,
+    public String edit(@PathVariable UUID id, @Valid @ModelAttribute("category") Category category,
                        BindingResult result) {
         if (result.hasErrors()) {
             return "category-edit";

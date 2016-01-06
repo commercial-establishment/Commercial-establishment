@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class CategoryService extends BaseService<Category, CategoryRepository>{
@@ -23,5 +24,5 @@ public class CategoryService extends BaseService<Category, CategoryRepository>{
         return repository.findByName(categoryName);
     }
 
-    public void delete(long id){ repository.delete(id); }
+    public void delete(UUID id){ repository.delete(id); }
 }

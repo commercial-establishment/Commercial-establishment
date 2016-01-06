@@ -15,14 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class AdminPageController {
 
-    public static final String ADMIN = "ADMIN";
-    public static final String GENDERS = "genders";
-    public static final String ADMIN_LOWER_CASE = "admin";
-    public static final String ADMINS = "admins";
+    private static final String ADMIN = "ADMIN";
+    private static final String GENDERS = "genders";
+    private static final String ADMIN_LOWER_CASE = "admin";
+    private static final String ADMINS = "admins";
 
     @Autowired
     private AdminService adminService;
@@ -30,14 +31,14 @@ public class AdminPageController {
     private SpringUtil springUtil;
 
     @RequestMapping("/admin/admins/{id}")
-    public String information(Model model, @PathVariable long id) {
+    public String information(Model model, @PathVariable UUID id) {
         Admin admin = adminService.findById(id);
         model.addAttribute(ADMIN_LOWER_CASE, admin);
         return "/admin-info";
     }
 
     @RequestMapping("/admin/admins/{id}/edit")
-    public String edit(Model model, @PathVariable long id) {
+    public String edit(Model model, @PathVariable UUID id) {
         Admin admin = adminService.findById(id);
         List<Gender> genders = springUtil.getGenders();
         List<Role> roles = springUtil.getRoles();
