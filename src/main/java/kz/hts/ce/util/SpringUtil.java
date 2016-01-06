@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ public class SpringUtil {
     private Map<String, Role> roleMap;
     private List<Role> roles;
     private List<Gender> genders;
+    private Date broadcastDate;
 
     @Autowired
     private RoleService roleService;
@@ -57,5 +59,13 @@ public class SpringUtil {
 
     public void setRoleMap(Map<String, Role> roleMap) {
         this.roleMap = roleMap;
+    }
+
+    public Date getBroadcastDate() {
+        return broadcastDate;
+    }
+
+    public void setBroadcastDate(Date broadcastDate) {
+        this.broadcastDate = broadcastDate;
     }
 }

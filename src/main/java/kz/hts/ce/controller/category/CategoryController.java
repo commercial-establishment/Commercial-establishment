@@ -39,9 +39,10 @@ public class CategoryController {
         return "redirect:";
     }
 
-    @RequestMapping(value = "/json/categories", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    @RequestMapping(value = "/json/category-changes", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @ResponseBody
     public List<Category> sendAllCategoriesToClient() {
+
         return categoryService.findAll();
     }
 }
