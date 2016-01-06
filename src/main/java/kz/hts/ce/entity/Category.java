@@ -1,5 +1,6 @@
 package kz.hts.ce.entity;
 
+import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;
@@ -7,6 +8,7 @@ import javax.persistence.Entity;
 import javax.validation.constraints.Size;
 
 @Entity
+@Audited
 public class Category extends BaseEntity {
 
     @NotEmpty
