@@ -195,14 +195,14 @@ public class ProviderController {
         return "redirect:/admin/providers/" + providerId + "/products";
     }
 
-    @RequestMapping(value = "/json/providers/add", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    @RequestMapping(value = "/replication/providers/add", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     @ResponseBody
     public List<Provider> getProvidersFromClient(@RequestBody List<Provider> providers) {
         for (Provider provider : providers) providerService.save(provider);
         return providers;
     }
 
-    @RequestMapping(value = "/json/providers", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    @RequestMapping(value = "/replication/providers", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @ResponseBody
     public List<Provider> sendAllProvidersToClient() {
         return providerService.findAll();

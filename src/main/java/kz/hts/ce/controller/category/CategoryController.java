@@ -1,8 +1,10 @@
 package kz.hts.ce.controller.category;
 
 import kz.hts.ce.entity.Category;
+import kz.hts.ce.entity.Provider;
 import kz.hts.ce.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.history.Revisions;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,14 +12,17 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 @Controller
 public class CategoryController {
+
     @Autowired
     private CategoryService categoryService;
-
 
     @RequestMapping(value = "/admin/categories/{id}/edit", method = RequestMethod.POST)
     public String edit(@PathVariable UUID id, @Valid @ModelAttribute("category") Category category,
@@ -39,11 +44,11 @@ public class CategoryController {
         return "redirect:";
     }
 
-    @RequestMapping(value = "/json/category-changes", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    @RequestMapping(value = "/replication/categories/time={time}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @ResponseBody
-    public List<Category> sendAllCategoriesToClient() {
-
-        return categoryService.findAll();
+    public List<Category> sendAllCategoriesToClient(@PathVariable long time) {
+        List<Category> categories = categoryService.getHistory(time);
+        return categories;
     }
 }
 
