@@ -10,7 +10,7 @@
     <link href="<c:url value="/resources/css/style.css"/>" rel="stylesheet" type="text/css">
 </t:head>
 
-<t:container providers="active">
+<t:container categories="active">
 
     <div id="page-wrapper">
 
@@ -26,12 +26,7 @@
                             <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>">Главная</a>
                         </li>
                         <li>
-                            <i class="fa fa-table"></i> <a href="<c:url value="/admin/categories"/>">Категории</a>
-                        </li>
-                        <li class="active">
-                            <i class="fa fa-desktop"></i> <a href="<c:url value="/admin/categories/${category.id}"/>">Информация
-                            о
-                            категориях</a>
+                            <i class="fa fa-table"></i> <a href="<c:url value="/categories"/>">Категории</a>
                         </li>
                         <li class="active">
                             <i class="fa fa-edit"></i> Редактирование данных
@@ -43,17 +38,27 @@
                 <div class="table-responsive">
                     <form:form method="post" action="/admin/categories/${id}/edit" modelAttribute="category"
                                commandName="category">
-                        <table class="table table-hover fixed-table">
+                        <table class="table table-hover">
                             <tbody>
                             <tr>
-                                <td style="width: 250px;"><form:label path="name">Название категории:</form:label></td>
-                                <td style="width: 250px;"><form:input cssClass="form-control" path="name"/></td>
+                                <td><form:label path="name">Название категории:</form:label></td>
+                                <td><form:input cssClass="form-control" path="name"/></td>
+                                <c:set var="nameErrors"><form:errors path="name" cssClass="error"/>
+                                </c:set>
+                                <c:choose>
+                                    <c:when test="${not empty nameErrors}">
+                                        <td> ${nameErrors} </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>- Введите актуальное название категории</td>
+                                    </c:otherwise>
+                                </c:choose>
                             </tr>
                             <tr>
-                                <td style="width: 250px;">
+                                <td>
                                     <form:button type="submit" class="btn btn-lg btn-success">Сохранить</form:button>
-                                        <%--<input type="submit" class="btn btn-lg btn-success" value="Сохранить">--%>
                                 </td>
+                                <td/>
                                 <td><a href="<c:url value="/admin/categories/${id}"/>" class="btn btn-lg btn-danger">Отмена</a>
                                 </td>
                             </tr>

@@ -1,13 +1,12 @@
 package kz.hts.ce.entity;
 
-import org.hibernate.envers.Audited;
-
 import javax.persistence.Entity;
 
 @Entity
-public class City extends BaseEntity {
+public class Unit extends BaseEntity {
 
     private String name;
+    private String symbol;
 
     public String getName() {
         return name;
@@ -15,5 +14,13 @@ public class City extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 }

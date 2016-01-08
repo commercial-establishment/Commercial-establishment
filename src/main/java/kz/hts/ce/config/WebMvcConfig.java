@@ -1,9 +1,8 @@
 package kz.hts.ce.config;
 
-import kz.hts.ce.util.converters.StringToCategory;
-import kz.hts.ce.util.converters.StringToCity;
-import kz.hts.ce.util.converters.StringToGender;
-import kz.hts.ce.util.converters.StringToType;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import kz.hts.ce.util.converters.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -11,11 +10,12 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -26,6 +26,8 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 @Configuration
@@ -42,6 +44,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     private StringToType stringToTypeConverter;
     @Autowired
     private StringToCategory stringToCategoryConverter;
+    @Autowired
+    private StringToArea stringToAreaConverter;
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
@@ -49,6 +53,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         registry.addConverter(stringToCityConverter);
         registry.addConverter(stringToTypeConverter);
         registry.addConverter(stringToCategoryConverter);
+        registry.addConverter(stringToAreaConverter);
 
     }
 
@@ -87,7 +92,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public LocaleResolver localeResolver(){
+    public LocaleResolver localeResolver() {
         CookieLocaleResolver resolver = new CookieLocaleResolver();
         resolver.setDefaultLocale(new Locale("ru_RU"));
         resolver.setCookieName("establishmentLocaleCookie");
@@ -100,5 +105,26 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
         interceptor.setParamName("establishmentLocale");
         registry.addInterceptor(interceptor);
+    }
+
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        converters.add(jsonConverter());
+    }
+
+    @Bean
+    public MappingJackson2HttpMessageConverter jsonConverter() {
+        MappingJackson2HttpMessageConverter jacksonConverter = new
+                MappingJackson2HttpMessageConverter();
+        jacksonConverter.setSupportedMediaTypes(Arrays.asList(MediaType.valueOf("application/json")));
+        jacksonConverter.setObjectMapper(jacksonObjectMapper());
+        return jacksonConverter;
+    }
+
+    @Bean
+    public ObjectMapper jacksonObjectMapper() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        return objectMapper;
     }
 }

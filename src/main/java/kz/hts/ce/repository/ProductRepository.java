@@ -7,16 +7,18 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
+
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<Product, UUID> {
 
     @Transactional
     @Modifying
     @Query("UPDATE Product p set p.blocked = TRUE where p.id = ?1")
-    void lockById(long id);
+    void lockById(UUID id);
 
     @Transactional
     @Modifying
     @Query("UPDATE Product p set p.blocked = FALSE where p.id = ?1")
-    void reestablishById(long id);
+    void reestablishById(UUID id);
 }

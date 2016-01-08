@@ -22,7 +22,8 @@
                             <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>">Главная</a>
                         </li>
                         <li>
-                            <i class="fa fa-table"></i> <a href="<c:url value="/admin/providers"/>">Список поставщиков</a>
+                            <i class="fa fa-table"></i> <a href="<c:url value="/admin/providers"/>">Список
+                            поставщиков</a>
                         </li>
                         <li class="active">
                             <i class="fa fa-desktop"></i> Информация о поставщике
@@ -40,9 +41,10 @@
                                 <form method="GET" action="/admin/providers/${id}/products">
                                     <input type="submit" class="btn btn-lg btn-default" value="Товары">
                                 </form>
-                                <%--<a href="<c:url value="/providers/${id}/products"/>" class="btn btn-lg btn-default">Товары</a>--%>
+                                    <%--<a href="<c:url value="/providers/${id}/products"/>" class="btn btn-lg btn-default">Товары</a>--%>
                             </td>
-                            <td><a href="<c:url value="/admin/providers/${id}/shops"/>" class="btn btn-lg btn-default">Магазины</a></td>
+                            <td><a href="<c:url value="/admin/providers/${id}/shops"/>" class="btn btn-lg btn-default">Магазины</a>
+                            </td>
                         </tr>
                         <tr>
                             <td><b>Имя пользователя:</b></td>
@@ -67,6 +69,34 @@
                         <tr>
                             <td><b>Контактное лицо:</b></td>
                             <td>${provider.contactPerson}</td>
+                        </tr>
+                        <tr>
+                            <td><b>ИИН:</b></td>
+                            <c:choose>
+                                <c:when test="${provider.iin == ''}">
+                                    <td>ИИН не заполнен</td>
+                                </c:when>
+                                <c:when test="${provider.iin != null}">
+                                    <td>${provider.iin}</td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td>ИИН не заполнен</td>
+                                </c:otherwise>
+                            </c:choose>
+                        </tr>
+                        <tr>
+                            <td><b>БИН:</b></td>
+                            <c:choose>
+                                <c:when test="${provider.bin == ''}">
+                                    <td>БИН не заполнен</td>
+                                </c:when>
+                                <c:when test="${provider.bin != null}">
+                                    <td>${provider.bin}</td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td>БИН не заполнен</td>
+                                </c:otherwise>
+                            </c:choose>
                         </tr>
                         <tr>
                             <td><b>Дата начала работы:</b></td>
@@ -94,7 +124,8 @@
                             </td>
                             <c:choose>
                                 <c:when test="${provider.blocked == false}">
-                                    <td><a href="<c:url value="/admin/providers/${id}/lock"/>" class="btn btn-lg btn-danger">Заблокировать</a>
+                                    <td><a href="<c:url value="/admin/providers/${id}/lock"/>"
+                                           class="btn btn-lg btn-danger">Заблокировать</a>
                                     </td>
                                 </c:when>
                                 <c:otherwise>

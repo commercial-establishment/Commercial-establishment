@@ -1,5 +1,7 @@
 package kz.hts.ce.entity;
 
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.RelationTargetAuditMode;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -12,19 +14,22 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
+
 @Entity
+@Audited
 public class Provider extends BaseEntity {
 
-    @NotEmpty
     @Size(min = 3, max = 14)
     @Pattern(regexp = "^[a-z0-9_-]+[a-z0-9_-]$")
+    @Column(nullable = true)
     private String username;
 
-    @NotEmpty
+    @Column(nullable = true)
     private String password;
 
     @ManyToOne
     @JoinColumn(name = "city_id", nullable = false)
+    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     private City city;
 
     @Size(max = 100)
@@ -36,15 +41,17 @@ public class Provider extends BaseEntity {
     private String email;
 
     @Size(max = 100)
-    @Column(name = "contact_person")
+    @Column(name = "contact_person", nullable = false)
     private String contactPerson;
 
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
+    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     private Role role;
 
     @Size(max = 30)
-    @Column(name = "company_name")
+    @NotEmpty
+    @Column(name = "company_name", nullable = false)
     private String companyName;
 
     @Column(name = "start_work_date", nullable = false)
@@ -57,6 +64,16 @@ public class Provider extends BaseEntity {
 
     @Column(name = "is_blocked", nullable = false)
     private boolean blocked;
+
+    @Size(max = 20)
+    @Column(nullable = true)
+    @Pattern(regexp = "^[\\d]{0,20}$")
+    private String iin;
+
+    @Size(max = 20)
+    @Pattern(regexp = "^[\\d]{0,20}$")
+    @Column(nullable = true)
+    private String bin;
 
     public String getUsername() {
         return username;
@@ -145,4 +162,21 @@ public class Provider extends BaseEntity {
     public void setBlocked(boolean blocked) {
         this.blocked = blocked;
     }
+
+    public String getIin() {
+        return iin;
+    }
+
+    public void setIin(String iin) {
+        this.iin = iin;
+    }
+
+    public String getBin() {
+        return bin;
+    }
+
+    public void setBin(String bin) {
+        this.bin = bin;
+    }
 }
+

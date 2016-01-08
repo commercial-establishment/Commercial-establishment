@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class LoginPageController {
 
-    public static final String SPRING_SECURITY_LAST_EXCEPTION = "SPRING_SECURITY_LAST_EXCEPTION";
+    private static final String SPRING_SECURITY_LAST_EXCEPTION = "SPRING_SECURITY_LAST_EXCEPTION";
 
-    @RequestMapping(value = "/login/form",method = RequestMethod.GET)
-    public String loginPage(HttpServletRequest request, Model model, String logout) {
+    @RequestMapping(value = "/login/form", method = RequestMethod.GET)
+    public String loginPage(HttpServletRequest request, Model model) {
         Exception exception = (Exception) request.getSession().getAttribute(SPRING_SECURITY_LAST_EXCEPTION);
         if (exception != null) {
             model.addAttribute("error", "incorrect.username.or.password");

@@ -45,7 +45,7 @@
                             <tbody>
                             <tr>
                                 <td><form:label path="username">Имя пользователя:</form:label></td>
-                                <td><form:input cssClass="" path="username"/></td>
+                                <td><form:input cssClass="form-control" path="username"/></td>
                                 <form:hidden path="password"/>
                                 <c:set var="usernameErrors"><form:errors path="username" cssClass="error"/> </c:set>
                                 <c:choose>

@@ -1,24 +1,25 @@
 package kz.hts.ce.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 public class Warehouse extends BaseEntity {
 
-    @ManyToOne
-    @JoinColumn(name = "produt_id")
-    private Product product;
+    @OneToOne
+    @JoinColumn(name = "shop_id", nullable = false)
+    private Shop shop;
 
-    private int arrival;
-    private int residue;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
     /*TODO nullable = false*/
     @Column(name = "import_date", nullable = true)
     private LocalDateTime importDate;
+
+    private int arrival;
+    private int residue;
 
     public Product getProduct() {
         return product;
@@ -50,5 +51,13 @@ public class Warehouse extends BaseEntity {
 
     public void setImportDate(LocalDateTime importDate) {
         this.importDate = importDate;
+    }
+
+    public Shop getShop() {
+        return shop;
+    }
+
+    public void setShop(Shop shop) {
+        this.shop = shop;
     }
 }

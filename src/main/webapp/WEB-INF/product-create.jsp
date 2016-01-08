@@ -39,6 +39,28 @@
                             <tr>
                                 <td><form:label path="name">Название товара:</form:label></td>
                                 <td><form:input cssClass="form-control" path="name"/></td>
+                                <c:set var="nameErrors"><form:errors path="name" cssClass="error"/> </c:set>
+                                <c:choose>
+                                    <c:when test="${not empty nameErrors}">
+                                        <td> ${nameErrors} </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>- Введите корректное название товара</td>
+                                    </c:otherwise>
+                                </c:choose>
+                            </tr>
+                            <tr>
+                                <td><form:label path="barcode">Штрих код:</form:label></td>
+                                <td><form:input cssClass="form-control" path="barcode"/></td>
+                                <c:set var="barcodeErrors"><form:errors path="barcode" cssClass="error"/> </c:set>
+                                <c:choose>
+                                    <c:when test="${not empty barcodeErrors}">
+                                        <td> ${barcodeErrors} </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>- Введите штрих код товара</td>
+                                    </c:otherwise>
+                                </c:choose>
                             </tr>
                             <tr>
                                 <td><form:label path="category">Категория:</form:label></td>
@@ -48,15 +70,25 @@
                                             <option> ${category.name}</option>
                                         </c:forEach>
                                     </select>
+                                </td>
+                                <td>- Выберите категорию</td>
+                            </tr>
+                            <tr>
+                                <td><form:label path="unit">Единица измерения:</form:label></td>
+                                <td>
+                                    <select name="unit" id="unit" class="form-control">
+                                        <c:forEach items="${units}" var="unit">
+                                            <option> ${unit.name}</option>
+                                        </c:forEach>
                                     </select>
                                 </td>
-                                <td>Имя пользователя должно состоять из ...</td>
+                                <td>- Выберите единицу измерения</td>
                             </tr>
                             <tr>
                                 <td><form:label path="blocked">Заблокирован:</form:label></td>
                                 <td>${product.blocked}</td>
                                 <form:hidden path="blocked"/>
-                                <td>Имя пользователя должно состоять из ...</td>
+                                <td/>
                             </tr>
                             <tr>
                                 <td>

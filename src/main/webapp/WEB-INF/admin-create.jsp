@@ -39,37 +39,96 @@
                             <tr>
                                 <td><form:label path="username">Имя пользователя:</form:label></td>
                                 <td><form:input cssClass="form-control" path="username"/></td>
-                                <td>Имя пользователя должно состоять из ...</td>
+                                <c:set var="usernameErrors"><form:errors path="username" cssClass="error"/> </c:set>
+                                <c:choose>
+                                    <c:when test="${not empty loginIsOccupied}">
+                                        <td class="error"> ${loginIsOccupied} </td>
+                                    </c:when>
+                                    <c:when test="${not empty usernameErrors}">
+                                        <td> ${usernameErrors} </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>Имя пользователя должно состоять из ...</td>
+                                    </c:otherwise>
+                                </c:choose>
                             </tr>
                             <tr>
                                 <td><form:label path="password">Пароль:</form:label></td>
-                                <td><form:input cssClass="form-control" path="password"/></td>
-                                <td>Имя пользователя должно состоять из ...</td>
+                                <td><form:password cssClass="form-control" path="password"/></td>
+                                <c:set var="passwordErrors"><form:errors path="password" cssClass="error"/> </c:set>
+                                <c:choose>
+                                    <c:when test="${not empty passwordErrors}">
+                                        <td> ${passwordErrors} </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>Имя пользователя должно состоять из ...</td>
+                                    </c:otherwise>
+                                </c:choose>
                             </tr>
                             <tr>
                                 <td><form:label path="name">Имя:</form:label></td>
                                 <td><form:input cssClass="form-control" path="name"/></td>
-                                <td>Имя пользователя должно состоять из ...</td>
+                                <c:set var="nameErrors"><form:errors path="name" cssClass="error"/> </c:set>
+                                <c:choose>
+                                    <c:when test="${not empty nameErrors}">
+                                        <td> ${nameErrors} </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>Имя пользователя должно состоять из ...</td>
+                                    </c:otherwise>
+                                </c:choose>
                             </tr>
                             <tr>
                                 <td><form:label path="patronymic">Отчество:</form:label></td>
                                 <td><form:input cssClass="form-control" path="patronymic"/></td>
-                                <td>Имя пользователя должно состоять из ...</td>
+                                <c:set var="patronymicErrors"><form:errors path="patronymic" cssClass="error"/> </c:set>
+                                <c:choose>
+                                    <c:when test="${not empty patronymicErrors}">
+                                        <td> ${patronymicErrors} </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>Имя пользователя должно состоять из ...</td>
+                                    </c:otherwise>
+                                </c:choose>
                             </tr>
                             <tr>
                                 <td><form:label path="surname">Фамилия:</form:label></td>
                                 <td><form:input cssClass="form-control" path="surname"/></td>
-                                <td>Имя пользователя должно состоять из ...</td>
+                                <c:set var="surnameErrors"><form:errors path="surname" cssClass="error"/> </c:set>
+                                <c:choose>
+                                    <c:when test="${not empty surnameErrors}">
+                                        <td> ${surnameErrors} </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>Имя пользователя должно состоять из ...</td>
+                                    </c:otherwise>
+                                </c:choose>
                             </tr>
                             <tr>
                                 <td><form:label path="email">Email:</form:label></td>
                                 <td><form:input type="email" cssClass="form-control" path="email"/></td>
-                                <td>Имя пользователя должно состоять из ...</td>
+                                <c:set var="emailErrors"><form:errors path="email" cssClass="error"/> </c:set>
+                                <c:choose>
+                                    <c:when test="${not empty emailErrors}">
+                                        <td> ${emailErrors} </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>Имя пользователя должно состоять из ...</td>
+                                    </c:otherwise>
+                                </c:choose>
                             </tr>
                             <tr>
                                 <td><form:label path="phone">Номер телефона (без +7):</form:label></td>
                                 <td><form:input cssClass="form-control" path="phone"/></td>
-                                <td>Имя пользователя должно состоять из ...</td>
+                                <c:set var="phoneErrors"><form:errors path="phone" cssClass="error"/> </c:set>
+                                <c:choose>
+                                    <c:when test="${not empty phoneErrors}">
+                                        <td> ${phoneErrors} </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>Имя пользователя должно состоять из ...</td>
+                                    </c:otherwise>
+                                </c:choose>
                             </tr>
                             <tr>
                                 <td><form:label path="gender">Пол:</form:label></td>
@@ -82,17 +141,17 @@
                                 </td>
                                 <td>Имя пользователя должно состоять из ...</td>
                             </tr>
-                            <tr>
-                                <td><form:label path="role">Роль:</form:label></td>
-                                <td><form:label path="role">ADMIN</form:label></td>
-                                <td>Имя пользователя должно состоять из ...</td>
-                            </tr>
-                            <tr>
-                                <td><form:label path="blocked">Заблокирован:</form:label></td>
-                                <td>${admin.blocked}</td>
-                                <form:hidden path="blocked"/>
-                                <td>Имя пользователя должно состоять из ...</td>
-                            </tr>
+                            <%--<tr>--%>
+                                <%--<td><form:label path="role">Роль:</form:label></td>--%>
+                                <%--<td><form:label path="role">ADMIN</form:label></td>--%>
+                                <%--<td>Имя пользователя должно состоять из ...</td>--%>
+                            <%--</tr>--%>
+                            <%--<tr>--%>
+                                <%--<td><form:label path="blocked">Заблокирован:</form:label></td>--%>
+                                <%--<td>${admin.blocked}</td>--%>
+                                <%--<form:hidden path="blocked"/>--%>
+                                <%--<td>Имя пользователя должно состоять из ...</td>--%>
+                            <%--</tr>--%>
                             <tr>
                                 <td>
                                     <form:button type="submit" class="btn btn-lg btn-success">Сохранить</form:button>

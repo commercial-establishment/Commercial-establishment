@@ -15,7 +15,7 @@ import java.util.Date;
 @Entity
 public class Admin extends BaseEntity {
 
-    public static final String NAME_REGEX = "^[a-zA-Z\u0430-\u044f\u0410-\u042f\u0451\u0401]" +
+    private static final String NAME_REGEX = "^[a-zA-Z\u0430-\u044f\u0410-\u042f\u0451\u0401]" +
             "[a-zA-Z-\u0430-\u044f\u0410-\u042f\u0451\u0401]+[a-zA-Z\u0430-\u044f\u0410-\u042f\u0451\u0401]?$";
 
     @NotEmpty

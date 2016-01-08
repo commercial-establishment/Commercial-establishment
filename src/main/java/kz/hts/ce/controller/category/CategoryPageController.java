@@ -10,22 +10,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class CategoryPageController {
+
     @Autowired
     private CategoryService categoryService;
 
-
     @RequestMapping("/admin/categories/{id}")
-    public String information(Model model, @PathVariable long id){
+    public String information(Model model, @PathVariable UUID id){
         Category category = categoryService.findById(id);
         model.addAttribute("category", category);
         return "/category-info";
     }
 
     @RequestMapping("/admin/categories/{id}/edit")
-    public String edit(Model model, @PathVariable long id){
+    public String edit(Model model, @PathVariable UUID id){
         Category category = categoryService.findById(id);
         model.addAttribute("category", category);
         return "category-edit";

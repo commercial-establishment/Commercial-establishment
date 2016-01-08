@@ -6,7 +6,7 @@
 
 <t:head title="Информация о категории"/>
 
-<t:container admins="active">
+<t:container categories="active">
 
     <div id="page-wrapper">
 
@@ -48,6 +48,8 @@
                                     <input type="submit" class="btn btn-lg btn-default" value="Редактировать">
                                 </form>
                                     <%--<a href="<c:url value="/admins/${id}/edit"/>" class="btn btn-lg btn-default">Редактировать</a>--%>
+                            </td>
+                            <td>
                             </td>
                         </tr>
                         </tbody>

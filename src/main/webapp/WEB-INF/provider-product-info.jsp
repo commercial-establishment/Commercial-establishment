@@ -53,18 +53,18 @@
                             <td><b>Категория:</b></td>
                             <td>${productProvider.product.category.name}</td>
                         </tr>
-                        <tr>
-                            <td><b>Цена(в тенге):</b></td>
-                            <td>${productProvider.price}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Количество:</b></td>
-                            <td>${productProvider.amount}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Общая цена:</b></td>
-                            <td><b>${sumPrice}</b></td>
-                        </tr>
+                        <%--<tr>--%>
+                            <%--<td><b>Цена(в тенге):</b></td>--%>
+                            <%--<td>${productProvider.price}</td>--%>
+                        <%--</tr>--%>
+                        <%--<tr>--%>
+                            <%--<td><b>Количество:</b></td>--%>
+                            <%--<td>${productProvider.amount}</td>--%>
+                        <%--</tr>--%>
+                        <%--<tr>--%>
+                            <%--<td><b>Общая цена:</b></td>--%>
+                            <%--<td><b>${sumPrice}</b></td>--%>
+                        <%--</tr>--%>
                         <tr>
                             <td>
                                 <form method="GET"
