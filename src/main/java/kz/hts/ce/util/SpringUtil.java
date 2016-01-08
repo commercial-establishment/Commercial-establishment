@@ -53,14 +53,6 @@ public class SpringUtil {
         this.genders = genders;
     }
 
-    public Map<String, Role> getRoleMap() {
-        return roleMap;
-    }
-
-    public void setRoleMap(Map<String, Role> roleMap) {
-        this.roleMap = roleMap;
-    }
-
     public Date getBroadcastDate() {
         return broadcastDate;
     }
