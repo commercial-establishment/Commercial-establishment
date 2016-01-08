@@ -29,8 +29,9 @@
                             <i class="fa fa-table"></i> <a href="<c:url value="/admin/shops"/>">Список магазинов</a>
                         </li>
                         <li class="active">
-                            <i class="fa fa-desktop"></i> <a href="<c:url value="/admin/shops/${shop.id}"/>">Информация о магазинах
-                            </a>
+                            <i class="fa fa-desktop"></i> <a href="<c:url value="/admin/shops/${shop.id}"/>">Информация
+                            о магазинах
+                        </a>
                         </li>
                         <li class="active">
                             <i class="fa fa-edit"></i> Редактирование данных
@@ -46,24 +47,49 @@
                             <tr>
                                 <td><form:label path="name">Наименование магазина:</form:label></td>
                                 <td><form:input cssClass="form-control" path="name"/></td>
-
+                                <c:set var="nameErrors"><form:errors path="name" cssClass="error"/> </c:set>
+                                <c:choose>
+                                    <c:when test="${not empty nameErrors}">
+                                        <td> ${nameErrors} </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>- Введите корректное название магазина</td>
+                                    </c:otherwise>
+                                </c:choose>
                             </tr>
                             <tr>
                                 <td><form:label path="address">Адрес:</form:label></td>
                                 <td><form:input cssClass="form-control" path="address"/></td>
-
+                                <c:set var="addressErrors"><form:errors path="address" cssClass="error"/> </c:set>
+                                <c:choose>
+                                    <c:when test="${not empty addressErrors}">
+                                        <td> ${addressErrors} </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>- Введите корректный адрес</td>
+                                    </c:otherwise>
+                                </c:choose>
                             </tr>
                             <tr>
-                                <td><form:label path="city">Город:</form:label></td>
+                                <td><label>Город:</label></td>
                                 <td>
-                                    <select name="city" id="city" class="form-control">
+                                    <select name="city" id="city" onchange="selectCity()" class="form-control">
                                         <c:forEach items="${cities}" var="city">
-                                            <option <c:if test="${shop.city.name == city.name}">selected</c:if>>
+                                            <option <c:if test="${shop.area.city.name == city.name}">selected</c:if>>
                                                     ${city.name}</option>
                                         </c:forEach>
                                     </select>
                                 </td>
-                                <td>Имя пользователя должно состоять из ...</td>
+                                <td>- Выберите город</td>
+                            </tr>
+                            <tr>
+                                <td><label>Район:</label></td>
+                                <td>
+                                    <select disabled="disabled" name="area" id="area" class="form-control">
+                                        <option selected value="${shop.area.name}">${shop.area.name}</option>
+                                    </select>
+                                </td>
+                                <td>- Выберите район</td>
                             </tr>
                             <tr>
                                 <td><form:label path="type">Тип:</form:label></td>
@@ -78,25 +104,16 @@
                                 <td>Имя пользователя должно состоять из ...</td>
                             </tr>
                             <tr>
-                                <td><form:label path="blocked">Заблокирован:</form:label></td>
-                                <td>${shop.blocked}</td>
+                                <input type="hidden" name="blocked" value="${shop.blocked}">
                                 <form:hidden path="blocked"/>
-                                <c:set var="blockedErrors"><form:errors path="blocked" cssClass="error"/> </c:set>
-                                <c:choose>
-                                    <c:when test="${not empty blockedErrors}">
-                                        <td> ${blockedErrors} </td>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <td>Имя пользователя должно состоять из ...</td>
-                                    </c:otherwise>
-                                </c:choose>
                             </tr>
                             <tr>
                                 <td>
                                     <form:button type="submit" class="btn btn-lg btn-success">Сохранить</form:button>
                                 </td>
                                 <td></td>
-                                <td><a href="<c:url value="/admin/shops/${id}"/>" class="btn btn-lg btn-danger">Отмена</a>
+                                <td><a href="<c:url value="/admin/shops/${id}"/>"
+                                       class="btn btn-lg btn-danger">Отмена</a>
                                 </td>
                             </tr>
                             </tbody>
@@ -107,6 +124,7 @@
         </div>
     </div>
 
+    <script src="<c:url value="/resources/js/script.js"/>"></script>
     <script src="<c:url value="/resources/js/jquery.js"/>"></script>
     <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
     <script src="<c:url value="/resources/js/bootstrap-datepicker.js"/>"></script>

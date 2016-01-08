@@ -9,9 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Repository
-public interface AdminRepository extends JpaRepository<Admin, Long> {
+public interface AdminRepository extends JpaRepository<Admin, UUID> {
 
     Admin findByUsername(String username);
 
@@ -22,25 +23,25 @@ public interface AdminRepository extends JpaRepository<Admin, Long> {
     @Transactional
     @Modifying
     @Query("UPDATE Admin a set a.password = ?1 where a.id = ?2")
-    void updatePasswordById(String password, long id);
+    void updatePasswordById(String password, UUID id);
 
     @Transactional
     @Modifying
     @Query("UPDATE Admin a set a.blocked = TRUE where a.id = ?1")
-    void lockById(long id);
+    void lockById(UUID id);
 
     @Transactional
     @Modifying
     @Query("UPDATE Admin a set a.blocked = FALSE where a.id = ?1")
-    void reestablishById(long id);
+    void reestablishById(UUID id);
 
     @Transactional
     @Modifying
     @Query("UPDATE Admin a set a.startWorkDate = ?1, a.endWorkDate = ?2 where a.id = ?3")
-    void updateStartAndEndWorkDate(Date startWorkDate, Date endWorkDate, long id);
+    void updateStartAndEndWorkDate(Date startWorkDate, Date endWorkDate, UUID id);
 
     @Transactional
     @Modifying
     @Query("UPDATE Admin a set a.endWorkDate = ?1 where a.id = ?2")
-    void updateEndWorkDate(Date endWorkDate, long id);
+    void updateEndWorkDate(Date endWorkDate, UUID id);
 }

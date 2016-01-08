@@ -42,7 +42,9 @@
                         <tr>
                             <th>ID</th>
                             <th>Название товара</th>
+                            <th>Штрих код</th>
                             <th>Категория</th>
+                            <th>Ед. измерения</th>
                             <th>Заблокирован</th>
                         </tr>
                         </thead>
@@ -52,7 +54,9 @@
                             <tr onclick="document.location = '/admin/products/' + ${product.id};">
                                 <td>${product.id}</td>
                                 <td>${product.name}</td>
+                                <td>${product.barcode}</td>
                                 <td>${product.category.name}</td>
+                                <td>${product.unit.name}</td>
                                 <td>${product.blocked}</td>
                             </tr>
                         </c:forEach>
@@ -61,7 +65,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 
     <t:script/>

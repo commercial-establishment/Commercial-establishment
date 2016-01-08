@@ -15,7 +15,6 @@
 
         <div class="container-fluid">
 
-            <!-- Page Heading -->
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
@@ -34,9 +33,13 @@
             <div class="col-lg-12">
                 <div class="table-responsive">
                     <div>
-                        <a href="<c:url value="/admin/providers/create"/>" class="btn btn-lg btn-default">Добавить
-                            поставщика</a>
-                        <br/> <br/>
+                        <form method="GET" action="<c:url value="/admin/providers/create"/>">
+                            <input type="submit" class="btn btn-lg btn-default" value="Добавить">
+                        </form>
+                        <%--<a href="<c:url value="/admin/providers/create"/>" class="btn btn-lg btn-default">Добавить--%>
+                            <%--поставщика</a>--%>
+                        <%--<br/> --%>
+                        <br/>
                     </div>
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
@@ -66,7 +69,6 @@
             </div>
         </div>
     </div>
-</div>
 
     <t:script/>
 </t:container>

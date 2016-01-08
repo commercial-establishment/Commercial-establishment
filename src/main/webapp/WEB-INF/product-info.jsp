@@ -39,8 +39,16 @@
                             <td>${product.name}</td>
                         </tr>
                         <tr>
+                            <td><b>Штрих код:</b></td>
+                            <td>${product.barcode}</td>
+                        </tr>
+                        <tr>
                             <td><b>Категория:</b></td>
                             <td>${product.category.name}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Единица измерения:</b></td>
+                            <td>${product.unit.name}</td>
                         </tr>
                         <tr>
                             <td><b>Заблокирован:</b></td>

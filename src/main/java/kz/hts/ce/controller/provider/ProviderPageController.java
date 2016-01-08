@@ -13,18 +13,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static kz.hts.ce.util.Helper.calculateCost;
 
 @Controller
 public class ProviderPageController {
 
-    public static final String PROVIDER = "PROVIDER";
+    private static final String PROVIDER = "PROVIDER";
 
     @Autowired
     private ProviderService providerService;
-    @Autowired
-    private RoleService roleService;
     @Autowired
     private CityService cityService;
     @Autowired
@@ -38,6 +37,9 @@ public class ProviderPageController {
     @Autowired
     private SpringUtil springUtil;
 
+    @Autowired
+    private SpringUtil springUtil;
+
     @RequestMapping(value = "/admin/providers", method = RequestMethod.GET)
     public String providers(Model model) {
         List<Provider> providers = providerService.findByRoleName(PROVIDER);
@@ -46,17 +48,17 @@ public class ProviderPageController {
     }
 
     @RequestMapping("/admin/providers/{id}")
-    public String providerInformation(Model model, @PathVariable long id) {
+    public String providerInformation(Model model, @PathVariable UUID id) {
         Provider provider = providerService.findById(id);
         model.addAttribute("provider", provider);
         return "/provider-info";
     }
 
     @RequestMapping("/admin/providers/{id}/edit")
-    public String edit(Model model, @PathVariable long id) {
+    public String edit(Model model, @PathVariable UUID id) {
         List<City> cities = cityService.findAll();
         Provider provider = providerService.findById(id);
-        List<Role> roles = roleService.findAll();
+        List<Role> roles = springUtil.getRoles();
         model.addAttribute("roles", roles);
         model.addAttribute("provider", provider);
         model.addAttribute("cities", cities);
@@ -74,7 +76,7 @@ public class ProviderPageController {
     }
 
     @RequestMapping(value = "/admin/providers/{id}/products", method = RequestMethod.GET)
-    public String products(Model model, @PathVariable long id) {
+    public String products(Model model, @PathVariable UUID id) {
         List<ProductProvider> providerProducts = productProviderService.findByProviderId(id);
         model.addAttribute("providerProducts", providerProducts);
         model.addAttribute("providerId", id);
@@ -82,7 +84,7 @@ public class ProviderPageController {
     }
 
     @RequestMapping(value = "/admin/providers/{id}/shops", method = RequestMethod.GET)
-    public String shops(Model model, @PathVariable long id) {
+    public String shops(Model model, @PathVariable UUID id) {
         List<ShopProvider> providerShops = shopProviderService.findByProviderId(id);
         model.addAttribute("providerShops", providerShops);
         model.addAttribute("providerId", id);
@@ -106,20 +108,20 @@ public class ProviderPageController {
     }
 
     @RequestMapping(value = "/admin/providers/{providerId}/products/{productProviderId}", method = RequestMethod.GET)
-    public String providerProducts(Model model, @PathVariable("productProviderId") long productProviderId) {
+    public String providerProducts(Model model, @PathVariable("productProviderId") UUID productProviderId) {
         ProductProvider productProvider = productProviderService.findById(productProviderId);
 
-        long amount = productProvider.getAmount();
-        BigDecimal price = productProvider.getPrice();
-        BigDecimal sumPrice = calculateCost(amount, price);
+//        long amount = productProvider.getAmount();
+//        BigDecimal price = productProvider.getPrice();
+//        BigDecimal sumPrice = calculateCost(amount, price);
 
         model.addAttribute("productProvider", productProvider);
-        model.addAttribute("sumPrice", sumPrice);
+//        model.addAttribute("sumPrice", sumPrice);
         return "provider-product-info";
     }
 
     @RequestMapping(value = "/admin/providers/{providerId}/products/{productProviderId}/edit", method = RequestMethod.GET)
-    public String providerProductEdit(Model model, @PathVariable("productProviderId") long productProviderId) {
+    public String providerProductEdit(Model model, @PathVariable("productProviderId") UUID productProviderId) {
         ProductProvider productProvider = productProviderService.findById(productProviderId);
 
         model.addAttribute("productProvider", productProvider);

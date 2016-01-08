@@ -4,12 +4,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<t:head title="Редактирование списка категории">
+<t:head title="Список категорий">
     <link href="<c:url value="/resources/css/datepicker.css"/>" rel="stylesheet" type="text/css">
     <link href="<c:url value="/resources/css/style.css"/>" rel="stylesheet" type="text/css">
 </t:head>
 
-<t:container products="active">
+<t:container categories="active">
 
     <div id="page-wrapper">
 
@@ -23,10 +23,10 @@
                     </h1>
                     <ol class="breadcrumb">
                         <li>
-                            <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>">Главная</a>
+                            <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>"> Главная</a>
                         </li>
                         <li class="active">
-                            <i class="fa fa-table"></i> <a href="<c:url value="/categories"/>">Категории</a>
+                            <i class="fa fa-table"></i> Категории
                         </li>
                     </ol>
                 </div>
@@ -34,7 +34,7 @@
             <div class="col-lg-12">
                 <div class="table-responsive">
                     <div>
-                        <a href="<c:url value="/categories/create"/>" class="btn btn-lg btn-default">Добавить</a>
+                        <a href="<c:url value="/admin/categories/create"/>" class="btn btn-lg btn-default">Добавить</a>
                         <br/> <br/>
                     </div>
                     <table class="table table-bordered table-hover table-striped">
@@ -42,14 +42,17 @@
                         <tr>
                             <th>ID</th>
                             <th>Категория</th>
+                            <th>Редактирование</th>
                         </tr>
                         </thead>
                         <tbody>
                             <%--@elvariable id="shop" type="kz.hts.ce.entity.Category"--%>
                         <c:forEach items="${categories}" var="category">
-                            <tr onclick="document.location = '/categories/' + ${category.id};">
-                                <td class = "td_id">${category.id}</td>
-                                <td class = "td_category">${category.name}</td>
+                            <tr>
+                                <td>${category.id}</td>
+                                <td>${category.name}</td>
+                                <td><a href="/admin/categories/${category.id}/edit" class="btn btn-lg btn-default">Редактировать</a>
+                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -57,7 +60,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 
     <t:script/>

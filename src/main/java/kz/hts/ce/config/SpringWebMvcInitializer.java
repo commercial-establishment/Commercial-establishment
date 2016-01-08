@@ -16,7 +16,7 @@ import javax.servlet.ServletRegistration.Dynamic;
 public class SpringWebMvcInitializer implements WebApplicationInitializer {
 
     private static final String DISPATCHER_SERVLET_NAME = "dispatcher";
-    public static final String SPRING_SECURITY_FILTER = "springSecurityFilterChain";
+    private static final String SPRING_SECURITY_FILTER = "springSecurityFilterChain";
 
     public void onStartup(ServletContext servletContext) throws ServletException {
         FilterRegistration.Dynamic characterEncodingFilter = servletContext.

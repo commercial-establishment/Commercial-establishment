@@ -53,8 +53,8 @@
                                     <th>ID</th>
                                     <th>Название</th>
                                     <th>Категория</th>
-                                    <th>Цена(в тенге)</th>
-                                    <th>Количество</th>
+                                    <%--<th>Цена(в тенге)</th>--%>
+                                    <%--<th>Количество</th>--%>
                                     <th>Редактировать</th>
                                     <th>Удалить</th>
                                 </tr>
@@ -65,12 +65,12 @@
                                         <td>${providerProduct.id}</td>
                                         <td>${providerProduct.product.name}</td>
                                         <td>${providerProduct.product.category.name}</td>
-                                        <td>${providerProduct.price}</td>
-                                        <td>${providerProduct.amount}</td>
+                                        <%--<td>${providerProduct.price}</td>--%>
+                                        <%--<td>${providerProduct.amount}</td>--%>
                                         <td>
                                             <form method="GET"
                                                   action="<c:url value="/admin/providers/${providerProduct.provider.id}/products/${providerProduct.id}/edit"/>">
-                                                <button type="submit" class="btn btn-lg btn-default">Редактировать
+                                                <button type="submit" class="btn btn-lg btn-default">Редакт-ть
                                                 </button>
                                             </form>
                                         </td>

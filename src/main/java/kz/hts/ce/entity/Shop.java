@@ -1,12 +1,22 @@
 package kz.hts.ce.entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
 public class Shop extends BaseEntity {
 
+    @NotEmpty
+    @Column(nullable = false)
+    @Size(min = 2, max = 30)
     private String name;
+
+    @NotEmpty
+    @Column(nullable = false)
+    @Size(min = 2, max = 30)
     private String address;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "shop")
@@ -17,8 +27,8 @@ public class Shop extends BaseEntity {
     private Type type;
 
     @OneToOne
-    @JoinColumn(name = "city_id", nullable = false)
-    private City city;
+    @JoinColumn(name = "area_id", nullable = false)
+    private Area area;
 
     @Column(name = "is_blocked", nullable = false)
     private boolean blocked;
@@ -63,12 +73,11 @@ public class Shop extends BaseEntity {
         this.blocked = blocked;
     }
 
-    public City getCity() {
-        return city;
+    public Area getArea() {
+        return area;
     }
 
-    public void setCity(City city) {
-        this.city = city;
+    public void setArea(Area area) {
+        this.area = area;
     }
-
 }

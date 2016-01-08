@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TypeService extends BaseService<Type, TypeRepository>{
+public class TypeService extends BaseService<Type, TypeRepository> {
+
     @Autowired
     protected TypeService(TypeRepository repository) {
         super(repository);

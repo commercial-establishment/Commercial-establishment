@@ -10,7 +10,6 @@
     <meta name="author" content="">
 
     <%@ attribute name="title" %>
-    <%--<title><fmt:message key="${title}"/></title>--%>
     <title>${title}</title>
 
     <link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet" type="text/css">

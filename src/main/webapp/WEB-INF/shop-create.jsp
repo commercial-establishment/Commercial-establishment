@@ -39,42 +39,48 @@
                             <tr>
                                 <td><form:label path="name">Наименование магазина:</form:label></td>
                                 <td><form:input cssClass="form-control" path="name"/></td>
-                                    <%--<form:hidden path="password"/>--%>
-                                    <%--<c:set var="usernameErrors"><form:errors path="username" cssClass="error"/> </c:set>--%>
-                                    <%--<c:choose>--%>
-                                    <%--<c:when test="${not empty usernameErrors}">--%>
-                                    <%--<td> ${usernameErrors} </td>--%>
-                                    <%--</c:when>--%>
-                                    <%--<c:otherwise>--%>
-                                    <%--<td>Имя пользователя должно состоять из ...</td>--%>
-                                    <%--</c:otherwise>--%>
-                                    <%--</c:choose>--%>
+                                <c:set var="nameErrors"><form:errors path="name" cssClass="error"/> </c:set>
+                                <c:choose>
+                                    <c:when test="${not empty nameErrors}">
+                                        <td> ${nameErrors} </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>- Введите корректное название магазина</td>
+                                    </c:otherwise>
+                                </c:choose>
+                            </tr>
+                            <tr>
+                                <td><label>Город:</label></td>
+                                <td>
+                                    <select name="city" id="city" onchange="selectCity()" class="form-control">
+                                        <option selected disabled>Выберите город</option>
+                                        <c:forEach items="${cities}" var="city">
+                                            <option id="${city.id}"> ${city.name}</option>
+                                        </c:forEach>
+                                    </select>
+                                </td>
+                                <td>- Выберите город</td>
+                            </tr>
+                            <tr>
+                                <td><label>Район:</label></td>
+                                <td>
+                                    <select disabled="disabled" name="area" id="area" class="form-control">
+                                    </select>
+                                </td>
+                                <td>- Выберите район</td>
                             </tr>
                             <tr>
                                 <td><form:label path="address">Адрес магазина:</form:label></td>
                                 <td><form:input cssClass="form-control" path="address"/></td>
-                                    <%--<c:set var="companyNameErrors"><form:errors path="address" cssClass="error"/>--%>
-                                    <%--</c:set>--%>
-                                    <%--<c:choose>--%>
-                                    <%--<c:when test="${not empty companyNameErrors}">--%>
-                                    <%--<td> ${companyNameErrors} </td>--%>
-                                    <%--</c:when>--%>
-                                    <%--<c:otherwise>--%>
-                                    <%--<td>Имя пользователя должно состоять из ...</td>--%>
-                                    <%--</c:otherwise>--%>
-                                    <%--</c:choose>--%>
-                            </tr>
-                            <tr>
-                                <td><form:label path="city">Город:</form:label></td>
-                                <td>
-                                    <select name="city" id="city" class="form-control">
-                                        <c:forEach items="${cities}" var="city">
-                                            <option> ${city.name}</option>
-                                        </c:forEach>
-                                    </select>
-                                    </select>
-                                </td>
-                                <td>Имя пользователя должно состоять из ...</td>
+                                <c:set var="addressErrors"><form:errors path="address" cssClass="error"/> </c:set>
+                                <c:choose>
+                                    <c:when test="${not empty addressErrors}">
+                                        <td> ${addressErrors} </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>- Введите действующий адрес магазина</td>
+                                    </c:otherwise>
+                                </c:choose>
                             </tr>
                             <tr>
                                 <td><form:label path="type">Тип:</form:label></td>
@@ -85,14 +91,15 @@
                                         </c:forEach>
                                     </select>
                                 </td>
-                                <td>Имя пользователя должно состоять из ...</td>
+                                <td>- Выберите тип магазина</td>
                             </tr>
                             <tr>
                                 <td>
                                     <form:button type="submit" class="btn btn-lg btn-success">Сохранить</form:button>
                                 </td>
                                 <td/>
-                                <td><a href="<c:url value="/admin/shops/${id}"/>" class="btn btn-lg btn-danger">Отмена</a>
+                                <td><a href="<c:url value="/admin/shops/${id}"/>"
+                                       class="btn btn-lg btn-danger">Отмена</a>
                                 </td>
                             </tr>
                             </tbody>
@@ -103,5 +110,6 @@
         </div>
     </div>
     <t:script/>
+    <script src="<c:url value="/resources/js/script.js"/>"></script>
 </t:container>
 </html>

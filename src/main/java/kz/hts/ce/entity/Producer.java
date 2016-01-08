@@ -2,7 +2,7 @@ package kz.hts.ce.entity;
 
 import javax.persistence.Entity;
 
-@Entity
+@Entity/*TODO for what this class??*/
 public class Producer extends BaseEntity {
 
     private String name;

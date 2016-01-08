@@ -42,8 +42,9 @@
                         <tr>
                             <th>ID</th>
                             <th>Название магазина</th>
-                            <th>Адрес</th>
                             <th>Город</th>
+                            <th>Район</th>
+                            <th>Адрес</th>
                             <th>Тип</th>
                             <th>Заблокирован</th>
                         </tr>
@@ -54,8 +55,9 @@
                             <tr onclick="document.location = '/admin/shops/' + ${shop.id};">
                                 <td>${shop.id}</td>
                                 <td>${shop.name}</td>
+                                <td>${shop.area.city.name}</td>
+                                <td>${shop.area.name}</td>
                                 <td>${shop.address}</td>
-                                <td>${shop.city.name}</td>
                                 <td>${shop.type.name}</td>
                                 <td>${shop.blocked}</td>
                             </tr>

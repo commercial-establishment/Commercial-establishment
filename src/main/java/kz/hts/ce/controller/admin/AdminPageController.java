@@ -6,6 +6,7 @@ import kz.hts.ce.entity.Role;
 import kz.hts.ce.service.AdminService;
 import kz.hts.ce.service.GenderService;
 import kz.hts.ce.service.RoleService;
+import kz.hts.ce.util.SpringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,54 +15,54 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class AdminPageController {
 
-    public static final String ADMIN = "ADMIN";
+    private static final String ADMIN = "ADMIN";
+    private static final String GENDERS = "genders";
+    private static final String ADMIN_LOWER_CASE = "admin";
+    private static final String ADMINS = "admins";
 
     @Autowired
     private AdminService adminService;
     @Autowired
-    private GenderService genderService;
-    @Autowired
-    private RoleService roleService;
+    private SpringUtil springUtil;
 
     @RequestMapping("/admin/admins/{id}")
-    public String information(Model model, @PathVariable long id) {
+    public String information(Model model, @PathVariable UUID id) {
         Admin admin = adminService.findById(id);
-        model.addAttribute("admin", admin);
+        model.addAttribute(ADMIN_LOWER_CASE, admin);
         return "/admin-info";
     }
 
-
-
     @RequestMapping("/admin/admins/{id}/edit")
-    public String edit(Model model, @PathVariable long id) {
+    public String edit(Model model, @PathVariable UUID id) {
         Admin admin = adminService.findById(id);
-        List<Gender> genders = genderService.findAll();
-        List<Role> roles = roleService.findAll();
+        List<Gender> genders = springUtil.getGenders();
+        List<Role> roles = springUtil.getRoles();
 
-        model.addAttribute("genders", genders);
+        model.addAttribute(GENDERS, genders);
         model.addAttribute("roles", roles);
-        model.addAttribute("admin", admin);
+        model.addAttribute(ADMIN_LOWER_CASE, admin);
         return "admin-edit";
     }
 
     @RequestMapping("/admin/admins/create")
     public String create(Model model) {
         Admin admin = new Admin();
-        List<Gender> genders = genderService.findAll();
+        List<Gender> genders = springUtil.getGenders();
 
-        model.addAttribute("genders", genders);
-        model.addAttribute("admin", admin);
+        model.addAttribute(GENDERS, genders);
+        model.addAttribute(ADMIN_LOWER_CASE, admin);
         return "admin-create";
     }
 
     @RequestMapping(value = "/admin/admins",method = RequestMethod.GET)
     public String admins(Model model) {
         List<Admin> admins = adminService.findByRoleName(ADMIN);
-        model.addAttribute("admins", admins);
-        return "admins";
+        model.addAttribute(ADMINS, admins);
+        return ADMINS;
     }
 }
