@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,8 +33,6 @@ public class ProviderPageController {
     private ProductService productService;
     @Autowired
     private ShopService shopService;
-    @Autowired
-    private SpringUtil springUtil;
 
     @Autowired
     private SpringUtil springUtil;
@@ -126,32 +123,5 @@ public class ProviderPageController {
 
         model.addAttribute("productProvider", productProvider);
         return "provider-product-edit";
-    }
-
-    /*For provider*/
-    @RequestMapping(value = "/provider/shops", method = RequestMethod.GET)
-    public String providerShops(Model model) {
-        Provider provider = springUtil.getAuthorizedProvider();
-        List<ShopProvider> providerShops = shopProviderService.findByProviderId(provider.getId());
-        List<Shop> shops = new ArrayList<>();
-        for (ShopProvider providerShop : providerShops) {
-            Shop shop = providerShop.getShop();
-            shops.add(shop);
-        }
-        model.addAttribute("shops", shops);
-        return "shops";
-    }
-
-    @RequestMapping(value = "/provider/products", method = RequestMethod.GET)
-    public String providerProducts(Model model) {
-        Provider provider = springUtil.getAuthorizedProvider();
-        List<ProductProvider> productsProvider = productProviderService.findByProviderId(provider.getId());
-        List<Product> products = new ArrayList<>();
-        for (ProductProvider productProvider : productsProvider) {
-            Product product = productProvider.getProduct();
-            products.add(product);
-        }
-        model.addAttribute("products", products);
-        return "products";
     }
 }

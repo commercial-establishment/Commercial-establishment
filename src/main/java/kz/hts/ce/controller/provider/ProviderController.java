@@ -75,7 +75,7 @@ public class ProviderController {
         Admin adminFromDB = adminService.findByUsernameAndBlocked(provider.getUsername(), false);
         Provider providerFromDB = providerService.findByUsernameAndBlocked(provider.getUsername(), false);
         if (adminFromDB == null && providerFromDB == null) {
-            Role role = springUtil.getRoleMap().get(PROVIDER);
+            Role role = SpringUtil.roleMap.get(PROVIDER);
             provider.setBlocked(false);
             provider.setRole(role);
             provider.setPassword(passwordEncoder.encode(provider.getPassword()));
