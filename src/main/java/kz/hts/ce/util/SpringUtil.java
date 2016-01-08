@@ -18,7 +18,7 @@ import java.util.Map;
 @Component
 public class SpringUtil {
 
-    private Map<String, Role> roleMap;
+    public static Map<String, Role> roleMap;
     private List<Role> roles;
     private List<Gender> genders;
     private Date broadcastDate;

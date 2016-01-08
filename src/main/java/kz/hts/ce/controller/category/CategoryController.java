@@ -47,8 +47,7 @@ public class CategoryController {
     @RequestMapping(value = "/replication/categories/time={time}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @ResponseBody
     public List<Category> sendAllCategoriesToClient(@PathVariable long time) {
-        List<Category> categories = categoryService.getHistory(time);
-        return categories;
+        return categoryService.getHistory(time);
     }
 }
 

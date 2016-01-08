@@ -194,17 +194,25 @@ public class ProviderController {
         productProviderService.save(productProvider);
         return "redirect:/admin/providers/" + providerId + "/products";
     }
+//
+//    @RequestMapping(value = "/replication/providers/add", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+//    @ResponseBody
+//    public List<Provider> getProvidersFromClient(@RequestBody List<Provider> providers) {
+//        for (Provider provider : providers) providerService.save(provider);
+//        return providers;
+//    }
+//
+//    @RequestMapping(value = "/replication/providers", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+//    @ResponseBody
+//    public List<Provider> sendAllProvidersToClient() {
+//        return providerService.findAll();
+//    }
 
-    @RequestMapping(value = "/replication/providers/add", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    @RequestMapping(value = "/replication/providers/time={time}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @ResponseBody
-    public List<Provider> getProvidersFromClient(@RequestBody List<Provider> providers) {
-        for (Provider provider : providers) providerService.save(provider);
-        return providers;
-    }
-
-    @RequestMapping(value = "/replication/providers", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
-    @ResponseBody
-    public List<Provider> sendAllProvidersToClient() {
-        return providerService.findAll();
+    public List<Provider> sendNewProviderDataToClient(@PathVariable long time) {
+        List<Provider> history = providerService.getHistory(time);
+        System.out.println(history);
+        return history;
     }
 }

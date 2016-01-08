@@ -44,7 +44,6 @@ public class CategoryService extends BaseService<Category, CategoryRepository> {
             }
             if (category != null) categories.add(category);
         }
-
         return categories;
     }
 }
