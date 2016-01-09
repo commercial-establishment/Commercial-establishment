@@ -11,10 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
-
-import static kz.hts.ce.util.SpringUtil.getPrincipal;
 
 @Controller
 public class ProviderPageController {
@@ -127,8 +126,7 @@ public class ProviderPageController {
 
     @RequestMapping(value = "/provider/shops", method = RequestMethod.GET)
     public String providerShops(Model model) {
-        UUID id = providerService.findByUsername(getPrincipal()).getId();/*TODO move to SpringUtil*/
-        List<ShopProvider> providerShops = shopProviderService.findByProviderId(id);
+        List<ShopProvider> providerShops = shopProviderService.findByProviderId(springUtil.getAuthProviderId());
         List<Shop> shops = new ArrayList<>();
         for (ShopProvider providerShop : providerShops) {
             shops.add(providerShop.getShop());
@@ -137,18 +135,23 @@ public class ProviderPageController {
         return "shops";
     }
 
-    @RequestMapping(value = "/provider/shops/create", method = RequestMethod.GET)
-    public String providerCreateShop(Model model) {
-        UUID id = providerService.findByUsername(getPrincipal()).getId();/*TODO move to SpringUtil*/
+    @RequestMapping(value = "/provider/shops/add", method = RequestMethod.GET)
+    public String providerAddShop(Model model) {
+        UUID id = springUtil.getAuthProviderId();
         List<ShopProvider> providerShops = shopProviderService.findByProviderId(id);
-        List<Shop> shops = new ArrayList<>();
-        for (ShopProvider providerShop : providerShops) shops.add(providerShop.getShop());
+        List<UUID> shopIds = new ArrayList<>();
+        for (ShopProvider providerShop : providerShops) shopIds.add(providerShop.getShop().getId());
 
         List<Shop> allShops = shopService.findAll();
-        for (Shop shop : shops) {
-            if (allShops.contains(shop)) allShops.remove(shop);
+        for (UUID shopId : shopIds) {
+            for (Iterator<Shop> it = allShops.iterator(); it.hasNext(); ) {
+                if (allShops.size() == 0) break;
+                Shop shop = it.next();
+                if (shop.getId().equals(shopId)) allShops.remove(shop);
+            }
         }
 
+        model.addAttribute("providerId", id);
         model.addAttribute("shops", allShops);
         return "provider-shop-add";
     }

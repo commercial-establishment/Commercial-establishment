@@ -2,7 +2,9 @@ package kz.hts.ce.util;
 
 import kz.hts.ce.entity.Gender;
 import kz.hts.ce.entity.Role;
+import kz.hts.ce.entity.ShopProvider;
 import kz.hts.ce.service.GenderService;
+import kz.hts.ce.service.ProviderService;
 import kz.hts.ce.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,10 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 public class SpringUtil {
@@ -27,6 +26,9 @@ public class SpringUtil {
     private RoleService roleService;
     @Autowired
     private GenderService genderService;
+
+    @Autowired
+    private ProviderService providerService;
 
     @PostConstruct
     public void initialize() {
@@ -47,6 +49,10 @@ public class SpringUtil {
             userName = principal.toString();
         }
         return userName;
+    }
+
+    public UUID getAuthProviderId() {
+        return providerService.findByUsername(getPrincipal()).getId();
     }
 
     public List<Role> getRoles() {

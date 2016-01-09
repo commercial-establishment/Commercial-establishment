@@ -38,41 +38,49 @@
                     <div>
                         <c:choose>
                             <c:when test="${role eq 'ROLE_ADMIN'}">
-                                <a href="<c:url value="/admin/shops/create"/>" class="btn btn-lg btn-default">Добавить</a>
+                                <a href="<c:url value="/admin/shops/create"/>"
+                                   class="btn btn-lg btn-default">Добавить</a>
                             </c:when>
                             <c:when test="${role eq 'ROLE_PROVIDER'}">
-                                <a href="<c:url value="/provider/shops/create"/>" class="btn btn-lg btn-default">Добавить</a>
+                                <a href="<c:url value="/provider/shops/add"/>" class="btn btn-lg btn-default">Добавить</a>
                             </c:when>
                         </c:choose>
                         <br/> <br/>
                     </div>
-                    <table class="table table-bordered table-hover table-striped">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Название магазина</th>
-                            <th>Город</th>
-                            <th>Район</th>
-                            <th>Адрес</th>
-                            <th>Тип</th>
-                            <th>Заблокирован</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            <%--@elvariable id="shop" type="kz.hts.ce.entity.Shop"--%>
-                        <c:forEach items="${shops}" var="shop">
-                            <tr onclick="document.location = '/admin/shops/' + '${shop.id}';">
-                                <td>${shop.id}</td>
-                                <td>${shop.name}</td>
-                                <td>${shop.area.city.name}</td>
-                                <td>${shop.area.name}</td>
-                                <td>${shop.address}</td>
-                                <td>${shop.type.name}</td>
-                                <td>${shop.blocked}</td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
+                    <c:choose>
+                        <c:when test="${shops.size() == 0}">
+                            <h1>Нет привязанных магазинов. Пожалуйтса, добавьте магазин.</h1>
+                        </c:when>
+                        <c:otherwise>
+                            <table class="table table-bordered table-hover table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Название магазина</th>
+                                    <th>Город</th>
+                                    <th>Район</th>
+                                    <th>Адрес</th>
+                                    <th>Тип</th>
+                                    <th>Заблокирован</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <%--@elvariable id="shop" type="kz.hts.ce.entity.Shop"--%>
+                                <c:forEach items="${shops}" var="shop">
+                                    <tr onclick="document.location = '/admin/shops/' + '${shop.id}';">
+                                        <td>${shop.id}</td>
+                                        <td>${shop.name}</td>
+                                        <td>${shop.area.city.name}</td>
+                                        <td>${shop.area.name}</td>
+                                        <td>${shop.address}</td>
+                                        <td>${shop.type.name}</td>
+                                        <td>${shop.blocked}</td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </div>

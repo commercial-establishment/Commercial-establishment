@@ -18,6 +18,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import static kz.hts.ce.util.SpringUtil.getPrincipal;
+
 @Controller
 public class ProviderController {
 
@@ -214,5 +216,22 @@ public class ProviderController {
         List<Provider> history = providerService.getHistory(time);
         System.out.println(history);
         return history;
+    }
+
+    @Transactional
+    @RequestMapping(value = "/provider/shops/add", method = RequestMethod.POST)
+    public String addShop(@RequestParam("shopId") UUID shopId) {
+        UUID providerId = springUtil.getAuthProviderId();
+        ShopProvider shopProviderFromDB = shopProviderService.findByProviderIdAndShopId(providerId, shopId);
+        if (shopProviderFromDB == null) {
+            Shop shop = shopService.findById(shopId);
+            Provider provider = providerService.findById(providerId);
+            ShopProvider shopProvider = new ShopProvider();
+            shopProvider.setProvider(provider);
+            shopProvider.setShop(shop);
+            shopProvider.setBlocked(false);
+            shopProviderService.save(shopProvider);
+        }
+        return REDIRECT;
     }
 }
