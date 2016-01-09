@@ -67,8 +67,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/login/form", "/recovery").anonymous()
                 .antMatchers("/", "/home", "/home/**").hasAnyRole("ADMIN", "PROVIDER")
-                .antMatchers("/admin/*").hasRole("ADMIN")
-                .antMatchers("/provider/*").hasRole("PROVIDER")
+                .antMatchers("/admin", "/admin/**").hasAnyRole("ADMIN")
+                .antMatchers("/provider", "/provider/**").hasAnyRole("PROVIDER")
                 .antMatchers("/replication/*").hasAnyRole("OWNER", "ACCOUNTANT", "SELLER")
                 .anyRequest().authenticated();
         http
