@@ -1,6 +1,8 @@
 package kz.hts.ce.controller.provider;
 
-import kz.hts.ce.entity.*;
+import kz.hts.ce.model.entity.*;
+import kz.hts.ce.model.dto.TransferDto;
+import kz.hts.ce.model.entity.*;
 import kz.hts.ce.service.*;
 import kz.hts.ce.util.SpringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +18,8 @@ import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
-
-import static kz.hts.ce.util.SpringUtil.getPrincipal;
 
 @Controller
 public class ProviderController {
@@ -42,6 +43,8 @@ public class ProviderController {
     private ShopProviderService shopProviderService;
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private ShopProductProviderService sppService;
 
     @Autowired
     private SpringUtil springUtil;
@@ -233,5 +236,14 @@ public class ProviderController {
             shopProviderService.save(shopProvider);
         }
         return REDIRECT;
+    }
+
+    @RequestMapping(value = "/replication/provider-products", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    @ResponseBody
+    public void getProvidersFromClient(@RequestBody List<TransferDto> transferDtos) {
+        for (TransferDto transferDto : transferDtos) {
+            List<ShopProductProvider> shopProductProviderList = sppService.
+                    findByShopIdAndProviderId(transferDto.getShopId(), transferDto.getProviderId());
+        }
     }
 }

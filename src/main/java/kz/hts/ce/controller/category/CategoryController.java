@@ -1,10 +1,8 @@
 package kz.hts.ce.controller.category;
 
-import kz.hts.ce.entity.Category;
-import kz.hts.ce.entity.Provider;
+import kz.hts.ce.model.entity.Category;
 import kz.hts.ce.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.history.Revisions;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,9 +10,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.security.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 

@@ -1,6 +1,6 @@
 package kz.hts.ce.util.converters;
 
-import kz.hts.ce.entity.Type;
+import kz.hts.ce.model.entity.Type;
 import kz.hts.ce.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;

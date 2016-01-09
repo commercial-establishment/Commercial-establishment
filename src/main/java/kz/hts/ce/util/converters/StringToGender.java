@@ -1,6 +1,6 @@
 package kz.hts.ce.util.converters;
 
-import kz.hts.ce.entity.Gender;
+import kz.hts.ce.model.entity.Gender;
 import kz.hts.ce.service.GenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;

@@ -42,7 +42,8 @@
                                    class="btn btn-lg btn-default">Добавить</a>
                             </c:when>
                             <c:when test="${role eq 'ROLE_PROVIDER'}">
-                                <a href="<c:url value="/provider/shops/add"/>" class="btn btn-lg btn-default">Добавить</a>
+                                <a href="<c:url value="/provider/shops/add"/>"
+                                   class="btn btn-lg btn-default">Добавить</a>
                             </c:when>
                         </c:choose>
                         <br/> <br/>
@@ -67,7 +68,14 @@
                                 <tbody>
                                     <%--@elvariable id="shop" type="kz.hts.ce.entity.Shop"--%>
                                 <c:forEach items="${shops}" var="shop">
-                                    <tr onclick="document.location = '/admin/shops/' + '${shop.id}';">
+                                    <c:choose>
+                                        <c:when test="${role eq 'ROLE_ADMIN'}">
+                                            <tr onclick="document.location = '/admin/shops/' + '${shop.id}';">
+                                        </c:when>
+                                        <c:when test="${role eq 'ROLE_PROVIDER'}">
+                                            <tr onclick="document.location = '/provider/shops/' + '${shop.id}';">
+                                        </c:when>
+                                    </c:choose>
                                         <td>${shop.id}</td>
                                         <td>${shop.name}</td>
                                         <td>${shop.area.city.name}</td>

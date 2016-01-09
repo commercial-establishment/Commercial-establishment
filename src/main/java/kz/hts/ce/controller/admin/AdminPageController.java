@@ -1,11 +1,9 @@
 package kz.hts.ce.controller.admin;
 
-import kz.hts.ce.entity.Admin;
-import kz.hts.ce.entity.Gender;
-import kz.hts.ce.entity.Role;
+import kz.hts.ce.model.entity.Admin;
+import kz.hts.ce.model.entity.Gender;
+import kz.hts.ce.model.entity.Role;
 import kz.hts.ce.service.AdminService;
-import kz.hts.ce.service.GenderService;
-import kz.hts.ce.service.RoleService;
 import kz.hts.ce.util.SpringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

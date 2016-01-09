@@ -1,6 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authentication var="role" property="principal.authorities[0]"/>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,15 +66,25 @@
                         </tr>
                         <tr>
                             <td>
-                                <form method="GET" action="<c:url value="/admin/shops/${id}/edit"/>">
-                                    <input type="submit" class="btn btn-lg btn-default" value="Редактировать">
-                                </form>
-                                    <%--<a href="<c:url value="/admins/${id}/edit"/>" class="btn btn-lg btn-default">Редактировать</a>--%>
+                                <c:choose>
+                                    <c:when test="${role eq 'ROLE_ADMIN'}">
+                                        <form method="GET" action="<c:url value="/admin/shops/${id}/edit"/>">
+                                            <input type="submit" class="btn btn-lg btn-default" value="Редактировать">
+                                        </form>
+                                    </c:when>
+                                    <c:when test="${role eq 'ROLE_PROVIDER'}">
+                                        <form method="GET"
+                                              action="<c:url value="/provider/shops/${shop.id}/products"/>">
+                                            <input type="submit" class="btn btn-lg btn-default" value="Товары">
+                                        </form>
+                                    </c:when>
+                                </c:choose>
                             </td>
 
                             <c:choose>
                                 <c:when test="${shop.blocked == false}">
-                                    <td><a href="<c:url value="/admin/shops/${id}/lock"/>" class="btn btn-lg btn-danger">Заблокировать</a>
+                                    <td><a href="<c:url value="/admin/shops/${id}/lock"/>"
+                                           class="btn btn-lg btn-danger">Заблокировать</a>
                                     </td>
                                 </c:when>
                                 <c:otherwise>

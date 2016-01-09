@@ -1,8 +1,6 @@
 package kz.hts.ce.service;
 
-import kz.hts.ce.entity.Category;
-import kz.hts.ce.entity.Provider;
-import kz.hts.ce.entity.Role;
+import kz.hts.ce.model.entity.Provider;
 import kz.hts.ce.repository.ProviderRepository;
 import kz.hts.ce.util.SpringUtil;
 import org.springframework.beans.factory.annotation.Autowired;

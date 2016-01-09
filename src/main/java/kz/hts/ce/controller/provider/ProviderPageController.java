@@ -1,6 +1,7 @@
 package kz.hts.ce.controller.provider;
 
-import kz.hts.ce.entity.*;
+import kz.hts.ce.model.entity.*;
+import kz.hts.ce.model.entity.*;
 import kz.hts.ce.service.*;
 import kz.hts.ce.util.SpringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 public class ProviderPageController {
@@ -32,6 +30,8 @@ public class ProviderPageController {
     private ProductService productService;
     @Autowired
     private ShopService shopService;
+    @Autowired
+    private ShopProductProviderService sppService;
 
     @Autowired
     private SpringUtil springUtil;
@@ -154,5 +154,20 @@ public class ProviderPageController {
         model.addAttribute("providerId", id);
         model.addAttribute("shops", allShops);
         return "provider-shop-add";
+    }
+
+    @RequestMapping(value = "/provider/shops/{shopId}", method = RequestMethod.GET)
+    public String providerShop(Model model, @PathVariable("shopId") UUID shopId) {
+        Shop shop = shopService.findById(shopId);
+        model.addAttribute("shop", shop);
+        return "shop-info";
+    }
+
+    @RequestMapping(value = "/provider/shops/{shopId}/products", method = RequestMethod.GET)
+    public String providerShopProducts(Model model, @PathVariable("shopId") UUID shopId) {
+        UUID providerId = springUtil.getAuthProviderId();
+        Map<Product, Integer> products = sppService.findProductsByShopIdAndProviderId(shopId, providerId);
+        model.addAttribute("products", products);
+        return "provider-shop-products";
     }
 }

@@ -1,6 +1,6 @@
 package kz.hts.ce.repository;
 
-import kz.hts.ce.entity.Admin;
+import kz.hts.ce.model.entity.Admin;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

@@ -1,6 +1,6 @@
 package kz.hts.ce.entity.validation;
 
-import kz.hts.ce.entity.Admin;
+import kz.hts.ce.model.entity.Admin;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

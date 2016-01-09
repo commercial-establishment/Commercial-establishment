@@ -1,8 +1,7 @@
 package kz.hts.ce.util;
 
-import kz.hts.ce.entity.Gender;
-import kz.hts.ce.entity.Role;
-import kz.hts.ce.entity.ShopProvider;
+import kz.hts.ce.model.entity.Gender;
+import kz.hts.ce.model.entity.Role;
 import kz.hts.ce.service.GenderService;
 import kz.hts.ce.service.ProviderService;
 import kz.hts.ce.service.RoleService;

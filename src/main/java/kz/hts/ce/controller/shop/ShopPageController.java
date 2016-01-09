@@ -1,8 +1,8 @@
 package kz.hts.ce.controller.shop;
 
-import kz.hts.ce.entity.City;
-import kz.hts.ce.entity.Shop;
-import kz.hts.ce.entity.Type;
+import kz.hts.ce.model.entity.City;
+import kz.hts.ce.model.entity.Shop;
+import kz.hts.ce.model.entity.Type;
 import kz.hts.ce.service.CityService;
 import kz.hts.ce.service.ShopService;
 import kz.hts.ce.service.TypeService;

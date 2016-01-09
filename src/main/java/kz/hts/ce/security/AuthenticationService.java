@@ -1,8 +1,8 @@
 package kz.hts.ce.security;
 
-import kz.hts.ce.entity.Admin;
-import kz.hts.ce.entity.Employee;
-import kz.hts.ce.entity.Provider;
+import kz.hts.ce.model.entity.Admin;
+import kz.hts.ce.model.entity.Employee;
+import kz.hts.ce.model.entity.Provider;
 import kz.hts.ce.service.AdminService;
 import kz.hts.ce.service.EmployeeService;
 import kz.hts.ce.service.ProviderService;

@@ -1,6 +1,6 @@
 package kz.hts.ce.util.converters;
 
-import kz.hts.ce.entity.Area;
+import kz.hts.ce.model.entity.Area;
 import kz.hts.ce.service.AreaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;

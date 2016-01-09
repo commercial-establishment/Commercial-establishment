@@ -1,6 +1,7 @@
 package kz.hts.ce.controller.shop;
 
-import kz.hts.ce.entity.*;
+import kz.hts.ce.model.entity.*;
+import kz.hts.ce.model.entity.*;
 import kz.hts.ce.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
