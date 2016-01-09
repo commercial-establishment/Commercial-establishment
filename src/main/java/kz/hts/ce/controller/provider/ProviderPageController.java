@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import static kz.hts.ce.util.Helper.calculateCost;
+import static kz.hts.ce.util.SpringUtil.getPrincipal;
 
 @Controller
 public class ProviderPageController {
@@ -123,5 +125,17 @@ public class ProviderPageController {
 
         model.addAttribute("productProvider", productProvider);
         return "provider-product-edit";
+    }
+
+    @RequestMapping(value = "/provider/shops", method = RequestMethod.GET)
+    public String providerShops(Model model) {
+        UUID id = providerService.findByUsername(getPrincipal()).getId();
+        List<ShopProvider> providerShops = shopProviderService.findByProviderId(id);
+        List<Shop> shops = new ArrayList<>();
+        for (ShopProvider providerShop : providerShops) {
+            shops.add(providerShop.getShop());
+        }
+        model.addAttribute("shops", shops);
+        return "shops";
     }
 }
