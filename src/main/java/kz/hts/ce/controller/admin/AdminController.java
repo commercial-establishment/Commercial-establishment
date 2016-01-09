@@ -62,7 +62,7 @@ public class AdminController {
 
     @RequestMapping(value = "/admin/admins/{id}/edit", method = RequestMethod.POST)
     public String edit(Model model, @PathVariable UUID id, @Valid @ModelAttribute("admin") Admin admin, BindingResult result) {
-        Role role = springUtil.getRoleMap().get(ADMIN);
+        Role role = SpringUtil.roleMap.get(ADMIN);
         admin.setRole(role);
 
         if (result.hasErrors()) {
@@ -90,7 +90,7 @@ public class AdminController {
         Admin adminFromDB = adminService.findByUsernameAndBlocked(admin.getUsername(), false);
         Provider providerFromDB = providerService.findByUsernameAndBlocked(admin.getUsername(), false);
         if (adminFromDB == null && providerFromDB == null) {
-            Role role = springUtil.getRoleMap().get(ADMIN);
+            Role role = SpringUtil.roleMap.get(ADMIN);
             admin.setRole(role);
             admin.setPassword(passwordEncoder.encode(admin.getPassword()));
             admin.setStartWorkDate(new Date());

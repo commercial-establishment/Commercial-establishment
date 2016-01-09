@@ -37,6 +37,18 @@ public class SpringUtil {
         genders = genderService.findAll();
     }
 
+    public static String getPrincipal() {
+        String userName;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        if (principal instanceof UserDetails) {
+            userName = ((UserDetails) principal).getUsername();
+        } else {
+            userName = principal.toString();
+        }
+        return userName;
+    }
+
     public List<Role> getRoles() {
         return roles;
     }

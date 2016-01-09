@@ -69,7 +69,7 @@ public class ProviderService extends BaseService<Provider, ProviderRepository> {
                 long dateTimeInMillis = revision.getMetadata().getRevisionDate().getMillis();
                 if (time < dateTimeInMillis) {
                     provider = revision.getEntity();
-                    provider.setCity(providerFromAllProviders.getCity());
+                    provider.setCity(providerFromAllProviders.getCity());/*FIXME*/
                     provider.setRole(SpringUtil.roleMap.get(PROVIDER));
                 }
             }
