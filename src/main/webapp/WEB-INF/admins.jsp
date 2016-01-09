@@ -47,7 +47,7 @@
                         </thead>
                         <tbody>
                         <c:forEach items="${admins}" var="admin">
-                            <tr onclick="document.location = '/admin/admins/' + ${admin.id};">
+                            <tr onclick="document.location = '/admin/admins/' + '${admin.id}';">
                                 <td>${admin.id}</td>
                                 <td>${admin.username}</td>
                                 <td>${admin.name}</td>

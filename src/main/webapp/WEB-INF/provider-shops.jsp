@@ -55,7 +55,7 @@
                         <tbody>
                             <%--@elvariable id="shop" type="kz.hts.ce.entity.Shop"--%>
                         <c:forEach items="${providerShops}" var="providerShop">
-                            <tr onclick="document.location = '/admin/providers/' + ${providerShop.provider.id} + '/shops/' + ${providerShop.shop.id};">
+                            <tr onclick="document.location = '/admin/providers/' + '${providerShop.provider.id}' + '/shops/' + '${providerShop.shop.id}';">
                                 <td>${providerShop.id}</td>
                                 <td>${providerShop.shop.name}</td>
                                 <td>${providerShop.shop.address}</td>

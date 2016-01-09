@@ -10,12 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static kz.hts.ce.util.Helper.calculateCost;
 import static kz.hts.ce.util.SpringUtil.getPrincipal;
 
 @Controller
@@ -129,7 +127,7 @@ public class ProviderPageController {
 
     @RequestMapping(value = "/provider/shops", method = RequestMethod.GET)
     public String providerShops(Model model) {
-        UUID id = providerService.findByUsername(getPrincipal()).getId();
+        UUID id = providerService.findByUsername(getPrincipal()).getId();/*TODO move to SpringUtil*/
         List<ShopProvider> providerShops = shopProviderService.findByProviderId(id);
         List<Shop> shops = new ArrayList<>();
         for (ShopProvider providerShop : providerShops) {
@@ -137,5 +135,21 @@ public class ProviderPageController {
         }
         model.addAttribute("shops", shops);
         return "shops";
+    }
+
+    @RequestMapping(value = "/provider/shops/create", method = RequestMethod.GET)
+    public String providerCreateShop(Model model) {
+        UUID id = providerService.findByUsername(getPrincipal()).getId();/*TODO move to SpringUtil*/
+        List<ShopProvider> providerShops = shopProviderService.findByProviderId(id);
+        List<Shop> shops = new ArrayList<>();
+        for (ShopProvider providerShop : providerShops) shops.add(providerShop.getShop());
+
+        List<Shop> allShops = shopService.findAll();
+        for (Shop shop : shops) {
+            if (allShops.contains(shop)) allShops.remove(shop);
+        }
+
+        model.addAttribute("shops", allShops);
+        return "provider-shop-add";
     }
 }

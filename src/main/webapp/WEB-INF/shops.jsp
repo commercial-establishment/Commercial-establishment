@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authentication var="role" property="principal.authorities[0]"/>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,7 +36,14 @@
             <div class="col-lg-12">
                 <div class="table-responsive">
                     <div>
-                        <a href="<c:url value="/admin/shops/create"/>" class="btn btn-lg btn-default">Добавить</a>
+                        <c:choose>
+                            <c:when test="${role eq 'ROLE_ADMIN'}">
+                                <a href="<c:url value="/admin/shops/create"/>" class="btn btn-lg btn-default">Добавить</a>
+                            </c:when>
+                            <c:when test="${role eq 'ROLE_PROVIDER'}">
+                                <a href="<c:url value="/provider/shops/create"/>" class="btn btn-lg btn-default">Добавить</a>
+                            </c:when>
+                        </c:choose>
                         <br/> <br/>
                     </div>
                     <table class="table table-bordered table-hover table-striped">
@@ -52,7 +61,7 @@
                         <tbody>
                             <%--@elvariable id="shop" type="kz.hts.ce.entity.Shop"--%>
                         <c:forEach items="${shops}" var="shop">
-                            <tr onclick="document.location = '/admin/shops/' + ${shop.id};">
+                            <tr onclick="document.location = '/admin/shops/' + '${shop.id}';">
                                 <td>${shop.id}</td>
                                 <td>${shop.name}</td>
                                 <td>${shop.area.city.name}</td>
