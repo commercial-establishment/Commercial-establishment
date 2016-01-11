@@ -138,4 +138,17 @@ public class ProviderPageController {
         model.addAttribute("shops", shops);
         return "shops";
     }
+
+    @RequestMapping(value = "/provider/products", method = RequestMethod.GET)
+    public String providerProducts(Model model) {
+        UUID id = providerService.findByUsername(getPrincipal()).getId();
+        List<ProductProvider> productProviders = productProviderService.findByProviderId(id);
+        List<Product> products = new ArrayList<>();
+        for (ProductProvider productProvider : productProviders) {
+            products.add(productProvider.getProduct());
+        }
+
+        model.addAttribute("products", products);
+        return "products";
+    }
 }
