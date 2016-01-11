@@ -11,4 +11,6 @@ import java.util.UUID;
 public interface ShopProductProviderRepository extends JpaRepository<ShopProductProvider, UUID> {
 
     List<ShopProductProvider> findByShop_IdAndProductProvider_Provider_Id(UUID shopId, UUID providerId);
+
+    ShopProductProvider findByShop_IdAndProductProvider_Id(UUID shopId, UUID productProviderId);
 }
