@@ -15,6 +15,9 @@
         <hibernate.version>4.2.0.Final</hibernate.version>
         <slf4j.version>1.7.0</slf4j.version>
         <spring-security.version>4.0.2.RELEASE</spring-security.version>
+        <spring-data-jpa.version>1.9.2.RELEASE</spring-data-jpa.version>
+        <spring-data-envers.version>0.3.0.RELEASE</spring-data-envers.version>
+        <jackson-annotations.version>2.4.1</jackson-annotations.version>
     </properties>
 
     <dependencies>
@@ -46,19 +49,11 @@
             <version>4.2.2.RELEASE</version>
         </dependency>
 
-        <!--JPA-->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-            <scope>provided</scope>
-        </dependency>
-
         <!--Spring data JPA-->
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
-            <version>1.9.2.RELEASE</version>
+            <version>${spring-data-jpa.version}</version>
         </dependency>
         <dependency>
             <groupId>joda-time</groupId>
@@ -68,9 +63,16 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-envers</artifactId>
-            <version>0.3.0.RELEASE</version>
+            <version>${spring-data-envers.version}</version>
         </dependency>
 
+        <!--JPA-->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
 
         <!--Hibernate-->
         <dependency>
@@ -182,17 +184,17 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
-            <version>2.4.1</version>
+            <version>${jackson-annotations.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>2.4.1</version>
+            <version>${jackson-annotations.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.4.1</version>
+            <version>${jackson-annotations.version}</version>
         </dependency>
 
         <dependency>
