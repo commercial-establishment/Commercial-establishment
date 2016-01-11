@@ -28,4 +28,8 @@ public class ShopProductProviderService extends BaseService<ShopProductProvider,
     public List<ShopProductProvider> findByShopIdAndProviderId(UUID shopId, UUID providerId) {
         return repository.findByShop_IdAndProductProvider_Provider_Id(shopId, providerId);
     }
+
+    public ShopProductProvider findByShopIdAndProductProviderId(UUID shopId, UUID productProviderId) {
+        return repository.findByShop_IdAndProductProvider_Id(shopId, productProviderId);
+    }
 }
