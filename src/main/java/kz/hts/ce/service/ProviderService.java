@@ -16,9 +16,6 @@ public class ProviderService extends BaseService<Provider, ProviderRepository> {
     private static final String PROVIDER = "PROVIDER";
 
     @Autowired
-    private CityService cityService;
-
-    @Autowired
     protected ProviderService(ProviderRepository repository) {
         super(repository);
     }
