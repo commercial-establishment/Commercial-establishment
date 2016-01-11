@@ -1,8 +1,7 @@
 package kz.hts.ce.controller.provider;
 
 import kz.hts.ce.model.entity.*;
-import kz.hts.ce.model.dto.TransferDto;
-import kz.hts.ce.model.entity.*;
+import kz.hts.ce.model.dto.ShopProductProviderDto;
 import kz.hts.ce.service.*;
 import kz.hts.ce.util.SpringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 @Controller
@@ -238,12 +236,46 @@ public class ProviderController {
         return REDIRECT;
     }
 
-    @RequestMapping(value = "/replication/provider-products", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    @RequestMapping(value = "/replication/residues", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     @ResponseBody
-    public void getProvidersFromClient(@RequestBody List<TransferDto> transferDtos) {
-        for (TransferDto transferDto : transferDtos) {
-            List<ShopProductProvider> shopProductProviderList = sppService.
-                    findByShopIdAndProviderId(transferDto.getShopId(), transferDto.getProviderId());
+    public void getProvidersFromClient(@RequestBody List<ShopProductProviderDto> sppDtos) {
+        for (ShopProductProviderDto sppDto : sppDtos) {
+            ShopProductProvider shopProductProvider = sppService.
+                    findByShopIdAndProductProviderId(sppDto.getShopId(), sppDto.getProductProviderId());
+            if (shopProductProvider == null) {
+                ShopProductProvider spp = new ShopProductProvider();
+                Shop shop = shopService.findById(sppDto.getShopId());
+                spp.setShop(shop);
+                ProductProvider productProvider = productProviderService.findById(sppDto.getProductProviderId());
+                spp.setProductProvider(productProvider);
+                spp.setResidue(sppDto.getResidue());
+                spp.setBlocked(false);
+                sppService.save(spp);
+            } else {
+                shopProductProvider.setResidue(sppDto.getResidue());
+                sppService.save(shopProductProvider);
+            }
         }
+    }
+
+    @RequestMapping(value = "/replication/product-provider-list/add", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    @ResponseBody
+    public List<ProductProvider> getProductProviderListForSavingFromClient(@RequestBody List<ProductProvider> productProviderList) {
+        for (ProductProvider productProvider : productProviderList) {
+            if (productService.findById(productProvider.getProduct().getId()) == null) {
+                productService.save(productProvider.getProduct());
+            }
+            if (providerService.findById(productProvider.getProvider().getId()) == null) {
+                providerService.save(productProvider.getProvider());
+            }
+            productProviderService.save(productProvider);
+        }
+        return productProviderList;
+    }
+
+    @RequestMapping(value = "/replication/providers", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    @ResponseBody
+    public void addProviderChangesFromClient(@RequestBody List<Provider> providers) {
+        for (Provider provider : providers) providerService.save(provider);
     }
 }
