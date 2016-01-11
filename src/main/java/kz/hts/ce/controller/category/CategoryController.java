@@ -31,18 +31,12 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "/admin/categories/create-save", method = RequestMethod.POST)
-    public String create(Model model, @Valid @ModelAttribute("category") Category category, BindingResult result) {
+    public String create(@Valid @ModelAttribute("category") Category category, BindingResult result) {
         if (result.hasErrors()) {
             return "category-create";
         }
         categoryService.save(category);
         return "redirect:";
-    }
-
-    @RequestMapping(value = "/replication/categories/time={time}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
-    @ResponseBody
-    public List<Category> sendAllCategoriesToClient(@PathVariable long time) {
-        return categoryService.getHistory(time);
     }
 }
 

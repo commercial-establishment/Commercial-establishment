@@ -197,27 +197,6 @@ public class ProviderController {
         productProviderService.save(productProvider);
         return "redirect:/admin/providers/" + providerId + "/products";
     }
-//
-//    @RequestMapping(value = "/replication/providers/add", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-//    @ResponseBody
-//    public List<Provider> getProvidersFromClient(@RequestBody List<Provider> providers) {
-//        for (Provider provider : providers) providerService.save(provider);
-//        return providers;
-//    }
-//
-//    @RequestMapping(value = "/replication/providers", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
-//    @ResponseBody
-//    public List<Provider> sendAllProvidersToClient() {
-//        return providerService.findAll();
-//    }
-
-    @RequestMapping(value = "/replication/providers/time={time}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
-    @ResponseBody
-    public List<Provider> sendNewProviderDataToClient(@PathVariable long time) {
-        List<Provider> history = providerService.getHistory(time);
-        System.out.println(history);
-        return history;
-    }
 
     @Transactional
     @RequestMapping(value = "/provider/shops/add", method = RequestMethod.POST)
@@ -234,48 +213,5 @@ public class ProviderController {
             shopProviderService.save(shopProvider);
         }
         return REDIRECT;
-    }
-
-    @RequestMapping(value = "/replication/residues", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-    @ResponseBody
-    public void getProvidersFromClient(@RequestBody List<ShopProductProviderDto> sppDtos) {
-        for (ShopProductProviderDto sppDto : sppDtos) {
-            ShopProductProvider shopProductProvider = sppService.
-                    findByShopIdAndProductProviderId(sppDto.getShopId(), sppDto.getProductProviderId());
-            if (shopProductProvider == null) {
-                ShopProductProvider spp = new ShopProductProvider();
-                Shop shop = shopService.findById(sppDto.getShopId());
-                spp.setShop(shop);
-                ProductProvider productProvider = productProviderService.findById(sppDto.getProductProviderId());
-                spp.setProductProvider(productProvider);
-                spp.setResidue(sppDto.getResidue());
-                spp.setBlocked(false);
-                sppService.save(spp);
-            } else {
-                shopProductProvider.setResidue(sppDto.getResidue());
-                sppService.save(shopProductProvider);
-            }
-        }
-    }
-
-    @RequestMapping(value = "/replication/product-provider-list/add", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-    @ResponseBody
-    public List<ProductProvider> getProductProviderListForSavingFromClient(@RequestBody List<ProductProvider> productProviderList) {
-        for (ProductProvider productProvider : productProviderList) {
-            if (productService.findById(productProvider.getProduct().getId()) == null) {
-                productService.save(productProvider.getProduct());
-            }
-            if (providerService.findById(productProvider.getProvider().getId()) == null) {
-                providerService.save(productProvider.getProvider());
-            }
-            productProviderService.save(productProvider);
-        }
-        return productProviderList;
-    }
-
-    @RequestMapping(value = "/replication/providers", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-    @ResponseBody
-    public void addProviderChangesFromClient(@RequestBody List<Provider> providers) {
-        for (Provider provider : providers) providerService.save(provider);
     }
 }
