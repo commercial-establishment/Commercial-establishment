@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authentication var="role" property="principal.authorities[0]"/>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,17 +23,35 @@
                         <li>
                             <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>">Главная</a>
                         </li>
-                        <li>
-                            <i class="fa fa-table"></i> <a href="<c:url value="/admin/providers"/>">Список
-                            поставщиков</a>
-                        </li>
-                        <li>
-                            <i class="fa fa-desktop"></i> <a href="<c:url value="/admin/providers/${id}"/>">Информация о
-                            поставщике</a>
-                        </li>
-                        <li class="active">
-                            <i class="fa fa-table"></i> Список товаров
-                        </li>
+                        <c:choose>
+                            <c:when test="${role eq 'ROLE_ADMIN'}">
+                                <li>
+                                    <i class="fa fa-table"></i> <a href="<c:url value="/admin/providers"/>">Список
+                                    поставщиков</a>
+                                </li>
+                                <li>
+                                    <i class="fa fa-desktop"></i> <a href="<c:url value="/admin/providers/${id}"/>">Информация
+                                    о
+                                    поставщике</a>
+                                </li>
+                                <li class="active">
+                                    <i class="fa fa-table"></i> Список товаров
+                                </li>
+                            </c:when>
+                            <c:when test="${role eq 'ROLE_PROVIDER'}">
+                                <li>
+                                    <i class="fa fa-table"></i> <a href="<c:url value="/provider/shops"/>">Список
+                                    магазинов</a>
+                                </li>
+                                <li>
+                                    <i class="fa fa-desktop"></i> <a href="<c:url value="/provider/shops/${shop.id}"/>">Информация
+                                    о магазине</a>
+                                </li>
+                                <li class="active">
+                                    <i class="fa fa-table"></i> Список товаров
+                                </li>
+                            </c:when>
+                        </c:choose>
                     </ol>
                 </div>
             </div>

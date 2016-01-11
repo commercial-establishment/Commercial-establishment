@@ -23,21 +23,35 @@
                         <li>
                             <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>">Главная</a>
                         </li>
-                        <li>
-                            <i class="fa fa-table"></i> <a href="<c:url value="/admin/providers"/>">Список
-                            поставщиков</a>
-                        </li>
-                        <li>
-                            <i class="fa fa-desktop"></i> <a href="<c:url value="/admin/providers/${id}"/>">Информация о
-                            поставщике</a>
-                        </li>
-                        <li>
-                            <i class="fa fa-table"></i> <a href="<c:url value="/admin/providers/${id}/shops"/>">Список
-                            магазинов</a>
-                        </li>
-                        <li class="active">
-                            <i class="fa fa-table"></i> Добавление магазина
-                        </li>
+                        <c:choose>
+                            <c:when test="${role eq 'ROLE_ADMIN'}">
+                                <li>
+                                    <i class="fa fa-table"></i> <a href="<c:url value="/admin/providers"/>">Список
+                                    поставщиков</a>
+                                </li>
+                                <li>
+                                    <i class="fa fa-desktop"></i> <a href="<c:url value="/admin/providers/${id}"/>">Информация
+                                    о
+                                    поставщике</a>
+                                </li>
+                                <li>
+                                    <i class="fa fa-table"></i> <a href="<c:url value="/admin/providers/${id}/shops"/>">Список
+                                    магазинов</a>
+                                </li>
+                                <li class="active">
+                                    <i class="fa fa-table"></i> Добавление магазина
+                                </li>
+                            </c:when>
+                            <c:when test="${role eq 'ROLE_PROVIDER'}">
+                                <li>
+                                    <i class="fa fa-table"></i> <a href="<c:url value="/provider/shops"/>">Список
+                                    магазинов</a>
+                                </li>
+                                <li class="active">
+                                    <i class="fa fa-table"></i> Добавление магазина
+                                </li>
+                            </c:when>
+                        </c:choose>
                     </ol>
                 </div>
             </div>
