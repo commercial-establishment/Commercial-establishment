@@ -1,7 +1,6 @@
 package kz.hts.ce.controller.provider;
 
 import kz.hts.ce.model.entity.*;
-import kz.hts.ce.model.entity.*;
 import kz.hts.ce.service.*;
 import kz.hts.ce.util.SpringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.*;
+
+import static kz.hts.ce.util.SpringUtil.getPrincipal;
 
 @Controller
 public class ProviderPageController {
