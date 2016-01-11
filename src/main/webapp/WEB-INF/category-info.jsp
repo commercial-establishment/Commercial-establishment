@@ -32,15 +32,15 @@
             </div>
             <div class="col-lg-12">
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-hover fixed-table">
                         <tbody>
                         <tr>
-                            <td style="width:10%;"><b>ID:</b></td>
-                            <td style="width:10%;">${category.id}</td>
+                            <td style="width: 250px;"><b>ID:</b></td>
+                            <td style="width: 250px;">${category.id}</td>
                         </tr>
                         <tr>
-                            <td style="width:10%;"><b>Название категории:</b></td>
-                            <td style="width:10%;">${category.name}</td>
+                            <td><b>Название категории:</b></td>
+                            <td>${category.name}</td>
                         </tr>
                         <tr>
                             <td>
