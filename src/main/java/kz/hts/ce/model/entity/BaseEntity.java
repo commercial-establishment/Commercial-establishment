@@ -1,19 +1,23 @@
 package kz.hts.ce.model.entity;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
 import java.util.UUID;
 
 @MappedSuperclass
 public abstract class BaseEntity {
 
     @Id
-    @GeneratedValue(generator = "uuid-gen")
-    @GenericGenerator(name = "uuid-gen", strategy = "uuid2")
-    @Column(name = "id", columnDefinition = "uuid")
+    @Column(columnDefinition = "uuid")
     @org.hibernate.annotations.Type(type="pg-uuid")
     private UUID id;
+
+    @PrePersist//FIXME
+    public void initializeUUID() {
+        if (id == null) id = UUID.randomUUID();
+    }
 
     public UUID getId() {
         return id;
