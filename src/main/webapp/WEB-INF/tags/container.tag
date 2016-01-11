@@ -78,6 +78,10 @@
                         <li class="${products}">
                             <a href="<c:url value="/provider/products"/>"><i class="fa fa-fw fa-table"></i>Товары</a>
                         </li>
+                        <li class="${categories}">
+                            <a href="<c:url value="/provider/categories"/>"><i class="fa fa-fw fa-wrench"></i>Категории
+                                товаров</a>
+                        </li>
                     </c:otherwise>
                 </c:choose>
             </ul>
