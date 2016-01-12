@@ -4,7 +4,7 @@ import kz.hts.ce.model.entity.Admin;
 import kz.hts.ce.model.entity.Gender;
 import kz.hts.ce.model.entity.Role;
 import kz.hts.ce.service.AdminService;
-import kz.hts.ce.util.SpringUtil;
+import kz.hts.ce.util.SpringHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +26,7 @@ public class AdminPageController {
     @Autowired
     private AdminService adminService;
     @Autowired
-    private SpringUtil springUtil;
+    private SpringHelper springHelper;
 
     @RequestMapping("/admin/admins/{id}")
     public String information(Model model, @PathVariable UUID id) {
@@ -38,8 +38,8 @@ public class AdminPageController {
     @RequestMapping("/admin/admins/{id}/edit")
     public String edit(Model model, @PathVariable UUID id) {
         Admin admin = adminService.findById(id);
-        List<Gender> genders = springUtil.getGenders();
-        List<Role> roles = springUtil.getRoles();
+        List<Gender> genders = springHelper.getGenders();
+        List<Role> roles = springHelper.getRoles();
 
         model.addAttribute(GENDERS, genders);
         model.addAttribute("roles", roles);
@@ -50,7 +50,7 @@ public class AdminPageController {
     @RequestMapping("/admin/admins/create")
     public String create(Model model) {
         Admin admin = new Admin();
-        List<Gender> genders = springUtil.getGenders();
+        List<Gender> genders = springHelper.getGenders();
 
         model.addAttribute(GENDERS, genders);
         model.addAttribute(ADMIN_LOWER_CASE, admin);

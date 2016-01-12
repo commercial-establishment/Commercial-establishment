@@ -2,7 +2,7 @@ package kz.hts.ce.controller.replication;
 
 import kz.hts.ce.model.entity.ShopProvider;
 import kz.hts.ce.service.ShopProviderService;
-import org.hibernate.envers.Audited;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,12 +15,12 @@ import java.util.List;
 @Controller
 public class ShopProviderReplicationController {
 
-    @Audited
+    @Autowired
     private ShopProviderService shopProviderService;
 
     @RequestMapping(value = "/replication/shop-provider-list", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     @ResponseBody
     public void getProductProviderListForSavingFromClient(@RequestBody List<ShopProvider> shopProviderList) {
-        for (ShopProvider shopProvider : shopProviderList) shopProviderService.save(shopProvider);
+            for (ShopProvider shopProvider : shopProviderList) shopProviderService.save(shopProvider);
     }
 }

@@ -2,7 +2,7 @@ package kz.hts.ce.controller.provider;
 
 import kz.hts.ce.model.entity.*;
 import kz.hts.ce.service.*;
-import kz.hts.ce.util.SpringUtil;
+import kz.hts.ce.util.SpringHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.*;
 
-import static kz.hts.ce.util.SpringUtil.getPrincipal;
+import static kz.hts.ce.util.SpringHelper.getPrincipal;
 
 @Controller
 public class ProviderPageController {
@@ -35,7 +35,7 @@ public class ProviderPageController {
     private ShopProductProviderService sppService;
 
     @Autowired
-    private SpringUtil springUtil;
+    private SpringHelper springHelper;
 
     @RequestMapping(value = "/admin/providers", method = RequestMethod.GET)
     public String providers(Model model) {
@@ -55,7 +55,7 @@ public class ProviderPageController {
     public String edit(Model model, @PathVariable UUID id) {
         List<City> cities = cityService.findAll();
         Provider provider = providerService.findById(id);
-        List<Role> roles = springUtil.getRoles();
+        List<Role> roles = springHelper.getRoles();
         model.addAttribute("roles", roles);
         model.addAttribute("provider", provider);
         model.addAttribute("cities", cities);
@@ -127,7 +127,7 @@ public class ProviderPageController {
 
     @RequestMapping(value = "/provider/shops", method = RequestMethod.GET)
     public String providerShops(Model model) {
-        List<ShopProvider> providerShops = shopProviderService.findByProviderId(springUtil.getAuthProviderId());
+        List<ShopProvider> providerShops = shopProviderService.findByProviderId(springHelper.getAuthProviderId());
         List<Shop> shops = new ArrayList<>();
         for (ShopProvider providerShop : providerShops) {
             shops.add(providerShop.getShop());
@@ -138,7 +138,7 @@ public class ProviderPageController {
 
     @RequestMapping(value = "/provider/shops/add", method = RequestMethod.GET)
     public String providerAddShop(Model model) {
-        UUID id = springUtil.getAuthProviderId();
+        UUID id = springHelper.getAuthProviderId();
         List<ShopProvider> providerShops = shopProviderService.findByProviderId(id);
         List<UUID> shopIds = new ArrayList<>();
         for (ShopProvider providerShop : providerShops) shopIds.add(providerShop.getShop().getId());
@@ -166,7 +166,7 @@ public class ProviderPageController {
 
     @RequestMapping(value = "/provider/shops/{shopId}/products", method = RequestMethod.GET)
     public String providerShopProducts(Model model, @PathVariable("shopId") UUID shopId) {
-        UUID providerId = springUtil.getAuthProviderId();
+        UUID providerId = springHelper.getAuthProviderId();
         Map<Product, Integer> products = sppService.findProductsByShopIdAndProviderId(shopId, providerId);
         model.addAttribute("products", products);
         return "provider-shop-products";

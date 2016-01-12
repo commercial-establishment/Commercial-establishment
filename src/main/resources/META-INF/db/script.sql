@@ -45,9 +45,9 @@ INSERT INTO product (id, is_blocked, name, category_id, barcode, unit_id) VALUES
   ('00000000-0000-0002-0000-000000000000', FALSE, 'NeCoca-Cola', '00000000-0000-0001-0000-000000000000', 321321321321,
    '00000000-0000-0002-0000-000000000000');
 
-INSERT INTO shop (id, address, is_blocked, name, area_id, type_id) VALUES
+INSERT INTO shop (id, address, is_blocked, name, area_id, type_id, iin) VALUES
   ('00000000-0000-0001-0000-000000000000', 'Туркистан 8/2', FALSE, 'Gal Mart', '00000000-0000-0001-0000-000000000000',
-   '00000000-0000-0001-0000-000000000000');
+   '00000000-0000-0001-0000-000000000000', 123213123);
 
 INSERT INTO warehouse (id, arrival, import_date, residue, product_id, shop_id) VALUES
   ('00000000-0000-0001-0000-000000000000', 100, NULL, 50, '00000000-0000-0001-0000-000000000000',

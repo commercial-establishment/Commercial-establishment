@@ -1,11 +1,9 @@
 package kz.hts.ce.controller.provider;
 
 import kz.hts.ce.model.entity.*;
-import kz.hts.ce.model.dto.ShopProductProviderDto;
 import kz.hts.ce.service.*;
-import kz.hts.ce.util.SpringUtil;
+import kz.hts.ce.util.SpringHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,7 +43,7 @@ public class ProviderController {
     private ShopProductProviderService sppService;
 
     @Autowired
-    private SpringUtil springUtil;
+    private SpringHelper springHelper;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -78,7 +76,7 @@ public class ProviderController {
         Admin adminFromDB = adminService.findByUsernameAndBlocked(provider.getUsername(), false);
         Provider providerFromDB = providerService.findByUsernameAndBlocked(provider.getUsername(), false);
         if (adminFromDB == null && providerFromDB == null) {
-            Role role = SpringUtil.roleMap.get(PROVIDER);
+            Role role = SpringHelper.roleMap.get(PROVIDER);
             provider.setBlocked(false);
             provider.setRole(role);
             provider.setPassword(passwordEncoder.encode(provider.getPassword()));
@@ -96,7 +94,7 @@ public class ProviderController {
     public String edit(Model model, @PathVariable UUID id, @Valid @ModelAttribute("provider") Provider provider,
                        BindingResult result) {
         List<City> cities = cityService.findAll();
-        List<Role> roles = springUtil.getRoles();
+        List<Role> roles = springHelper.getRoles();
         if (result.hasErrors()) {
             model.addAttribute(CITIES, cities);
             model.addAttribute(ROLES, roles);
@@ -201,7 +199,7 @@ public class ProviderController {
     @Transactional
     @RequestMapping(value = "/provider/shops/add", method = RequestMethod.POST)
     public String addShop(@RequestParam("shopId") UUID shopId) {
-        UUID providerId = springUtil.getAuthProviderId();
+        UUID providerId = springHelper.getAuthProviderId();
         ShopProvider shopProviderFromDB = shopProviderService.findByProviderIdAndShopId(providerId, shopId);
         if (shopProviderFromDB == null) {
             Shop shop = shopService.findById(shopId);

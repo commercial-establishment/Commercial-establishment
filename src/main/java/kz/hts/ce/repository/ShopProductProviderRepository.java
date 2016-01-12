@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface ShopProductProviderRepository extends JpaRepository<ShopProductProvider, UUID> {
+public interface ShopProductProviderRepository extends JpaRepository<ShopProductProvider, UUID> {/*FIXME remove??*/
 
     List<ShopProductProvider> findByShop_IdAndProductProvider_Provider_Id(UUID shopId, UUID providerId);
 

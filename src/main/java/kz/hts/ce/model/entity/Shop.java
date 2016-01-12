@@ -1,13 +1,17 @@
 package kz.hts.ce.model.entity;
 
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.RelationTargetAuditMode;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.List;
 
 @Entity
+@Audited
 public class Shop extends BaseEntity {
+
+    private int iin;
 
     @NotEmpty
     @Column(nullable = false)
@@ -19,15 +23,14 @@ public class Shop extends BaseEntity {
     @Size(min = 2, max = 30)
     private String address;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "shop")
-    private List<Employee> employees;
-
     @ManyToOne
     @JoinColumn(name = "type_id", nullable = false)
+    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     private Type type;
 
     @OneToOne
     @JoinColumn(name = "area_id", nullable = false)
+    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     private Area area;
 
     @Column(name = "is_blocked", nullable = false)
@@ -39,14 +42,6 @@ public class Shop extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
     }
 
     public String getAddress() {
@@ -79,5 +74,13 @@ public class Shop extends BaseEntity {
 
     public void setArea(Area area) {
         this.area = area;
+    }
+
+    public int getIin() {
+        return iin;
+    }
+
+    public void setIin(int iin) {
+        this.iin = iin;
     }
 }

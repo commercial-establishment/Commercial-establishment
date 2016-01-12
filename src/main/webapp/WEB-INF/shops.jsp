@@ -66,7 +66,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <%--@elvariable id="shop" type="kz.hts.ce.entity.Shop"--%>
+                                    <%--@elvariable id="shop" type="kz.hts.ce.model.entity.Shop"--%>
                                 <c:forEach items="${shops}" var="shop">
                                     <c:choose>
                                         <c:when test="${role eq 'ROLE_ADMIN'}">

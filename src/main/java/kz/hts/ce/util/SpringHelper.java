@@ -14,7 +14,7 @@ import javax.annotation.PostConstruct;
 import java.util.*;
 
 @Component
-public class SpringUtil {
+public class SpringHelper {
 
     public static Map<String, Role> roleMap;
     private List<Role> roles;

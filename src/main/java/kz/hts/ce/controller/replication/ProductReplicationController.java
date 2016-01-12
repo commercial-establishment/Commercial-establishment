@@ -5,10 +5,7 @@ import kz.hts.ce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,5 +19,14 @@ public class ProductReplicationController {
     @ResponseBody
     public void saveNewProvidersDataFromClient(@RequestBody List<Product> products) {
         for (Product product : products) productService.save(product);
+    }
+
+    @RequestMapping(value = "/replication/products/time={time}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    @ResponseBody
+    public List<Product> sendNewProductsDataToClient(@PathVariable long time) {
+        List<Product> products;
+        if (time == 0) products = productService.findAll();
+        else products = productService.getHistory(time);
+        return products;
     }
 }

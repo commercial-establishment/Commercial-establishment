@@ -6,7 +6,7 @@ import kz.hts.ce.model.entity.Provider;
 import kz.hts.ce.model.entity.Role;
 import kz.hts.ce.service.AdminService;
 import kz.hts.ce.service.ProviderService;
-import kz.hts.ce.util.SpringUtil;
+import kz.hts.ce.util.SpringHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -36,7 +36,7 @@ public class AdminController {
     private ProviderService providerService;
 
     @Autowired
-    private SpringUtil springUtil;
+    private SpringHelper springHelper;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -60,12 +60,12 @@ public class AdminController {
 
     @RequestMapping(value = "/admin/admins/{id}/edit", method = RequestMethod.POST)
     public String edit(Model model, @PathVariable UUID id, @Valid @ModelAttribute("admin") Admin admin, BindingResult result) {
-        Role role = SpringUtil.roleMap.get(ADMIN);
+        Role role = SpringHelper.roleMap.get(ADMIN);
         admin.setRole(role);
 
         if (result.hasErrors()) {
-            List<Gender> genders = springUtil.getGenders();
-            List<Role> roles = springUtil.getRoles();
+            List<Gender> genders = springHelper.getGenders();
+            List<Role> roles = springHelper.getRoles();
 
             model.addAttribute(GENDERS, genders);
             model.addAttribute(ROLES, roles);
@@ -79,7 +79,7 @@ public class AdminController {
 
     @RequestMapping(value = "/admin/admins/create-save", method = RequestMethod.POST)
     public String create(Model model, @Valid @ModelAttribute("admin") Admin admin, BindingResult result) {
-        List<Gender> genders = springUtil.getGenders();
+        List<Gender> genders = springHelper.getGenders();
         if (result.hasErrors()) {
             model.addAttribute(GENDERS, genders);
             return "admin-create";
@@ -88,7 +88,7 @@ public class AdminController {
         Admin adminFromDB = adminService.findByUsernameAndBlocked(admin.getUsername(), false);
         Provider providerFromDB = providerService.findByUsernameAndBlocked(admin.getUsername(), false);
         if (adminFromDB == null && providerFromDB == null) {
-            Role role = SpringUtil.roleMap.get(ADMIN);
+            Role role = SpringHelper.roleMap.get(ADMIN);
             admin.setRole(role);
             admin.setPassword(passwordEncoder.encode(admin.getPassword()));
             admin.setStartWorkDate(new Date());

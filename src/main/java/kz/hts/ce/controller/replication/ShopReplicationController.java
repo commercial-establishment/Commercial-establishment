@@ -1,7 +1,7 @@
 package kz.hts.ce.controller.replication;
 
-import kz.hts.ce.model.entity.Employee;
-import kz.hts.ce.service.EmployeeService;
+import kz.hts.ce.model.entity.Shop;
+import kz.hts.ce.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-public class EmployeeReplicationController {
+public class ShopReplicationController {
 
     @Autowired
-    private EmployeeService employeeService;
+    private ShopService shopService;
 
-    @RequestMapping(value = "/replication/employees", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    @RequestMapping(value = "/replication/shops", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     @ResponseBody
-    public void saveNewEmployeesDataFromClient(@RequestBody List<Employee> employees) {
-        for (Employee employee : employees) employeeService.save(employee);
+    public void getShopsForSavingFromClient(@RequestBody List<Shop> shops) {
+        for (Shop shop : shops) shopService.save(shop);
     }
 }
