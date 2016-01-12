@@ -1,5 +1,7 @@
 package kz.hts.ce.model.entity;
 
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.RelationTargetAuditMode;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;
@@ -10,6 +12,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
+@Audited
 public class Product extends BaseEntity {
 
     @NotEmpty
@@ -22,10 +25,12 @@ public class Product extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
+    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     private Category category;
 
     @ManyToOne
     @JoinColumn(name = "unit_id", nullable = false)
+    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     private Unit unit;
 
     @Column(name = "is_blocked")

@@ -1,22 +1,25 @@
 package kz.hts.ce.controller.replication;
 
 import kz.hts.ce.model.dto.ShopProductProviderDto;
-import kz.hts.ce.model.entity.*;
-import kz.hts.ce.service.*;
+import kz.hts.ce.model.entity.ProductProvider;
+import kz.hts.ce.model.entity.Shop;
+import kz.hts.ce.model.entity.ShopProductProvider;
+import kz.hts.ce.service.ProductProviderService;
+import kz.hts.ce.service.ShopProductProviderService;
+import kz.hts.ce.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
 @Controller
-public class ReplicationController {
+public class ResidueReplicationController {
 
-    @Autowired
-    private ProductService productService;
-    @Autowired
-    private ProviderService providerService;
     @Autowired
     private ShopProductProviderService sppService;
     @Autowired
@@ -44,20 +47,5 @@ public class ReplicationController {
                 sppService.save(shopProductProvider);
             }
         }
-    }
-
-    @RequestMapping(value = "/replication/product-provider-list/add", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-    @ResponseBody
-    public List<ProductProvider> getProductProviderListForSavingFromClient(@RequestBody List<ProductProvider> productProviderList) {
-        for (ProductProvider productProvider : productProviderList) {
-            if (productService.findById(productProvider.getProduct().getId()) == null) {
-                productService.save(productProvider.getProduct());
-            }
-            if (providerService.findById(productProvider.getProvider().getId()) == null) {
-                providerService.save(productProvider.getProvider());
-            }
-            productProviderService.save(productProvider);
-        }
-        return productProviderList;
     }
 }

@@ -1,7 +1,6 @@
 package kz.hts.ce.controller.shop;
 
 import kz.hts.ce.model.entity.*;
-import kz.hts.ce.model.entity.*;
 import kz.hts.ce.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -87,7 +86,7 @@ public class ShopController {
         return areaNames;
     }
 
-    @RequestMapping(value = "/employees11", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    @RequestMapping(value = "/employees11", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)/*TODO remove*/
     @ResponseBody
     public String getForClient(Model model) {
         List<City> cities = cityService.findAll();
@@ -95,7 +94,7 @@ public class ShopController {
         return cities.get(0).getName();
     }
 
-    @RequestMapping(value = "/json/shop-providers/add", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    @RequestMapping(value = "/json/shop-providers/add", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)/*TODO remove*/
     @ResponseBody
     public List<ShopProvider> getShopProvidersFromClient(@RequestBody List<ShopProvider> shopProviders) {
         for (ShopProvider shopProvider : shopProviders) shopProviderService.save(shopProvider);

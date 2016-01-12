@@ -21,6 +21,9 @@ public class CategoryReplicationController {
     @RequestMapping(value = "/replication/categories/time={time}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @ResponseBody
     public List<Category> sendNewCategoriesDataToClient(@PathVariable long time) {
-        return categoryService.getHistory(time);
+        List<Category> categories;
+        if (time == 0) categories = categoryService.findAll();
+        else categories = categoryService.getHistory(time);
+        return categories;
     }
 }

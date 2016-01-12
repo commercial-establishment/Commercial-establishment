@@ -15,29 +15,18 @@ public class ProviderReplicationController {
     @Autowired
     private ProviderService providerService;
 
-    //
-//    @RequestMapping(value = "/replication/providers/add", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-//    @ResponseBody
-//    public List<Provider> getProvidersFromClient(@RequestBody List<Provider> providers) {
-//        for (Provider provider : providers) providerService.save(provider);
-//        return providers;
-//    }
-//
-//    @RequestMapping(value = "/replication/providers", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
-//    @ResponseBody
-//    public List<Provider> sendAllProvidersToClient() {
-//        return providerService.findAll();
-//    }
-
     @RequestMapping(value = "/replication/providers/time={time}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @ResponseBody
     public List<Provider> sendNewProvidersDataToClient(@PathVariable long time) {
-        return providerService.getHistory(time);
+        List<Provider> providers;
+        if (time == 0) providers = providerService.findAll();
+        else providers = providerService.getHistory(time);
+        return providers;
     }
 
     @RequestMapping(value = "/replication/providers", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     @ResponseBody
-    public void saveProvidersChangesFromClient(@RequestBody List<Provider> providers) {
+    public void saveNewProvidersDataFromClient(@RequestBody List<Provider> providers) {
         for (Provider provider : providers) providerService.save(provider);
     }
 }

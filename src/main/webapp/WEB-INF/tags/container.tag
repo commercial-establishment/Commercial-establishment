@@ -68,7 +68,7 @@
                                 товаров</a>
                         </li>
                     </c:when>
-                    <c:otherwise>
+                    <c:when test="${role eq 'ROLE_PROVIDER'}">
                         <li class="${home}">
                             <a href="<c:url value="/home"/>"><i class="fa fa-fw fa-dashboard"></i> Главная</a>
                         </li>
@@ -82,7 +82,7 @@
                             <a href="<c:url value="/provider/categories"/>"><i class="fa fa-fw fa-wrench"></i>Категории
                                 товаров</a>
                         </li>
-                    </c:otherwise>
+                    </c:when>
                 </c:choose>
             </ul>
         </div>
