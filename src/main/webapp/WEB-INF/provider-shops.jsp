@@ -60,13 +60,13 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <%--@elvariable id="shop" type="kz.hts.ce.entity.Shop"--%>
+                                <%--@elvariable id="providerShop" type="kz.hts.ce.model.entity.ShopProvider"--%>
                                 <c:forEach items="${providerShops}" var="providerShop">
                                     <tr onclick="document.location = '/admin/providers/' + '${providerShop.provider.id}' + '/shops/' + '${providerShop.shop.id}';">
                                         <td>${providerShop.id}</td>
                                         <td>${providerShop.shop.name}</td>
                                         <td>${providerShop.shop.address}</td>
-                                        <td>${providerShop.shop.city.name}</td>
+                                        <td>${providerShop.shop.area.city.name}</td>
                                         <td>${providerShop.shop.type.name}</td>
                                         <td>
                                             <c:choose>

@@ -38,7 +38,7 @@
             <div class="col-lg-12">
                 <div class="table-responsive">
                     <div>
-                        <a href="<c:url value="/admin/providers/${providerId}/products/all"/>"
+                        <a href="<c:url value="/admin/providers/${providerId}/products/add"/>"
                            class="btn btn-lg btn-default">Добавить товар</a>
                         <br/> <br/>
                     </div>

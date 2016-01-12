@@ -125,9 +125,7 @@ public class ProviderController {
 
     @RequestMapping(value = "/admin/providers/{providerId}/products/add", method = RequestMethod.POST)
     public String addProduct(@PathVariable("providerId") UUID providerId,
-                             @RequestParam("productId") UUID productId,
-                             @RequestParam("amount") long amount,
-                             @RequestParam("price") BigDecimal price) {
+                             @RequestParam("productId") UUID productId) {
         Product product = productService.findById(productId);
         Provider provider = providerService.findById(providerId);
 
@@ -150,6 +148,11 @@ public class ProviderController {
     @RequestMapping(value = "/admin/providers/{providerId}/shops/add", method = RequestMethod.POST)
     public String addShop(@PathVariable("providerId") UUID providerId,
                           @RequestParam("shopId") UUID shopId) {
+        saveNewShopProvider(providerId, shopId);
+        return REDIRECT;
+    }
+
+    private void saveNewShopProvider(UUID providerId, UUID shopId) {
         ShopProvider shopProviderFromDB = shopProviderService.findByProviderIdAndShopId(providerId, shopId);
         if (shopProviderFromDB == null) {
             Shop shop = shopService.findById(shopId);
@@ -160,7 +163,6 @@ public class ProviderController {
             shopProvider.setBlocked(false);
             shopProviderService.save(shopProvider);
         }
-        return REDIRECT;
     }
 
     @RequestMapping(value = "/admin/providers/{providerId}/products/{productId}/delete",
@@ -190,9 +192,7 @@ public class ProviderController {
 
     @RequestMapping(value = "/admin/providers/{providerId}/products/{productProviderId}/edit", method = RequestMethod.POST)
     public String providerProductEdit(@PathVariable("productProviderId") UUID productProviderId,
-                                      @PathVariable("providerId") UUID providerId,
-                                      @RequestParam("amount") int amount,
-                                      @RequestParam("price") BigDecimal price) {
+                                      @PathVariable("providerId") UUID providerId) {
         ProductProvider productProvider = productProviderService.findById(productProviderId);
         productProviderService.save(productProvider);
         return "redirect:/admin/providers/" + providerId + "/products";
@@ -200,17 +200,25 @@ public class ProviderController {
 
     @Transactional
     @RequestMapping(value = "/provider/shops/add", method = RequestMethod.POST)
-    public String addShop(@RequestParam("shopId") UUID shopId) {
+    public String providerAddShop(@RequestParam("shopId") UUID shopId) {
         UUID providerId = springUtil.getAuthProviderId();
-        ShopProvider shopProviderFromDB = shopProviderService.findByProviderIdAndShopId(providerId, shopId);
-        if (shopProviderFromDB == null) {
-            Shop shop = shopService.findById(shopId);
+        saveNewShopProvider(providerId, shopId);
+        return REDIRECT;
+    }
+
+    @Transactional
+    @RequestMapping(value = "/provider/products/add", method = RequestMethod.POST)
+    public String providerAddProduct(@RequestParam("productId") UUID productId) {
+        UUID providerId = springUtil.getAuthProviderId();
+        ProductProvider productProviderFromDB = productProviderService.findByProviderIdAndProductId(providerId, productId);
+        if (productProviderFromDB == null) {
+            Product product = productService.findById(productId);
             Provider provider = providerService.findById(providerId);
-            ShopProvider shopProvider = new ShopProvider();
-            shopProvider.setProvider(provider);
-            shopProvider.setShop(shop);
-            shopProvider.setBlocked(false);
-            shopProviderService.save(shopProvider);
+            ProductProvider productProvider = new ProductProvider();
+            productProvider.setProvider(provider);
+            productProvider.setProduct(product);
+            productProvider.setBlocked(false);
+            productProviderService.save(productProvider);
         }
         return REDIRECT;
     }

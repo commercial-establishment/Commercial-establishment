@@ -88,7 +88,7 @@ public class ProviderPageController {
         return "provider-shops";
     }
 
-    @RequestMapping(value = "/admin/providers/{providerId}/products/all", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/providers/{providerId}/products/add", method = RequestMethod.GET)
     public String providerProductAdd(Model model, @PathVariable("providerId") String providerId) {
         List<Product> products = productService.findAll();
         model.addAttribute("products", products);
@@ -145,10 +145,12 @@ public class ProviderPageController {
 
         List<Shop> allShops = shopService.findAll();
         for (UUID shopId : shopIds) {
-            for (Iterator<Shop> it = allShops.iterator(); it.hasNext(); ) {
-                if (allShops.size() == 0) break;
-                Shop shop = it.next();
-                if (shop.getId().equals(shopId)) allShops.remove(shop);
+            Iterator<Shop> it = allShops.iterator();
+            it.hasNext();
+            if (allShops.size() == 0) break;
+            Shop shop = it.next();
+            if (shop.getId().equals(shopId)) {
+                allShops.remove(shop);
             }
         }
 
@@ -174,8 +176,7 @@ public class ProviderPageController {
 
     @RequestMapping(value = "/provider/products", method = RequestMethod.GET)
     public String providerProducts(Model model) {
-        UUID id = providerService.findByUsername(getPrincipal()).getId();
-        List<ProductProvider> productProviders = productProviderService.findByProviderId(id);
+        List<ProductProvider> productProviders = productProviderService.findByProviderId(springUtil.getAuthProviderId());
         List<Product> products = new ArrayList<>();
         for (ProductProvider productProvider : productProviders) {
             products.add(productProvider.getProduct());
@@ -183,5 +184,27 @@ public class ProviderPageController {
 
         model.addAttribute("products", products);
         return "products";
+    }
+
+    @RequestMapping(value = "/provider/products/add", method = RequestMethod.GET)
+    public String providerAddProduct(Model model) {
+        UUID id = springUtil.getAuthProviderId();
+        List<ProductProvider> productProviders = productProviderService.findByProviderId(id);
+        List<UUID> productsIds = new ArrayList<>();
+        for (ProductProvider productProvider : productProviders) productsIds.add(productProvider.getProduct().getId());
+
+        List<Product> allProducts = productService.findAll();
+        for (UUID productId : productsIds) {
+            Iterator<Product> it = allProducts.iterator();
+            it.hasNext();
+            if (allProducts.size() == 0) break;
+            Product product = it.next();
+            if (product.getId().equals(productId)) allProducts.remove(product);
+
+        }
+
+        model.addAttribute("providerId", id);
+        model.addAttribute("products", allProducts);
+        return "provider-product-add";
     }
 }
