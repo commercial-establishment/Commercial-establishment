@@ -8,7 +8,7 @@ import kz.hts.ce.service.CategoryService;
 import kz.hts.ce.service.ProductProviderService;
 import kz.hts.ce.service.ProductService;
 import kz.hts.ce.service.UnitService;
-import kz.hts.ce.util.SpringUtil;
+import kz.hts.ce.util.SpringHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,7 +37,7 @@ public class ProductController {
     private ProductProviderService productProviderService;
 
     @Autowired
-    private SpringUtil springUtil;
+    private SpringHelper springHelper;
 
     @RequestMapping(value = "/admin/products/{id}/lock")
     public String lock(@PathVariable UUID id) {
@@ -85,7 +85,7 @@ public class ProductController {
             Product newProduct = productService.save(product);
             ProductProvider productProvider = new ProductProvider();
             productProvider.setProduct(newProduct);
-            productProvider.setProvider(springUtil.getAuthProvider());
+            productProvider.setProvider(springHelper.getAuthProvider());
             productProviderService.save(productProvider);
             return REDIRECT;
         }

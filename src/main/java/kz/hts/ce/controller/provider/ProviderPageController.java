@@ -4,7 +4,6 @@ import kz.hts.ce.model.entity.*;
 import kz.hts.ce.service.*;
 import kz.hts.ce.util.SpringHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.support.ManagedSet;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.*;
-
-import static kz.hts.ce.util.SpringHelper.getPrincipal;
 
 @Controller
 public class ProviderPageController {
@@ -177,7 +174,7 @@ public class ProviderPageController {
 
     @RequestMapping(value = "/provider/products", method = RequestMethod.GET)
     public String providerProducts(Model model) {
-        List<ProductProvider> productProviders = productProviderService.findByProviderId(springUtil.getAuthProviderId());
+        List<ProductProvider> productProviders = productProviderService.findByProviderId(springHelper.getAuthProviderId());
         List<Product> products = new ArrayList<>();
         for (ProductProvider productProvider : productProviders) {
             products.add(productProvider.getProduct());
@@ -189,7 +186,7 @@ public class ProviderPageController {
 
     @RequestMapping(value = "/provider/products/add", method = RequestMethod.GET)
     public String providerAddProduct(Model model) {
-        UUID id = springUtil.getAuthProviderId();
+        UUID id = springHelper.getAuthProviderId();
         List<ProductProvider> productProviders = productProviderService.findByProviderId(id);
         List<UUID> productsIds = new ArrayList<>();
         for (ProductProvider productProvider : productProviders)

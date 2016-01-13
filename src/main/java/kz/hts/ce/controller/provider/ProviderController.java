@@ -161,7 +161,6 @@ public class ProviderController {
             shopProvider.setBlocked(false);
             shopProviderService.save(shopProvider);
         }
-        return REDIRECT;
     }
 
     @RequestMapping(value = "/admin/providers/{providerId}/products/{productId}/delete",
@@ -200,7 +199,7 @@ public class ProviderController {
     @Transactional
     @RequestMapping(value = "/provider/shops/add", method = RequestMethod.POST)
     public String providerAddShop(@RequestParam("shopId") UUID shopId) {
-        UUID providerId = springUtil.getAuthProviderId();
+        UUID providerId = springHelper.getAuthProviderId();
         saveNewShopProvider(providerId, shopId);
         return REDIRECT;
     }
@@ -208,7 +207,7 @@ public class ProviderController {
     @Transactional
     @RequestMapping(value = "/provider/products/add", method = RequestMethod.POST)
     public String providerAddProduct(@RequestParam("productId") UUID productId) {
-        UUID providerId = springUtil.getAuthProviderId();
+        UUID providerId = springHelper.getAuthProviderId();
         ProductProvider productProviderFromDB = productProviderService.findByProviderIdAndProductId(providerId, productId);
         if (productProviderFromDB == null) {
             Product product = productService.findById(productId);
