@@ -4,6 +4,7 @@ import kz.hts.ce.model.entity.*;
 import kz.hts.ce.service.*;
 import kz.hts.ce.util.SpringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.support.ManagedSet;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -191,17 +192,21 @@ public class ProviderPageController {
         UUID id = springUtil.getAuthProviderId();
         List<ProductProvider> productProviders = productProviderService.findByProviderId(id);
         List<UUID> productsIds = new ArrayList<>();
-        for (ProductProvider productProvider : productProviders) productsIds.add(productProvider.getProduct().getId());
+        for (ProductProvider productProvider : productProviders)
+            productsIds.add(productProvider.getProduct().getId());
 
         List<Product> allProducts = productService.findAll();
+        List<Product> deletedProducts = new ArrayList<>();
         for (UUID productId : productsIds) {
             Iterator<Product> it = allProducts.iterator();
-            it.hasNext();
-            if (allProducts.size() == 0) break;
-            Product product = it.next();
-            if (product.getId().equals(productId)) allProducts.remove(product);
-
+            while (it.hasNext()) {
+                if (allProducts.size() == 0) break;
+                Product product = it.next();
+                if (product.getId().equals(productId))
+                    deletedProducts.add(product);
+            }
         }
+        allProducts.removeAll(deletedProducts);
 
         model.addAttribute("providerId", id);
         model.addAttribute("products", allProducts);

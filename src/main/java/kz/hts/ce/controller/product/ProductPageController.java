@@ -45,7 +45,11 @@ public class ProductPageController {
     }
 
     @RequestMapping("/admin/products/create")
-    public String create(Model model) {
+    public String createForAdmin(Model model) {
+        return create(model);
+    }
+
+    private String create(Model model) {
         Product product = new Product();
         List<Category> categories = categoryService.findAll();
         List<Unit> units = unitService.findAll();
@@ -60,6 +64,10 @@ public class ProductPageController {
         List<Product> products = productService.findAll();
         model.addAttribute("products", products);
         return "products";
+    }
+    @RequestMapping("/provider/products/create")
+    public String createForProvider(Model model) {
+        return create(model);
     }
 
 }

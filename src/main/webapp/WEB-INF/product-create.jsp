@@ -33,7 +33,17 @@
             </div>
             <div class="col-lg-12">
                 <div class="table-responsive">
-                    <form:form method="post" action="/admin/products/create-save" modelAttribute="product">
+                    <c:choose>
+                    <c:when test="${role eq 'ROLE_ADMIN'}">
+                        <c:set var="url" scope="request" value="/admin/products/create"/>
+                        <%--<form:form method="post" action="/admin/products/create-save" modelAttribute="product">--%>
+                        </c:when>
+                        <c:when test="${role eq 'ROLE_PROVIDER'}">
+                            <c:set var="url" scope="request" value="/provider/products/create"/>
+                            <%--<form:form method="post" action="/provider/products/create-save" modelAttribute="product">--%>
+                        </c:when>
+                            </c:choose>
+                <form:form method="post" action="${url}" modelAttribute="product">
                         <table class="table table-hover">
                             <tbody>
                             <tr>
@@ -100,7 +110,7 @@
                             </tr>
                             </tbody>
                         </table>
-                    </form:form>
+                        </form:form>
                 </div>
             </div>
         </div>
