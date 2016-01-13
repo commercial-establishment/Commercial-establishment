@@ -52,7 +52,6 @@ public class ProviderService extends BaseService<Provider, ProviderRepository> {
         repository.updateEndWorkDate(endWorkDate, id);
     }
 
-
     public List<Provider> getHistory(long time) {
         List<Provider> allProviders = findAll();
         List<Provider> providers = new ArrayList<>();

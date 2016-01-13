@@ -20,11 +20,11 @@ public class ShopProviderService extends BaseService<ShopProvider, ShopProviderR
     }
 
     public List<ShopProvider> findByProviderId(UUID id) {
-       return repository.findByProvider_Id(id);
+        return repository.findByProvider_Id(id);
     }
 
     public ShopProvider findByProviderIdAndShopId(UUID providerId, UUID shopId) {
-       return repository.findByProvider_IdAndShop_Id(providerId, shopId);
+        return repository.findByProvider_IdAndShop_Id(providerId, shopId);
     }
 
     public void lockById(UUID id) {
@@ -35,8 +35,11 @@ public class ShopProviderService extends BaseService<ShopProvider, ShopProviderR
         repository.reestablishById(id);
     }
 
-    public List<ShopProvider> getHistory(long time) {
-        List<ShopProvider> allShopProviderList = findAll();
+    public List<ShopProvider> findByShopId(UUID shopId) {
+        return repository.findByShop_Id(shopId);
+    }
+
+    public List<ShopProvider> getHistory(long time, UUID shopId, List<ShopProvider> allShopProviderList) {
         List<ShopProvider> shopProviderList = new ArrayList<>();
         for (ShopProvider spFromAllShopProviderList : allShopProviderList) {
             Revisions<Integer, ShopProvider> revisions = repository.findRevisions(spFromAllShopProviderList.getId());

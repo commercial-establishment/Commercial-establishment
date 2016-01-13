@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface ProviderRepository extends RevisionRepository<Provider, UUID, Integer>,JpaRepository<Provider, UUID> {
+public interface ProviderRepository extends RevisionRepository<Provider, UUID, Integer>, JpaRepository<Provider, UUID> {
 
     Provider findByUsername(String username);
 

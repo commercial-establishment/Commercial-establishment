@@ -18,6 +18,8 @@ public interface ShopProviderRepository extends RevisionRepository<ShopProvider,
 
     ShopProvider findByProvider_IdAndShop_Id(UUID providerId, UUID shopId);
 
+    List<ShopProvider> findByShop_Id(UUID shopId);
+
     @Transactional
     @Modifying
     @Query("UPDATE ShopProvider sp set sp.blocked = TRUE where sp.id = ?1")
