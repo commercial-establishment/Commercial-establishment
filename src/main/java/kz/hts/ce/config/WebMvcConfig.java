@@ -46,6 +46,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     private StringToCategory stringToCategoryConverter;
     @Autowired
     private StringToArea stringToAreaConverter;
+    @Autowired
+    private StringToUnit stringToUnitConverter;
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
@@ -54,6 +56,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         registry.addConverter(stringToTypeConverter);
         registry.addConverter(stringToCategoryConverter);
         registry.addConverter(stringToAreaConverter);
+        registry.addConverter(stringToUnitConverter);
 
     }
 

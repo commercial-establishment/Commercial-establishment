@@ -28,7 +28,7 @@
                             <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>">Главная</a>
                         </li>
                         <li>
-                            <i class="fa fa-table"></i> <a href="<c:url value="/admin/shops"/>">Список магазинов</a>
+                            <i class="fa fa-table"></i> <a href="<c:url value="/provider/shops"/>">Список магазинов</a>
                         </li>
                         <li class="active">
                             <i class="fa fa-desktop"></i> Информация о магазине

@@ -1,6 +1,7 @@
 package kz.hts.ce.util;
 
 import kz.hts.ce.model.entity.Gender;
+import kz.hts.ce.model.entity.Provider;
 import kz.hts.ce.model.entity.Role;
 import kz.hts.ce.service.GenderService;
 import kz.hts.ce.service.ProviderService;
@@ -52,6 +53,10 @@ public class SpringHelper {
 
     public UUID getAuthProviderId() {
         return providerService.findByUsername(getPrincipal()).getId();
+    }
+
+    public Provider getAuthProvider() {
+        return providerService.findByUsername(getPrincipal());
     }
 
     public List<Role> getRoles() {
