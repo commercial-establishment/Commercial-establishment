@@ -1,5 +1,6 @@
 package kz.hts.ce.model.entity;
 
+import org.hibernate.annotations.Proxy;
 import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -9,6 +10,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Audited
+@Proxy(lazy = false)
 public class Category extends BaseEntity {
 
     @NotEmpty

@@ -1,10 +1,13 @@
 package kz.hts.ce.model.entity;
 
+import org.hibernate.annotations.Proxy;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
+@Proxy(lazy = false)
 public class Area extends BaseEntity {
 
     private String name;
