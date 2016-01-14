@@ -1,7 +1,3 @@
-//$('table').on('change', '#city', function () {
-//    alert("Rest finished successful!!!");
-//});
-
 function selectCity() {
     var cityName = $("#city").val();
 
@@ -12,9 +8,19 @@ function selectCity() {
             $selectArea.prop('disabled', false);
             $.each(data, function (key, value) {
                 $selectArea.append($("<option>")
-                        .val(value)
-                        .html(value)
+                    .val(value)
+                    .html(value)
                 );
             });
         });
+}
+
+
+function addLimitTypes() {
+    $('.limitInput').each(function () {
+        var name = $(this).attr("id");
+        var oldVal = $(this).val();
+        var newVal = name + ':' + oldVal;
+        $(this).val(newVal);
+    });
 }

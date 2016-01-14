@@ -61,11 +61,12 @@
                     </c:choose>
                     <table class="table table-hover">
                         <tbody>
-                        <form:form method="post" action="${url}" modelAttribute="product">
+                            <%--@elvariable id="productProvider" type="kz.hts.ce.model.entity.ProductProvider"--%>
+                        <form:form method="post" action="${url}" modelAttribute="productProvider">
                             <tr>
-                                <td><form:label path="name">Название товара:</form:label></td>
-                                <td><form:input cssClass="form-control" path="name"/></td>
-                                <c:set var="nameErrors"><form:errors path="name" cssClass="error"/> </c:set>
+                                <td><form:label path="product.name">Название товара:</form:label></td>
+                                <td><form:input cssClass="form-control" path="product.name"/></td>
+                                <c:set var="nameErrors"><form:errors path="product.name" cssClass="error"/></c:set>
                                 <c:choose>
                                     <c:when test="${not empty nameErrors}">
                                         <td> ${nameErrors} </td>
@@ -76,9 +77,10 @@
                                 </c:choose>
                             </tr>
                             <tr>
-                                <td><form:label path="barcode">Штрих код:</form:label></td>
-                                <td><form:input cssClass="form-control" path="barcode"/></td>
-                                <c:set var="barcodeErrors"><form:errors path="barcode" cssClass="error"/> </c:set>
+                                <td><form:label path="product.barcode">Штрих код:</form:label></td>
+                                <td><form:input cssClass="form-control" path="product.barcode"/></td>
+                                <c:set var="barcodeErrors"><form:errors path="product.barcode" cssClass="error"/>
+                                </c:set>
                                 <c:choose>
                                     <c:when test="${not empty barcodeErrors}">
                                         <td> ${barcodeErrors} </td>
@@ -89,9 +91,9 @@
                                 </c:choose>
                             </tr>
                             <tr>
-                                <td><form:label path="category">Категория:</form:label></td>
+                                <td><form:label path="product.category">Категория:</form:label></td>
                                 <td>
-                                    <select name="category" id="category" class="form-control">
+                                    <select name="product.category" id="product.category" class="form-control">
                                         <c:forEach items="${categories}" var="category">
                                             <option> ${category.name}</option>
                                         </c:forEach>
@@ -100,9 +102,9 @@
                                 <td>- Выберите категорию</td>
                             </tr>
                             <tr>
-                                <td><form:label path="unit">Единица измерения:</form:label></td>
+                                <td><form:label path="product.unit">Единица измерения:</form:label></td>
                                 <td>
-                                    <select name="unit" id="unit" class="form-control">
+                                    <select name="product.unit" class="form-control">
                                         <c:forEach items="${units}" var="unit">
                                             <option> ${unit.name}</option>
                                         </c:forEach>
@@ -110,10 +112,30 @@
                                 </td>
                                 <td>- Выберите единицу измерения</td>
                             </tr>
+                            <c:if test="${role eq 'ROLE_PROVIDER'}">
+                                <%--@elvariable id="type" type="kz.hts.ce.model.entity.Type"--%>
+                                <div class="limitsDiv">
+                                    <c:forEach items="${types}" var="type">
+                                        <tr>
+                                            <td>Укажите пределы остатков для типа ${type.name}:</td>
+                                            <td class="form-inline">
+                                                <input id="min${type.name}" type="text" name="limits"
+                                                       placeholder="Минимум"
+                                                       class="form-control limitInput">
+                                                <input id="max${type.name}" type="text" name="limits"
+                                                       placeholder="Максимум"
+                                                       class="form-control limitInput">
+                                            </td>
+                                            <td>- Укажите верные пределы для остатков</td>
+                                        </tr>
+                                    </c:forEach>
+                                </div>
+                            </c:if>
                             <form:hidden path="blocked"/>
                             <tr>
                                 <td>
-                                    <form:button type="submit" class="btn btn-lg btn-success">Сохранить</form:button>
+                                    <input type="submit" class="btn btn-lg btn-success" onclick="addLimitTypes()" value="Сохранить">
+                                    <%--<form:button type="submit" class="btn btn-lg btn-success">Сохранить</form:button>--%>
                                 </td>
                                 <td/>
                                 <c:choose>
@@ -128,28 +150,6 @@
                                     </c:when>
                                 </c:choose>
                             </tr>
-                            <c:if test="${role eq 'ROLE_PROVIDER'}">
-                                <%--@elvariable id="type" type="kz.hts.ce.model.entity.Type"--%>
-                                <%--<c:forEach items="${types}" var="type">--%>
-                                <tr>
-                                    <td><form:label
-                                            path="type">Укажите пределы остатков для типа ${type.name}:</form:label></td>
-                                    <td class="form-inline">
-                                        <form:input cssClass="form-control" path="type"/>
-                                            <%--<form:input cssClass="form-control" path=""/>--%>
-                                    </td>
-                                    <c:set var="typeErrors"><form:errors path="type" cssClass="error"/> </c:set>
-                                    <c:choose>
-                                        <c:when test="${not empty typeErrors}">
-                                            <td> ${typeErrors} </td>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <td>- Заполните поля, чтобы лучше понимать о товаре на складах</td>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </tr>
-                                <%--</c:forEach>--%>
-                            </c:if>
                         </form:form>
                         </tbody>
                     </table>
@@ -158,5 +158,6 @@
         </div>
     </div>
     <t:script/>
+    <script src="<c:url value="/resources/js/script.js"/>"></script>
 </t:container>
 </html>

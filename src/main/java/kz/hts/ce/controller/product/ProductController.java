@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Controller
@@ -72,14 +73,17 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/provider/products/create", method = RequestMethod.POST)
-    public String createForProvider(Model model, @Valid @ModelAttribute("product") Product product, BindingResult result) {
+    public String createForProvider(Model model, @Valid @ModelAttribute("productProvider") ProductProvider productProvider, BindingResult result) {
         if (checkErrors(model, result)) return "product-create";
         else {
-            Product newProduct = productService.save(product);
-            ProductProvider productProvider = new ProductProvider();
-            productProvider.setProduct(newProduct);
             productProvider.setProvider(springHelper.getAuthProvider());
-            productProviderService.save(productProvider);
+            System.out.println(productProvider);
+
+//            Product newProduct = productService.save(product);
+//            ProductProvider productProvider = new ProductProvider();
+//            productProvider.setProduct(newProduct);
+//            productProvider.setProvider(springHelper.getAuthProvider());
+//            productProviderService.save(productProvider);
             return REDIRECT;
         }
     }

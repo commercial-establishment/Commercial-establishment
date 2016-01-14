@@ -68,7 +68,7 @@ public class ProductPageController {
     }
 
     @RequestMapping("/provider/products/create")
-    public String createForProvider(Model model, @ModelAttribute("productLimitList") List<ProductLimit> productLimitList) {
+    public String createForProvider(Model model, @ModelAttribute("productProvider") ProductProvider productProvider) {
         model.addAttribute("types", springHelper.getTypes());
         return create(model);
     }
