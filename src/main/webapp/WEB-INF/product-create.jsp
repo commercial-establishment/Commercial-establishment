@@ -28,7 +28,8 @@
                         <c:choose>
                             <c:when test="${role eq 'ROLE_ADMIN'}">
                                 <li>
-                                    <i class="fa fa-table"></i> <a href="<c:url value="/admin/products"/>">Список товаров</a>
+                                    <i class="fa fa-table"></i> <a href="<c:url value="/admin/products"/>">Список
+                                    товаров</a>
                                 </li>
                                 <li class="active">
                                     <i class="fa fa-edit"></i> Добавление товара
@@ -36,7 +37,8 @@
                             </c:when>
                             <c:when test="${role eq 'ROLE_PROVIDER'}">
                                 <li>
-                                    <i class="fa fa-table"></i> <a href="<c:url value="/provider/products"/>">Список товаров</a>
+                                    <i class="fa fa-table"></i> <a href="<c:url value="/provider/products"/>">Список
+                                    товаров</a>
                                 </li>
                                 <li class="active">
                                     <i class="fa fa-edit"></i> Добавление товара
@@ -50,16 +52,16 @@
             <div class="col-lg-12">
                 <div class="table-responsive">
                     <c:choose>
-                    <c:when test="${role eq 'ROLE_ADMIN'}">
-                        <c:set var="url" scope="request" value="/admin/products/create"/>
-                        <%--<form:form method="post" action="/admin/products/create-save" modelAttribute="product">--%>
+                        <c:when test="${role eq 'ROLE_ADMIN'}">
+                            <c:set var="url" scope="request" value="/admin/products/create"/>
+                            <%--<form:form method="post" action="/admin/products/create-save" modelAttribute="product">--%>
                         </c:when>
                         <c:when test="${role eq 'ROLE_PROVIDER'}">
                             <c:set var="url" scope="request" value="/provider/products/create"/>
                             <%--<form:form method="post" action="/provider/products/create-save" modelAttribute="product">--%>
                         </c:when>
-                            </c:choose>
-                <form:form method="post" action="${url}" modelAttribute="product">
+                    </c:choose>
+                    <form:form method="post" action="${url}" modelAttribute="product">
                         <table class="table table-hover">
                             <tbody>
                             <tr>
@@ -112,9 +114,9 @@
                             </tr>
                             <tr>
                                 <td><form:label path="barcode">Укажите пределы остатков для типа А:</form:label></td>
-                                <td>
-                                    <form:input cssClass="form-control" path="barcode"/>
-                                    <form:input cssClass="form-control" path=""/>
+                                <td class="form-inline">
+                                        <form:input cssClass="form-control" path="barcode"/>
+                                        <form:input cssClass="form-control" path=""/>
                                 </td>
                                 <c:set var="barcodeErrors"><form:errors path="barcode" cssClass="error"/> </c:set>
                                 <c:choose>
@@ -128,7 +130,7 @@
                             </tr>
                             <tr>
                                 <td><form:label path="barcode">Укажите пределы остатков для типа B:</form:label></td>
-                                <td><form:input cssClass="form-control" path="barcode"/>
+                                <td class="form-inline"><form:input cssClass="form-control" path="barcode"/>
                                     <form:input cssClass="form-control" path=""/>
                                 </td>
                                 <c:set var="barcodeErrors"><form:errors path="barcode" cssClass="error"/> </c:set>
@@ -143,7 +145,7 @@
                             </tr>
                             <tr>
                                 <td><form:label path="barcode">Укажите пределы остатков для типа C:</form:label></td>
-                                <td><form:input cssClass="form-control form_control_2" path="barcode"/>
+                                <td class="form-inline"><form:input cssClass="form-control form_control_2" path="barcode"/>
                                     <form:input cssClass="form-control form_control_2" path=""/>
                                 </td>
                                 <c:set var="barcodeErrors"><form:errors path="barcode" cssClass="error"/> </c:set>
@@ -158,7 +160,7 @@
                             </tr>
                             <tr>
                                 <td><form:label path="barcode">Укажите пределы остатков для типа D:</form:label></td>
-                                <td><form:input cssClass="form-control" path="barcode"/>
+                                <td class="form-inline"><form:input cssClass="form-control" path="barcode"/>
                                     <form:input cssClass="form-control" path=""/>
                                 </td>
                                 <c:set var="barcodeErrors"><form:errors path="barcode" cssClass="error"/> </c:set>
@@ -184,7 +186,8 @@
                                 <td/>
                                 <c:choose>
                                     <c:when test="${role eq 'ROLE_ADMIN'}">
-                                        <td><a href="<c:url value="/admin/products/${id}"/>" class="btn btn-lg btn-danger">Отмена</a>
+                                        <td><a href="<c:url value="/admin/products/${id}"/>"
+                                               class="btn btn-lg btn-danger">Отмена</a>
                                         </td>
                                     </c:when>
                                     <c:when test="${role eq 'ROLE_PROVIDER'}">
@@ -195,7 +198,7 @@
                             </tr>
                             </tbody>
                         </table>
-                        </form:form>
+                    </form:form>
                 </div>
             </div>
         </div>
