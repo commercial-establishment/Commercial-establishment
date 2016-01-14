@@ -77,7 +77,21 @@ public class ProductController {
         if (checkErrors(model, result)) return "product-create";
         else {
             productProvider.setProvider(springHelper.getAuthProvider());
-            System.out.println(productProvider);
+            ProductProvider savedProductProvider = productProviderService.save(productProvider);
+//
+//            Map<String, Integer> limits = productProvider.getLimits();
+//            for (Map.Entry<String, Integer> typeLimit : limits.entrySet()) {
+//
+//
+//
+//                ProductLimit productLimit = new ProductLimit();
+//                productLimit.setProductProvider(savedProductProvider);
+//                productLimit.setType();
+//                productLimit.setMin();
+//                productLimit.setMax();
+//                System.out.println(productProvider);
+            }
+
 
 //            Product newProduct = productService.save(product);
 //            ProductProvider productProvider = new ProductProvider();
@@ -86,7 +100,6 @@ public class ProductController {
 //            productProviderService.save(productProvider);
             return REDIRECT;
         }
-    }
 
     @RequestMapping(value = "/provider/products/{id}/edit", method = RequestMethod.POST)
     public String editForProvider(Model model, @PathVariable UUID id, @Valid @ModelAttribute("product") Product product, BindingResult result) {
