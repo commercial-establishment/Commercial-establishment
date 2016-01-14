@@ -6,8 +6,8 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "product_provider_type")
-public class ProductProviderType extends BaseEntity {
+@Table(name = "product_limit")
+public class ProductLimit extends BaseEntity {
 
     @ManyToOne
     @PrimaryKeyJoinColumn(name = "product_provider_id", referencedColumnName = "id")
