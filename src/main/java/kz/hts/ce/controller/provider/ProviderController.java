@@ -204,20 +204,20 @@ public class ProviderController {
         return REDIRECT;
     }
 
-    @Transactional
-    @RequestMapping(value = "/provider/products/add", method = RequestMethod.POST)
-    public String providerAddProduct(@RequestParam("productId") UUID productId) {
-        UUID providerId = springHelper.getAuthProviderId();
-        ProductProvider productProviderFromDB = productProviderService.findByProviderIdAndProductId(providerId, productId);
-        if (productProviderFromDB == null) {
-            Product product = productService.findById(productId);
-            Provider provider = providerService.findById(providerId);
-            ProductProvider productProvider = new ProductProvider();
-            productProvider.setProvider(provider);
-            productProvider.setProduct(product);
-            productProvider.setBlocked(false);
-            productProviderService.save(productProvider);
-        }
-        return REDIRECT;
-    }
+//    @Transactional
+//    @RequestMapping(value = "/provider/products/add", method = RequestMethod.POST)
+//    public String providerAddProduct(@RequestParam("productId") UUID productId) {
+//        UUID providerId = springHelper.getAuthProviderId();
+//        ProductProvider productProviderFromDB = productProviderService.findByProviderIdAndProductId(providerId, productId);
+//        if (productProviderFromDB == null) {
+//            Product product = productService.findById(productId);
+//            Provider provider = providerService.findById(providerId);
+//            ProductProvider productProvider = new ProductProvider();
+//            productProvider.setProvider(provider);
+//            productProvider.setProduct(product);
+//            productProvider.setBlocked(false);
+//            productProviderService.save(productProvider);
+//        }
+//        return REDIRECT;
+//    }
 }
