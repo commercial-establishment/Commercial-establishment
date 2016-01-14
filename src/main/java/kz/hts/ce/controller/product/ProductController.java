@@ -55,23 +55,19 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/admin/products/{id}/edit", method = RequestMethod.POST)
-    public String edit(Model model, @PathVariable UUID id, @Valid @ModelAttribute("product") Product product, BindingResult result) {
-        if (result.hasErrors()) {
-            List<Category> categories = categoryService.findAll();
-            List<Unit> units = unitService.findAll();
-            model.addAttribute("categories", categories);
-            model.addAttribute("units", units);
-            return "product-edit";
+    public String editForAdmin
+            (Model model, @PathVariable UUID id, @Valid @ModelAttribute("product") Product product, BindingResult result) {
+        if (checkErrors(model, result)) return "product-edit";
+        else {
+            product.setId(id);
+            productService.save(product);
+            return REDIRECT;
         }
-
-        product.setId(id);
-        productService.save(product);
-        return REDIRECT;
     }
 
     @RequestMapping(value = "/admin/products/create", method = RequestMethod.POST)
     public String createForAdmin(Model model, @Valid @ModelAttribute("product") Product product, BindingResult result) {
-        if (checkErrorsForCreating(model, result)) return "product-create";
+        if (checkErrors(model, result)) return "product-create";
         else {
             productService.save(product);
             return REDIRECT;
@@ -80,7 +76,7 @@ public class ProductController {
 
     @RequestMapping(value = "/provider/products/create", method = RequestMethod.POST)
     public String createForProvider(Model model, @Valid @ModelAttribute("product") Product product, BindingResult result) {
-        if (checkErrorsForCreating(model, result)) return "product-create";
+        if (checkErrors(model, result)) return "product-create";
         else {
             Product newProduct = productService.save(product);
             ProductProvider productProvider = new ProductProvider();
@@ -91,7 +87,17 @@ public class ProductController {
         }
     }
 
-    private boolean checkErrorsForCreating(Model model, BindingResult result) {
+    @RequestMapping(value = "/provider/products/{id}/edit", method = RequestMethod.POST)
+    public String editForProvider(Model model, @PathVariable UUID id, @Valid @ModelAttribute("product") Product product, BindingResult result) {
+        if (checkErrors(model, result)) return "product-edit";
+        else {
+            product.setId(id);
+            productService.save(product);
+            return REDIRECT;
+        }
+    }
+
+    private boolean checkErrors(Model model, BindingResult result) {
         if (result.hasErrors()) {
             List<Category> categories = categoryService.findAll();
             List<Unit> units = unitService.findAll();

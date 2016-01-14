@@ -43,8 +43,8 @@
                                    class="btn btn-lg btn-default">Добавить</a>
                             </c:when>
                             <c:when test="${role eq 'ROLE_PROVIDER'}">
-                                <a href="<c:url value="/provider/products/add"/>"
-                                   class="btn btn-lg btn-default">Добавить</a>
+                                <%--<a href="<c:url value="/provider/products/add"/>"--%>
+                                   <%--class="btn btn-lg btn-default">Добавить</a>--%>
                                 <a href="<c:url value="/provider/products/create"/>"
                                    class="btn btn-lg btn-default">Создать</a>
                             </c:when>

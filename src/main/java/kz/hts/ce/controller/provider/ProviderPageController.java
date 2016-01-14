@@ -135,15 +135,15 @@ public class ProviderPageController {
     }
 
     @RequestMapping(value = "/provider/shops/add", method = RequestMethod.GET)
-    public String providerAddShop(Model model) {
-        UUID id = springHelper.getAuthProviderId();
-        List<ShopProvider> providerShops = shopProviderService.findByProviderId(id);
-        List<UUID> shopIds = new ArrayList<>();
-        for (ShopProvider providerShop : providerShops) shopIds.add(providerShop.getShop().getId());
+            public String providerAddShop(Model model) {
+                UUID id = springHelper.getAuthProviderId();
+                List<ShopProvider> providerShops = shopProviderService.findByProviderId(id);
+                List<UUID> shopIds = new ArrayList<>();
+                for (ShopProvider providerShop : providerShops) shopIds.add(providerShop.getShop().getId());
 
-        List<Shop> allShops = shopService.findAll();
-        for (UUID shopId : shopIds) {
-            Iterator<Shop> it = allShops.iterator();
+                List<Shop> allShops = shopService.findAll();
+                for (UUID shopId : shopIds) {
+                    Iterator<Shop> it = allShops.iterator();
             it.hasNext();
             if (allShops.size() == 0) break;
             Shop shop = it.next();
@@ -184,29 +184,29 @@ public class ProviderPageController {
         return "products";
     }
 
-    @RequestMapping(value = "/provider/products/add", method = RequestMethod.GET)
-    public String providerAddProduct(Model model) {
-        UUID id = springHelper.getAuthProviderId();
-        List<ProductProvider> productProviders = productProviderService.findByProviderId(id);
-        List<UUID> productsIds = new ArrayList<>();
-        for (ProductProvider productProvider : productProviders)
-            productsIds.add(productProvider.getProduct().getId());
-
-        List<Product> allProducts = productService.findAll();
-        List<Product> deletedProducts = new ArrayList<>();
-        for (UUID productId : productsIds) {
-            Iterator<Product> it = allProducts.iterator();
-            while (it.hasNext()) {
-                if (allProducts.size() == 0) break;
-                Product product = it.next();
-                if (product.getId().equals(productId))
-                    deletedProducts.add(product);
-            }
-        }
-        allProducts.removeAll(deletedProducts);
-
-        model.addAttribute("providerId", id);
-        model.addAttribute("products", allProducts);
-        return "provider-product-add";
-    }
+//    @RequestMapping(value = "/provider/products/add", method = RequestMethod.GET)
+//    public String providerAddProduct(Model model) {
+//        UUID id = springHelper.getAuthProviderId();
+//        List<ProductProvider> productProviders = productProviderService.findByProviderId(id);
+//        List<UUID> productsIds = new ArrayList<>();
+//        for (ProductProvider productProvider : productProviders)
+//            productsIds.add(productProvider.getProduct().getId());
+//
+//        List<Product> allProducts = productService.findAll();
+//        List<Product> deletedProducts = new ArrayList<>();
+//        for (UUID productId : productsIds) {
+//            Iterator<Product> it = allProducts.iterator();
+//            while (it.hasNext()) {
+//                if (allProducts.size() == 0) break;
+//                Product product = it.next();
+//                if (product.getId().equals(productId))
+//                    deletedProducts.add(product);
+//            }
+//        }
+//        allProducts.removeAll(deletedProducts);
+//
+//        model.addAttribute("providerId", id);
+//        model.addAttribute("products", allProducts);
+//        return "provider-product-add";
+//    }
 }
