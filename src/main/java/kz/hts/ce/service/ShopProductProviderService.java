@@ -1,7 +1,7 @@
 package kz.hts.ce.service;
 
 import kz.hts.ce.model.entity.Product;
-import kz.hts.ce.model.entity.ShopProductProvider;
+import kz.hts.ce.model.entity.ProductResidue;
 import kz.hts.ce.repository.ShopProductProviderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class ShopProductProviderService extends BaseService<ShopProductProvider, ShopProductProviderRepository> {
+public class ShopProductProviderService extends BaseService<ProductResidue, ShopProductProviderRepository> {
 
     @Autowired
     protected ShopProductProviderService(ShopProductProviderRepository repository) {
@@ -17,19 +17,19 @@ public class ShopProductProviderService extends BaseService<ShopProductProvider,
     }
 
     public Map<Product, Integer> findProductsByShopIdAndProviderId(UUID shopId, UUID providerId) {
-        List<ShopProductProvider> shopProviderProducts = repository.findByShop_IdAndProductProvider_Provider_Id(shopId, providerId);
+        List<ProductResidue> shopProviderProducts = repository.findByShop_IdAndProductProvider_Provider_Id(shopId, providerId);
         Map<Product, Integer> products = new HashMap<>();
-        for (ShopProductProvider shopProviderProduct : shopProviderProducts) {
+        for (ProductResidue shopProviderProduct : shopProviderProducts) {
             products.put(shopProviderProduct.getProductProvider().getProduct(), shopProviderProduct.getResidue());
         }
         return products;
     }
 
-    public List<ShopProductProvider> findByShopIdAndProviderId(UUID shopId, UUID providerId) {
+    public List<ProductResidue> findByShopIdAndProviderId(UUID shopId, UUID providerId) {
         return repository.findByShop_IdAndProductProvider_Provider_Id(shopId, providerId);
     }
 
-    public ShopProductProvider findByShopIdAndProductProviderId(UUID shopId, UUID productProviderId) {
+    public ProductResidue findByShopIdAndProductProviderId(UUID shopId, UUID productProviderId) {
         return repository.findByShop_IdAndProductProvider_Id(shopId, productProviderId);
     }
 }

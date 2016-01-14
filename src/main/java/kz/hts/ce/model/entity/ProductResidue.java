@@ -3,8 +3,8 @@ package kz.hts.ce.model.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "shop_product_provider")
-public class ShopProductProvider extends BaseEntity {
+@Table(name = "product_residue")
+public class ProductResidue extends BaseEntity {
 
     @ManyToOne
     @PrimaryKeyJoinColumn(name = "product_provider_id", referencedColumnName = "id")

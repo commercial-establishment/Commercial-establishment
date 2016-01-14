@@ -185,7 +185,6 @@
                             <tr>
                                 <td>
                                     <form:button type="submit" class="btn btn-lg btn-success">Сохранить</form:button>
-                                        <%--<input type="submit" class="btn btn-lg btn-success" value="Сохранить">--%>
                                 </td>
                                 <td/>
                                 <td><a href="<c:url value="/admin/providers/${id}"/>" class="btn btn-lg btn-danger">Отмена</a>

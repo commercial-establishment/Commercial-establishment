@@ -1,14 +1,14 @@
 package kz.hts.ce.controller.product;
 
-import kz.hts.ce.model.entity.Category;
-import kz.hts.ce.model.entity.Product;
-import kz.hts.ce.model.entity.Unit;
+import kz.hts.ce.model.entity.*;
 import kz.hts.ce.service.CategoryService;
 import kz.hts.ce.service.ProductService;
 import kz.hts.ce.service.UnitService;
+import kz.hts.ce.util.SpringHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +25,9 @@ public class ProductPageController {
     private CategoryService categoryService;
     @Autowired
     private UnitService unitService;
+
+    @Autowired
+    private SpringHelper springHelper;
 
     @RequestMapping("/admin/products/{id}")
     public String information(Model model, @PathVariable UUID id) {
@@ -50,11 +53,9 @@ public class ProductPageController {
     }
 
     private String create(Model model) {
-        Product product = new Product();
         List<Category> categories = categoryService.findAll();
         List<Unit> units = unitService.findAll();
         model.addAttribute("categories", categories);
-        model.addAttribute("product", product);
         model.addAttribute("units", units);
         return "product-create";
     }
@@ -65,9 +66,10 @@ public class ProductPageController {
         model.addAttribute("products", products);
         return "products";
     }
+
     @RequestMapping("/provider/products/create")
-    public String createForProvider(Model model) {
+    public String createForProvider(Model model, @ModelAttribute("productLimitList") List<ProductLimit> productLimitList) {
+        model.addAttribute("types", springHelper.getTypes());
         return create(model);
     }
-
 }

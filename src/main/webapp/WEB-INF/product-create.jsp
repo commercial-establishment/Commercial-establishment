@@ -54,16 +54,14 @@
                     <c:choose>
                         <c:when test="${role eq 'ROLE_ADMIN'}">
                             <c:set var="url" scope="request" value="/admin/products/create"/>
-                            <%--<form:form method="post" action="/admin/products/create-save" modelAttribute="product">--%>
                         </c:when>
                         <c:when test="${role eq 'ROLE_PROVIDER'}">
                             <c:set var="url" scope="request" value="/provider/products/create"/>
-                            <%--<form:form method="post" action="/provider/products/create-save" modelAttribute="product">--%>
                         </c:when>
                     </c:choose>
-                    <form:form method="post" action="${url}" modelAttribute="product">
-                        <table class="table table-hover">
-                            <tbody>
+                    <table class="table table-hover">
+                        <tbody>
+                        <form:form method="post" action="${url}" modelAttribute="product">
                             <tr>
                                 <td><form:label path="name">Название товара:</form:label></td>
                                 <td><form:input cssClass="form-control" path="name"/></td>
@@ -112,73 +110,7 @@
                                 </td>
                                 <td>- Выберите единицу измерения</td>
                             </tr>
-                            <tr>
-                                <td><form:label path="barcode">Укажите пределы остатков для типа А:</form:label></td>
-                                <td class="form-inline">
-                                        <form:input cssClass="form-control" path="barcode"/>
-                                        <form:input cssClass="form-control" path=""/>
-                                </td>
-                                <c:set var="barcodeErrors"><form:errors path="barcode" cssClass="error"/> </c:set>
-                                <c:choose>
-                                    <c:when test="${not empty barcodeErrors}">
-                                        <td> ${barcodeErrors} </td>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <td>- Заполните все поля</td>
-                                    </c:otherwise>
-                                </c:choose>
-                            </tr>
-                            <tr>
-                                <td><form:label path="barcode">Укажите пределы остатков для типа B:</form:label></td>
-                                <td class="form-inline"><form:input cssClass="form-control" path="barcode"/>
-                                    <form:input cssClass="form-control" path=""/>
-                                </td>
-                                <c:set var="barcodeErrors"><form:errors path="barcode" cssClass="error"/> </c:set>
-                                <c:choose>
-                                    <c:when test="${not empty barcodeErrors}">
-                                        <td> ${barcodeErrors} </td>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <td>- Заполните все поля</td>
-                                    </c:otherwise>
-                                </c:choose>
-                            </tr>
-                            <tr>
-                                <td><form:label path="barcode">Укажите пределы остатков для типа C:</form:label></td>
-                                <td class="form-inline"><form:input cssClass="form-control form_control_2" path="barcode"/>
-                                    <form:input cssClass="form-control form_control_2" path=""/>
-                                </td>
-                                <c:set var="barcodeErrors"><form:errors path="barcode" cssClass="error"/> </c:set>
-                                <c:choose>
-                                    <c:when test="${not empty barcodeErrors}">
-                                        <td> ${barcodeErrors} </td>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <td>- Заполните все поля</td>
-                                    </c:otherwise>
-                                </c:choose>
-                            </tr>
-                            <tr>
-                                <td><form:label path="barcode">Укажите пределы остатков для типа D:</form:label></td>
-                                <td class="form-inline"><form:input cssClass="form-control" path="barcode"/>
-                                    <form:input cssClass="form-control" path=""/>
-                                </td>
-                                <c:set var="barcodeErrors"><form:errors path="barcode" cssClass="error"/> </c:set>
-                                <c:choose>
-                                    <c:when test="${not empty barcodeErrors}">
-                                        <td> ${barcodeErrors} </td>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <td>- Заполните все поля</td>
-                                    </c:otherwise>
-                                </c:choose>
-                            </tr>
-                            <tr>
-                                <td><form:label path="blocked">Заблокирован:</form:label></td>
-                                <td>${product.blocked}</td>
-                                <form:hidden path="blocked"/>
-                                <td/>
-                            </tr>
+                            <form:hidden path="blocked"/>
                             <tr>
                                 <td>
                                     <form:button type="submit" class="btn btn-lg btn-success">Сохранить</form:button>
@@ -196,9 +128,31 @@
                                     </c:when>
                                 </c:choose>
                             </tr>
-                            </tbody>
-                        </table>
-                    </form:form>
+                            <c:if test="${role eq 'ROLE_PROVIDER'}">
+                                <%--@elvariable id="type" type="kz.hts.ce.model.entity.Type"--%>
+                                <%--<c:forEach items="${types}" var="type">--%>
+                                <tr>
+                                    <td><form:label
+                                            path="type">Укажите пределы остатков для типа ${type.name}:</form:label></td>
+                                    <td class="form-inline">
+                                        <form:input cssClass="form-control" path="type"/>
+                                            <%--<form:input cssClass="form-control" path=""/>--%>
+                                    </td>
+                                    <c:set var="typeErrors"><form:errors path="type" cssClass="error"/> </c:set>
+                                    <c:choose>
+                                        <c:when test="${not empty typeErrors}">
+                                            <td> ${typeErrors} </td>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <td>- Заполните поля, чтобы лучше понимать о товаре на складах</td>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </tr>
+                                <%--</c:forEach>--%>
+                            </c:if>
+                        </form:form>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

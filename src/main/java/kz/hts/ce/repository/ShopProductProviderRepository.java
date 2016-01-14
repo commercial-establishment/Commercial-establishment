@@ -1,6 +1,6 @@
 package kz.hts.ce.repository;
 
-import kz.hts.ce.model.entity.ShopProductProvider;
+import kz.hts.ce.model.entity.ProductResidue;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface ShopProductProviderRepository extends JpaRepository<ShopProductProvider, UUID> {/*FIXME remove??*/
+public interface ShopProductProviderRepository extends JpaRepository<ProductResidue, UUID> {/*FIXME remove??*/
 
-    List<ShopProductProvider> findByShop_IdAndProductProvider_Provider_Id(UUID shopId, UUID providerId);
+    List<ProductResidue> findByShop_IdAndProductProvider_Provider_Id(UUID shopId, UUID providerId);
 
-    ShopProductProvider findByShop_IdAndProductProvider_Id(UUID shopId, UUID productProviderId);
+    ProductResidue findByShop_IdAndProductProvider_Id(UUID shopId, UUID productProviderId);
 }

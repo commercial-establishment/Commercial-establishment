@@ -3,7 +3,7 @@ package kz.hts.ce.controller.replication;
 import kz.hts.ce.model.dto.ShopProductProviderDto;
 import kz.hts.ce.model.entity.ProductProvider;
 import kz.hts.ce.model.entity.Shop;
-import kz.hts.ce.model.entity.ShopProductProvider;
+import kz.hts.ce.model.entity.ProductResidue;
 import kz.hts.ce.service.ProductProviderService;
 import kz.hts.ce.service.ShopProductProviderService;
 import kz.hts.ce.service.ShopService;
@@ -31,10 +31,10 @@ public class ResidueReplicationController {
     @ResponseBody
     public void getProvidersFromClient(@RequestBody List<ShopProductProviderDto> sppDtos) {
         for (ShopProductProviderDto sppDto : sppDtos) {
-            ShopProductProvider shopProductProvider = sppService.
+            ProductResidue productResidue = sppService.
                     findByShopIdAndProductProviderId(sppDto.getShopId(), sppDto.getProductProviderId());
-            if (shopProductProvider == null) {
-                ShopProductProvider spp = new ShopProductProvider();
+            if (productResidue == null) {
+                ProductResidue spp = new ProductResidue();
                 Shop shop = shopService.findById(sppDto.getShopId());
                 spp.setShop(shop);
                 ProductProvider productProvider = productProviderService.findById(sppDto.getProductProviderId());
@@ -43,8 +43,8 @@ public class ResidueReplicationController {
                 spp.setBlocked(false);
                 sppService.save(spp);
             } else {
-                shopProductProvider.setResidue(sppDto.getResidue());
-                sppService.save(shopProductProvider);
+                productResidue.setResidue(sppDto.getResidue());
+                sppService.save(productResidue);
             }
         }
     }

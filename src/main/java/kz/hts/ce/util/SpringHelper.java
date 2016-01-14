@@ -3,16 +3,21 @@ package kz.hts.ce.util;
 import kz.hts.ce.model.entity.Gender;
 import kz.hts.ce.model.entity.Provider;
 import kz.hts.ce.model.entity.Role;
+import kz.hts.ce.model.entity.Type;
 import kz.hts.ce.service.GenderService;
 import kz.hts.ce.service.ProviderService;
 import kz.hts.ce.service.RoleService;
+import kz.hts.ce.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @Component
 public class SpringHelper {
@@ -20,13 +25,14 @@ public class SpringHelper {
     public static Map<String, Role> roleMap;
     private List<Role> roles;
     private List<Gender> genders;
-    private Date broadcastDate;
+    private List<Type> types;
 
     @Autowired
     private RoleService roleService;
     @Autowired
     private GenderService genderService;
-
+    @Autowired
+    private TypeService typeService;
     @Autowired
     private ProviderService providerService;
 
@@ -37,6 +43,7 @@ public class SpringHelper {
         for (Role role : roles) roleMap.put(role.getName(), role);
 
         genders = genderService.findAll();
+        types = typeService.findAll();
     }
 
     public static String getPrincipal() {
@@ -63,23 +70,11 @@ public class SpringHelper {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-
     public List<Gender> getGenders() {
         return genders;
     }
 
-    public void setGenders(List<Gender> genders) {
-        this.genders = genders;
-    }
-
-    public Date getBroadcastDate() {
-        return broadcastDate;
-    }
-
-    public void setBroadcastDate(Date broadcastDate) {
-        this.broadcastDate = broadcastDate;
+    public List<Type> getTypes() {
+        return types;
     }
 }

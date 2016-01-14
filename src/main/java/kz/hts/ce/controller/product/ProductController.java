@@ -1,9 +1,6 @@
 package kz.hts.ce.controller.product;
 
-import kz.hts.ce.model.entity.Category;
-import kz.hts.ce.model.entity.Product;
-import kz.hts.ce.model.entity.ProductProvider;
-import kz.hts.ce.model.entity.Unit;
+import kz.hts.ce.model.entity.*;
 import kz.hts.ce.service.CategoryService;
 import kz.hts.ce.service.ProductProviderService;
 import kz.hts.ce.service.ProductService;
