@@ -44,4 +44,12 @@ public class ProductProviderService extends BaseService<ProductProvider, Product
         }
         return productProviderList;
     }
+
+    public void lockById(UUID id) {
+        repository.lockById(id);
+    }
+
+    public void reestablishById(UUID id) {
+        repository.reestablishById(id);
+    }
 }

@@ -150,19 +150,6 @@ public class ProviderController {
         return REDIRECT;
     }
 
-    private void saveNewShopProvider(UUID providerId, UUID shopId) {
-        ShopProvider shopProviderFromDB = shopProviderService.findByProviderIdAndShopId(providerId, shopId);
-        if (shopProviderFromDB == null) {
-            Shop shop = shopService.findById(shopId);
-            Provider provider = providerService.findById(providerId);
-            ShopProvider shopProvider = new ShopProvider();
-            shopProvider.setProvider(provider);
-            shopProvider.setShop(shop);
-            shopProvider.setBlocked(false);
-            shopProviderService.save(shopProvider);
-        }
-    }
-
     @RequestMapping(value = "/admin/providers/{providerId}/products/{productId}/delete",
             method = RequestMethod.POST)
     public String deleteProduct(@PathVariable("productId") UUID productId,
@@ -204,20 +191,39 @@ public class ProviderController {
         return REDIRECT;
     }
 
-//    @Transactional
-//    @RequestMapping(value = "/provider/products/add", method = RequestMethod.POST)
-//    public String providerAddProduct(@RequestParam("productId") UUID productId) {
-//        UUID providerId = springHelper.getAuthProviderId();
-//        ProductProvider productProviderFromDB = productProviderService.findByProviderIdAndProductId(providerId, productId);
-//        if (productProviderFromDB == null) {
-//            Product product = productService.findById(productId);
-//            Provider provider = providerService.findById(providerId);
-//            ProductProvider productProvider = new ProductProvider();
-//            productProvider.setProvider(provider);
-//            productProvider.setProduct(product);
-//            productProvider.setBlocked(false);
-//            productProviderService.save(productProvider);
-//        }
-//        return REDIRECT;
-//    }
+    @RequestMapping(value = "/provider/products/{productId}/delete",
+            method = RequestMethod.POST)
+    public String deleteProductFromProvider(@PathVariable("productId") UUID productId) {
+        UUID providerId = springHelper.getAuthProviderId();
+        ProductProvider productProvider = productProviderService.findByProviderIdAndProductId(providerId, productId);
+        productProviderService.delete(productProvider.getId());
+        return "redirect:/provider/products";
+    }
+    private void saveNewShopProvider(UUID providerId, UUID shopId) {
+        ShopProvider shopProviderFromDB = shopProviderService.findByProviderIdAndShopId(providerId, shopId);
+        if (shopProviderFromDB == null) {
+            Shop shop = shopService.findById(shopId);
+            Provider provider = providerService.findById(providerId);
+            ShopProvider shopProvider = new ShopProvider();
+            shopProvider.setProvider(provider);
+            shopProvider.setShop(shop);
+            shopProvider.setBlocked(false);
+            shopProviderService.save(shopProvider);
+        }
+    }
+    @RequestMapping(value = "/provider/products/{productId}/lock", method = RequestMethod.POST)
+    public String lockShop(@PathVariable("productId") UUID productId) {
+        UUID providerId = springHelper.getAuthProviderId();
+        ProductProvider productProvider = productProviderService.findByProviderIdAndProductId(providerId, productId);
+        productProviderService.lockById(productProvider.getId());
+        return "redirect:/provider/products";
+    }
+
+    @RequestMapping(value = "/provider/products/{productId}/reestablish", method = RequestMethod.POST)
+    public String reestablishShop(@PathVariable("productId") UUID productId) {
+        UUID providerId = springHelper.getAuthProviderId();
+        ProductProvider productProvider = productProviderService.findByProviderIdAndProductId(providerId, productId);
+        productProviderService.reestablishById(productProvider.getId());
+        return "redirect:/provider/products";
+    }
 }
