@@ -126,8 +126,49 @@ public class ProviderPageController {
         for (ShopProvider providerShop : providerShops) {
             shops.add(providerShop.getShop());
         }
-        model.addAttribute("shops", shops);
+        UUID providerId = springHelper.getAuthProviderId();
+        Map<Shop, String> shopMap = new HashMap<>();
+        List<String> colors = new ArrayList<>();
+        for (Shop shop : shops) {
+            Map<ProductProvider, Integer> products = sppService.findProductsByShopIdAndProviderId(shop.getId(), providerId);
+            Type shopType = shopService.findById(shop.getId()).getType();
+            Map<ProductLimit, Integer> productLimitResidueMap = new HashMap<>();
+            for (Map.Entry<ProductProvider, Integer> productProvider : products.entrySet()) {
+                ProductLimit productLimit = productLimitService.findByProductProviderIdAndTypeName(productProvider.getKey().getId(), shopType.getName());
+                Integer residue = productProvider.getValue();
+                int min;
+                int max;
+                if (productLimit == null) {
+                    min = 10;
+                    max = 20;
+                } else {
+                    min = productLimit.getMin();
+                    max = productLimit.getMax();
+                }
+
+                String color = getRowColor(residue, min, max);
+                colors.add(color);
+            }
+
+            if (colors.contains("red")) {
+                shopMap.put(shop, "red");
+                colors.clear();
+            } else if (colors.contains("orange") && !colors.contains("red")) {
+                shopMap.put(shop, "orange");
+                colors.clear();
+            } else if (!colors.contains("red") && !colors.contains("orange")){
+                shopMap.put(shop, "green");
+                colors.clear();
+            }
+        }
+        model.addAttribute("shops", shopMap);
         return "shops";
+    }
+
+    private String getRowColor(Integer residue, int min, int max) {
+        if (residue < min) return "red";
+        else if (min <= residue && residue < max) return "orange";
+        else return "green";
     }
 
     @RequestMapping(value = "/provider/shops/add", method = RequestMethod.GET)

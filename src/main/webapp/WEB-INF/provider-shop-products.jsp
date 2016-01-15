@@ -84,7 +84,7 @@
                                         <c:when test="${productLimitMap.key.min <= productLimitMap.value && productLimitMap.value < productLimitMap.key.max}">
                                             <c:set var="color" value="orange"/>
                                         </c:when>
-                                        <c:when test="${productLimitMap.value <= productLimitMap.key.max}">
+                                        <c:when test="${productLimitMap.value >= productLimitMap.key.max}">
                                             <c:set var="color" value="green"/>
                                         </c:when>
                                     </c:choose>

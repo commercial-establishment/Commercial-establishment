@@ -53,7 +53,7 @@
                             <h1>Нет привязанных магазинов. Пожалуйтса, добавьте магазин.</h1>
                         </c:when>
                         <c:otherwise>
-                            <table class="table table-bordered table-hover table-striped">
+                            <table class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
@@ -66,24 +66,32 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <%--@elvariable id="shop" type="kz.hts.ce.model.entity.Shop"--%>
                                 <c:forEach items="${shops}" var="shop">
                                     <c:choose>
                                         <c:when test="${role eq 'ROLE_ADMIN'}">
                                             <tr onclick="document.location = '/admin/shops/' + '${shop.id}';">
+                                                <td>${shop.id}</td>
+                                                <td>${shop.name}</td>
+                                                <td>${shop.area.city.name}</td>
+                                                <td>${shop.area.name}</td>
+                                                <td>${shop.address}</td>
+                                                <td>${shop.type.name}</td>
+                                                <td>${shop.blocked}</td>
+                                            </tr>
                                         </c:when>
                                         <c:when test="${role eq 'ROLE_PROVIDER'}">
-                                            <tr onclick="document.location = '/provider/shops/' + '${shop.id}';">
+                                            <tr onclick="document.location = '/provider/shops/' + '${shop.key.id}';"
+                                                class="background-color-${shop.value}">
+                                                <td>${shop.key.id}</td>
+                                                <td>${shop.key.name}</td>
+                                                <td>${shop.key.area.city.name}</td>
+                                                <td>${shop.key.area.name}</td>
+                                                <td>${shop.key.address}</td>
+                                                <td>${shop.key.type.name}</td>
+                                                <td>${shop.key.blocked}</td>
+                                            </tr>
                                         </c:when>
                                     </c:choose>
-                                        <td>${shop.id}</td>
-                                        <td>${shop.name}</td>
-                                        <td>${shop.area.city.name}</td>
-                                        <td>${shop.area.name}</td>
-                                        <td>${shop.address}</td>
-                                        <td>${shop.type.name}</td>
-                                        <td>${shop.blocked}</td>
-                                    </tr>
                                 </c:forEach>
                                 </tbody>
                             </table>
