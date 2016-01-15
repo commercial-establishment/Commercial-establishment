@@ -1,10 +1,7 @@
 package kz.hts.ce.controller.product;
 
 import kz.hts.ce.model.entity.*;
-import kz.hts.ce.service.CategoryService;
-import kz.hts.ce.service.ProductProviderService;
-import kz.hts.ce.service.ProductService;
-import kz.hts.ce.service.UnitService;
+import kz.hts.ce.service.*;
 import kz.hts.ce.util.SpringHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +30,8 @@ public class ProductController {
     private UnitService unitService;
     @Autowired
     private ProductProviderService productProviderService;
+    @Autowired
+    private ProductLimitService productLimitService;
 
     @Autowired
     private SpringHelper springHelper;
@@ -73,36 +72,35 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/provider/products/create", method = RequestMethod.POST)
-    public String createForProvider(Model model, @Valid @ModelAttribute("productProvider") ProductProvider productProvider, BindingResult result) {
+    public String createForProvider(Model model, @Valid @ModelAttribute("productProvider") ProductProvider productProvider,
+                                    BindingResult result) {
         if (checkErrors(model, result)) return "product-create";
         else {
+            Product product = productService.save(productProvider.getProduct());
             productProvider.setProvider(springHelper.getAuthProvider());
+            productProvider.setProduct(product);
             ProductProvider savedProductProvider = productProviderService.save(productProvider);
-//
-//            Map<String, Integer> limits = productProvider.getLimits();
-//            for (Map.Entry<String, Integer> typeLimit : limits.entrySet()) {
-//
-//
-//
-//                ProductLimit productLimit = new ProductLimit();
-//                productLimit.setProductProvider(savedProductProvider);
-//                productLimit.setType();
-//                productLimit.setMin();
-//                productLimit.setMax();
-//                System.out.println(productProvider);
+
+            Map<String, Integer> limits = productProvider.getLimits();
+            Map<String, Type> typeMap = SpringHelper.typeMap;
+            for (Map.Entry<String, Type> typeEntry : typeMap.entrySet()) {
+                ProductLimit productLimit = new ProductLimit();
+                productLimit.setProductProvider(savedProductProvider);
+                String typeName = typeEntry.getKey();
+                Integer min = limits.get("min" + typeName);
+                Integer max = limits.get("max" + typeName);
+                productLimit.setType(typeEntry.getValue());
+                productLimit.setMin(min);
+                productLimit.setMax(max);
+                productLimitService.save(productLimit);
             }
-
-
-//            Product newProduct = productService.save(product);
-//            ProductProvider productProvider = new ProductProvider();
-//            productProvider.setProduct(newProduct);
-//            productProvider.setProvider(springHelper.getAuthProvider());
-//            productProviderService.save(productProvider);
             return REDIRECT;
         }
+    }
 
     @RequestMapping(value = "/provider/products/{id}/edit", method = RequestMethod.POST)
-    public String editForProvider(Model model, @PathVariable UUID id, @Valid @ModelAttribute("product") Product product, BindingResult result) {
+    public String editForProvider(Model model, @PathVariable UUID id, @Valid @ModelAttribute("product") Product product,
+                                  BindingResult result) {
         if (checkErrors(model, result)) return "product-edit";
         else {
             product.setId(id);

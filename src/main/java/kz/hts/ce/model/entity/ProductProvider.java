@@ -4,7 +4,7 @@ import org.hibernate.annotations.Proxy;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Entity
@@ -51,30 +51,17 @@ public class ProductProvider extends BaseEntity {
         this.blocked = blocked;
     }
 
-//    public List<String> getLimits() {
-//        return limits;
-//    }
-//
-//    public void setLimits(String listOfString) {
-//        String[] strings = listOfString.split(",");
-//        for (String val : strings) {
-//            if (limits == null) limits = new ArrayList<>();
-//            limits.add(val);
-//        }
-//    }
-
     public Map<String, Integer> getLimits() {
         return limits;
     }
 
     public void setLimits(String limits) {
-        if (this.limits == null) this.limits = new HashMap<>();
+        if (this.limits == null) this.limits = new LinkedHashMap<>();
         String[] splittedLimitsByComma = limits.split(",");
         for (String limit : splittedLimitsByComma) {
             String[] splittedLimitByColon = limit.split(":");
             this.limits.put(splittedLimitByColon[0], Integer.valueOf(splittedLimitByColon[1]));
         }
-        System.out.println(this.limits);
     }
 }
 

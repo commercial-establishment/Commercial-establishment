@@ -1,9 +1,6 @@
 package kz.hts.ce.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.PrePersist;
+import javax.persistence.*;
 import java.util.UUID;
 
 @MappedSuperclass

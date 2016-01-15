@@ -23,6 +23,7 @@ import java.util.UUID;
 public class SpringHelper {
 
     public static Map<String, Role> roleMap;
+    public static Map<String, Type> typeMap;
     private List<Role> roles;
     private List<Gender> genders;
     private List<Type> types;
@@ -38,12 +39,15 @@ public class SpringHelper {
 
     @PostConstruct
     public void initialize() {
+        genders = genderService.findAll();
+
         roles = roleService.findAll();
         roleMap = new HashMap<>();
         for (Role role : roles) roleMap.put(role.getName(), role);
 
-        genders = genderService.findAll();
         types = typeService.findAll();
+        typeMap = new HashMap<>();
+        for (Type type : types) typeMap.put(type.getName(), type);
     }
 
     public static String getPrincipal() {
