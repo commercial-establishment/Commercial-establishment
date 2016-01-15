@@ -31,6 +31,8 @@ public class ProviderPageController {
     private ShopService shopService;
     @Autowired
     private ShopProductProviderService sppService;
+    @Autowired
+    private ProductLimitService productLimitService;
 
     @Autowired
     private SpringHelper springHelper;
@@ -105,13 +107,7 @@ public class ProviderPageController {
     @RequestMapping(value = "/admin/providers/{providerId}/products/{productProviderId}", method = RequestMethod.GET)
     public String providerProducts(Model model, @PathVariable("productProviderId") UUID productProviderId) {
         ProductProvider productProvider = productProviderService.findById(productProviderId);
-
-//        long amount = productProvider.getAmount();
-//        BigDecimal price = productProvider.getPrice();
-//        BigDecimal sumPrice = calculateCost(amount, price);
-
         model.addAttribute("productProvider", productProvider);
-//        model.addAttribute("sumPrice", sumPrice);
         return "provider-product-info";
     }
 
@@ -135,15 +131,15 @@ public class ProviderPageController {
     }
 
     @RequestMapping(value = "/provider/shops/add", method = RequestMethod.GET)
-            public String providerAddShop(Model model) {
-                UUID id = springHelper.getAuthProviderId();
-                List<ShopProvider> providerShops = shopProviderService.findByProviderId(id);
-                List<UUID> shopIds = new ArrayList<>();
-                for (ShopProvider providerShop : providerShops) shopIds.add(providerShop.getShop().getId());
+    public String providerAddShop(Model model) {
+        UUID id = springHelper.getAuthProviderId();
+        List<ShopProvider> providerShops = shopProviderService.findByProviderId(id);
+        List<UUID> shopIds = new ArrayList<>();
+        for (ShopProvider providerShop : providerShops) shopIds.add(providerShop.getShop().getId());
 
-                List<Shop> allShops = shopService.findAll();
-                for (UUID shopId : shopIds) {
-                    Iterator<Shop> it = allShops.iterator();
+        List<Shop> allShops = shopService.findAll();
+        for (UUID shopId : shopIds) {
+            Iterator<Shop> it = allShops.iterator();
             it.hasNext();
             if (allShops.size() == 0) break;
             Shop shop = it.next();
@@ -167,46 +163,45 @@ public class ProviderPageController {
     @RequestMapping(value = "/provider/shops/{shopId}/products", method = RequestMethod.GET)
     public String providerShopProducts(Model model, @PathVariable("shopId") UUID shopId) {
         UUID providerId = springHelper.getAuthProviderId();
-        Map<Product, Integer> products = sppService.findProductsByShopIdAndProviderId(shopId, providerId);
-        model.addAttribute("products", products);
+        Map<ProductProvider, Integer> products = sppService.findProductsByShopIdAndProviderId(shopId, providerId);
+        Type shopType = shopService.findById(shopId).getType();
+        Map<ProductLimit, Integer> productLimitResidueMap = new HashMap<>();
+        for (Map.Entry<ProductProvider, Integer> productProvider : products.entrySet()) {
+            ProductLimit productLimit = productLimitService.findByProductProviderIdAndTypeName(productProvider.getKey().getId(), shopType.getName());
+            if (productLimit == null) {
+                ProductLimit productLimitEntity = new ProductLimit();
+                productLimitEntity.setMin(10);/*FIXME min max*/
+                productLimitEntity.setMax(20);
+                productLimitEntity.setType(shopType);
+                productLimitEntity.setProductProvider(productProvider.getKey());
+                productLimitResidueMap.put(productLimitEntity, productProvider.getValue());
+            } else {
+                if (productLimit.getMin() == 0 && productLimit.getMax() == 0) {
+                    productLimit.setMin(10);
+                    productLimit.setMin(20);
+                }
+                productLimitResidueMap.put(productLimit, productProvider.getValue());
+            }
+        }
+        model.addAttribute("productLimitResidueMap", productLimitResidueMap);
         return "provider-shop-products";
     }
 
     @RequestMapping(value = "/provider/products", method = RequestMethod.GET)
     public String providerProducts(Model model) {
-        List<ProductProvider> productProviders = productProviderService.findByProviderId(springHelper.getAuthProviderId());
-        List<Product> products = new ArrayList<>();
-        for (ProductProvider productProvider : productProviders) {
-            products.add(productProvider.getProduct());
-        }
-
-        model.addAttribute("products", products);
+        List<ProductProvider> productProviderList = productProviderService.findByProviderId(springHelper.getAuthProviderId());
+        model.addAttribute("productProviderList", productProviderList);
         return "products";
     }
 
-//    @RequestMapping(value = "/provider/products/add", method = RequestMethod.GET)
-//    public String providerAddProduct(Model model) {
-//        UUID id = springHelper.getAuthProviderId();
-//        List<ProductProvider> productProviders = productProviderService.findByProviderId(id);
-//        List<UUID> productsIds = new ArrayList<>();
-//        for (ProductProvider productProvider : productProviders)
-//            productsIds.add(productProvider.getProduct().getId());
-//
-//        List<Product> allProducts = productService.findAll();
-//        List<Product> deletedProducts = new ArrayList<>();
-//        for (UUID productId : productsIds) {
-//            Iterator<Product> it = allProducts.iterator();
-//            while (it.hasNext()) {
-//                if (allProducts.size() == 0) break;
-//                Product product = it.next();
-//                if (product.getId().equals(productId))
-//                    deletedProducts.add(product);
-//            }
-//        }
-//        allProducts.removeAll(deletedProducts);
-//
-//        model.addAttribute("providerId", id);
-//        model.addAttribute("products", allProducts);
-//        return "provider-product-add";
-//    }
+    @RequestMapping(value = "/provider/products/{productId}", method = RequestMethod.GET)
+    public String providerProductInfo(Model model, @PathVariable("productId") UUID productId) {
+        UUID providerId = springHelper.getAuthProviderId();
+        UUID productProviderId = productProviderService.findByProviderIdAndProductId(providerId, productId).getId();
+        List<ProductLimit> productLimits = productLimitService.findByProductProviderId(productProviderId);
+        Product product = productService.findById(productId);
+        model.addAttribute("product", product);
+        model.addAttribute("limits", productLimits);
+        return "product-info";
+    }
 }

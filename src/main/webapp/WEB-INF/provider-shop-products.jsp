@@ -58,11 +58,11 @@
             <div class="col-lg-12">
                 <div class="table-responsive">
                     <c:choose>
-                        <c:when test="${providerProducts.size() == 0}">
+                        <c:when test="${productLimitResidueMap.size() == 0}">
                             <h1 align="center">Список товаров пуст!</h1>
                         </c:when>
                         <c:otherwise>
-                            <table class="table table-bordered table-hover table-striped">
+                            <table class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
@@ -70,19 +70,33 @@
                                     <th>Название</th>
                                     <th>Категория</th>
                                     <th>Ед. измерения</th>
+                                    <th>Мин. предел</th>
+                                    <th>Макс. предел</th>
                                     <th>Остаток</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <%--@elvariable id="product" type="kz.hts.ce.entity.Product"--%>
-                                <c:forEach items="${products}" var="product">
-                                    <tr>
-                                        <td>${product.key.id}</td>
-                                        <td>${product.key.barcode}</td>
-                                        <td>${product.key.name}</td>
-                                        <td>${product.key.category.name}</td>
-                                        <td>${product.key.unit.name}</td>
-                                        <td>${product.value}</td>
+                                <c:forEach items="${productLimitResidueMap}" var="productLimitMap">
+                                    <c:choose>
+                                        <c:when test="${productLimitMap.value < productLimitMap.key.min}">
+                                            <c:set var="color" value="red"/>
+                                        </c:when>
+                                        <c:when test="${productLimitMap.key.min <= productLimitMap.value && productLimitMap.value < productLimitMap.key.max}">
+                                            <c:set var="color" value="orange"/>
+                                        </c:when>
+                                        <c:when test="${productLimitMap.value <= productLimitMap.key.max}">
+                                            <c:set var="color" value="green"/>
+                                        </c:when>
+                                    </c:choose>
+                                    <tr class="background-color-${color}">
+                                        <td>${productLimitMap.key.productProvider.id}</td>
+                                        <td>${productLimitMap.key.productProvider.product.barcode}</td>
+                                        <td>${productLimitMap.key.productProvider.product.name}</td>
+                                        <td>${productLimitMap.key.productProvider.product.category.name}</td>
+                                        <td>${productLimitMap.key.productProvider.product.unit.name}</td>
+                                        <td>${productLimitMap.key.min}</td>
+                                        <td>${productLimitMap.key.max}</td>
+                                        <td>${productLimitMap.value}</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>

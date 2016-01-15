@@ -9,14 +9,34 @@ tr.hover {
 }
 
 .error {
-    color: red; font-weight: bold;
+    color: red;
+    font-weight: bold;
 }
-.fixed-table{
+
+.fixed-table {
     width: initial;
 }
-.td_id{
+
+.td_id {
     width: 100px;
 }
-.td_category{
+
+.td_category {
     width: 450px;
+}
+
+.background-color-red {
+    background-color: #ff4d43;
+}
+
+.background-color-green {
+    background-color: lawngreen;
+}
+
+.background-color-orange {
+    background-color: orange;
+}
+
+.background-color-white {
+    background-color: white;
 }

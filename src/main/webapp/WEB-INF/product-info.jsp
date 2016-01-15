@@ -1,6 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authentication var="role" property="principal.authorities[0]"/>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,6 +57,14 @@
                             <td><b>Заблокирован:</b></td>
                             <td>${product.blocked}</td>
                         </tr>
+                        <c:if test="${role eq 'ROLE_PROVIDER'}">
+                            <c:forEach items="${limits}" var="limit">
+                                <tr>
+                                    <td><b>Пределы остатков для магазина типа ${limit.type.name}:</b></td>
+                                    <td>${limit.min} : ${limit.max}</td>
+                                </tr>
+                            </c:forEach>
+                        </c:if>
                         <tr>
                             <td>
                                 <form method="GET" action="<c:url value="/admin/products/${id}/edit"/>">
@@ -64,7 +75,8 @@
 
                             <c:choose>
                                 <c:when test="${product.blocked == false}">
-                                    <td><a href="<c:url value="/admin/products/${id}/lock"/>" class="btn btn-lg btn-danger">Заблокировать</a>
+                                    <td><a href="<c:url value="/admin/products/${id}/lock"/>"
+                                           class="btn btn-lg btn-danger">Заблокировать</a>
                                     </td>
                                 </c:when>
                                 <c:otherwise>

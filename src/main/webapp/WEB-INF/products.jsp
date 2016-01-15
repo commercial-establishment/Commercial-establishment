@@ -51,7 +51,7 @@
                         </c:choose>
                         <br> </br>
                     </div>
-                    <table class="table table-bordered table-hover table-striped">
+                    <table class="table table-bordered table-hover">
                         <thead>
                         <tr>
                             <th>ID</th>
@@ -64,37 +64,72 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <%--@elvariable id="shop" type="kz.hts.ce.entity.Product"--%>
-                        <c:forEach items="${products}" var="product">
-                            <c:choose>
-                                <c:when test="${role eq 'ROLE_ADMIN'}">
+                        <c:choose>
+                            <c:when test="${role eq 'ROLE_ADMIN'}">
+                                <c:forEach items="${products}" var="product">
                                     <tr onclick="document.location = '/admin/products/' + '${product.id}';">
-                                </c:when>
-                            </c:choose>
-                            <td>${product.id}</td>
-                            <td>${product.name}</td>
-                            <td>${product.barcode}</td>
-                            <td>${product.category.name}</td>
-                            <td>${product.unit.name}</td>
-                            <td>${product.blocked}</td>
-                            <td>
-                                <c:choose>
-                                    <c:when test="${providerShop.blocked == false}">
-                                        <form method="POST"
-                                              action="<c:url value="/provider/products/${product.id}/lock"/>">
-                                            <button type="submit" class="btn btn-lg btn-danger">Заблокировать</button>
-                                        </form>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <form method="POST"
-                                              action="<c:url value="/provider/products/${product.id}/reestablish"/>">
-                                            <button type="submit" class="btn btn-lg btn-danger">Разблокировать</button>
-                                        </form>
-                                    </c:otherwise>
-                                </c:choose>
-                            </td>
-                            </tr>
-                            </c:forEach>
+                                        <td>${product.id}</td>
+                                        <td>${product.name}</td>
+                                        <td>${product.barcode}</td>
+                                        <td>${product.category.name}</td>
+                                        <td>${product.unit.name}</td>
+                                        <td>${product.blocked}</td>
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${product.blocked == false}">
+                                                    <form method="POST"
+                                                          action="<c:url value="/provider/products/${product.id}/lock"/>">
+                                                        <button type="submit" class="btn btn-lg btn-danger">
+                                                            Заблокировать
+                                                        </button>
+                                                    </form>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <form method="POST"
+                                                          action="<c:url value="/provider/products/${product.id}/reestablish"/>">
+                                                        <button type="submit" class="btn btn-lg btn-danger">
+                                                            Разблокировать
+                                                        </button>
+                                                    </form>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </c:when>
+                            <c:when test="${role eq 'ROLE_PROVIDER'}">
+                                <c:forEach items="${productProviderList}" var="productProvider">
+                                    <tr onclick="document.location = '/provider/products/' + '${productProvider.product.id}';">
+                                        <td>${productProvider.product.id}</td>
+                                        <td>${productProvider.product.name}</td>
+                                        <td>${productProvider.product.barcode}</td>
+                                        <td>${productProvider.product.category.name}</td>
+                                        <td>${productProvider.product.unit.name}</td>
+                                        <td>${productProvider.blocked}</td>
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${productProvider.blocked == false}">
+                                                    <form method="POST"
+                                                          action="<c:url value="/provider/products/${productProvider.product.id}/lock"/>">
+                                                        <button type="submit" class="btn btn-lg btn-danger">
+                                                            Заблокировать
+                                                        </button>
+                                                    </form>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <form method="POST"
+                                                          action="<c:url value="/provider/products/${productProvider.product.id}/reestablish"/>">
+                                                        <button type="submit" class="btn btn-lg btn-success">
+                                                            Разблокировать
+                                                        </button>
+                                                    </form>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </c:when>
+                        </c:choose>
                         </tbody>
                     </table>
                 </div>

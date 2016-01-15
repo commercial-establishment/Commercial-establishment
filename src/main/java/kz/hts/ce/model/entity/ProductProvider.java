@@ -2,6 +2,7 @@ package kz.hts.ce.model.entity;
 
 import org.hibernate.annotations.Proxy;
 import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 
 import javax.persistence.*;
 import java.util.LinkedHashMap;
@@ -25,6 +26,7 @@ public class ProductProvider extends BaseEntity {
     private boolean blocked;
 
     @Transient
+    @NotAudited
     private Map<String, Integer> limits;
 
     public Product getProduct() {

@@ -1,12 +1,15 @@
 package kz.hts.ce.service;
 
-import kz.hts.ce.model.entity.Product;
+import kz.hts.ce.model.entity.ProductProvider;
 import kz.hts.ce.model.entity.ProductResidue;
 import kz.hts.ce.repository.ShopProductProviderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @Service
 public class ShopProductProviderService extends BaseService<ProductResidue, ShopProductProviderRepository> {
@@ -16,11 +19,11 @@ public class ShopProductProviderService extends BaseService<ProductResidue, Shop
         super(repository);
     }
 
-    public Map<Product, Integer> findProductsByShopIdAndProviderId(UUID shopId, UUID providerId) {
+    public Map<ProductProvider, Integer> findProductsByShopIdAndProviderId(UUID shopId, UUID providerId) {
         List<ProductResidue> shopProviderProducts = repository.findByShop_IdAndProductProvider_Provider_Id(shopId, providerId);
-        Map<Product, Integer> products = new HashMap<>();
+        Map<ProductProvider, Integer> products = new HashMap<>();
         for (ProductResidue shopProviderProduct : shopProviderProducts) {
-            products.put(shopProviderProduct.getProductProvider().getProduct(), shopProviderProduct.getResidue());
+            products.put(shopProviderProduct.getProductProvider(), shopProviderProduct.getResidue());
         }
         return products;
     }
