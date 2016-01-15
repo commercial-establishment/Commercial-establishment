@@ -36,7 +36,7 @@
             <div class="col-lg-12">
                 <div class="table-responsive">
                     <div>
-                        <%--<a href="<c:url value="/provider/products/add"/>" class="btn btn-lg btn-default">Добавить</a>--%>
+                            <%--<a href="<c:url value="/provider/products/add"/>" class="btn btn-lg btn-default">Добавить</a>--%>
                         <c:choose>
                             <c:when test="${role eq 'ROLE_ADMIN'}">
                                 <a href="<c:url value="/admin/products/create"/>"
@@ -44,7 +44,7 @@
                             </c:when>
                             <c:when test="${role eq 'ROLE_PROVIDER'}">
                                 <%--<a href="<c:url value="/provider/products/add"/>"--%>
-                                   <%--class="btn btn-lg btn-default">Добавить</a>--%>
+                                <%--class="btn btn-lg btn-default">Добавить</a>--%>
                                 <a href="<c:url value="/provider/products/create"/>"
                                    class="btn btn-lg btn-default">Создать</a>
                             </c:when>
@@ -60,6 +60,7 @@
                             <th>Категория</th>
                             <th>Ед. измерения</th>
                             <th>Заблокирован</th>
+                            <th>Заблокировать</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -69,18 +70,31 @@
                                 <c:when test="${role eq 'ROLE_ADMIN'}">
                                     <tr onclick="document.location = '/admin/products/' + '${product.id}';">
                                 </c:when>
-                                <c:when test="${role eq 'ROLE_PROVIDER'}">
-                                    <tr>
-                                </c:when>
                             </c:choose>
-                                <td>${product.id}</td>
-                                <td>${product.name}</td>
-                                <td>${product.barcode}</td>
-                                <td>${product.category.name}</td>
-                                <td>${product.unit.name}</td>
-                                <td>${product.blocked}</td>
+                            <td>${product.id}</td>
+                            <td>${product.name}</td>
+                            <td>${product.barcode}</td>
+                            <td>${product.category.name}</td>
+                            <td>${product.unit.name}</td>
+                            <td>${product.blocked}</td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${providerShop.blocked == false}">
+                                        <form method="POST"
+                                              action="<c:url value="/provider/products/${product.id}/lock"/>">
+                                            <button type="submit" class="btn btn-lg btn-danger">Заблокировать</button>
+                                        </form>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <form method="POST"
+                                              action="<c:url value="/provider/products/${product.id}/reestablish"/>">
+                                            <button type="submit" class="btn btn-lg btn-danger">Разблокировать</button>
+                                        </form>
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
                             </tr>
-                        </c:forEach>
+                            </c:forEach>
                         </tbody>
                     </table>
                 </div>
