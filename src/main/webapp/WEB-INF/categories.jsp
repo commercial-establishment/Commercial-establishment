@@ -34,7 +34,7 @@
             <div class="col-lg-12">
                 <div class="table-responsive">
                     <div>
-                        <a href="<c:url value="/admin/categories/create"/>" class="btn btn-lg btn-default">Добавить</a>
+                        <a href="<c:url value="/categories/create"/>" class="btn btn-lg btn-default">Добавить</a>
                         <br/> <br/>
                     </div>
                     <table class="table table-bordered table-hover table-striped">
@@ -51,7 +51,7 @@
                             <tr>
                                 <td>${category.id}</td>
                                 <td>${category.name}</td>
-                                <td><a href="/admin/categories/${category.id}/edit" class="btn btn-lg btn-default">Редактировать</a>
+                                <td><a href="/categories/${category.id}/edit" class="btn btn-lg btn-default">Редактировать</a>
                                 </td>
                             </tr>
                         </c:forEach>

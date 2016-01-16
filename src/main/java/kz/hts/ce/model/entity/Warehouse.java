@@ -10,24 +10,12 @@ public class Warehouse extends BaseEntity {
     @JoinColumn(name = "shop_id", nullable = false)
     private Shop shop;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
-
     /*TODO nullable = false*/
     @Column(name = "import_date", nullable = true)
     private LocalDateTime importDate;
 
     private int arrival;
     private int residue;
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
 
     public int getArrival() {
         return arrival;

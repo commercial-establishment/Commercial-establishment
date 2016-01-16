@@ -36,7 +36,7 @@
             </div>
             <div class="col-lg-12">
                 <div class="table-responsive">
-                    <form:form method="post" action="/admin/categories/${id}/edit" modelAttribute="category"
+                    <form:form method="post" action="/categories/${id}/edit" modelAttribute="category"
                                commandName="category">
                         <table class="table table-hover">
                             <tbody>
@@ -59,7 +59,7 @@
                                     <form:button type="submit" class="btn btn-lg btn-success">Сохранить</form:button>
                                 </td>
                                 <td/>
-                                <td><a href="<c:url value="/admin/categories/${id}"/>" class="btn btn-lg btn-danger">Отмена</a>
+                                <td><a href="<c:url value="/categories/${id}"/>" class="btn btn-lg btn-danger">Отмена</a>
                                 </td>
                             </tr>
                             </tbody>

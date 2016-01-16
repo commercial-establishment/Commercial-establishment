@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<t:head title="Редактирование администратора">
+<t:head title="Список магазинов">
     <link href="<c:url value="/resources/css/datepicker.css"/>" rel="stylesheet" type="text/css">
     <link href="<c:url value="/resources/css/style.css"/>" rel="stylesheet" type="text/css">
 </t:head>
@@ -41,10 +41,10 @@
                                 <a href="<c:url value="/admin/shops/create"/>"
                                    class="btn btn-lg btn-default">Добавить</a>
                             </c:when>
-                            <c:when test="${role eq 'ROLE_PROVIDER'}">
-                                <a href="<c:url value="/provider/shops/add"/>"
-                                   class="btn btn-lg btn-default">Добавить</a>
-                            </c:when>
+                            <%--<c:when test="${role eq 'ROLE_PROVIDER'}">--%>
+                                <%--<a href="<c:url value="/provider/shops/add"/>"--%>
+                                   <%--class="btn btn-lg btn-default">Добавить</a>--%>
+                            <%--</c:when>--%>
                         </c:choose>
                         <br/> <br/>
                     </div>

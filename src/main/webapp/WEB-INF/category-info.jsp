@@ -22,7 +22,7 @@
                             <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>">Главная</a>
                         </li>
                         <li>
-                            <i class="fa fa-table"></i> <a href="<c:url value="/admin/categories"/>">Категории</a>
+                            <i class="fa fa-table"></i> <a href="<c:url value="/categories"/>">Категории</a>
                         </li>
                         <li class="active">
                             <i class="fa fa-desktop"></i> Информация о категории
@@ -44,10 +44,9 @@
                         </tr>
                         <tr>
                             <td>
-                                <form method="GET" action="<c:url value="/admin/categories/${id}/edit"/>">
+                                <form method="GET" action="<c:url value="/categories/${id}/edit"/>">
                                     <input type="submit" class="btn btn-lg btn-default" value="Редактировать">
                                 </form>
-                                    <%--<a href="<c:url value="/admins/${id}/edit"/>" class="btn btn-lg btn-default">Редактировать</a>--%>
                             </td>
                             <td>
                             </td>

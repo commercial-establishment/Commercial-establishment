@@ -18,28 +18,28 @@ public class CategoryPageController {
     @Autowired
     private CategoryService categoryService;
 
-    @RequestMapping("/admin/categories/{id}")
+    @RequestMapping("/categories/{id}")
     public String information(Model model, @PathVariable UUID id){
         Category category = categoryService.findById(id);
         model.addAttribute("category", category);
         return "/category-info";
     }
 
-    @RequestMapping("/admin/categories/{id}/edit")
+    @RequestMapping("/categories/{id}/edit")
     public String edit(Model model, @PathVariable UUID id){
         Category category = categoryService.findById(id);
         model.addAttribute("category", category);
         return "category-edit";
     }
 
-    @RequestMapping("/admin/categories/create")
+    @RequestMapping("/categories/create")
     public String create(Model model){
         Category category = new Category();
         model.addAttribute("category", category);
         return "category-create";
     }
 
-    @RequestMapping(value = "/admin/categories",method = RequestMethod.GET)
+    @RequestMapping(value = "/categories",method = RequestMethod.GET)
     public String categoriesPage(Model model) {
         List<Category> categories = categoryService.findAll();
         model.addAttribute("categories", categories);

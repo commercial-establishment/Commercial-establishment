@@ -36,34 +36,41 @@
                         <form method="GET" action="<c:url value="/admin/providers/create"/>">
                             <input type="submit" class="btn btn-lg btn-default" value="Добавить">
                         </form>
-                        <%--<a href="<c:url value="/admin/providers/create"/>" class="btn btn-lg btn-default">Добавить--%>
+                            <%--<a href="<c:url value="/admin/providers/create"/>" class="btn btn-lg btn-default">Добавить--%>
                             <%--поставщика</a>--%>
-                        <%--<br/> --%>
+                            <%--<br/> --%>
                         <br/>
                     </div>
                     <table class="table table-bordered table-hover table-striped">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Имя пользователя</th>
-                            <th>Название компании</th>
-                            <th>Контактное лицо</th>
-                            <th>Email</th>
-                            <th>Заблокирован</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach items="${providers}" var="provider">
-                            <tr onclick="document.location = '/admin/providers/' + '${provider.id}';">
-                                <td>${provider.id}</td>
-                                <td>${provider.username}</td>
-                                <td>${provider.companyName}</td>
-                                <td>${provider.contactPerson}</td>
-                                <td>${provider.email}</td>
-                                <td>${provider.blocked}</td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
+                        <c:choose>
+                            <c:when test="${providers.size() == 0}">
+                                    <h2>Список поставщиков пуст.</h2>
+                            </c:when>
+                            <c:otherwise>
+                                <c:forEach items="${providers}" var="provider">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Имя пользователя</th>
+                                        <th>Название компании</th>
+                                        <th>Контактное лицо</th>
+                                        <th>Email</th>
+                                        <th>Заблокирован</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr onclick="document.location = '/admin/providers/' + '${provider.id}';">
+                                        <td>${provider.id}</td>
+                                        <td>${provider.username}</td>
+                                        <td>${provider.companyName}</td>
+                                        <td>${provider.contactPerson}</td>
+                                        <td>${provider.email}</td>
+                                        <td>${provider.blocked}</td>
+                                    </tr>
+                                    </tbody>
+                                </c:forEach>
+                            </c:otherwise>
+                        </c:choose>
                     </table>
                 </div>
             </div>

@@ -19,7 +19,7 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @RequestMapping(value = "/admin/categories/{id}/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/categories/{id}/edit", method = RequestMethod.POST)
     public String edit(@PathVariable UUID id, @Valid @ModelAttribute("category") Category category,
                        BindingResult result) {
         if (result.hasErrors()) {
@@ -30,7 +30,7 @@ public class CategoryController {
         return "redirect:";
     }
 
-    @RequestMapping(value = "/admin/categories/create-save", method = RequestMethod.POST)
+    @RequestMapping(value = "/categories/create-save", method = RequestMethod.POST)
     public String create(@Valid @ModelAttribute("category") Category category, BindingResult result) {
         if (result.hasErrors()) {
             return "category-create";

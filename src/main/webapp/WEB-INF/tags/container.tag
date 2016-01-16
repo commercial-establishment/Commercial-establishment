@@ -64,7 +64,7 @@
                             <a href="<c:url value="/admin/products"/>"><i class="fa fa-fw fa-table"></i>Товары</a>
                         </li>
                         <li class="${categories}">
-                            <a href="<c:url value="/admin/categories"/>"><i class="fa fa-fw fa-wrench"></i>Категории
+                            <a href="<c:url value="/categories"/>"><i class="fa fa-fw fa-wrench"></i>Категории
                                 товаров</a>
                         </li>
                     </c:when>
@@ -79,7 +79,7 @@
                             <a href="<c:url value="/provider/products"/>"><i class="fa fa-fw fa-table"></i>Товары</a>
                         </li>
                         <li class="${categories}">
-                            <a href="<c:url value="/provider/categories"/>"><i class="fa fa-fw fa-wrench"></i>Категории
+                            <a href="<c:url value="/categories"/>"><i class="fa fa-fw fa-wrench"></i>Категории
                                 товаров</a>
                         </li>
                     </c:when>
