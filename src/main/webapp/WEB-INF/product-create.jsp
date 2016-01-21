@@ -59,6 +59,9 @@
                             <c:set var="url" scope="request" value="/provider/products/create"/>
                         </c:when>
                     </c:choose>
+                    <c:if test="${not empty limitCountError}">
+                        <b class="error">${limitCountError}</b>
+                    </c:if>
                     <table class="table table-hover">
                         <tbody>
                             <%--@elvariable id="productProvider" type="kz.hts.ce.model.entity.ProductProvider"--%>
@@ -134,8 +137,9 @@
                             <form:hidden path="blocked"/>
                             <tr>
                                 <td>
-                                    <input type="submit" class="btn btn-lg btn-success" onclick="addLimitTypes()" value="Сохранить">
-                                    <%--<form:button type="submit" class="btn btn-lg btn-success">Сохранить</form:button>--%>
+                                    <input type="submit" class="btn btn-lg btn-success" onclick="addLimitTypes()"
+                                           value="Сохранить">
+                                        <%--<form:button type="submit" class="btn btn-lg btn-success">Сохранить</form:button>--%>
                                 </td>
                                 <td/>
                                 <c:choose>

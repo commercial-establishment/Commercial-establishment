@@ -38,8 +38,11 @@
                                    class="btn btn-lg btn-default">Добавить</a>
                             </c:when>
                             <c:when test="${role eq 'ROLE_PROVIDER'}">
-                                <a href="<c:url value="/provider/products/create"/>"
-                                   class="btn btn-lg btn-default">Создать</a>
+                                <form method="get" action="<c:url value="/provider/products/create"/>">
+                                    <button type="submit" class="btn btn-lg btn-default">Создать</button>
+                                </form>
+                                <%--<a href="<c:url value="/provider/products/create"/>"--%>
+                                   <%--class="btn btn-lg btn-default">Создать</a>--%>
                             </c:when>
                         </c:choose>
                         <br><br>

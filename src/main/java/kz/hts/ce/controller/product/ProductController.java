@@ -74,6 +74,18 @@ public class ProductController {
     @RequestMapping(value = "/provider/products/create", method = RequestMethod.POST)
     public String createForProvider(Model model, @Valid @ModelAttribute("productProvider") ProductProvider productProvider,
                                     BindingResult result) {
+        Map<String, Integer> limits = productProvider.getLimits();
+        int limitSize = springHelper.getTypes().size() * 2;
+        if (!(limitSize == limits.size())) {
+            List<Category> categories = categoryService.findAll();
+            List<Unit> units = unitService.findAll();
+            model.addAttribute("types", springHelper.getTypes());
+            model.addAttribute("categories", categories);
+            model.addAttribute("units", units);
+            model.addAttribute("limitCountError", "Заполните все пределы.");
+            return "product-create";
+        }
+
         if (checkErrors(model, result)) return "product-create";
         else {
             Product product = productService.save(productProvider.getProduct());
@@ -81,7 +93,6 @@ public class ProductController {
             productProvider.setProduct(product);
             ProductProvider savedProductProvider = productProviderService.save(productProvider);
 
-            Map<String, Integer> limits = productProvider.getLimits();
             Map<String, Type> typeMap = SpringHelper.typeMap;
             for (Map.Entry<String, Type> typeEntry : typeMap.entrySet()) {
                 ProductLimit productLimit = new ProductLimit();
@@ -113,6 +124,7 @@ public class ProductController {
         if (result.hasErrors()) {
             List<Category> categories = categoryService.findAll();
             List<Unit> units = unitService.findAll();
+            model.addAttribute("types", springHelper.getTypes());
             model.addAttribute("categories", categories);
             model.addAttribute("units", units);
             return true;
