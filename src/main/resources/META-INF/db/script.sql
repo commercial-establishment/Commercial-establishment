@@ -43,39 +43,14 @@ INSERT INTO unit (id, name, symbol) VALUES ('00000000-0000-0001-0000-00000000000
 INSERT INTO unit (id, name, symbol) VALUES ('00000000-0000-0002-0000-000000000000', 'Литр', 'л');
 INSERT INTO unit (id, name, symbol) VALUES ('00000000-0000-0003-0000-000000000000', 'Штука', 'шт');
 
--- INSERT INTO product (id, is_blocked, name, category_id, barcode, unit_id) VALUES
---   ('00000000-0000-0001-0000-000000000000', FALSE, 'Coca-Cola', '00000000-0000-0001-0000-000000000000', 123123123123,
---    '00000000-0000-0001-0000-000000000000');
--- INSERT INTO product (id, is_blocked, name, category_id, barcode, unit_id) VALUES
---   ('00000000-0000-0002-0000-000000000000', FALSE, 'NeCoca-Cola', '00000000-0000-0001-0000-000000000000', 321321321321,
---    '00000000-0000-0002-0000-000000000000');
-
 INSERT INTO shop (id, address, is_blocked, name, area_id, type_id, iin) VALUES
   ('00000000-0000-0001-0000-000000000000', 'Туркистан 8/2', FALSE, 'Gal Mart', '00000000-0000-0001-0000-000000000000',
    '00000000-0000-0001-0000-000000000000', 123213123);
 
 INSERT INTO warehouse (id, arrival, import_date, residue, shop_id) VALUES
   ('00000000-0000-0001-0000-000000000000', 100, NULL, 50, '00000000-0000-0001-0000-000000000000');
---
--- INSERT INTO provider (id, address, is_blocked, company_name, contact_person, email, end_work_date, password, start_work_date, username, city_id, role_id)
--- VALUES
---   ('00000000-0000-0001-0000-000000000000', 'ул. Ташенова 5/2', FALSE, 'COMPANY NAME', 'PERSON NAME', 'yakov@gmail.com',
---                                            NULL,
---                                            '$2a$10$5/0IiLwNrICc3Dmq/7AWKO08qK13AKH2tWIytGe9a2.WZHIj2WwPa',
---                                            '11-11-20110',
---                                            'username', '00000000-0000-0001-0000-000000000000',
---    '00000000-0000-0002-0000-000000000000');
-
--- INSERT INTO product_provider (id, is_blocked, product_id, provider_id) VALUES
---   ('00000000-0000-0001-0000-000000000000', FALSE, '00000000-0000-0001-0000-000000000000',
---    '00000000-0000-0001-0000-000000000000');
--- INSERT INTO product_provider (id, is_blocked, product_id, provider_id) VALUES
---   ('00000000-0000-0002-0000-000000000000', FALSE, '00000000-0000-0002-0000-000000000000',
---    '00000000-0000-0001-0000-000000000000');
 
 INSERT INTO EMPLOYEE (ID, IS_BLOCKED, FIRST_NAME, PASSWORD, SURNAME, USERNAME, ROLE_ID, SHOP_ID) VALUES
   ('00000000-0000-0001-0000-000000000000', FALSE, 'FIRSTNAME',
    '$2a$10$5/0IiLwNrICc3Dmq/7AWKO08qK13AKH2tWIytGe9a2.WZHIj2WwPa', 'surname', 'owner',
    '00000000-0000-0003-0000-000000000000', '00000000-0000-0001-0000-000000000000');
-
--- INSERT INTO shop (id, is_blocked, full_name, password, username, type_id, warehouse_id) VALUES (1, FALSE, 'Super Магаз', 'super', 'super', 1, 1);

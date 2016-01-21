@@ -12,12 +12,8 @@
 </t:head>
 
 <t:container shops="active">
-
     <div id="page-wrapper">
-
         <div class="container-fluid">
-
-            <!-- Page Heading -->
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
@@ -41,16 +37,13 @@
                                 <a href="<c:url value="/admin/shops/create"/>"
                                    class="btn btn-lg btn-default">Добавить</a>
                             </c:when>
-                            <%--<c:when test="${role eq 'ROLE_PROVIDER'}">--%>
-                                <%--<a href="<c:url value="/provider/shops/add"/>"--%>
-                                   <%--class="btn btn-lg btn-default">Добавить</a>--%>
-                            <%--</c:when>--%>
                         </c:choose>
-                        <br/> <br/>
                     </div>
                     <c:choose>
                         <c:when test="${shops.size() == 0}">
-                            <h1>Нет привязанных магазинов. Пожалуйтса, добавьте магазин.</h1>
+                            <h1>Нет привязанных магазинов.</h1>
+                            <h3>Как только сотрудник магазина добавит вас в список - магазин отобразится.</h3>
+                            <br>
                         </c:when>
                         <c:otherwise>
                             <table class="table table-bordered table-hover">
@@ -101,8 +94,6 @@
             </div>
         </div>
     </div>
-    </div>
-
     <t:script/>
 </t:container>
 </html>

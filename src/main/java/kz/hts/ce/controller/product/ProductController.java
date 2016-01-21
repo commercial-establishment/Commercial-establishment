@@ -119,4 +119,29 @@ public class ProductController {
         }
         return false;
     }
+
+    @RequestMapping(value = "/provider/products/{productId}/delete",
+            method = RequestMethod.POST)
+    public String deleteProductFromProvider(@PathVariable("productId") UUID productId) {
+        UUID providerId = springHelper.getAuthProviderId();
+        ProductProvider productProvider = productProviderService.findByProviderIdAndProductId(providerId, productId);
+        productProviderService.delete(productProvider.getId());
+        return "redirect:/provider/products";
+    }
+
+    @RequestMapping(value = "/provider/products/{productId}/lock", method = RequestMethod.POST)
+    public String lockShop(@PathVariable("productId") UUID productId) {
+        UUID providerId = springHelper.getAuthProviderId();
+        ProductProvider productProvider = productProviderService.findByProviderIdAndProductId(providerId, productId);
+        productProviderService.lockById(productProvider.getId());
+        return "redirect:/provider/products";
+    }
+
+    @RequestMapping(value = "/provider/products/{productId}/reestablish", method = RequestMethod.POST)
+    public String reestablishShop(@PathVariable("productId") UUID productId) {
+        UUID providerId = springHelper.getAuthProviderId();
+        ProductProvider productProvider = productProviderService.findByProviderIdAndProductId(providerId, productId);
+        productProviderService.reestablishById(productProvider.getId());
+        return "redirect:/provider/products";
+    }
 }
