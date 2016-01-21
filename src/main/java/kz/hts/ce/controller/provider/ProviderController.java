@@ -40,7 +40,7 @@ public class ProviderController {
     @Autowired
     private AdminService adminService;
     @Autowired
-    private ShopProductProviderService sppService;
+    private EmployeeService employeeService;
 
     @Autowired
     private SpringHelper springHelper;
@@ -68,14 +68,18 @@ public class ProviderController {
     @RequestMapping(value = "/admin/providers/create", method = RequestMethod.POST)
     public String create(Model model, @Valid @ModelAttribute("provider") Provider provider, BindingResult result) {
         List<City> cities = cityService.findAll();
-        if (result.hasErrors()) {
-            model.addAttribute(CITIES, cities);
-            return "provider-create";
-        }
 
-        Admin adminFromDB = adminService.findByUsernameAndBlocked(provider.getUsername(), false);
-        Provider providerFromDB = providerService.findByUsernameAndBlocked(provider.getUsername(), false);
-        if (adminFromDB == null && providerFromDB == null) {
+        boolean adminUsernameExists = adminService.usernameExists(provider.getUsername());
+        boolean providerUsernameExists = providerService.usernameExists(provider.getUsername());
+        boolean employeeUsernameExists = employeeService.usernameExists(provider.getUsername());
+        if (!adminUsernameExists && !providerUsernameExists && !employeeUsernameExists) {
+            boolean companyNameExists = providerService.companyNameExists(provider.getCompanyName());
+            if (!companyNameExists) {
+            if (result.hasErrors()) {
+                model.addAttribute(CITIES, cities);
+                return "provider-create";
+            }
+
             Role role = SpringHelper.roleMap.get(PROVIDER);
             provider.setBlocked(false);
             provider.setRole(role);
@@ -83,8 +87,13 @@ public class ProviderController {
             provider.setStartWorkDate(new Date());
             providerService.save(provider);
             return REDIRECT;
+            } else {
+                model.addAttribute("companyNameIsOccupied", "Указанное название компании занято.");
+                model.addAttribute(CITIES, cities);
+                return "provider-create";
+            }
         } else {
-            model.addAttribute("loginIsOccupied", "Указанный логин уже занят");
+            model.addAttribute("loginIsOccupied", "Указанный логин уже занят.");
             model.addAttribute(CITIES, cities);
             return "provider-create";
         }
@@ -199,6 +208,7 @@ public class ProviderController {
         productProviderService.delete(productProvider.getId());
         return "redirect:/provider/products";
     }
+
     private void saveNewShopProvider(UUID providerId, UUID shopId) {
         ShopProvider shopProviderFromDB = shopProviderService.findByProviderIdAndShopId(providerId, shopId);
         if (shopProviderFromDB == null) {
@@ -211,6 +221,7 @@ public class ProviderController {
             shopProviderService.save(shopProvider);
         }
     }
+
     @RequestMapping(value = "/provider/products/{productId}/lock", method = RequestMethod.POST)
     public String lockShop(@PathVariable("productId") UUID productId) {
         UUID providerId = springHelper.getAuthProviderId();

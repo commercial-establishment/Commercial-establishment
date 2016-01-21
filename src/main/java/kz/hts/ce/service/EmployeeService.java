@@ -2,7 +2,6 @@ package kz.hts.ce.service;
 
 import kz.hts.ce.model.entity.Employee;
 import kz.hts.ce.repository.EmployeeRepository;
-import kz.hts.ce.util.SpringHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.history.Revision;
 import org.springframework.data.history.Revisions;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class EmployeeService extends BaseService<Employee, EmployeeRepository>{
+public class EmployeeService extends BaseService<Employee, EmployeeRepository> {
 
     @Autowired
     protected EmployeeService(EmployeeRepository repository) {
@@ -44,5 +43,9 @@ public class EmployeeService extends BaseService<Employee, EmployeeRepository>{
             if (employee != null) employees.add(employee);
         }
         return employees;
+    }
+
+    public boolean usernameExists(String username) {
+        return repository.findByUsername(username) != null;
     }
 }

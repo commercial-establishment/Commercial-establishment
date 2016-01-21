@@ -8,7 +8,10 @@ import org.springframework.data.history.Revision;
 import org.springframework.data.history.Revisions;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ProviderService extends BaseService<Provider, ProviderRepository> {
@@ -22,6 +25,10 @@ public class ProviderService extends BaseService<Provider, ProviderRepository> {
 
     public Provider findByUsername(String username) {
         return repository.findByUsername(username);
+    }
+
+    public Provider findByCompanyName(String companyName) {
+        return repository.findByCompanyName(companyName);
     }
 
     public Provider findByUsernameAndBlocked(String username, boolean blocked) {
@@ -70,5 +77,13 @@ public class ProviderService extends BaseService<Provider, ProviderRepository> {
             if (provider != null) providers.add(provider);
         }
         return providers;
+    }
+
+    public boolean usernameExists(String username) {
+        return repository.findByUsername(username) != null;
+    }
+
+    public boolean companyNameExists(String companyName) {
+        return repository.findByCompanyName(companyName) != null;
     }
 }

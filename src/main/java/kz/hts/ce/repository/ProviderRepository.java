@@ -17,6 +17,8 @@ public interface ProviderRepository extends RevisionRepository<Provider, UUID, I
 
     Provider findByUsername(String username);
 
+    Provider findByCompanyName(String companyName);
+
     List<Provider> findByRole_Name(String roleName);
 
     @Transactional

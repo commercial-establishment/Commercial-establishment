@@ -48,4 +48,8 @@ public class AdminService extends BaseService<Admin, AdminRepository> {
     public Admin findByUsernameAndBlocked(String username, boolean blocked) {
         return repository.findByUsernameAndBlocked(username, blocked);
     }
+
+    public boolean usernameExists(String username) {
+        return repository.findByUsername(username) != null;
+    }
 }

@@ -24,6 +24,7 @@ public class Provider extends BaseEntity {
     @Pattern(regexp = "^[a-z0-9_-]+[a-z0-9_-]$")
     private String username;
 
+    @NotEmpty
     private String password;
 
     @ManyToOne
@@ -61,16 +62,13 @@ public class Provider extends BaseEntity {
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date endWorkDate;
 
+    @Size(min = 12, max = 12)
+    @Pattern(regexp = "^[\\d]{12}$")
+    @Column(name = "identification_number", nullable = false)
+    private String identificationNumber;
+
     @Column(name = "is_blocked", nullable = false)
     private boolean blocked;
-
-    @Size(max = 20)
-    @Pattern(regexp = "^[\\d]{0,20}$")
-    private String iin;
-
-    @Size(max = 20)
-    @Pattern(regexp = "^[\\d]{0,20}$")
-    private String bin;
 
     public String getUsername() {
         return username;
@@ -160,20 +158,12 @@ public class Provider extends BaseEntity {
         this.blocked = blocked;
     }
 
-    public String getIin() {
-        return iin;
+    public String getIdentificationNumber() {
+        return identificationNumber;
     }
 
-    public void setIin(String iin) {
-        this.iin = iin;
-    }
-
-    public String getBin() {
-        return bin;
-    }
-
-    public void setBin(String bin) {
-        this.bin = bin;
+    public void setIdentificationNumber(String identificationNumber) {
+        this.identificationNumber = identificationNumber;
     }
 }
 
