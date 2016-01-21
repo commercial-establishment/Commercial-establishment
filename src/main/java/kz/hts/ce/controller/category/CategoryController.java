@@ -27,7 +27,7 @@ public class CategoryController {
         }
         category.setId(id);
         categoryService.save(category);
-        return "redirect:";
+        return "redirect:/categories";
     }
 
     @RequestMapping(value = "/categories/create-save", method = RequestMethod.POST)
