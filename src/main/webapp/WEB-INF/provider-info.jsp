@@ -73,11 +73,11 @@
                         <tr>
                             <td><b>ИИН:</b></td>
                             <c:choose>
-                                <c:when test="${provider.iin == ''}">
+                                <c:when test="${provider.identificationNumber == ''}">
                                     <td>ИИН не заполнен</td>
                                 </c:when>
-                                <c:when test="${provider.iin != null}">
-                                    <td>${provider.iin}</td>
+                                <c:when test="${provider.identificationNumber != null}">
+                                    <td>${provider.identificationNumber}</td>
                                 </c:when>
                                 <c:otherwise>
                                     <td>ИИН не заполнен</td>

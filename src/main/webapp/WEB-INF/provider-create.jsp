@@ -109,6 +109,9 @@
                                 <c:set var="companyNameErrors"><form:errors path="companyName" cssClass="error"/>
                                 </c:set>
                                 <c:choose>
+                                    <c:when test="${not empty companyNameIsOccupied}">
+                                        <td class="error"> ${companyNameIsOccupied} </td>
+                                    </c:when>
                                     <c:when test="${not empty companyNameErrors}">
                                         <td> ${companyNameErrors} </td>
                                     </c:when>
@@ -132,31 +135,31 @@
                                 </c:choose>
                             </tr>
                             <tr>
-                                <td><form:label path="iin">ИИН:</form:label></td>
-                                <td><form:input cssClass="form-control" path="iin"/></td>
-                                <c:set var="iinErrors"><form:errors path="iin" cssClass="error"/> </c:set>
+                                <td><form:label path="identificationNumber">ИИН/БИН:</form:label></td>
+                                <td><form:input cssClass="form-control" path="identificationNumber" /></td>
+                                <c:set var="identificationNumberErrors"><form:errors path="identificationNumber" cssClass="error"/> </c:set>
                                 <c:choose>
-                                    <c:when test="${not empty iinErrors}">
-                                        <td> ${iinErrors} </td>
+                                    <c:when test="${not empty identificationNumberErrors}">
+                                        <td> ${identificationNumberErrors} </td>
                                     </c:when>
                                     <c:otherwise>
-                                        <td>Имя пользователя должно состоять из ...</td>
+                                        <td>ИИН/БИН должен состоять из 12 цифр.</td>
                                     </c:otherwise>
                                 </c:choose>
                             </tr>
-                            <tr>
-                                <td><form:label path="bin">БИН:</form:label></td>
-                                <td><form:input cssClass="form-control" path="bin"/></td>
-                                <c:set var="binErrors"><form:errors path="bin" cssClass="error"/> </c:set>
-                                <c:choose>
-                                    <c:when test="${not empty binErrors}">
-                                        <td> ${binErrors} </td>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <td>Имя пользователя должно состоять из ...</td>
-                                    </c:otherwise>
-                                </c:choose>
-                            </tr>
+                            <%--<tr>--%>
+                                <%--<td><form:label path="bin">БИН:</form:label></td>--%>
+                                <%--<td><form:input cssClass="form-control" path="bin"/></td>--%>
+                                <%--<c:set var="binErrors"><form:errors path="bin" cssClass="error"/> </c:set>--%>
+                                <%--<c:choose>--%>
+                                    <%--<c:when test="${not empty binErrors}">--%>
+                                        <%--<td> ${binErrors} </td>--%>
+                                    <%--</c:when>--%>
+                                    <%--<c:otherwise>--%>
+                                        <%--<td>Имя пользователя должно состоять из ...</td>--%>
+                                    <%--</c:otherwise>--%>
+                                <%--</c:choose>--%>
+                            <%--</tr>--%>
                             <tr>
                                 <td>
                                     <form:button type="submit" class="btn btn-lg btn-success">Сохранить</form:button>

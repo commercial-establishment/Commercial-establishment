@@ -44,31 +44,29 @@
                     <table class="table table-bordered table-hover table-striped">
                         <c:choose>
                             <c:when test="${providers.size() == 0}">
-                                    <h2>Список поставщиков пуст.</h2>
+                                <h2>Список поставщиков пуст.</h2>
                             </c:when>
                             <c:otherwise>
+                                <thead>
+                                <tr>
+                                    <th>Имя пользователя</th>
+                                    <th>Название компании</th>
+                                    <th>Контактное лицо</th>
+                                    <th>Email</th>
+                                    <th>Заблокирован</th>
+                                </tr>
+                                </thead>
+                                <tbody>
                                 <c:forEach items="${providers}" var="provider">
-                                    <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Имя пользователя</th>
-                                        <th>Название компании</th>
-                                        <th>Контактное лицо</th>
-                                        <th>Email</th>
-                                        <th>Заблокирован</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
                                     <tr onclick="document.location = '/admin/providers/' + '${provider.id}';">
-                                        <td>${provider.id}</td>
                                         <td>${provider.username}</td>
                                         <td>${provider.companyName}</td>
                                         <td>${provider.contactPerson}</td>
                                         <td>${provider.email}</td>
                                         <td>${provider.blocked}</td>
                                     </tr>
-                                    </tbody>
                                 </c:forEach>
+                                </tbody>
                             </c:otherwise>
                         </c:choose>
                     </table>
