@@ -10,12 +10,8 @@
 </t:head>
 
 <t:container categories="active">
-
     <div id="page-wrapper">
-
         <div class="container-fluid">
-
-            <!-- Page Heading -->
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
@@ -46,7 +42,6 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <%--@elvariable id="shop" type="kz.hts.ce.entity.Category"--%>
                         <c:forEach items="${categories}" var="category">
                             <tr>
                                 <td>${category.id}</td>

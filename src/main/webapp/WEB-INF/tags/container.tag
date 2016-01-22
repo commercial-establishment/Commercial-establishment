@@ -87,8 +87,6 @@
             </ul>
         </div>
     </nav>
-
     <jsp:doBody/>
-
 </div>
 </body>

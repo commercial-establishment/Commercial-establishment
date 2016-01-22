@@ -41,11 +41,9 @@
                                 <form method="get" action="<c:url value="/provider/products/create"/>">
                                     <button type="submit" class="btn btn-lg btn-default">Создать</button>
                                 </form>
-                                <%--<a href="<c:url value="/provider/products/create"/>"--%>
-                                   <%--class="btn btn-lg btn-default">Создать</a>--%>
                             </c:when>
                         </c:choose>
-                        <br><br>
+                        <br>
                     </div>
                     <c:choose>
                         <c:when test="${productProviderList.size() == 0 || products.size() == 0}">

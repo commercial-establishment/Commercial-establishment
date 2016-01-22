@@ -3,18 +3,22 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <sec:authentication var="role" property="principal.authorities[0]"/>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <t:head title="Информация о товаре"/>
 
 <t:container admins="active">
-
+    <c:choose>
+        <c:when test="${role eq 'ROLE_ADMIN'}">
+            <c:set var="roleForUrl" value="/admin"/>
+        </c:when>
+        <c:when test="${role eq 'ROLE_PROVIDER'}">
+            <c:set var="roleForUrl" value="/provider"/>
+        </c:when>
+    </c:choose>
     <div id="page-wrapper">
-
         <div class="container-fluid">
-
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
@@ -25,7 +29,7 @@
                             <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>">Главная</a>
                         </li>
                         <li>
-                            <i class="fa fa-table"></i> <a href="<c:url value="/admin/products"/>">Список товаров</a>
+                            <i class="fa fa-table"></i> <a href="<c:url value="${roleForUrl}/products"/>">Список товаров</a>
                         </li>
                         <li class="active">
                             <i class="fa fa-desktop"></i> Информация о товаре
@@ -67,7 +71,7 @@
                         </c:if>
                         <tr>
                             <td>
-                                <form method="GET" action="<c:url value="/admin/products/${id}/edit"/>">
+                                <form method="GET" action="<c:url value="${roleForUrl}/products/${product.id}/edit"/>">
                                     <input type="submit" class="btn btn-lg btn-default" value="Редактировать">
                                 </form>
                                     <%--<a href="<c:url value="/admins/${id}/edit"/>" class="btn btn-lg btn-default">Редактировать</a>--%>
@@ -75,12 +79,12 @@
 
                             <c:choose>
                                 <c:when test="${product.blocked == false}">
-                                    <td><a href="<c:url value="/admin/products/${id}/lock"/>"
+                                    <td><a href="<c:url value="/admin/products/${product.id}/lock"/>"
                                            class="btn btn-lg btn-danger">Заблокировать</a>
                                     </td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td><a href="<c:url value="/admin/products/${id}/reestablish"/>"
+                                    <td><a href="<c:url value="/admin/products/${product.id}/reestablish"/>"
                                            class="btn btn-lg btn-success">Восстановить</a></td>
                                 </c:otherwise>
                             </c:choose>

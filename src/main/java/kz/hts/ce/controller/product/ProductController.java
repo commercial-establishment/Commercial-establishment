@@ -51,9 +51,7 @@ public class ProductController {
         return REDIRECT;
     }
 
-    @RequestMapping(value = "/admin/products/{id}/edit", method = RequestMethod.POST)
-    public String editForAdmin
-            (Model model, @PathVariable UUID id, @Valid @ModelAttribute("product") Product product, BindingResult result) {
+    private String edit(Model model, BindingResult result, Product product, UUID id) {
         if (checkErrors(model, result)) return "product-edit";
         else {
             product.setId(id);
@@ -61,6 +59,18 @@ public class ProductController {
             return REDIRECT;
         }
     }
+
+    @RequestMapping(value = "/admin/products/{id}/edit", method = RequestMethod.POST)
+    public String editForAdmin
+            (Model model, @PathVariable UUID id, @Valid @ModelAttribute("product") Product product, BindingResult result) {
+        return edit(model, result, product, id);
+    }
+//
+//    @RequestMapping(value = "/provider/products/{id}/edit", method = RequestMethod.POST)
+//    public String editForProvider(Model model, @PathVariable UUID id, @Valid @ModelAttribute("product") Product product,
+//                                  BindingResult result) {
+//        return edit(model, result, product, id);
+//    }
 
     @RequestMapping(value = "/admin/products/create", method = RequestMethod.POST)
     public String createForAdmin(Model model, @Valid @ModelAttribute("product") Product product, BindingResult result) {
@@ -71,19 +81,31 @@ public class ProductController {
         }
     }
 
+    private String setAttributesForProductCreatePage(Model model, String limitError) {
+        List<Category> categories = categoryService.findAll();
+        List<Unit> units = unitService.findAll();
+        model.addAttribute("types", springHelper.getTypes());
+        model.addAttribute("categories", categories);
+        model.addAttribute("units", units);
+        model.addAttribute("limitError", limitError);
+        return "product-create";
+    }
+
     @RequestMapping(value = "/provider/products/create", method = RequestMethod.POST)
-    public String createForProvider(Model model, @Valid @ModelAttribute("productProvider") ProductProvider productProvider,
-                                    BindingResult result) {
-        Map<String, Integer> limits = productProvider.getLimits();
+    public String createProductForProvider(Model model, @Valid @ModelAttribute("productProvider") ProductProvider productProvider,
+                                           BindingResult result) {
         int limitSize = springHelper.getTypes().size() * 2;
-        if (!(limitSize == limits.size())) {
-            List<Category> categories = categoryService.findAll();
-            List<Unit> units = unitService.findAll();
-            model.addAttribute("types", springHelper.getTypes());
-            model.addAttribute("categories", categories);
-            model.addAttribute("units", units);
-            model.addAttribute("limitCountError", "Заполните все пределы.");
-            return "product-create";
+        Map<String, Integer> limits = productProvider.getLimits();
+        if (!(limitSize == limits.size())) return setAttributesForProductCreatePage(model, "Заполните все пределы.");
+
+        Map<String, Type> typeMap = SpringHelper.typeMap;
+        for (Map.Entry<String, Type> typeEntry : typeMap.entrySet()) {
+            String typeName = typeEntry.getKey();
+            Integer min = limits.get("min" + typeName);
+            Integer max = limits.get("max" + typeName);
+            if (min >= max) {
+                return setAttributesForProductCreatePage(model, "Минимум не может быть больше либо равен максимуму.");
+            }
         }
 
         if (checkErrors(model, result)) return "product-create";
@@ -93,7 +115,6 @@ public class ProductController {
             productProvider.setProduct(product);
             ProductProvider savedProductProvider = productProviderService.save(productProvider);
 
-            Map<String, Type> typeMap = SpringHelper.typeMap;
             for (Map.Entry<String, Type> typeEntry : typeMap.entrySet()) {
                 ProductLimit productLimit = new ProductLimit();
                 productLimit.setProductProvider(savedProductProvider);
@@ -110,14 +131,22 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/provider/products/{id}/edit", method = RequestMethod.POST)
-    public String editForProvider(Model model, @PathVariable UUID id, @Valid @ModelAttribute("product") Product product,
-                                  BindingResult result) {
-        if (checkErrors(model, result)) return "product-edit";
-        else {
-            product.setId(id);
-            productService.save(product);
-            return REDIRECT;
+    public String editProductForProvider(Model model, @Valid @ModelAttribute("productProvider") ProductProvider productProvider,
+                                         @PathVariable UUID id, BindingResult result) {
+        int limitSize = springHelper.getTypes().size() * 2;
+        Map<String, Integer> limits = productProvider.getLimits();
+        if (!(limitSize == limits.size())) return setAttributesForProductCreatePage(model, "Заполните все пределы.");
+
+        Map<String, Type> typeMap = SpringHelper.typeMap;
+        for (Map.Entry<String, Type> typeEntry : typeMap.entrySet()) {
+            String typeName = typeEntry.getKey();
+            Integer min = limits.get("min" + typeName);
+            Integer max = limits.get("max" + typeName);
+            if (min >= max) {
+                return setAttributesForProductCreatePage(model, "Минимум не может быть больше либо равен максимуму.");
+            }
         }
+        return "asdasd";
     }
 
     private boolean checkErrors(Model model, BindingResult result) {
@@ -130,15 +159,6 @@ public class ProductController {
             return true;
         }
         return false;
-    }
-
-    @RequestMapping(value = "/provider/products/{productId}/delete",
-            method = RequestMethod.POST)
-    public String deleteProductFromProvider(@PathVariable("productId") UUID productId) {
-        UUID providerId = springHelper.getAuthProviderId();
-        ProductProvider productProvider = productProviderService.findByProviderIdAndProductId(providerId, productId);
-        productProviderService.delete(productProvider.getId());
-        return "redirect:/provider/products";
     }
 
     @RequestMapping(value = "/provider/products/{productId}/lock", method = RequestMethod.POST)

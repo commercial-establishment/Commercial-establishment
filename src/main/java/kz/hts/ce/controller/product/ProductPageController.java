@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 public class ProductPageController {
@@ -57,15 +54,15 @@ public class ProductPageController {
 
     @RequestMapping("/admin/products/create")
     public String createForAdmin(Model model) {
-        return create(model);
+        attributesForCreateOrEditPage(model);
+        return "product-create";
     }
 
-    private String create(Model model) {
+    private void attributesForCreateOrEditPage(Model model) {
         List<Category> categories = categoryService.findAll();
         List<Unit> units = unitService.findAll();
         model.addAttribute("categories", categories);
         model.addAttribute("units", units);
-        return "product-create";
     }
 
     @RequestMapping(value = "/admin/products", method = RequestMethod.GET)
@@ -73,12 +70,6 @@ public class ProductPageController {
         List<Product> products = productService.findAll();
         model.addAttribute("products", products);
         return "products";
-    }
-
-    @RequestMapping("/provider/products/create")
-    public String createForProvider(Model model, @ModelAttribute("productProvider") ProductProvider productProvider) {
-        model.addAttribute("types", springHelper.getTypes());
-        return create(model);
     }
 
     @RequestMapping(value = "/admin/providers/{id}/products", method = RequestMethod.GET)
@@ -111,6 +102,7 @@ public class ProductPageController {
         model.addAttribute("productProvider", productProvider);
         return "provider-product-edit";
     }
+
     @RequestMapping(value = "/provider/shops/{shopId}/products", method = RequestMethod.GET)
     public String providerShopProducts(Model model, @PathVariable("shopId") UUID shopId) {
         UUID providerId = springHelper.getAuthProviderId();
@@ -154,5 +146,29 @@ public class ProductPageController {
         model.addAttribute("product", product);
         model.addAttribute("limits", productLimits);
         return "product-info";
+    }
+
+    @RequestMapping("/provider/products/create")
+    public String createForProvider(Model model, @ModelAttribute("productProvider") ProductProvider productProvider) {
+        model.addAttribute("types", springHelper.getTypes());
+        attributesForCreateOrEditPage(model);
+        return "product-create";
+    }
+
+    @RequestMapping(value = "/provider/products/{id}/edit", method = RequestMethod.GET)
+    public String productProviderEdit(Model model, @PathVariable("id") UUID id) {
+        UUID providerId = springHelper.getAuthProviderId();
+        ProductProvider productProvider = productProviderService.findByProviderIdAndProductId(providerId, id);
+        List<Type> types = springHelper.getTypes();
+        List<ProductLimit> productLimitList = new ArrayList<>();
+        for (Type type : types) {
+            ProductLimit productLimit = productLimitService.findByProductProviderIdAndTypeName(productProvider.getId(), type.getName());
+            if (productLimit == null) break;
+            productLimitList.add(productLimit);
+        }
+        attributesForCreateOrEditPage(model);
+        model.addAttribute("productLimitList", productLimitList);
+        model.addAttribute("productProvider", productProvider);
+        return "product-edit";
     }
 }

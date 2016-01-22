@@ -25,27 +25,13 @@
                         <li>
                             <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>">Главная</a>
                         </li>
-                        <c:choose>
-                            <c:when test="${role eq 'ROLE_ADMIN'}">
-                                <li>
-                                    <i class="fa fa-table"></i> <a href="<c:url value="/admin/products"/>">Список
-                                    товаров</a>
-                                </li>
-                                <li class="active">
-                                    <i class="fa fa-edit"></i> Добавление товара
-                                </li>
-                            </c:when>
-                            <c:when test="${role eq 'ROLE_PROVIDER'}">
-                                <li>
-                                    <i class="fa fa-table"></i> <a href="<c:url value="/provider/products"/>">Список
-                                    товаров</a>
-                                </li>
-                                <li class="active">
-                                    <i class="fa fa-edit"></i> Добавление товара
-                                </li>
-                            </c:when>
-                        </c:choose>
-
+                        <li>
+                            <i class="fa fa-table"></i> <a href="<c:url value="${roleForUrl}/products"/>">Список
+                            товаров</a>
+                        </li>
+                        <li class="active">
+                            <i class="fa fa-edit"></i> Добавление товара
+                        </li>
                     </ol>
                 </div>
             </div>
@@ -53,19 +39,19 @@
                 <div class="table-responsive">
                     <c:choose>
                         <c:when test="${role eq 'ROLE_ADMIN'}">
-                            <c:set var="url" scope="request" value="/admin/products/create"/>
+                            <c:set var="roleForUrl" value="/admin"/>
                         </c:when>
                         <c:when test="${role eq 'ROLE_PROVIDER'}">
-                            <c:set var="url" scope="request" value="/provider/products/create"/>
+                            <c:set var="roleForUrl" value="/provider"/>
                         </c:when>
                     </c:choose>
-                    <c:if test="${not empty limitCountError}">
-                        <b class="error">${limitCountError}</b>
+                    <c:if test="${not empty limitError}">
+                        <b class="error">${limitError}</b>
                     </c:if>
                     <table class="table table-hover">
                         <tbody>
                             <%--@elvariable id="productProvider" type="kz.hts.ce.model.entity.ProductProvider"--%>
-                        <form:form method="post" action="${url}" modelAttribute="productProvider">
+                        <form:form method="post" action="${roleForUrl}/products/create" modelAttribute="productProvider">
                             <tr>
                                 <td><form:label path="product.name">Название товара:</form:label></td>
                                 <td><form:input cssClass="form-control" path="product.name"/></td>
