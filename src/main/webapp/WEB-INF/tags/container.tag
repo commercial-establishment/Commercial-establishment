@@ -8,8 +8,6 @@
 <body>
 <div id="wrapper">
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-
-        <%--Header--%>
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -26,7 +24,7 @@
                         class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-gear"></i>Кабинет</a>
+                        <a href="<c:url value="/cabinet"/>"><i class="fa fa-fw fa-gear"></i>Кабинет</a>
                     </li>
                     <li class="divider"></li>
                     <li>
@@ -35,8 +33,6 @@
                 </ul>
             </li>
         </ul>
-
-        <%--Panel--%>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <%@ attribute name="products" %>

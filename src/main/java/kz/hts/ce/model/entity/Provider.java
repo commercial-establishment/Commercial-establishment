@@ -40,6 +40,11 @@ public class Provider extends BaseEntity {
     @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
     private String email;
 
+    @Size(max = 30)
+    @NotEmpty
+    @Column(name = "company_name", nullable = false)
+    private String companyName;
+
     @Size(max = 100)
     @Column(name = "contact_person", nullable = false)
     private String contactPerson;
@@ -49,10 +54,6 @@ public class Provider extends BaseEntity {
     @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     private Role role;
 
-    @Size(max = 30)
-    @NotEmpty
-    @Column(name = "company_name", nullable = false)
-    private String companyName;
 
     @Column(name = "start_work_date", nullable = false)
     @DateTimeFormat(pattern = "dd-MM-yyyy")

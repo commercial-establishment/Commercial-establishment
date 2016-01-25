@@ -33,7 +33,7 @@
                     Какая-то информация Какая-то информация Какая-то информация Какая-то информация Какая-то информация
                     Какая-то информация </p>
 
-                <p><a href="#" class="btn btn-primary btn-lg" role="button">Узнать больше о нас »</a>
+                <p><a href="<c:url value="/info"/>" class="btn btn-primary btn-lg" role="button">Узнать больше о нас »</a>
                 </p>
             </div>
 

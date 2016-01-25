@@ -51,13 +51,12 @@
                             </c:if>
                             <div class="jumbotron" style="background-color: white">
                                 <div class="form-group">
-                                    <label for="username">Username</label>
+                                    <label for="username">Имя пользователя</label>
                                     <input id="username" name="j_username" type="text" class="form-control">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="password">Password <a href="<c:url value="/recovery"/>">(forgot
-                                        password)</a></label>
+                                    <label for="password">Пароль <a href="<c:url value="/recovery"/>">(Забыли пароль)</a></label>
                                     <input id="password" name="j_password" type="password" class="form-control">
                                 </div>
 
