@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -17,6 +18,7 @@ import javax.validation.constraints.Size;
 @Proxy(lazy = false)
 public class Product extends BaseEntity {
 
+    @Valid
     @NotEmpty
     @Size(min = 2, max = 30)
     @Column(nullable = false)

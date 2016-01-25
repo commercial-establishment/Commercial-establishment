@@ -4,13 +4,12 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <sec:authentication var="role" property="principal.authorities[0]"/>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <t:head title="Редактирование товара">
-    <link href="<c:url value="/resources/css/datepicker.css"/>" rel="stylesheet" type="text/css">
-    <link href="<c:url value="/resources/css/style.css"/>" rel="stylesheet" type="text/css">
+    <%--<link href="<c:url value="/resources/css/datepicker.css"/>" rel="stylesheet" type="text/css">--%>
+    <%--<link href="<c:url value="/resources/css/style.css"/>" rel="stylesheet" type="text/css">--%>
 </t:head>
 
 <t:container admins="active">
@@ -18,7 +17,14 @@
     <div id="page-wrapper">
 
         <div class="container-fluid">
-
+            <c:choose>
+                <c:when test="${role eq 'ROLE_ADMIN'}">
+                    <c:set var="roleForUrl" value="/admin"/>
+                </c:when>
+                <c:when test="${role eq 'ROLE_PROVIDER'}">
+                    <c:set var="roleForUrl" value="/provider"/>
+                </c:when>
+            </c:choose>
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
@@ -29,10 +35,12 @@
                             <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>">Главная</a>
                         </li>
                         <li>
-                            <i class="fa fa-table"></i> <a href="<c:url value="/admin/products"/>">Список товаров</a>
+                            <i class="fa fa-table"></i> <a href="<c:url value="${roleForUrl}/products"/>">Список
+                            товаров</a>
                         </li>
                         <li class="active">
-                            <i class="fa fa-desktop"></i> <a href="<c:url value="/admin/products/${product.id}"/>">Информация
+                            <i class="fa fa-desktop"></i> <a
+                                href="<c:url value="${roleForUrl}/products/${product.id}"/>">Информация
                             о товарах
                         </a>
                         </li>
@@ -42,14 +50,6 @@
                     </ol>
                 </div>
             </div>
-            <c:choose>
-                <c:when test="${role eq 'ROLE_ADMIN'}">
-                    <c:set var="roleForUrl" value="/admin"/>
-                </c:when>
-                <c:when test="${role eq 'ROLE_PROVIDER'}">
-                    <c:set var="roleForUrl" value="/provider"/>
-                </c:when>
-            </c:choose>
             <div class="col-lg-12">
                 <div class="table-responsive">
                     <c:if test="${not empty limitError}">
@@ -59,8 +59,11 @@
                         <tbody>
                         <c:choose>
                         <c:when test="${role eq 'ROLE_PROVIDER'}">
-                        <form:form method="post" action="${roleForUrl}/products/${productProvider.product.id}/edit"
+                            <%--@elvariable id="productProvider" type="kz.hts.ce.model.entity.ProductProvider"--%>
+                        <form:form method="post" action="${roleForUrl}/products/${productProvider.id}/edit"
                                    modelAttribute="productProvider">
+                        <form:hidden path="product.id"/>
+                        <form:hidden path="id"/>
                         <tr>
                             <td><form:label path="product.name">Название товара:</form:label></td>
                             <td><form:input cssClass="form-control" path="product.name"/></td>
@@ -119,7 +122,7 @@
                         <div class="limitsDiv">
                             <c:forEach items="${productLimitList}" var="productLimit">
                                 <tr>
-                                    <td>Укажите пределы остатков для типа ${productLimit.type.name}:</td>
+                                    <td>Пределы для магазина типа ${type.name}:</td>
                                     <td class="form-inline">
                                         <input id="min${productLimit.type.name}" type="text" name="limits"
                                                placeholder="Минимум" class="form-control limitInput"
@@ -135,7 +138,8 @@
                         <form:hidden path="blocked"/>
                         <tr>
                             <td>
-                                <form:button type="submit" class="btn btn-lg btn-success">Сохранить</form:button>
+                                <input type="submit" class="btn btn-lg btn-success" onclick="addLimitTypes()"
+                                       value="Сохранить">
                             </td>
                             <td></td>
                             <td><a href="<c:url value="${roleForUrl}/products/${id}"/>"
@@ -225,9 +229,11 @@
             </div>
         </div>
     </div>
+    <%--<script src="<c:url value="/resources/js/script.js"/>"></script>--%>
+    <%--<script src="<c:url value="/resources/js/jquery.js"/>"></script>--%>
+    <%--<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>--%>
+    <%--<script src="<c:url value="/resources/js/bootstrap-datepicker.js"/>"></script>--%>
+    <t:script/>
     <script src="<c:url value="/resources/js/script.js"/>"></script>
-    <script src="<c:url value="/resources/js/jquery.js"/>"></script>
-    <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
-    <script src="<c:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
 </t:container>
 </html>

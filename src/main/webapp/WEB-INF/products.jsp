@@ -99,8 +99,8 @@
                                     </c:when>
                                     <c:when test="${role eq 'ROLE_PROVIDER'}">
                                         <c:forEach items="${productProviderList}" var="productProvider">
-                                            <tr onclick="document.location = '/provider/products/' + '${productProvider.product.id}';">
-                                                <td>${productProvider.product.id}</td>
+                                            <tr onclick="document.location = '/provider/products/' + '${productProvider.id}';">
+                                                <td>${productProvider.id}</td>
                                                 <td>${productProvider.product.name}</td>
                                                 <td>${productProvider.product.barcode}</td>
                                                 <td>${productProvider.product.category.name}</td>

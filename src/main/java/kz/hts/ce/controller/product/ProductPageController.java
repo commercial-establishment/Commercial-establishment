@@ -137,18 +137,18 @@ public class ProductPageController {
         return "products";
     }
 
-    @RequestMapping(value = "/provider/products/{productId}", method = RequestMethod.GET)
-    public String providerProductInfo(Model model, @PathVariable("productId") UUID productId) {
-        UUID providerId = springHelper.getAuthProviderId();
-        UUID productProviderId = productProviderService.findByProviderIdAndProductId(providerId, productId).getId();
-        List<ProductLimit> productLimits = productLimitService.findByProductProviderId(productProviderId);
-        Product product = productService.findById(productId);
+    @RequestMapping(value = "/provider/products/{id}", method = RequestMethod.GET)
+    public String providerProductInfo(Model model, @PathVariable("id") UUID id) {
+        ProductProvider productProvider = productProviderService.findById(id);
+        List<ProductLimit> productLimits = productLimitService.findByProductProviderId(productProvider.getId());
+        Product product = productService.findById(productProvider.getProduct().getId());
+        model.addAttribute("productProviderId", productProvider.getId());
         model.addAttribute("product", product);
         model.addAttribute("limits", productLimits);
         return "product-info";
     }
 
-    @RequestMapping("/provider/products/create")
+    @RequestMapping(value = "/provider/products/create", method = RequestMethod.GET)
     public String createForProvider(Model model, @ModelAttribute("productProvider") ProductProvider productProvider) {
         model.addAttribute("types", springHelper.getTypes());
         attributesForCreateOrEditPage(model);
@@ -157,14 +157,18 @@ public class ProductPageController {
 
     @RequestMapping(value = "/provider/products/{id}/edit", method = RequestMethod.GET)
     public String productProviderEdit(Model model, @PathVariable("id") UUID id) {
-        UUID providerId = springHelper.getAuthProviderId();
-        ProductProvider productProvider = productProviderService.findByProviderIdAndProductId(providerId, id);
+        ProductProvider productProvider = productProviderService.findById(id);
         List<Type> types = springHelper.getTypes();
         List<ProductLimit> productLimitList = new ArrayList<>();
         for (Type type : types) {
             ProductLimit productLimit = productLimitService.findByProductProviderIdAndTypeName(productProvider.getId(), type.getName());
-            if (productLimit == null) break;
-            productLimitList.add(productLimit);
+            if (productLimit == null) {
+                ProductLimit productLimitEntity = new ProductLimit();
+                productLimitEntity.setType(type);
+                productLimitList.add(productLimitEntity);
+            } else {
+                productLimitList.add(productLimit);
+            }
         }
         attributesForCreateOrEditPage(model);
         model.addAttribute("productLimitList", productLimitList);

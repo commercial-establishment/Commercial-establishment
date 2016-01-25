@@ -86,7 +86,7 @@ public class ProviderController {
             provider.setPassword(passwordEncoder.encode(provider.getPassword()));
             provider.setStartWorkDate(new Date());
             providerService.save(provider);
-            return REDIRECT;
+            return "redirect:/admin/providers";
             } else {
                 model.addAttribute("companyNameIsOccupied", "Указанное название компании занято.");
                 model.addAttribute(CITIES, cities);

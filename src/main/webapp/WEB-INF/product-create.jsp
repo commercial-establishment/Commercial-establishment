@@ -106,7 +106,7 @@
                                 <div class="limitsDiv">
                                     <c:forEach items="${types}" var="type">
                                         <tr>
-                                            <td>Укажите пределы остатков для типа ${type.name}:</td>
+                                            <td>Пределы для магазина типа ${type.name}:</td>
                                             <td class="form-inline">
                                                 <input id="min${type.name}" type="text" name="limits"
                                                        placeholder="Минимум"
@@ -125,7 +125,6 @@
                                 <td>
                                     <input type="submit" class="btn btn-lg btn-success" onclick="addLimitTypes()"
                                            value="Сохранить">
-                                        <%--<form:button type="submit" class="btn btn-lg btn-success">Сохранить</form:button>--%>
                                 </td>
                                 <td/>
                                 <c:choose>

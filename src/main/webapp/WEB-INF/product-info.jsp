@@ -29,7 +29,8 @@
                             <i class="fa fa-dashboard"></i> <a href="<c:url value="/home"/>">Главная</a>
                         </li>
                         <li>
-                            <i class="fa fa-table"></i> <a href="<c:url value="${roleForUrl}/products"/>">Список товаров</a>
+                            <i class="fa fa-table"></i> <a href="<c:url value="${roleForUrl}/products"/>">Список
+                            товаров</a>
                         </li>
                         <li class="active">
                             <i class="fa fa-desktop"></i> Информация о товаре
@@ -71,12 +72,11 @@
                         </c:if>
                         <tr>
                             <td>
-                                <form method="GET" action="<c:url value="${roleForUrl}/products/${product.id}/edit"/>">
-                                    <input type="submit" class="btn btn-lg btn-default" value="Редактировать">
+                                <form method="GET"
+                                      action="<c:url value="${roleForUrl}/products/${productProviderId}/edit"/>">
+                                    <button type="submit" class="btn btn-lg btn-default">Редактировать</button>
                                 </form>
-                                    <%--<a href="<c:url value="/admins/${id}/edit"/>" class="btn btn-lg btn-default">Редактировать</a>--%>
                             </td>
-
                             <c:choose>
                                 <c:when test="${product.blocked == false}">
                                     <td><a href="<c:url value="/admin/products/${product.id}/lock"/>"
