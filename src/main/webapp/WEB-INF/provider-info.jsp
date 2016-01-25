@@ -41,7 +41,6 @@
                                 <form method="GET" action="/admin/providers/${id}/products">
                                     <input type="submit" class="btn btn-lg btn-default" value="Товары">
                                 </form>
-                                    <%--<a href="<c:url value="/providers/${id}/products"/>" class="btn btn-lg btn-default">Товары</a>--%>
                             </td>
                             <td><a href="<c:url value="/admin/providers/${id}/shops"/>" class="btn btn-lg btn-default">Магазины</a>
                             </td>
@@ -70,28 +69,15 @@
                             <td><b>Контактное лицо:</b></td>
                             <td>${provider.contactPerson}</td>
                         </tr>
+
                         <tr>
-                            <td><b>ИИН:</b></td>
+                            <td><b>ИИН/БИН:</b></td>
                             <c:choose>
                                 <c:when test="${provider.identificationNumber == ''}">
-                                    <td>ИИН не заполнен</td>
+                                    <td>БИН не заполнен</td>
                                 </c:when>
                                 <c:when test="${provider.identificationNumber != null}">
                                     <td>${provider.identificationNumber}</td>
-                                </c:when>
-                                <c:otherwise>
-                                    <td>ИИН не заполнен</td>
-                                </c:otherwise>
-                            </c:choose>
-                        </tr>
-                        <tr>
-                            <td><b>БИН:</b></td>
-                            <c:choose>
-                                <c:when test="${provider.bin == ''}">
-                                    <td>БИН не заполнен</td>
-                                </c:when>
-                                <c:when test="${provider.bin != null}">
-                                    <td>${provider.bin}</td>
                                 </c:when>
                                 <c:otherwise>
                                     <td>БИН не заполнен</td>
@@ -108,10 +94,6 @@
                                 <td>${provider.endWorkDate}</td>
                             </tr>
                         </c:if>
-                        <tr>
-                            <td><b>Роль:</b></td>
-                            <td><b>${provider.role.name}</b></td>
-                        </tr>
                         <tr>
                             <td><b>Заблокирован:</b></td>
                             <td>${provider.blocked}</td>

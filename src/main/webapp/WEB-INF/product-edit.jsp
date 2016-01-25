@@ -63,7 +63,6 @@
                         <form:form method="post" action="${roleForUrl}/products/${productProvider.id}/edit"
                                    modelAttribute="productProvider">
                         <form:hidden path="product.id"/>
-                        <form:hidden path="id"/>
                         <tr>
                             <td><form:label path="product.name">Название товара:</form:label></td>
                             <td><form:input cssClass="form-control" path="product.name"/></td>

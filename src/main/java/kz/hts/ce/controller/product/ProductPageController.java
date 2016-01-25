@@ -104,7 +104,8 @@ public class ProductPageController {
     }
 
     @RequestMapping(value = "/provider/shops/{shopId}/products", method = RequestMethod.GET)
-    public String providerShopProducts(Model model, @PathVariable("shopId") UUID shopId) {
+    public String providerShopProducts(Model model,
+                                       @PathVariable("shopId") UUID shopId) {
         UUID providerId = springHelper.getAuthProviderId();
         Map<ProductProvider, Integer> products = sppService.findProductsByShopIdAndProviderId(shopId, providerId);
         Type shopType = shopService.findById(shopId).getType();
@@ -138,7 +139,8 @@ public class ProductPageController {
     }
 
     @RequestMapping(value = "/provider/products/{id}", method = RequestMethod.GET)
-    public String providerProductInfo(Model model, @PathVariable("id") UUID id) {
+    public String providerProductInfo(Model model,
+                                      @PathVariable("id") UUID id) {
         ProductProvider productProvider = productProviderService.findById(id);
         List<ProductLimit> productLimits = productLimitService.findByProductProviderId(productProvider.getId());
         Product product = productService.findById(productProvider.getProduct().getId());
@@ -149,15 +151,19 @@ public class ProductPageController {
     }
 
     @RequestMapping(value = "/provider/products/create", method = RequestMethod.GET)
-    public String createForProvider(Model model, @ModelAttribute("productProvider") ProductProvider productProvider) {
+    public String createForProvider(Model model,
+                                    @ModelAttribute("productProvider") ProductProvider productProvider) {
         model.addAttribute("types", springHelper.getTypes());
         attributesForCreateOrEditPage(model);
         return "product-create";
     }
 
     @RequestMapping(value = "/provider/products/{id}/edit", method = RequestMethod.GET)
-    public String productProviderEdit(Model model, @PathVariable("id") UUID id) {
-        ProductProvider productProvider = productProviderService.findById(id);
+    public String productProviderEdit(Model model,
+                                      @PathVariable("id") UUID id,
+                                      @ModelAttribute("productProvider") ProductProvider productProvider) {
+        productProvider.setId(id);
+        productProvider = productProviderService.findById(id);
         List<Type> types = springHelper.getTypes();
         List<ProductLimit> productLimitList = new ArrayList<>();
         for (Type type : types) {
