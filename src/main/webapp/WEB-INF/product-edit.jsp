@@ -121,7 +121,7 @@
                         <div class="limitsDiv">
                             <c:forEach items="${productLimitList}" var="productLimit">
                                 <tr>
-                                    <td>Пределы для магазина типа ${type.name}:</td>
+                                    <td>Пределы для магазина типа ${productLimit.type.name}:</td>
                                     <td class="form-inline">
                                         <input id="min${productLimit.type.name}" type="text" name="limits"
                                                placeholder="Минимум" class="form-control limitInput"
